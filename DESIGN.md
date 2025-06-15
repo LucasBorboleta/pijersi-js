@@ -39,15 +39,17 @@ As depicted hereafter, one reset/clear button appears in each captured/cleared c
 
 ## Realistic layouts
 
-### Option with compact and bottom capture zones
+### Option with bottom capture zones
 
 This is preferred over the top and bottom capture zones showed after.
 
-<img src="./pictures/realistic-layout-compact-bottom-capture-zones-running.png" style="zoom: 67%;" />
+Showing the capture zones, when in running and reviewing modes, could be made optional, from the menu.
 
-<img src="./pictures/realistic-layout-compact-bottom-capture-zones-reviewing.png" style="zoom:67%;" />
+<img src="./pictures/realistic-layout-bottom-capture-zones-running.png" style="zoom:67%;" />
 
-<img src="./pictures/realistic-layout-compact-bottom-capture-zones-editing.png" style="zoom:67%;" />
+<img src="./pictures/realistic-layout-bottom-capture-zones-reviewing.png" style="zoom:67%;" />
+
+<img src="./pictures/realistic-layout-bottom-capture-zones-editing.png" style="zoom:67%;" />
 
 ### Option with top and bottom capture zones
 
