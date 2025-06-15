@@ -19,7 +19,7 @@ Transitions between modes are triggered either by events or user actions, as dep
 
 ## General layout
 
-The following layout should be convenient for a desktop browser and a smart-phone screen:
+The following layout should be convenient for a desktop browser and a smart-phone screen (the sketch of a realistic layout may change a bit such symbolic layout ; see next sections in the document).
 
 ![](./pictures/general-layout.png)
 
@@ -36,3 +36,21 @@ Hereafter some passive items becomes active for changing the active player and t
 As depicted hereafter, one reset/clear button appears in each captured/cleared cubes zone : either all cubes are removed out of the board or the cubes are reset to their standard position.
 
 ![](./pictures/captured-cubes-layout-in-setting-mode.png)
+
+## Realistic layouts
+
+### Option with compact and bottom capture zones
+
+This is preferred over the top and bottom capture zones showed after.
+
+![](./pictures/realistic-layout-compact-bottom-capture-zones-running.png)
+
+![](./pictures/realistic-layout-compact-bottom-capture-zones-reviewing.png)
+
+![](./pictures/realistic-layout-compact-bottom-capture-zones-editing.png)
+
+### Option with top and bottom capture zones
+
+This is disturbing and unusual !
+
+![](./pictures/realistic-layout-top-and-bottom-capture-zones.png)
