@@ -13,6 +13,10 @@
   - set the player turn
   - set the credit counter
 
+Transitions between modes are triggered either by events or user actions, as depicted in the following schema:
+
+![](./pictures/modes-and-transitions.png)
+
 ## General layout
 
 The following layout should be convenient for a desktop browser and a smart-phone screen:
