@@ -43,14 +43,14 @@ As depicted hereafter, one reset/clear button appears in each captured/cleared c
 
 This is preferred over the top and bottom capture zones showed after.
 
-![](./pictures/realistic-layout-compact-bottom-capture-zones-running.png)
+<img src="./pictures/realistic-layout-compact-bottom-capture-zones-running.png" style="zoom: 67%;" />
 
-![](./pictures/realistic-layout-compact-bottom-capture-zones-reviewing.png)
+<img src="./pictures/realistic-layout-compact-bottom-capture-zones-reviewing.png" style="zoom:67%;" />
 
-![](./pictures/realistic-layout-compact-bottom-capture-zones-editing.png)
+<img src="./pictures/realistic-layout-compact-bottom-capture-zones-editing.png" style="zoom:67%;" />
 
 ### Option with top and bottom capture zones
 
 This is disturbing and unusual !
 
-![](./pictures/realistic-layout-top-and-bottom-capture-zones.png)
+<img src="./pictures/realistic-layout-top-and-bottom-capture-zones.png" style="zoom:67%;" />
