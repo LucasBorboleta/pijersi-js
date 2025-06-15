@@ -2,11 +2,11 @@
 
 ## Modes
 
-- Running a game
-- Reviewing a game:
+- **Running** a game
+- **Reviewing** a game:
   - move back and forth amongst the played moves
   - resume the game from the displayed move
-- Editing a game
+- **Editing** a game (not a main feature, but useful during developing/testing phase and maybe also for making pedagogical examples)
   - reset to standard positions, initial turn player and credit counter
   - remove all cube from the board
   - freely select, remove, move and stack any cube, respecting the stacking rules.
@@ -17,7 +17,7 @@ Transitions between modes are triggered either by events or user actions, as dep
 
 ![](./pictures/modes-and-transitions.png)
 
-## General layout
+## General symbolic layout
 
 The following layout should be convenient for a desktop browser and a smart-phone screen (the sketch of a realistic layout may change a bit such symbolic layout ; see next sections in the document).
 
@@ -43,7 +43,7 @@ As depicted hereafter, one reset/clear button appears in each captured/cleared c
 
 This is preferred over the top and bottom capture zones showed after.
 
-Showing the capture zones, when in running and reviewing modes, could be made optional, from the menu.
+**Showing** the **capture** **zones**, when in running and reviewing modes, could be made **optional**, from the menu.
 
 <img src="./pictures/realistic-layout-bottom-capture-zones-running.png" style="zoom:67%;" />
 
