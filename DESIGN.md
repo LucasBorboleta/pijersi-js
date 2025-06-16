@@ -45,6 +45,8 @@ This is preferred over the top and bottom capture zones showed after.
 
 **Showing** the **capture** **zones**, when in running and reviewing modes, could be made **optional**, from the menu.
 
+Different options for packing the cubes inside the capture zones are shown.
+
 <img src="./pictures/realistic-layout-bottom-capture-zones-running.png" style="zoom:67%;" />
 
 <img src="./pictures/realistic-layout-bottom-capture-zones-reviewing.png" style="zoom:67%;" />
