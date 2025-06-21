@@ -49,10 +49,10 @@ pijersi.draw.__initModule = function(){
     pijersi.draw.hexagon_side = pijersi.draw.hexagon_height/2;
     pijersi.draw.hexagon_epsilon = 0;
 
-    pijersi.draw.cell_epsilon = 4;
-    pijersi.draw.cube_size = (pijersi.draw.hexagon_height - pijersi.draw.cell_epsilon)/(2 + Math.sqrt(3)/3);
-    pijersi.draw.cell_width = pijersi.draw.hexagon_width;
-    pijersi.draw.cell_height = pijersi.draw.hexagon_height;
+    pijersi.draw.hexagon_epsilon = 4;
+    pijersi.draw.cube_size = (pijersi.draw.hexagon_height - pijersi.draw.hexagon_epsilon)/(2 + Math.sqrt(3)/3);
+    pijersi.draw.hexagon_width = pijersi.draw.hexagon_width;
+    pijersi.draw.hexagon_height = pijersi.draw.hexagon_height;
 
     pijersi.draw.CubeDivLocation = { BOTTOM:0, MIDDLE:1, TOP:2 };
 
@@ -74,7 +74,7 @@ pijersi.draw.__initModule = function(){
     pijersi.draw.cube_div_classes[pijersi.rules.CubeColor.BLACK][pijersi.rules.CubeSort.SCISSORS] = 'pijersi_cube_scissors_black_class';
     pijersi.draw.cube_div_classes[pijersi.rules.CubeColor.BLACK][pijersi.rules.CubeSort.WISE] = 'pijersi_cube_wise_black_class';
 
-    pijersi.draw.cells_div = [];
+    pijersi.draw.hexagons_div = [];
     pijersi.draw.cubes_div = [];
 
     pijersi.draw.hexagons = [];
@@ -135,7 +135,7 @@ pijersi.draw.onHexagonClick = function(event){
         }
 
         if ( mouse_inside_hexagon ) {
-            pijersi.presenter.selectCell(hexagon.cell_index);
+            pijersi.presenter.selectHexagon(hexagon.hexagon_index);
             break;
         }
     }
@@ -184,70 +184,70 @@ pijersi.draw.playUndoSound = function(){
 
 // --- PIJERSI_BEGIN: makers ---
 
-pijersi.draw.makeAllCellsDiv = function(){
+pijersi.draw.makeAllHexagonsDiv = function(){
 
-    for ( const cell of pijersi.rules.cells ) {
-        pijersi.draw.cells_div.push(pijersi.draw.makeCellDiv(cell));
+    for ( const hexagon of pijersi.rules.hexagons ) {
+        pijersi.draw.hexagons_div.push(pijersi.draw.makeHexagonDiv(hexagon));
     }
-    pijersi.draw.toogleCellDivNames();
+    pijersi.draw.toogleHexagonDivNames();
 };
 
-pijersi.draw.makeCellDiv = function(cell){
+pijersi.draw.makeHexagonDiv = function(hexagon){
 
-    const cell_div = document.createElement("DIV");
-    cell_div.id = "pijersi_cell_" + cell.name;
+    const hexagon_div = document.createElement("DIV");
+    hexagon_div.id = "pijersi_hexagon_" + hexagon.name;
 
     const x_central_hexagon = 6*pijersi.draw.hexagon_width;
     const y_central_hexagon = 5/2*pijersi.draw.hexagon_height + 3*pijersi.draw.hexagon_side;
 
-    const x_hexagon = x_central_hexagon + (cell.u + cell.v/2)*pijersi.draw.hexagon_width;
-    const y_hexagon = y_central_hexagon - cell.v*Math.sqrt(3)/2*pijersi.draw.hexagon_width;
+    const x_hexagon = x_central_hexagon + (hexagon.u + hexagon.v/2)*pijersi.draw.hexagon_width;
+    const y_hexagon = y_central_hexagon - hexagon.v*Math.sqrt(3)/2*pijersi.draw.hexagon_width;
 
     let x_shift = 0;
-    if ( cell.reserve ) {
-        if ( cell.name === 'a' || cell.name === 'b' || cell.name === 'c' || cell.name === 'd' ) {
+    if ( hexagon.reserve ) {
+        if ( hexagon.name === 'a' || hexagon.name === 'b' || hexagon.name === 'c' || hexagon.name === 'd' ) {
             x_shift = pijersi.draw.hexagon_width/2;
-        } else if ( cell.name === 'i' || cell.name === 'h' || cell.name === 'g' || cell.name === 'f' ) {
+        } else if ( hexagon.name === 'i' || hexagon.name === 'h' || hexagon.name === 'g' || hexagon.name === 'f' ) {
             x_shift = -pijersi.draw.hexagon_width/2;
         }
     }
 
-    const x_cell_div = x_hexagon - pijersi.draw.cell_width/2 + x_shift; // cell left
-    const y_cell_div = y_hexagon - pijersi.draw.cell_height/2; // cell top
+    const x_hexagon_div = x_hexagon - pijersi.draw.hexagon_width/2 + x_shift; // hexagon left
+    const y_hexagon_div = y_hexagon - pijersi.draw.hexagon_height/2; // hexagon top
 
-    cell_div.style.left = Math.floor(x_cell_div) + "px";
-    cell_div.style.top = Math.floor(y_cell_div) + "px";
+    hexagon_div.style.left = Math.floor(x_hexagon_div) + "px";
+    hexagon_div.style.top = Math.floor(y_hexagon_div) + "px";
 
-    cell_div.style.width = Math.floor(pijersi.draw.cell_width) + "px";
-    cell_div.style.height = Math.floor(pijersi.draw.cell_height) + "px";
+    hexagon_div.style.width = Math.floor(pijersi.draw.hexagon_width) + "px";
+    hexagon_div.style.height = Math.floor(pijersi.draw.hexagon_height) + "px";
 
-    cell_div.className = "pijersi_cell_class";
-    cell_div.className += " " + "pijersi_cell_unselected_class";
+    hexagon_div.className = "pijersi_hexagon_class";
+    hexagon_div.className += " " + "pijersi_hexagon_unselected_class";
 
-    if ( ! cell.reserve ) {
-        const cell_text = document.createTextNode(cell.name);
+    if ( ! hexagon.reserve ) {
+        const hexagon_text = document.createTextNode(hexagon.name);
 
-        const cell_paragraph = document.createElement("P");
-        cell_paragraph.className  = "pijersi_cell_name_class";
-        cell_paragraph.appendChild(cell_text);
+        const hexagon_paragraph = document.createElement("P");
+        hexagon_paragraph.className  = "pijersi_hexagon_name_class";
+        hexagon_paragraph.appendChild(hexagon_text);
 
-        cell_div.appendChild(cell_paragraph);
+        hexagon_div.appendChild(hexagon_paragraph);
     }
 
-    pijersi.draw.draw_zone.appendChild(cell_div);
+    pijersi.draw.draw_zone.appendChild(hexagon_div);
 
     {
-        const hexagon_x_min = x_cell_div;
-        const hexagon_x_max = x_cell_div + pijersi.draw.hexagon_width;
+        const hexagon_x_min = x_hexagon_div;
+        const hexagon_x_max = x_hexagon_div + pijersi.draw.hexagon_width;
 
-        const hexagon_y_min = y_cell_div;
-        const hexagon_y_max = y_cell_div + pijersi.draw.hexagon_height;
+        const hexagon_y_min = y_hexagon_div;
+        const hexagon_y_max = y_hexagon_div + pijersi.draw.hexagon_height;
 
         const hexagon_y_first = (hexagon_y_min + hexagon_y_max)/2 - pijersi.draw.hexagon_side/2;
         const hexagon_y_second = (hexagon_y_min + hexagon_y_max)/2 + pijersi.draw.hexagon_side/2;
 
-        const hexagon = {
-            cell_index:cell.index,
+        const draw_hexagon = {
+            hexagon_index:hexagon.index,
 
             north:{x:(hexagon_x_min + hexagon_x_max)/2, y:hexagon_y_min},
             south:{x:(hexagon_x_min + hexagon_x_max)/2, y:hexagon_y_max},
@@ -259,42 +259,42 @@ pijersi.draw.makeCellDiv = function(cell){
             south_east:{x:hexagon_x_max, y:hexagon_y_second}
         };
 
-        pijersi.draw.hexagons.push(hexagon);
+        pijersi.draw.hexagons.push(draw_hexagon);
     }
 
-    return cell_div;
+    return hexagon_div;
 };
 
 pijersi.draw.makeAllCubesDiv = function(){
 
-    for ( const cell of pijersi.rules.cells ) {
+    for ( const hexagon of pijersi.rules.hexagons ) {
 
-        const cube_div_prefix = cell.name;
-        const cell_div_index = cell.index;
-        const cell_div = pijersi.draw.cells_div[cell_div_index]
+        const cube_div_prefix = hexagon.name;
+        const hexagon_div_index = hexagon.index;
+        const hexagon_div = pijersi.draw.hexagons_div[hexagon_div_index]
 
-        pijersi.draw.cubes_div[cell_div_index] = [];
+        pijersi.draw.cubes_div[hexagon_div_index] = [];
 
         for ( const cube_div_location of Object.values(pijersi.draw.CubeDivLocation) ) {
-            pijersi.draw.cubes_div[cell_div_index].push(pijersi.draw.makeCubeDiv(cell_div, cube_div_location, cube_div_prefix));
+            pijersi.draw.cubes_div[hexagon_div_index].push(pijersi.draw.makeCubeDiv(hexagon_div, cube_div_location, cube_div_prefix));
         }
     }
 };
 
-pijersi.draw.makeCubeDiv = function(cell_div, cube_div_location, cube_div_prefix){
+pijersi.draw.makeCubeDiv = function(hexagon_div, cube_div_location, cube_div_prefix){
 
     const cube_div_suffix = Object.keys(pijersi.draw.CubeDivLocation)[cube_div_location];
-    const cube_left = (pijersi.draw.cell_width - pijersi.draw.cube_size)/2;
+    const cube_left = (pijersi.draw.hexagon_width - pijersi.draw.cube_size)/2;
     let cube_top = 0;
 
     if ( cube_div_location === pijersi.draw.CubeDivLocation.BOTTOM ) {
-        cube_top = (pijersi.draw.cell_height + pijersi.draw.cell_epsilon)/2;
+        cube_top = (pijersi.draw.hexagon_height + pijersi.draw.hexagon_epsilon)/2;
 
     } else if ( cube_div_location === pijersi.draw.CubeDivLocation.MIDDLE ) {
-        cube_top = (pijersi.draw.cell_height - pijersi.draw.cube_size)/2;
+        cube_top = (pijersi.draw.hexagon_height - pijersi.draw.cube_size)/2;
 
     } else if ( cube_div_location === pijersi.draw.CubeDivLocation.TOP ) {
-        cube_top = (pijersi.draw.cell_height - pijersi.draw.cell_epsilon - 2*pijersi.draw.cube_size)/2;
+        cube_top = (pijersi.draw.hexagon_height - pijersi.draw.hexagon_epsilon - 2*pijersi.draw.cube_size)/2;
     }
 
     const cube_div = document.createElement("DIV");
@@ -307,7 +307,7 @@ pijersi.draw.makeCubeDiv = function(cell_div, cube_div_location, cube_div_prefix
 
     pijersi.draw.clearCubeDiv(cube_div);
 
-    cell_div.appendChild(cube_div);
+    hexagon_div.appendChild(cube_div);
     return cube_div;
 };
 
@@ -334,28 +334,28 @@ pijersi.draw.clearCubeDiv = function(cube_div){
 
 pijersi.draw.hideElement = function(element){ element.style.display = "none";}
 
-pijersi.draw.selectCellDiv = function(cell, condition){
+pijersi.draw.selectHexagonDiv = function(hexagon, condition){
 
-    const cell_div = pijersi.draw.cells_div[cell.index];
+    const hexagon_div = pijersi.draw.hexagons_div[hexagon.index];
 
     if ( condition ) {
-        cell_div.className = cell_div.className.replace("pijersi_cell_unselected_class", "pijersi_cell_selected_class")
+        hexagon_div.className = hexagon_div.className.replace("pijersi_hexagon_unselected_class", "pijersi_hexagon_selected_class")
     } else {
-        cell_div.className = cell_div.className.replace("pijersi_cell_selected_class", "pijersi_cell_unselected_class")
+        hexagon_div.className = hexagon_div.className.replace("pijersi_hexagon_selected_class", "pijersi_hexagon_unselected_class")
     }
 };
 
-pijersi.draw.selectCellCubeDiv = function(cell, condition){
-    pijersi.debug.assert( pijersi.rules.cellHasCube(cell), "cell_source has cube");
+pijersi.draw.selectHexagonCubeDiv = function(hexagon, condition){
+    pijersi.debug.assert( pijersi.rules.hexagonHasCube(hexagon), "hexagon_source has cube");
 
-    const cell_state = pijersi.rules.cells_states[cell.index];
+    const hexagon_state = pijersi.rules.hexagons_states[hexagon.index];
 
-    if ( cell_state.top !== null ) {
-        const cube_div_top = pijersi.draw.cubes_div[cell.index][pijersi.draw.CubeDivLocation.TOP];
+    if ( hexagon_state.top !== null ) {
+        const cube_div_top = pijersi.draw.cubes_div[hexagon.index][pijersi.draw.CubeDivLocation.TOP];
         pijersi.draw.selectCubeDiv(cube_div_top, condition);
 
     } else {
-        const cube_div_middle = pijersi.draw.cubes_div[cell.index][pijersi.draw.CubeDivLocation.MIDDLE];
+        const cube_div_middle = pijersi.draw.cubes_div[hexagon.index][pijersi.draw.CubeDivLocation.MIDDLE];
         pijersi.draw.selectCubeDiv(cube_div_middle, condition);
     }
 };
@@ -368,13 +368,13 @@ pijersi.draw.selectCubeDiv = function(cube_div, condition){
     }
 };
 
-pijersi.draw.selectCellStackDiv = function(cell, condition){
-    pijersi.debug.assert( pijersi.rules.cellHasStack(cell), "cell_source has stack");
+pijersi.draw.selectHexagonStackDiv = function(hexagon, condition){
+    pijersi.debug.assert( pijersi.rules.hexagonHasStack(hexagon), "hexagon_source has stack");
 
-    const cube_div_top = pijersi.draw.cubes_div[cell.index][pijersi.draw.CubeDivLocation.TOP];
+    const cube_div_top = pijersi.draw.cubes_div[hexagon.index][pijersi.draw.CubeDivLocation.TOP];
     pijersi.draw.selectCubeDiv(cube_div_top, condition);
 
-    const cube_div_bottom = pijersi.draw.cubes_div[cell.index][pijersi.draw.CubeDivLocation.BOTTOM];
+    const cube_div_bottom = pijersi.draw.cubes_div[hexagon.index][pijersi.draw.CubeDivLocation.BOTTOM];
     pijersi.draw.selectCubeDiv(cube_div_bottom, condition);
 };
 
@@ -390,16 +390,16 @@ pijersi.draw.setCubeDivClass = function(cube_div, cube_class){
 
 pijersi.draw.showElement = function(element){ element.style.display = "inherit";}
 
-pijersi.draw.updateAllCellsDiv = function(){
+pijersi.draw.updateAllHexagonsDiv = function(){
 
-    for ( const cell of pijersi.rules.cells ) {
-        pijersi.draw.updateCellDiv(cell);
+    for ( const hexagon of pijersi.rules.hexagons ) {
+        pijersi.draw.updateHexagonDiv(hexagon);
     }
 };
 
-pijersi.draw.toogleCellDivNames = function(){
+pijersi.draw.toogleHexagonDivNames = function(){
 
-    const label_elements = document.getElementsByClassName("pijersi_cell_name_class");
+    const label_elements = document.getElementsByClassName("pijersi_hexagon_name_class");
 
     pijersi.draw.labels_are_displayed = ! pijersi.draw.labels_are_displayed;
 
@@ -410,33 +410,33 @@ pijersi.draw.toogleCellDivNames = function(){
     }
 };
 
-pijersi.draw.updateCellDiv = function(cell){
+pijersi.draw.updateHexagonDiv = function(hexagon){
 
-    const cell_div_index = cell.index;
+    const hexagon_div_index = hexagon.index;
 
-    const cube_div_top = pijersi.draw.cubes_div[cell_div_index][pijersi.draw.CubeDivLocation.TOP];
-    const cube_div_middle = pijersi.draw.cubes_div[cell_div_index][pijersi.draw.CubeDivLocation.MIDDLE];
-    const cube_div_bottom = pijersi.draw.cubes_div[cell_div_index][pijersi.draw.CubeDivLocation.BOTTOM];
+    const cube_div_top = pijersi.draw.cubes_div[hexagon_div_index][pijersi.draw.CubeDivLocation.TOP];
+    const cube_div_middle = pijersi.draw.cubes_div[hexagon_div_index][pijersi.draw.CubeDivLocation.MIDDLE];
+    const cube_div_bottom = pijersi.draw.cubes_div[hexagon_div_index][pijersi.draw.CubeDivLocation.BOTTOM];
 
-    const cell_state = pijersi.rules.cells_states[cell.index];
+    const hexagon_state = pijersi.rules.hexagons_states[hexagon.index];
 
-    if ( cell_state.bottom === null && cell_state.top === null ) {
+    if ( hexagon_state.bottom === null && hexagon_state.top === null ) {
         pijersi.draw.clearCubeDiv(cube_div_top);
         pijersi.draw.clearCubeDiv(cube_div_middle);
         pijersi.draw.clearCubeDiv(cube_div_bottom);
 
-    } else if  ( cell_state.bottom !== null && cell_state.top === null ) {
+    } else if  ( hexagon_state.bottom !== null && hexagon_state.top === null ) {
         pijersi.draw.clearCubeDiv(cube_div_top);
-        pijersi.draw.setCubeDiv(cube_div_middle, cell_state.bottom.color, cell_state.bottom.sort);
+        pijersi.draw.setCubeDiv(cube_div_middle, hexagon_state.bottom.color, hexagon_state.bottom.sort);
         pijersi.draw.clearCubeDiv(cube_div_bottom);
 
-    } else if  ( cell_state.bottom !== null && cell_state.top !== null ) {
-        pijersi.draw.setCubeDiv(cube_div_top, cell_state.top.color, cell_state.top.sort);
+    } else if  ( hexagon_state.bottom !== null && hexagon_state.top !== null ) {
+        pijersi.draw.setCubeDiv(cube_div_top, hexagon_state.top.color, hexagon_state.top.sort);
         pijersi.draw.clearCubeDiv(cube_div_middle);
-        pijersi.draw.setCubeDiv(cube_div_bottom, cell_state.bottom.color, cell_state.bottom.sort);
+        pijersi.draw.setCubeDiv(cube_div_bottom, hexagon_state.bottom.color, hexagon_state.bottom.sort);
 
     } else {
-        pijersi.debug.assert(false, "pijersi.draw.updateCellDiv(): failed");
+        pijersi.debug.assert(false, "pijersi.draw.updateHexagonDiv(): failed");
     }
 };
 

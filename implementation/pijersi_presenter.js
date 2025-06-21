@@ -32,8 +32,8 @@ pijersi.presenter.__initModule = function(){
 
     pijersi.presenter.user_has_interacted = false;
 
-    pijersi.presenter.source_cell = null;
-    pijersi.presenter.destination_cell = null;
+    pijersi.presenter.source_hexagon = null;
+    pijersi.presenter.destination_hexagon = null;
     pijersi.presenter.source_cube_selected = false;
     pijersi.presenter.source_stack_selected = false;
 
@@ -49,8 +49,8 @@ pijersi.presenter.__initModule = function(){
 // --- PIJERSI_BEGIN: commands ---
 
 pijersi.presenter.clearSelection = function(){
-    pijersi.presenter.source_cell = null;
-    pijersi.presenter.destination_cell = null;
+    pijersi.presenter.source_hexagon = null;
+    pijersi.presenter.destination_hexagon = null;
 
     pijersi.presenter.source_cube_selected = false;
     pijersi.presenter.source_stack_selected = false;
@@ -75,12 +75,12 @@ pijersi.presenter.restartGame = function(){
         pijersi.presenter.user_has_interacted = false; //TODO: improve the semantic
     }
 
-    pijersi.draw.updateAllCellsDiv();
+    pijersi.draw.updateAllHexagonsDiv();
     pijersi.presenter.enable_ok_button(false);
     pijersi.presenter.enable_undo_button(false);
 };
 
-pijersi.presenter.selectCell = function(cell_index){
+pijersi.presenter.selectHexagon = function(hexagon_index){
 
     pijersi.presenter.user_has_interacted = true;
 
@@ -88,75 +88,75 @@ pijersi.presenter.selectCell = function(cell_index){
         return;
     }
 
-    const cell = pijersi.rules.cells[cell_index];
+    const hexagon = pijersi.rules.hexagons[hexagon_index];
 
-    if ( pijersi.presenter.source_cell == null && pijersi.presenter.destination_cell == null ) {
+    if ( pijersi.presenter.source_hexagon == null && pijersi.presenter.destination_hexagon == null ) {
 
-        if ( pijersi.rules.isSelectableSourceCell(cell) ) {
+        if ( pijersi.rules.isSelectableSourceHexagon(hexagon) ) {
 
-            pijersi.presenter.source_cell = cell;
-            pijersi.draw.selectCellDiv(pijersi.presenter.source_cell, true);
+            pijersi.presenter.source_hexagon = hexagon;
+            pijersi.draw.selectHexagonDiv(pijersi.presenter.source_hexagon, true);
 
-            if ( pijersi.rules.cellHasSelectableStack(pijersi.presenter.source_cell) ) {
+            if ( pijersi.rules.hexagonHasSelectableStack(pijersi.presenter.source_hexagon) ) {
                 pijersi.presenter.source_stack_selected = true;
-                pijersi.draw.selectCellStackDiv(pijersi.presenter.source_cell, true);
+                pijersi.draw.selectHexagonStackDiv(pijersi.presenter.source_hexagon, true);
 
-            } else if ( pijersi.rules.cellHasSelectableCube(pijersi.presenter.source_cell) ) {
+            } else if ( pijersi.rules.hexagonHasSelectableCube(pijersi.presenter.source_hexagon) ) {
                 pijersi.presenter.source_cube_selected = true;
-                pijersi.draw.selectCellCubeDiv(pijersi.presenter.source_cell, true);
+                pijersi.draw.selectHexagonCubeDiv(pijersi.presenter.source_hexagon, true);
             }
         }
 
-    } else if ( pijersi.presenter.destination_cell == null && pijersi.presenter.source_cell != cell ) {
+    } else if ( pijersi.presenter.destination_hexagon == null && pijersi.presenter.source_hexagon != hexagon ) {
 
-        if ( pijersi.rules.isSelectableDestinationCell(cell) ) {
+        if ( pijersi.rules.isSelectableDestinationHexagon(hexagon) ) {
 
-            pijersi.presenter.destination_cell = cell;
-            pijersi.draw.selectCellDiv(pijersi.presenter.destination_cell, true);
+            pijersi.presenter.destination_hexagon = hexagon;
+            pijersi.draw.selectHexagonDiv(pijersi.presenter.destination_hexagon, true);
 
             if ( pijersi.presenter.source_stack_selected ) {
                 pijersi.presenter.source_stack_selected = false;
-                pijersi.draw.selectCellStackDiv(pijersi.presenter.source_cell, false);
+                pijersi.draw.selectHexagonStackDiv(pijersi.presenter.source_hexagon, false);
                 pijersi.draw.playMoveSound();
-                pijersi.rules.moveStack(pijersi.presenter.source_cell, pijersi.presenter.destination_cell);
+                pijersi.rules.moveStack(pijersi.presenter.source_hexagon, pijersi.presenter.destination_hexagon);
                 pijersi.presenter.enable_ok_button(true);
                 pijersi.presenter.enable_undo_button(true);
 
             } else if ( pijersi.presenter.source_cube_selected ) {
                 pijersi.presenter.source_cube_selected = false;
-                pijersi.draw.selectCellCubeDiv(pijersi.presenter.source_cell, false);
+                pijersi.draw.selectHexagonCubeDiv(pijersi.presenter.source_hexagon, false);
                 pijersi.draw.playMoveSound();
-                pijersi.rules.moveCube(pijersi.presenter.source_cell, pijersi.presenter.destination_cell);
+                pijersi.rules.moveCube(pijersi.presenter.source_hexagon, pijersi.presenter.destination_hexagon);
                 pijersi.presenter.enable_ok_button(true);
                 pijersi.presenter.enable_undo_button(true);
             }
 
-            pijersi.draw.selectCellDiv(pijersi.presenter.source_cell, false);
-            pijersi.draw.selectCellDiv(pijersi.presenter.destination_cell, false);
-            pijersi.presenter.source_cell = null;
-            pijersi.presenter.destination_cell = null;
+            pijersi.draw.selectHexagonDiv(pijersi.presenter.source_hexagon, false);
+            pijersi.draw.selectHexagonDiv(pijersi.presenter.destination_hexagon, false);
+            pijersi.presenter.source_hexagon = null;
+            pijersi.presenter.destination_hexagon = null;
 
-            pijersi.draw.updateAllCellsDiv();
+            pijersi.draw.updateAllHexagonsDiv();
         }
 
-    } else if ( pijersi.presenter.source_cell == cell && pijersi.presenter.destination_cell == null ) {
+    } else if ( pijersi.presenter.source_hexagon == hexagon && pijersi.presenter.destination_hexagon == null ) {
 
         if ( pijersi.presenter.source_stack_selected ) {
 
             pijersi.presenter.source_stack_selected = false;
-            pijersi.draw.selectCellStackDiv(pijersi.presenter.source_cell, false);
+            pijersi.draw.selectHexagonStackDiv(pijersi.presenter.source_hexagon, false);
 
-            if ( pijersi.rules.cellHasSelectableCube(pijersi.presenter.source_cell) ) {
+            if ( pijersi.rules.hexagonHasSelectableCube(pijersi.presenter.source_hexagon) ) {
                 pijersi.presenter.source_cube_selected = true;
-                pijersi.draw.selectCellCubeDiv(pijersi.presenter.source_cell, true);
+                pijersi.draw.selectHexagonCubeDiv(pijersi.presenter.source_hexagon, true);
             }
 
         } else if ( pijersi.presenter.source_cube_selected ) {
 
             pijersi.presenter.source_cube_selected = false;
-            pijersi.draw.selectCellCubeDiv(pijersi.presenter.source_cell, false);
-            pijersi.draw.selectCellDiv(pijersi.presenter.source_cell, false);
-            pijersi.presenter.source_cell = null;
+            pijersi.draw.selectHexagonCubeDiv(pijersi.presenter.source_hexagon, false);
+            pijersi.draw.selectHexagonDiv(pijersi.presenter.source_hexagon, false);
+            pijersi.presenter.source_hexagon = null;
         }
     }
 };
@@ -164,7 +164,7 @@ pijersi.presenter.selectCell = function(cell_index){
 pijersi.presenter.startGame = function(){
     pijersi.rules.startGame();
 
-    pijersi.draw.makeAllCellsDiv();
+    pijersi.draw.makeAllHexagonsDiv();
     pijersi.draw.makeAllCubesDiv();
 
     pijersi.presenter.restartGame();
@@ -174,7 +174,7 @@ pijersi.presenter.undo = function(){
     pijersi.presenter.clearSelection();
     pijersi.rules.loadGame();
     pijersi.draw.playUndoSound();
-    pijersi.draw.updateAllCellsDiv();
+    pijersi.draw.updateAllHexagonsDiv();
     pijersi.presenter.enable_ok_button(false);
     pijersi.presenter.enable_undo_button(false);
 };

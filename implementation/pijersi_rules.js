@@ -35,7 +35,7 @@ pijersi.rules.__initModule = function(){
     pijersi.rules.xIndices = Array.from(pijersi.rules.xLabels.keys());
     pijersi.rules.yIndices = Array.from(pijersi.rules.yLabels.keys());
 
-    pijersi.rules.cellsPerSide = pijersi.rules.xIndices.length;
+    pijersi.rules.hexagonsPerSide = pijersi.rules.xIndices.length;
 
     pijersi.rules.CubeColor = { WHITE:0, BLACK:1 };
     pijersi.rules.CubeSort = { FOOL:0, KING:1, MOUNTAIN:2, PAPER:3, ROCK:4, SCISSORS:5, WISE:6 };
@@ -59,9 +59,9 @@ pijersi.rules.__initModule = function(){
     pijersi.rules.CubeLabel[pijersi.rules.CubeColor.BLACK][pijersi.rules.CubeSort.SCISSORS] = 's';
     pijersi.rules.CubeLabel[pijersi.rules.CubeColor.BLACK][pijersi.rules.CubeSort.WISE] = 'w';
 
-    pijersi.rules.cells = [];
-    pijersi.rules.cells_states = [];
-    pijersi.rules.saved_cells_states = null;
+    pijersi.rules.hexagons = [];
+    pijersi.rules.hexagons_states = [];
+    pijersi.rules.saved_hexagons_states = null;
 
     pijersi.rules.cubes = [];
     pijersi.rules.cubes_states = [];
@@ -74,26 +74,26 @@ pijersi.rules.__initModule = function(){
 
 // --- PIJERSI_BEGIN: getters ---
 
-pijersi.rules.cellHasCube = function(cell){
-    const cell_state = pijersi.rules.cells_states[cell.index];
-    return cell_state.bottom != null || cell_state.top != null;
+pijersi.rules.hexagonHasCube = function(hexagon){
+    const hexagon_state = pijersi.rules.hexagons_states[hexagon.index];
+    return hexagon_state.bottom != null || hexagon_state.top != null;
 };
 
-pijersi.rules.cellHasSelectableCube = function(cell){
-    return pijersi.rules.cellHasCube(cell);
+pijersi.rules.hexagonHasSelectableCube = function(hexagon){
+    return pijersi.rules.hexagonHasCube(hexagon);
 };
 
-pijersi.rules.cellHasSelectableStack = function(cell){
-    return pijersi.rules.cellHasStack(cell);
+pijersi.rules.hexagonHasSelectableStack = function(hexagon){
+    return pijersi.rules.hexagonHasStack(hexagon);
 };
 
-pijersi.rules.cellHasStack = function(cell){
-    const cell_state = pijersi.rules.cells_states[cell.index];
-    return cell_state.bottom != null && cell_state.top != null;
+pijersi.rules.hexagonHasStack = function(hexagon){
+    const hexagon_state = pijersi.rules.hexagons_states[hexagon.index];
+    return hexagon_state.bottom != null && hexagon_state.top != null;
 };
 
-pijersi.rules.getCell = function(cell_name){
-    return pijersi.rules.cells.find(function(cell, index, array){ return cell.name === cell_name; });
+pijersi.rules.getHexagon = function(hexagon_name){
+    return pijersi.rules.hexagons.find(function(hexagon, index, array){ return hexagon.name === hexagon_name; });
 };
 
 pijersi.rules.getCube = function(cube_name){
@@ -111,154 +111,154 @@ pijersi.rules.getCubeColorAndSort = function(cube_label){
     pijersi.debug.assert(false, "pijersi.rules.getCubeColorAndSort(): failed");
 };
 
-pijersi.rules.iSEmptyCell = function(cell){
-    const cell_state = pijersi.rules.cells_states[cell.index];
-    return cell_state.bottom == null && cell_state.top == null;
+pijersi.rules.iSEmptyHexagon = function(hexagon){
+    const hexagon_state = pijersi.rules.hexagons_states[hexagon.index];
+    return hexagon_state.bottom == null && hexagon_state.top == null;
 };
 
-pijersi.rules.isSelectableDestinationCell = function(cell){
-    return pijersi.rules.iSEmptyCell(cell);
+pijersi.rules.isSelectableDestinationHexagon = function(hexagon){
+    return pijersi.rules.iSEmptyHexagon(hexagon);
 };
 
-pijersi.rules.isSelectableSourceCell = function(cell){
-    return ! pijersi.rules.iSEmptyCell(cell);
+pijersi.rules.isSelectableSourceHexagon = function(hexagon){
+    return ! pijersi.rules.iSEmptyHexagon(hexagon);
 };
 
 // --- PIJERSI_END: getters ---
 
 // --- PIJERSI_BEGIN: makers ---
 
-pijersi.rules.makeAllCells = function(){
+pijersi.rules.makeAllHexagons = function(){
 
     // Row "a"
-    pijersi.rules.makeCell( 'a1', [-1, -4] );
-    pijersi.rules.makeCell( 'a2', [-0, -4] );
-    pijersi.rules.makeCell( 'a3', [1, -4] );
-    pijersi.rules.makeCell( 'a4', [2, -4] );
-    pijersi.rules.makeCell( 'a5', [3, -4] );
-    pijersi.rules.makeCell( 'a6', [4, -4] );
-    pijersi.rules.makeCell( 'a7', [5, -4] );
+    pijersi.rules.makeHexagon( 'a1', [-1, -4] );
+    pijersi.rules.makeHexagon( 'a2', [-0, -4] );
+    pijersi.rules.makeHexagon( 'a3', [1, -4] );
+    pijersi.rules.makeHexagon( 'a4', [2, -4] );
+    pijersi.rules.makeHexagon( 'a5', [3, -4] );
+    pijersi.rules.makeHexagon( 'a6', [4, -4] );
+    pijersi.rules.makeHexagon( 'a7', [5, -4] );
 
-    pijersi.rules.makeCell( 'a', [6, -4], true);
+    pijersi.rules.makeHexagon( 'a', [6, -4], true);
 
     // Row "b"
-    pijersi.rules.makeCell( 'b1', [-2, -3] );
-    pijersi.rules.makeCell( 'b2', [-1, -3] );
-    pijersi.rules.makeCell( 'b3', [0, -3] );
-    pijersi.rules.makeCell( 'b4', [1, -3] );
-    pijersi.rules.makeCell( 'b5', [2, -3] );
-    pijersi.rules.makeCell( 'b6', [3, -3] );
-    pijersi.rules.makeCell( 'b7', [4, -3] );
-    pijersi.rules.makeCell( 'b8', [5, -3] );
+    pijersi.rules.makeHexagon( 'b1', [-2, -3] );
+    pijersi.rules.makeHexagon( 'b2', [-1, -3] );
+    pijersi.rules.makeHexagon( 'b3', [0, -3] );
+    pijersi.rules.makeHexagon( 'b4', [1, -3] );
+    pijersi.rules.makeHexagon( 'b5', [2, -3] );
+    pijersi.rules.makeHexagon( 'b6', [3, -3] );
+    pijersi.rules.makeHexagon( 'b7', [4, -3] );
+    pijersi.rules.makeHexagon( 'b8', [5, -3] );
 
-    pijersi.rules.makeCell( 'b', [6, -3], true);
+    pijersi.rules.makeHexagon( 'b', [6, -3], true);
 
     // Row "c"
-    pijersi.rules.makeCell( 'c1', [-2, -2] );
-    pijersi.rules.makeCell( 'c2', [-1, -2] );
-    pijersi.rules.makeCell( 'c3', [0, -2] );
-    pijersi.rules.makeCell( 'c4', [1, -2] );
-    pijersi.rules.makeCell( 'c5', [2, -2] );
-    pijersi.rules.makeCell( 'c6', [3, -2] );
-    pijersi.rules.makeCell( 'c7', [4, -2] );
+    pijersi.rules.makeHexagon( 'c1', [-2, -2] );
+    pijersi.rules.makeHexagon( 'c2', [-1, -2] );
+    pijersi.rules.makeHexagon( 'c3', [0, -2] );
+    pijersi.rules.makeHexagon( 'c4', [1, -2] );
+    pijersi.rules.makeHexagon( 'c5', [2, -2] );
+    pijersi.rules.makeHexagon( 'c6', [3, -2] );
+    pijersi.rules.makeHexagon( 'c7', [4, -2] );
 
-    pijersi.rules.makeCell( 'c', [5, -2], true);
+    pijersi.rules.makeHexagon( 'c', [5, -2], true);
 
     // Row "d"
-    pijersi.rules.makeCell( 'd1', [-3, -1] );
-    pijersi.rules.makeCell( 'd2', [-2, -1] );
-    pijersi.rules.makeCell( 'd3', [-1, -1] );
-    pijersi.rules.makeCell( 'd4', [0, -1] );
-    pijersi.rules.makeCell( 'd5', [1, -1] );
-    pijersi.rules.makeCell( 'd6', [2, -1] );
-    pijersi.rules.makeCell( 'd7', [3, -1] );
-    pijersi.rules.makeCell( 'd8', [4, -1] );
+    pijersi.rules.makeHexagon( 'd1', [-3, -1] );
+    pijersi.rules.makeHexagon( 'd2', [-2, -1] );
+    pijersi.rules.makeHexagon( 'd3', [-1, -1] );
+    pijersi.rules.makeHexagon( 'd4', [0, -1] );
+    pijersi.rules.makeHexagon( 'd5', [1, -1] );
+    pijersi.rules.makeHexagon( 'd6', [2, -1] );
+    pijersi.rules.makeHexagon( 'd7', [3, -1] );
+    pijersi.rules.makeHexagon( 'd8', [4, -1] );
 
-    pijersi.rules.makeCell( 'd', [5, -1], true);
+    pijersi.rules.makeHexagon( 'd', [5, -1], true);
 
     // Row "e"
-    pijersi.rules.makeCell( 'e1', [-4, 0] );
-    pijersi.rules.makeCell( 'e2', [-3, 0] );
-    pijersi.rules.makeCell( 'e3', [-2, 0] );
-    pijersi.rules.makeCell( 'e4', [-1, 0] );
-    pijersi.rules.makeCell( 'e5', [0, 0] );
-    pijersi.rules.makeCell( 'e6', [1, 0] );
-    pijersi.rules.makeCell( 'e7', [2, 0] );
-    pijersi.rules.makeCell( 'e8', [3, 0] );
-    pijersi.rules.makeCell( 'e9', [4, 0] );
+    pijersi.rules.makeHexagon( 'e1', [-4, 0] );
+    pijersi.rules.makeHexagon( 'e2', [-3, 0] );
+    pijersi.rules.makeHexagon( 'e3', [-2, 0] );
+    pijersi.rules.makeHexagon( 'e4', [-1, 0] );
+    pijersi.rules.makeHexagon( 'e5', [0, 0] );
+    pijersi.rules.makeHexagon( 'e6', [1, 0] );
+    pijersi.rules.makeHexagon( 'e7', [2, 0] );
+    pijersi.rules.makeHexagon( 'e8', [3, 0] );
+    pijersi.rules.makeHexagon( 'e9', [4, 0] );
 
     // Row "f"
 
-    pijersi.rules.makeCell( 'f', [-5, 1], true);
+    pijersi.rules.makeHexagon( 'f', [-5, 1], true);
 
-    pijersi.rules.makeCell( 'f1', [-4, 1] );
-    pijersi.rules.makeCell( 'f2', [-3, 1] );
-    pijersi.rules.makeCell( 'f3', [-2, 1] );
-    pijersi.rules.makeCell( 'f4', [-1, 1] );
-    pijersi.rules.makeCell( 'f5', [0, 1] );
-    pijersi.rules.makeCell( 'f6', [1, 1] );
-    pijersi.rules.makeCell( 'f7', [2, 1] );
-    pijersi.rules.makeCell( 'f8', [3, 1] );
+    pijersi.rules.makeHexagon( 'f1', [-4, 1] );
+    pijersi.rules.makeHexagon( 'f2', [-3, 1] );
+    pijersi.rules.makeHexagon( 'f3', [-2, 1] );
+    pijersi.rules.makeHexagon( 'f4', [-1, 1] );
+    pijersi.rules.makeHexagon( 'f5', [0, 1] );
+    pijersi.rules.makeHexagon( 'f6', [1, 1] );
+    pijersi.rules.makeHexagon( 'f7', [2, 1] );
+    pijersi.rules.makeHexagon( 'f8', [3, 1] );
 
     // Row "g"
-    pijersi.rules.makeCell( 'g', [-5, 2], true);
+    pijersi.rules.makeHexagon( 'g', [-5, 2], true);
 
-    pijersi.rules.makeCell( 'g1', [-4, 2] );
-    pijersi.rules.makeCell( 'g2', [-3, 2] );
-    pijersi.rules.makeCell( 'g3', [-2, 2] );
-    pijersi.rules.makeCell( 'g4', [-1, 2] );
-    pijersi.rules.makeCell( 'g5', [0, 2] );
-    pijersi.rules.makeCell( 'g6', [1, 2] );
-    pijersi.rules.makeCell( 'g7', [2, 2] );
+    pijersi.rules.makeHexagon( 'g1', [-4, 2] );
+    pijersi.rules.makeHexagon( 'g2', [-3, 2] );
+    pijersi.rules.makeHexagon( 'g3', [-2, 2] );
+    pijersi.rules.makeHexagon( 'g4', [-1, 2] );
+    pijersi.rules.makeHexagon( 'g5', [0, 2] );
+    pijersi.rules.makeHexagon( 'g6', [1, 2] );
+    pijersi.rules.makeHexagon( 'g7', [2, 2] );
 
     // Row "h"
-    pijersi.rules.makeCell( 'h', [-6, 3], true);
+    pijersi.rules.makeHexagon( 'h', [-6, 3], true);
 
-    pijersi.rules.makeCell( 'h1', [-5, 3] );
-    pijersi.rules.makeCell( 'h2', [-4, 3] );
-    pijersi.rules.makeCell( 'h3', [-3, 3] );
-    pijersi.rules.makeCell( 'h4', [-2, 3] );
-    pijersi.rules.makeCell( 'h5', [-1, 3] );
-    pijersi.rules.makeCell( 'h6', [0, 3] );
-    pijersi.rules.makeCell( 'h7', [1, 3] );
-    pijersi.rules.makeCell( 'h8', [2, 3] );
+    pijersi.rules.makeHexagon( 'h1', [-5, 3] );
+    pijersi.rules.makeHexagon( 'h2', [-4, 3] );
+    pijersi.rules.makeHexagon( 'h3', [-3, 3] );
+    pijersi.rules.makeHexagon( 'h4', [-2, 3] );
+    pijersi.rules.makeHexagon( 'h5', [-1, 3] );
+    pijersi.rules.makeHexagon( 'h6', [0, 3] );
+    pijersi.rules.makeHexagon( 'h7', [1, 3] );
+    pijersi.rules.makeHexagon( 'h8', [2, 3] );
 
     // Row "i"
-    pijersi.rules.makeCell( 'i', [-6, 4], true);
+    pijersi.rules.makeHexagon( 'i', [-6, 4], true);
 
-    pijersi.rules.makeCell( 'i1', [-5, 4] );
-    pijersi.rules.makeCell( 'i2', [-4, 4] );
-    pijersi.rules.makeCell( 'i3', [-3, 4] );
-    pijersi.rules.makeCell( 'i4', [-2, 4] );
-    pijersi.rules.makeCell( 'i5', [-1, 4] );
-    pijersi.rules.makeCell( 'i6', [0, 4] );
-    pijersi.rules.makeCell( 'i7', [1, 4] );
+    pijersi.rules.makeHexagon( 'i1', [-5, 4] );
+    pijersi.rules.makeHexagon( 'i2', [-4, 4] );
+    pijersi.rules.makeHexagon( 'i3', [-3, 4] );
+    pijersi.rules.makeHexagon( 'i4', [-2, 4] );
+    pijersi.rules.makeHexagon( 'i5', [-1, 4] );
+    pijersi.rules.makeHexagon( 'i6', [0, 4] );
+    pijersi.rules.makeHexagon( 'i7', [1, 4] );
 }
 
-pijersi.rules.makeCell = function(cell_name, position_uv, reserve){
+pijersi.rules.makeHexagon = function(hexagon_name, position_uv, reserve){
 
     if ( typeof reserve === "undefined" ) {
         reserve = false;
     };
 
-    const cell = {
-        index: pijersi.rules.cells.length,
+    const hexagon = {
+        index: pijersi.rules.hexagons.length,
         u: position_uv[0],
         v: position_uv[1],
-        name: cell_name,
+        name: hexagon_name,
         reserve: reserve
     };
 
-    const cell_state = {
-        index: cell.index,
+    const hexagon_state = {
+        index: hexagon.index,
         bottom: null,
         top: null
     };
 
-    pijersi.rules.cells.push(cell);
-    pijersi.rules.cells_states.push(cell_state);
+    pijersi.rules.hexagons.push(hexagon);
+    pijersi.rules.hexagons_states.push(hexagon_state);
 
-    return  cell;
+    return  hexagon;
 };
 
 pijersi.rules.makeAllCubes = function(){
@@ -296,57 +296,57 @@ pijersi.rules.makeAllCubes = function(){
 
 // --- PIJERSI_BEGIN: setters ---
 
-pijersi.rules.clearCell = function(cell){
-    const cell_state = pijersi.rules.cells_states[cell.index];
-    cell_state.bottom = null;
-    cell_state.top = null;
+pijersi.rules.clearHexagon = function(hexagon){
+    const hexagon_state = pijersi.rules.hexagons_states[hexagon.index];
+    hexagon_state.bottom = null;
+    hexagon_state.top = null;
 }
 
-pijersi.rules.clearAllCells = function(){
-    pijersi.rules.cells.forEach(pijersi.rules.clearCell);
+pijersi.rules.clearAllHexagons = function(){
+    pijersi.rules.hexagons.forEach(pijersi.rules.clearHexagon);
 };
 
-pijersi.rules.moveCube = function(cell_source, cell_destination){
-    pijersi.debug.assert( pijersi.rules.cellHasCube(cell_source), "cell_source has cube");
-    pijersi.debug.assert( pijersi.rules.iSEmptyCell(cell_destination), "cell_destination is empty");
+pijersi.rules.moveCube = function(hexagon_source, hexagon_destination){
+    pijersi.debug.assert( pijersi.rules.hexagonHasCube(hexagon_source), "hexagon_source has cube");
+    pijersi.debug.assert( pijersi.rules.iSEmptyHexagon(hexagon_destination), "hexagon_destination is empty");
 
-    const cell_source_status = pijersi.rules.cells_states[cell_source.index];
-    const cell_destination_status = pijersi.rules.cells_states[cell_destination.index];
+    const hexagon_source_status = pijersi.rules.hexagons_states[hexagon_source.index];
+    const hexagon_destination_status = pijersi.rules.hexagons_states[hexagon_destination.index];
 
-    if ( cell_source_status.top != null ) {
-        cell_destination_status.bottom = cell_source_status.top;
-        cell_source_status.top = null;
+    if ( hexagon_source_status.top != null ) {
+        hexagon_destination_status.bottom = hexagon_source_status.top;
+        hexagon_source_status.top = null;
 
     } else {
-        cell_destination_status.bottom = cell_source_status.bottom;
-        cell_source_status.bottom = null;
+        hexagon_destination_status.bottom = hexagon_source_status.bottom;
+        hexagon_source_status.bottom = null;
     }
 };
 
-pijersi.rules.moveStack = function(cell_source, cell_destination){
-    pijersi.debug.assert( pijersi.rules.cellHasStack(cell_source), "cell_source has stack");
-    pijersi.debug.assert( pijersi.rules.iSEmptyCell(cell_destination), "cell_destination is empty");
+pijersi.rules.moveStack = function(hexagon_source, hexagon_destination){
+    pijersi.debug.assert( pijersi.rules.hexagonHasStack(hexagon_source), "hexagon_source has stack");
+    pijersi.debug.assert( pijersi.rules.iSEmptyHexagon(hexagon_destination), "hexagon_destination is empty");
 
-    const cell_source_status = pijersi.rules.cells_states[cell_source.index];
-    const cell_destination_status = pijersi.rules.cells_states[cell_destination.index];
+    const hexagon_source_status = pijersi.rules.hexagons_states[hexagon_source.index];
+    const hexagon_destination_status = pijersi.rules.hexagons_states[hexagon_destination.index];
 
-    cell_destination_status.bottom = cell_source_status.bottom;
-    cell_destination_status.top = cell_source_status.top;
+    hexagon_destination_status.bottom = hexagon_source_status.bottom;
+    hexagon_destination_status.top = hexagon_source_status.top;
 
-    cell_source_status.bottom = null;
-    cell_source_status.top = null;
+    hexagon_source_status.bottom = null;
+    hexagon_source_status.top = null;
 };
 
-pijersi.rules.setCube = function(cell, cube){
-    const cell_state = pijersi.rules.cells_states[cell.index];
+pijersi.rules.setCube = function(hexagon, cube){
+    const hexagon_state = pijersi.rules.hexagons_states[hexagon.index];
 
-    if ( cell_state.bottom === null ) { cell_state.bottom = cube; }
-    else if  ( cell_state.top === null ) { cell_state.top = cube; }
+    if ( hexagon_state.bottom === null ) { hexagon_state.bottom = cube; }
+    else if  ( hexagon_state.top === null ) { hexagon_state.top = cube; }
     else {
         pijersi.debug.assert(false, "pijersi.rules.setCube(): failed");
     }
 
-    if ( cell.reserve ) {
+    if ( hexagon.reserve ) {
         pijersi.rules.cubes_states[cube.index] = pijersi.rules.CubeState.RESERVED;
     } else {
         pijersi.rules.cubes_states[cube.index] = pijersi.rules.CubeState.ACTIVATED;
@@ -414,10 +414,10 @@ pijersi.rules.setAllCubes = function(){
     pijersi.rules.setCubeByLabels("g", "w2");
 };
 
-pijersi.rules.setCubeByLabels = function(cell_name, cube_name){
-    const cell = pijersi.rules.getCell(cell_name);
+pijersi.rules.setCubeByLabels = function(hexagon_name, cube_name){
+    const hexagon = pijersi.rules.getHexagon(hexagon_name);
     const cube = pijersi.rules.getCube(cube_name);
-    pijersi.rules.setCube(cell, cube);
+    pijersi.rules.setCube(hexagon, cube);
 };
 
 // --- PIJERSI_END: setters ---
@@ -425,36 +425,36 @@ pijersi.rules.setCubeByLabels = function(cell_name, cube_name){
 // --- PIJERSI_BEGIN: starters and savers ---
 
 pijersi.rules.startGame = function(){
-    pijersi.rules.makeAllCells();
+    pijersi.rules.makeAllHexagons();
     pijersi.rules.makeAllCubes();
     pijersi.rules.restartGame();
 };
 
 pijersi.rules.restartGame = function(){
-    pijersi.rules.clearAllCells();
+    pijersi.rules.clearAllHexagons();
     pijersi.rules.setAllCubes();
     pijersi.rules.saveGame();
     pijersi.rules.game_is_running = true;
 };
 
 pijersi.rules.saveGame = function(){
-    pijersi.rules.saveAllCellsStates();
+    pijersi.rules.saveAllHexagonsStates();
     pijersi.rules.saveAllCubesStates();
 };
 
-pijersi.rules.saveCellState = function(cell_state, cell_index){
-    const saved_cell_state = {bottom:cell_state.bottom, top:cell_state.top};
-    pijersi.rules.saved_cells_states[cell_index] = saved_cell_state;
+pijersi.rules.saveHexagonState = function(hexagon_state, hexagon_index){
+    const saved_hexagon_state = {bottom:hexagon_state.bottom, top:hexagon_state.top};
+    pijersi.rules.saved_hexagons_states[hexagon_index] = saved_hexagon_state;
 }
 
-pijersi.rules.saveAllCellsStates = function(){
+pijersi.rules.saveAllHexagonsStates = function(){
 
-    if  ( pijersi.rules.saved_cells_states === null ) {
-        pijersi.rules.saved_cells_states = Array.from(pijersi.rules.cells_states);
-        pijersi.rules.saved_cells_states.fill(null);
+    if  ( pijersi.rules.saved_hexagons_states === null ) {
+        pijersi.rules.saved_hexagons_states = Array.from(pijersi.rules.hexagons_states);
+        pijersi.rules.saved_hexagons_states.fill(null);
     }
 
-    pijersi.rules.cells_states.forEach(pijersi.rules.saveCellState);
+    pijersi.rules.hexagons_states.forEach(pijersi.rules.saveHexagonState);
 };
 
 pijersi.rules.saveCubeState = function(cube_state, cube_index){
@@ -473,18 +473,18 @@ pijersi.rules.saveAllCubesStates = function(){
 };
 
 pijersi.rules.loadGame = function(){
-    pijersi.rules.loadAllCellsStates();
+    pijersi.rules.loadAllHexagonsStates();
     pijersi.rules.loadAllCubeStates();
 };
 
-pijersi.rules.loadCellState = function(saved_cell_state, cell_index){
-    const cell_state = pijersi.rules.cells_states[cell_index];
-    cell_state.bottom = saved_cell_state.bottom;
-    cell_state.top = saved_cell_state.top;
+pijersi.rules.loadHexagonState = function(saved_hexagon_state, hexagon_index){
+    const hexagon_state = pijersi.rules.hexagons_states[hexagon_index];
+    hexagon_state.bottom = saved_hexagon_state.bottom;
+    hexagon_state.top = saved_hexagon_state.top;
 }
 
-pijersi.rules.loadAllCellsStates = function(){
-    pijersi.rules.saved_cells_states.forEach(pijersi.rules.loadCellState);
+pijersi.rules.loadAllHexagonsStates = function(){
+    pijersi.rules.saved_hexagons_states.forEach(pijersi.rules.loadHexagonState);
 };
 
 pijersi.rules.loadCubeState = function(saved_cube_state, cube_index){

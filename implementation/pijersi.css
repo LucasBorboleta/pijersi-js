@@ -78,20 +78,20 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     outline-width:0px;
 }
 
-.pijersi_cell_class{
+.pijersi_hexagon_class{
     position:absolute;
 }
 
-.pijersi_cell_selected_class{
+.pijersi_hexagon_selected_class{
     /* outline-style:outset !important;
     outline-color:white !important;
     outline-width:2px !important; */
 }
 
-.pijersi_cell_unselected_class{
+.pijersi_hexagon_unselected_class{
 }
 
-.pijersi_cell_name_class{
+.pijersi_hexagon_name_class{
     text-align:left;
     font-size:60%;
 
