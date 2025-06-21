@@ -148,7 +148,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     background-image:none;
 }
 
-/* --- JERSI_BEGIN: cube sorts  --- */
+/* --- PIJERSI_BEGIN: cube sorts  --- */
 
 .pijersi_cube_king_black_class{
     background-image:url(img/king-black.png);
@@ -220,7 +220,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     box-shadow: 4px 4px 4px black;
 }
 
-/* --- JERSI_END: cube sorts  --- */
+/* --- PIJERSI_END: cube sorts  --- */
 
 .pijersi_debug_messages_class{
     color:inherit;

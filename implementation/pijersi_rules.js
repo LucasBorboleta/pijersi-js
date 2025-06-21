@@ -72,7 +72,7 @@ pijersi.rules.__initModule = function(){
     pijersi.debug.writeMessage( "pijersi.rules.__initModule(): done" );
 };
 
-// --- JERSI_BEGIN: getters ---
+// --- PIJERSI_BEGIN: getters ---
 
 pijersi.rules.cellHasCube = function(cell){
     const cell_state = pijersi.rules.cells_states[cell.index];
@@ -124,9 +124,9 @@ pijersi.rules.isSelectableSourceCell = function(cell){
     return ! pijersi.rules.iSEmptyCell(cell);
 };
 
-// --- JERSI_END: getters ---
+// --- PIJERSI_END: getters ---
 
-// --- JERSI_BEGIN: makers ---
+// --- PIJERSI_BEGIN: makers ---
 
 pijersi.rules.makeAllCells = function(){
 
@@ -292,9 +292,9 @@ pijersi.rules.makeAllCubes = function(){
     }
 };
 
-// --- JERSI_END: makers ---
+// --- PIJERSI_END: makers ---
 
-// --- JERSI_BEGIN: setters ---
+// --- PIJERSI_BEGIN: setters ---
 
 pijersi.rules.clearCell = function(cell){
     const cell_state = pijersi.rules.cells_states[cell.index];
@@ -420,9 +420,9 @@ pijersi.rules.setCubeByLabels = function(cell_name, cube_name){
     pijersi.rules.setCube(cell, cube);
 };
 
-// --- JERSI_END: setters ---
+// --- PIJERSI_END: setters ---
 
-// --- JERSI_BEGIN: starters and savers ---
+// --- PIJERSI_BEGIN: starters and savers ---
 
 pijersi.rules.startGame = function(){
     pijersi.rules.makeAllCells();
@@ -495,6 +495,6 @@ pijersi.rules.loadAllCubeStates = function(){
     pijersi.rules.saved_cubes_states.forEach(pijersi.rules.loadCubeState);
 };
 
-// --- JERSI_END: starters and savers ---
+// --- PIJERSI_END: starters and savers ---
 
 //////////////////////////////////////////////////////////////////////////

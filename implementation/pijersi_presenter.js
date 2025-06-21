@@ -46,7 +46,7 @@ pijersi.presenter.__initModule = function(){
     pijersi.debug.writeMessage( "pijersi.presenter.__initModule(): done" );
 };
 
-// --- JERSI_BEGIN: commands ---
+// --- PIJERSI_BEGIN: commands ---
 
 pijersi.presenter.clearSelection = function(){
     pijersi.presenter.source_cell = null;
@@ -183,6 +183,6 @@ pijersi.presenter.enable_undo_button = function(condition){
     this.undo_button.disabled = ( ! condition );
 };
 
-// --- JERSI_END: commands ---
+// --- PIJERSI_END: commands ---
 
 //////////////////////////////////////////////////////////////////////////

@@ -94,7 +94,7 @@ pijersi.draw.__initModule = function(){
     pijersi.debug.writeMessage( "pijersi.draw.__initModule(): done" );
 };
 
-// --- JERSI_BEGIN: commands ---
+// --- PIJERSI_BEGIN: commands ---
 
 pijersi.draw.onHexagonClick = function(event){
 
@@ -180,9 +180,9 @@ pijersi.draw.playUndoSound = function(){
     pijersi.draw.playSlideSound();
 };
 
-// --- JERSI_END: commands ---
+// --- PIJERSI_END: commands ---
 
-// --- JERSI_BEGIN: makers ---
+// --- PIJERSI_BEGIN: makers ---
 
 pijersi.draw.makeAllCellsDiv = function(){
 
@@ -311,9 +311,9 @@ pijersi.draw.makeCubeDiv = function(cell_div, cube_div_location, cube_div_prefix
     return cube_div;
 };
 
-// --- JERSI_END: makers ---
+// --- PIJERSI_END: makers ---
 
-// --- JERSI_BEGIN: getters ---
+// --- PIJERSI_BEGIN: getters ---
 
 pijersi.draw.getMousePosition = function(event){
     const drawZoneRectangle = pijersi.draw.draw_zone.getBoundingClientRect();
@@ -323,9 +323,9 @@ pijersi.draw.getMousePosition = function(event){
     };
 };
 
-// --- JERSI_END: getters ---
+// --- PIJERSI_END: getters ---
 
-// --- JERSI_BEGIN: setters ---
+// --- PIJERSI_BEGIN: setters ---
 
 pijersi.draw.clearCubeDiv = function(cube_div){
     pijersi.draw.setCubeDivClass(cube_div, "pijersi_cube_class" +  " " + "pijersi_cube_unselected_class" +
@@ -440,6 +440,6 @@ pijersi.draw.updateCellDiv = function(cell){
     }
 };
 
-// --- JERSI_END: setters ---
+// --- PIJERSI_END: setters ---
 
 ///////////////////////////////////////////////////////////////////////////////
