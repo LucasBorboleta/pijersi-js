@@ -1,0 +1,323 @@
+/* PIJERSI-JS-COPYRIGHT-MD-BEGIN
+# COPYRIGHT
+
+The software PIJERSI-JS implements the rules of PIJERSI, which is an abstract/strategy board game. This copyright notice only covers the software PIJERSI-JS. The copyright of the PIJERSI rules and board game concept can be found at https://github.com/LucasBorboleta/pijersi.
+
+Copyright (C) 2025 Lucas Borboleta (lucas.borboleta@free.fr).
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses>.
+
+PIJERSI-JS-COPYRIGHT-MD-END */
+
+*{
+    font-family: Tahoma, Verdana, sans-serif;
+    font-style: normal;
+    font-size:18px;
+}
+
+.pijersi_button_class{
+    color:black;
+    background-color:khaki;
+
+    text-align:center;
+    line-height:100%;
+
+    padding-left:8px;
+    padding-right:8px;
+    padding-top:8px;
+    padding-bottom:8px;
+
+    border-style:none;
+    border-width:0px;
+
+    margin:0px;
+
+    outline-style:none;
+    outline-width:0px;
+}
+
+.pijersi_button_class:disabled{
+    opacity:0.5;
+}
+
+.pijersi_buttonGroup_class{
+    display:inherit;
+
+    padding-left:0px;
+    padding-right:24px;
+    padding-top:0px;
+    padding-bottom:0px;
+
+    border-style:solid;
+    border-width:0px;
+
+    margin:0px;
+
+    outline-style:none;
+    outline-width:0px;
+}
+
+.pijersi_buttonZone_class{
+    display:block;
+
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+    padding-bottom:0px;
+
+    border-style:none;
+    border-width:0px;
+
+    margin:2px;
+
+    outline-style:none;
+    outline-width:0px;
+}
+
+.pijersi_cell_class{
+    position:absolute;
+}
+
+.pijersi_cell_selected_class{
+    /* outline-style:outset !important;
+    outline-color:white !important;
+    outline-width:2px !important; */
+}
+
+.pijersi_cell_unselected_class{
+}
+
+.pijersi_cell_name_class{
+    text-align:left;
+    font-size:60%;
+
+    padding-left:2px;
+    padding-right:0px;
+    padding-top:67%;
+    padding-bottom:0px;
+
+    border-style:none;
+    border-width:0px;
+
+    margin:0px;
+
+    outline-style:none;
+    outline-width:0px;
+}
+
+.pijersi_column_class{
+    float:left;
+    margin-right:20px;
+}
+
+.pijersi_cube_class{
+    padding:0px;
+    margin:0px;
+
+    outline-style:none;
+    outline-width:0px;
+
+    background-origin:content-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:cover;
+
+    position:absolute;
+
+    transition-property:all;
+    transition-duration: 300ms;
+}
+
+.pijersi_cube_selected_class{
+    box-shadow: 8px 8px 8px black !important;
+    transform: scale(1.25) !important;
+    outline-style:outset !important;
+    outline-color:white !important;
+    outline-width:2px !important;
+    z-index: 1 !important;
+}
+
+.pijersi_cube_unselected_class{
+}
+
+.pijersi_cube_void_class{
+    background-image:none;
+}
+
+/* --- JERSI_BEGIN: cube sorts  --- */
+
+.pijersi_cube_king_black_class{
+    background-image:url(img/king-black.png);
+    box-shadow: 4px 4px 4px black;
+}
+
+.pijersi_cube_king_white_class{
+    background-image:url(img/king-white.png);
+    box-shadow: 4px 4px 4px black;
+}
+
+.pijersi_cube_fool_black_class{
+    background-image:url(img/fool-black.png);
+    box-shadow: 4px 4px 4px black;
+}
+
+.pijersi_cube_fool_white_class{
+    background-image:url(img/fool-white.png);
+    box-shadow: 4px 4px 4px black;
+}
+
+.pijersi_cube_wise_black_class{
+    background-image:url(img/wise-black.png);
+    box-shadow: 4px 4px 4px black;
+}
+
+.pijersi_cube_wise_white_class{
+    background-image:url(img/wise-white.png);
+    box-shadow: 4px 4px 4px black;
+}
+
+.pijersi_cube_mountain_black_class{
+    background-image:url(img/mountain-black.png);
+    box-shadow: 4px 4px 4px black;
+}
+
+.pijersi_cube_mountain_white_class{
+    background-image:url(img/mountain-white.png);
+    box-shadow: 4px 4px 4px black;
+}
+
+.pijersi_cube_rock_black_class{
+    background-image:url(img/rock-black.png);
+    box-shadow: 4px 4px 4px black;
+}
+
+.pijersi_cube_rock_white_class{
+    background-image:url(img/rock-white.png);
+    box-shadow: 4px 4px 4px black;
+}
+
+.pijersi_cube_paper_black_class{
+    background-image:url(img/paper-black.png);
+    box-shadow: 4px 4px 4px black;
+}
+
+.pijersi_cube_paper_white_class{
+    background-image:url(img/paper-white.png);
+    box-shadow: 4px 4px 4px black;
+}
+
+.pijersi_cube_scissors_black_class{
+    background-image:url(img/scissors-black.png);
+    box-shadow: 4px 4px 4px black;
+}
+
+.pijersi_cube_scissors_white_class{
+    background-image:url(img/scissors-white.png);
+    box-shadow: 4px 4px 4px black;
+}
+
+/* --- JERSI_END: cube sorts  --- */
+
+.pijersi_debug_messages_class{
+    color:inherit;
+    background-color:inherit;
+    width:500px;
+}
+
+.pijersi_debug_mousePosition_class{
+    color:white;
+    background-color:black;
+
+    text-align:center;
+    line-height:100%;
+
+    padding-left:8px;
+    padding-right:8px;
+    padding-top:6px;
+    padding-bottom:6px;
+
+    border-style:none;
+    border-width:0px;
+
+    margin:0px;
+
+    outline-style:none;
+    outline-width:0px;
+}
+
+.pijersi_debugZone_class{
+    display:block;
+
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+    padding-bottom:0px;
+
+    border-style:dashed none none none;
+    border-width:1px;
+    border-color:black;
+
+    margin:2px;
+
+    outline-style:none;
+    outline-width:0px;
+}
+
+.pijersi_drawZone_class{
+    height:600px;
+    width:calc(1.298 * 600px); /* width = 1.298*height   */
+
+    padding:0px;
+    margin:0px;
+    border-width:0px;
+
+    outline-style:none;
+    outline-width:0px;
+
+    background-image:url(img/pijersi_board.png);
+    background-origin:border-box;
+    background-position:left top;
+    background-repeat:no-repeat;
+    background-size:cover;
+
+    outline-style:outset;
+    outline-color:white;
+    outline-width:5px;
+
+    box-shadow: 5px 5px 15px black;
+
+    position:relative;
+}
+
+.pijersi_logo_class{
+    color:black;
+    background-color:white;
+
+    text-align:center;
+    position:absolute;
+    right:0px;
+    line-height:200%;
+
+    padding-left:8px;
+    padding-right:8px;
+    padding-top:0px;
+    padding-bottom:0px;
+
+    border-style:none;
+    border-width:0px;
+
+    margin:0px;
+
+    outline-style:none;
+    outline-width:0px;
+}
+
+.pijersi_row_class:after{
+    content:"";
+    display:table;
+    clear:both;
+}

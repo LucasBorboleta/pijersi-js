@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="./pijersi.css">
+	<title>pijersi</title>
+</head>
+
+<!-- PIJERSI-JS-COPYRIGHT-MD-BEGIN
+# COPYRIGHT
+
+The software PIJERSI-JS implements the rules of PIJERSI, which is an abstract/strategy board game. This copyright notice only covers the software PIJERSI-JS. The copyright of the PIJERSI rules and board game concept can be found at https://github.com/LucasBorboleta/pijersi.
+
+Copyright (C) 2025 Lucas Borboleta (lucas.borboleta@free.fr).
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program. If not, see <http://www.gnu.org/licenses>.
+
+PIJERSI-JS-COPYRIGHT-MD-END -->
+
+<body onload="pijersi.__initModule(); pijersi.presenter.startGame();">
+
+	<div class="pijersi_row_class">
+
+		<div class="pijersi_column_class">
+			<div class="pijersi_drawZone_class" id="pijersi_drawZone"></div>
+		</div>
+
+		<div class="pijersi_column_class">
+
+			<p id="pijersi_text_pleaseWait">Please wait, ʝersi files are being loaded ...</p>
+
+			<audio preload="auto" id="pijersi_audio_slide">
+			  <source src="sound/slide.mp3" type="audio/mpeg">
+			  Your browser does not support the audio element.
+			</audio>
+
+			<audio preload="auto" id="pijersi_audio_clickLight">
+			  <source src="sound/click-light.mp3" type="audio/mpeg">
+			  Your browser does not support the audio element.
+			</audio>
+
+			<audio preload="auto" id="pijersi_audio_clickDark">
+			  <source src="sound/click-dark.mp3" type="audio/mpeg">
+			  Your browser does not support the audio element.
+			</audio>
+
+			<audio preload="auto" id="pijersi_audio_clickDarkFiltered">
+			  <source src="sound/click-dark-filtered.mp3" type="audio/mpeg">
+			  Your browser does not support the audio element.
+			</audio>
+
+			<div id="pijersi_buttonZone" class="pijersi_buttonZone_class">
+
+				<div class="pijersi_logo_class">
+					<span>&#11041;&#11042;</span>
+					<span>pijersi</span>
+					<span>&#11041;&#11042;</span>
+				</div>
+
+				<div class="pijersi_buttonGroup_class">
+
+					<button class="pijersi_button_class" type="button" id="pijersi_button_ok"
+						onclick="pijersi.presenter.ok()">OK</button>
+
+					<button class="pijersi_button_class" type="button" id="pijersi_button_undo"
+						onclick="pijersi.presenter.undo()">Undo</button>
+
+					<button class="pijersi_button_class" type="button" id="pijersi_button_toogleCellNames"
+						onclick="pijersi.draw.toogleCellDivNames()">Coordinates</button>
+
+					<button class="pijersi_button_class" type="button" id="pijersi_button_restartGame"
+						onclick="pijersi.presenter.restartGame()">Restart</button>
+
+					<button class="pijersi_button_class" type="button" id="pijersi_button_debug"
+						onclick="pijersi.debug.debug()">Debug</button>
+			</div>
+
+			<div class="pijersi_debugZone_class" id="pijersi_debugZone">
+
+				<div class="pijersi_logo_class">
+					<span>&#11041;&#11042;</span>
+					<span>debug</span>
+					<span>&#11041;&#11042;</span>
+				</div>
+
+				<button class="pijersi_button_class" type="button" id="pijersi_debug_clearMessages" onclick="pijersi.debug.clearMessages()">Clear</button>
+				<span class="pijersi_debug_mousePosition_class" id="pijersi_debug_mousePosition">Mouse(x,y) = (?, ?)</span>
+				<p class="pijersi_debug_messages_class" id="pijersi_debug_messages"></p>
+			</div>
+		</div>
+	<div>
+
+	<script src="./pijersi_init.js"></script>
+
+	<script src="./pijersi_debug.js"></script>
+	<script src="./pijersi_draw.js"></script>
+	<script src="./pijersi_messager.js"></script>
+	<script src="./pijersi_presenter.js"></script>
+	<script src="./pijersi_rules.js"></script>
+</body>
+
+</html>
