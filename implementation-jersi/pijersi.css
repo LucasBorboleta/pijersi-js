@@ -19,6 +19,65 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     font-size:18px;
 }
 
+.pijersi_button_class{
+    color:black;
+    background-color:khaki;
+
+    text-align:center;
+    line-height:100%;
+
+    padding-left:8px;
+    padding-right:8px;
+    padding-top:8px;
+    padding-bottom:8px;
+
+    border-style:none;
+    border-width:0px;
+
+    margin:0px;
+
+    outline-style:none;
+    outline-width:0px;
+}
+
+.pijersi_button_class:disabled{
+    opacity:0.5;
+}
+
+.pijersi_buttonGroup_class{
+    display:inherit;
+
+    padding-left:0px;
+    padding-right:24px;
+    padding-top:0px;
+    padding-bottom:0px;
+
+    border-style:solid;
+    border-width:0px;
+
+    margin:0px;
+
+    outline-style:none;
+    outline-width:0px;
+}
+
+.pijersi_buttonZone_class{
+    display:block;
+
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+    padding-bottom:0px;
+
+    border-style:none;
+    border-width:0px;
+
+    margin:2px;
+
+    outline-style:none;
+    outline-width:0px;
+}
+
 .pijersi_hexagon_class{
     position:absolute;
 }
@@ -91,6 +150,26 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 /* --- PIJERSI_BEGIN: cube sorts  --- */
 
+.pijersi_cube_king_black_class{
+    background-image:url(img/king-black.png);
+    box-shadow: 4px 4px 4px black;
+}
+
+.pijersi_cube_king_white_class{
+    background-image:url(img/king-white.png);
+    box-shadow: 4px 4px 4px black;
+}
+
+.pijersi_cube_fool_black_class{
+    background-image:url(img/fool-black.png);
+    box-shadow: 4px 4px 4px black;
+}
+
+.pijersi_cube_fool_white_class{
+    background-image:url(img/fool-white.png);
+    box-shadow: 4px 4px 4px black;
+}
+
 .pijersi_cube_wise_black_class{
     background-image:url(img/wise-black.png);
     box-shadow: 4px 4px 4px black;
@@ -98,6 +177,16 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 .pijersi_cube_wise_white_class{
     background-image:url(img/wise-white.png);
+    box-shadow: 4px 4px 4px black;
+}
+
+.pijersi_cube_mountain_black_class{
+    background-image:url(img/mountain-black.png);
+    box-shadow: 4px 4px 4px black;
+}
+
+.pijersi_cube_mountain_white_class{
+    background-image:url(img/mountain-white.png);
     box-shadow: 4px 4px 4px black;
 }
 
@@ -133,14 +222,54 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 /* --- PIJERSI_END: cube sorts  --- */
 
-.pijersi_boardZone_class{
-    width:40%;
-    /* 
-    height:calc(0.15 * 4542px);
-    width:calc(0.15 * 4841px);
-    */
+.pijersi_debug_messages_class{
+    color:inherit;
+    background-color:inherit;
+    width:500px;
+}
 
-    display: block;
+.pijersi_debug_mousePosition_class{
+    color:white;
+    background-color:black;
+
+    text-align:center;
+    line-height:100%;
+
+    padding-left:8px;
+    padding-right:8px;
+    padding-top:6px;
+    padding-bottom:6px;
+
+    border-style:none;
+    border-width:0px;
+
+    margin:0px;
+
+    outline-style:none;
+    outline-width:0px;
+}
+
+.pijersi_debugZone_class{
+    display:block;
+
+    padding-left:0px;
+    padding-right:0px;
+    padding-top:0px;
+    padding-bottom:0px;
+
+    border-style:dashed none none none;
+    border-width:1px;
+    border-color:black;
+
+    margin:2px;
+
+    outline-style:none;
+    outline-width:0px;
+}
+
+.pijersi_drawZone_class{
+    height:600px;
+    width:calc(1.298 * 600px); /* width = 1.298*height   */
 
     padding:0px;
     margin:0px;
@@ -149,15 +278,11 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     outline-style:none;
     outline-width:0px;
 
-    /*
-    background-image:url(img/board.png);
+    background-image:url(img/pijersi_board.png);
     background-origin:border-box;
     background-position:left top;
     background-repeat:no-repeat;
-    background-size:contain;
-    */
-    background-color:#BF9B7A;
-
+    background-size:cover;
 
     outline-style:outset;
     outline-color:white;
@@ -168,78 +293,31 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     position:relative;
 }
 
-.pijersi_boardImage_class{
-    display: block;
-    max-width: 100%;
-    height: auto
-}
-
-.pijersi_top_button_group_class{
-    display: grid;
-    grid-template: 'turn-item title-item menu-item';
-}
-
-.pijersi_button_menu_class{
-    height:60px;
-    width:60px;
-
-    grid-area:menu-item;
-    align-self: center;
-    justify-self: right;
-
-    padding:0px;
-    margin:0px;
-    border-width:0px;
-
-    outline-style:none;
-    outline-width:0px;
-
-    background-image:url(img/hamburger.svg);
-    background-origin:border-box;
-    background-position:left top;
-    background-repeat:no-repeat;
-    background-size:cover;
-    background-color:#BF9B7A;
-
-
-    outline-style:outset;
-    outline-width:0px;
-
-    position:relative;
-}
-
-.pijersi_button_black_turn_class{
-    height:60px;
-    width:60px;
-
-    grid-area:turn-item;
-    align-self: center;
-    justify-self: left;
-
-    padding:0px;
-    margin:0px;
-    border-width:0px;
-
-    outline-style:none;
-    outline-width:0px;
-
-    background-image:url(img/black-chrono.svg);
-    background-origin:border-box;
-    background-position:left top;
-    background-repeat:no-repeat;
-    background-size:cover;
-
-    outline-style:outset;
-    outline-width:0px;
-
-    position:relative;
-}
-
-.pijersi_title_class {
-    grid-area:title-item;
-    align-self: center;
-    justify-self: center;
+.pijersi_logo_class{
+    color:black;
+    background-color:white;
 
     text-align:center;
-    line-height:100%;
+    position:absolute;
+    right:0px;
+    line-height:200%;
+
+    padding-left:8px;
+    padding-right:8px;
+    padding-top:0px;
+    padding-bottom:0px;
+
+    border-style:none;
+    border-width:0px;
+
+    margin:0px;
+
+    outline-style:none;
+    outline-width:0px;
+}
+
+.pijersi_row_class:after{
+    content:"";
+    display:table;
+    clear:both;
 }
