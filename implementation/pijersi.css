@@ -13,11 +13,150 @@ You should have received a copy of the GNU General Public License along with thi
 
 PIJERSI-JS-COPYRIGHT-MD-END */
 
+/* --- PIJERSI_BEGIN: grid-container  --- */
+
 *{
+    margin: 0;
+    box-sizing: border-box;
+
+}
+
+#pijersi_body {
     font-family: Tahoma, Verdana, sans-serif;
     font-style: normal;
-    font-size:18px;
 }
+
+#pijersi_grid_container {
+    display: grid;
+
+    grid-template-areas:
+        'top_left     top_middle     top_right'
+        'board        board          board'
+        'bottom_left  bottom_middle  bottom_right';
+
+    max-width: 40%;
+    height: auto;
+
+    gap: 10px;
+    padding: 10px;
+
+    background-color:#BF9B7A;
+
+    margin:5px;
+    border-width:0px;
+
+    outline-style:outset;
+    outline-color:white;
+    outline-width:5px;
+
+    box-shadow: 5px 5px 15px black;
+}
+
+#pijersi_board{
+    grid-area: board;
+
+    max-width: 100%;
+    height: auto;
+ }
+
+#pijersi_black_turn{
+    grid-area:top_left;
+
+    max-width: 30%;
+    height: auto;
+
+    align-self: center;
+    justify-self: center;
+}
+
+#pijersi_title {
+    grid-area:top_middle;
+    max-width: 100%;
+
+    font-size: 1.5em;
+
+    align-self: center;
+    justify-self: center;
+
+    text-align:center;
+    line-height:100%;
+}
+
+#pijersi_menu{
+    grid-area:top_right;
+
+    max-width: 30%;
+    height: auto;
+
+    align-self: center;
+    justify-self: center;
+}
+
+#pijersi_white_turn{
+    grid-area:bottom_left;
+
+    max-width: 30%;
+    height: auto;
+
+    align-self: center;
+    justify-self: center;
+}
+
+#pijersi_credit{
+    grid-area:bottom_right;
+ 
+    width: 100%;
+
+    align-self:center;
+    justify-self: center;
+
+    display:grid;
+    grid-template-areas: 'decrement value increment' ;
+    gap: 0px;
+    margin: 0px;
+    padding: 0px;
+ }
+
+
+#pijersi_credit_value{
+    grid-area:value;
+
+    align-self:center;
+    justify-self: center;
+
+    font-size: 1.5em;
+
+    padding: 100%;
+
+    background-color:#156082;
+}
+
+#pijersi_credit_decrement{
+    grid-area:decrement;
+
+    align-self:center;
+    justify-self: center;
+
+    max-width: 50%;
+
+    background-color:#BF9B7A;
+}
+#pijersi_credit_increment{
+    grid-area:increment;
+
+    align-self:center;
+    justify-self: center;
+  
+    max-width: 50%;
+
+    background-color:#BF9B7A;
+}
+
+
+/* --- PIJERSI_END: grid-container  --- */
+
+
+/* --- PIJERSI_BEGIN: hexagon states  --- */
 
 .pijersi_hexagon_class{
     position:absolute;
@@ -50,10 +189,10 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     outline-width:0px;
 }
 
-.pijersi_column_class{
-    float:left;
-    margin-right:20px;
-}
+/* --- PIJERSI_END: hexagon states  --- */
+
+
+/* --- PIJERSI_BEGIN: cube states  --- */
 
 .pijersi_cube_class{
     padding:0px;
@@ -88,6 +227,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 .pijersi_cube_void_class{
     background-image:none;
 }
+
+/* --- PIJERSI_END: cube states  --- */
+
 
 /* --- PIJERSI_BEGIN: cube sorts  --- */
 
@@ -132,114 +274,3 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 }
 
 /* --- PIJERSI_END: cube sorts  --- */
-
-.pijersi_boardZone_class{
-    width:40%;
-    /* 
-    height:calc(0.15 * 4542px);
-    width:calc(0.15 * 4841px);
-    */
-
-    display: block;
-
-    padding:0px;
-    margin:0px;
-    border-width:0px;
-
-    outline-style:none;
-    outline-width:0px;
-
-    /*
-    background-image:url(img/board.png);
-    background-origin:border-box;
-    background-position:left top;
-    background-repeat:no-repeat;
-    background-size:contain;
-    */
-    background-color:#BF9B7A;
-
-
-    outline-style:outset;
-    outline-color:white;
-    outline-width:5px;
-
-    box-shadow: 5px 5px 15px black;
-
-    position:relative;
-}
-
-.pijersi_boardImage_class{
-    display: block;
-    max-width: 100%;
-    height: auto
-}
-
-.pijersi_top_button_group_class{
-    display: grid;
-    grid-template: 'turn-item title-item menu-item';
-}
-
-.pijersi_button_menu_class{
-    height:60px;
-    width:60px;
-
-    grid-area:menu-item;
-    align-self: center;
-    justify-self: right;
-
-    padding:0px;
-    margin:0px;
-    border-width:0px;
-
-    outline-style:none;
-    outline-width:0px;
-
-    background-image:url(img/hamburger.svg);
-    background-origin:border-box;
-    background-position:left top;
-    background-repeat:no-repeat;
-    background-size:cover;
-    background-color:#BF9B7A;
-
-
-    outline-style:outset;
-    outline-width:0px;
-
-    position:relative;
-}
-
-.pijersi_button_black_turn_class{
-    height:60px;
-    width:60px;
-
-    grid-area:turn-item;
-    align-self: center;
-    justify-self: left;
-
-    padding:0px;
-    margin:0px;
-    border-width:0px;
-
-    outline-style:none;
-    outline-width:0px;
-
-    background-image:url(img/black-chrono.svg);
-    background-origin:border-box;
-    background-position:left top;
-    background-repeat:no-repeat;
-    background-size:cover;
-
-    outline-style:outset;
-    outline-width:0px;
-
-    position:relative;
-}
-
-.pijersi_title_class {
-    grid-area:title-item;
-    align-self: center;
-    justify-self: center;
-
-    text-align:center;
-    line-height:100%;
-}
