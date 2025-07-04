@@ -15,6 +15,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 /* --- PIJERSI_BEGIN: grid-container  --- */
 
+.show {display: block;}
+.hide {display: none;}
+
 *{
     margin: 0;
     box-sizing: border-box;
@@ -39,10 +42,10 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
     gap: 10px;
     padding: 10px;
+    margin:5px;
 
     background-color:#BF9B7A;
 
-    margin:5px;
     border-width:0px;
 
     outline-style:outset;
@@ -90,6 +93,32 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
     align-self: center;
     justify-self: center;
+}
+
+#pijersi_menu:hover{
+    background-color:#156082;
+}
+
+#pijersi_menu:hover #pijersi_menu_items {
+    display: block;
+}
+
+#pijersi_menu_items{
+    display: none;
+    position: absolute;
+    z-index: 1;
+
+    padding: 10px;
+    background-color: #156082;
+    box-shadow: 5px 5px 15px black;
+}
+
+.pijersi_menu_item_class{
+    font-size: 1.5em;
+}
+
+.pijersi_menu_item_class:hover{
+    background-color:#BF9B7A;
 }
 
 #pijersi_white_turn{
