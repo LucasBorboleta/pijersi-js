@@ -113,6 +113,17 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     box-shadow: 5px 5px 15px black;
 }
 
+.pijersi_menu_line_class{
+    border-color: black;
+    border-width: 2px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.pijersi_menu_separator_class{
+      font-size: 1.5em;
+}
+
 .pijersi_menu_item_class{
     font-size: 1.5em;
 }
