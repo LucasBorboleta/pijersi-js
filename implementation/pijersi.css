@@ -19,7 +19,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 .hide {display: none;}
 
 *{
-    margin: 0;
+    margin:0em;
     box-sizing: border-box;
 
 }
@@ -40,9 +40,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     max-width: 40%;
     height: auto;
 
-    gap: 10px;
-    padding: 10px;
-    margin:5px;
+    gap: 1.0em;
+    padding: 1.0em;
+    margin: 0.5em;
 
     background-color:#BF9B7A;
 
@@ -50,9 +50,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
     outline-style:outset;
     outline-color:white;
-    outline-width:5px;
+    outline-width: 0.5em;
 
-    box-shadow: 5px 5px 15px black;
+    box-shadow: 0.5em 0.5em 0.5em black;
 }
 
 #pijersi_board{
@@ -65,7 +65,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 #pijersi_black_turn{
     grid-area:top_left;
 
-    max-width: 30%;
+    width: 3em;
     height: auto;
 
     align-self: center;
@@ -74,9 +74,10 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 #pijersi_title {
     grid-area:top_middle;
-    max-width: 100%;
+    width: 18em;
 
-    font-size: 1.5em;
+    font-size: 1em;
+    font-weight:bold;
 
     align-self: center;
     justify-self: center;
@@ -88,7 +89,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 #pijersi_menu{
     grid-area:top_right;
 
-    max-width: 30%;
+    width: 3em;
     height: auto;
 
     align-self: center;
@@ -97,6 +98,11 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 #pijersi_menu:hover{
     background-color:#156082;
+}
+
+#pijersi_hamburger{
+    width: 3em;
+    height: auto;
 }
 
 #pijersi_menu:hover #pijersi_menu_items {
@@ -108,34 +114,39 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     position: absolute;
     z-index: 1;
 
-    padding: 10px;
+    padding: 1.0em;
     background-color: #156082;
-    box-shadow: 5px 5px 15px black;
+    box-shadow: 0.5em 0.5em 1.5em black;
 }
 
 .pijersi_menu_line_class{
     border-color: black;
-    border-width: 2px;
-    margin-top: 10px;
-    margin-bottom: 5px;
+    border-width: 0.2em;
+    margin-top: 1.0em;
+    margin-bottom: 0.5em;
 }
 
 .pijersi_menu_separator_class{
-      font-size: 1.5em;
+      font-size: 2.0em;
 }
 
 .pijersi_menu_item_class{
-    font-size: 1.5em;
+    font-size: 2.5em;
 }
 
 .pijersi_menu_item_class:hover{
     background-color:#BF9B7A;
 }
 
+.pijersi_checkbox_class{
+  height:2.0em;
+  width:2.0em;
+}
+
 #pijersi_white_turn{
     grid-area:bottom_left;
 
-    max-width: 30%;
+    width: 3em;
     height: auto;
 
     align-self: center;
@@ -145,16 +156,16 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 #pijersi_credit{
     grid-area:bottom_right;
  
-    width: 100%;
+    width: 12em;
 
     align-self:center;
     justify-self: center;
 
     display:grid;
     grid-template-areas: 'decrement value increment' ;
-    gap: 0px;
-    margin: 0px;
-    padding: 0px;
+    gap: 0em;
+    margin: 0em;
+    padding: 0em;
  }
 
 
@@ -164,34 +175,43 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self:center;
     justify-self: center;
 
-    font-size: 1.5em;
+    font-size: 1em;
+    font-weight:bold;
 
-    padding: 100%;
+    margin: 0em;
+    padding: 1.0em;
 
     background-color:#156082;
 }
 
 #pijersi_credit_decrement{
+    display: none;
+
     grid-area:decrement;
 
     align-self:center;
     justify-self: center;
 
-    max-width: 50%;
+    width: 3.0em;
+    margin: 0em;
+    padding: 0em;
 
     background-color:#BF9B7A;
 }
 #pijersi_credit_increment{
+    display: none;
+
     grid-area:increment;
 
     align-self:center;
     justify-self: center;
   
-    max-width: 50%;
+    width: 3.0em;
+    margin: 0em;
+    padding: 0em;
 
     background-color:#BF9B7A;
 }
-
 
 /* --- PIJERSI_END: grid-container  --- */
 

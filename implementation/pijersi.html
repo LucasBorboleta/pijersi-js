@@ -28,22 +28,26 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 
 		<img src="img/black-chrono.svg" alt="pijersi" id="pijersi_black_turn">
 		
-		<span id="pijersi_title"><b>Pijersi</b> [running]</span>
+		<span id="pijersi_title">Pijersi [running]</span>
 		
 		<div id="pijersi_menu">
-			<img src="img/hamburger.svg" alt="pijersi" >
+			<img id="pijersi_hamburger" src="img/hamburger.svg" alt="pijersi" >
 			<div id="pijersi_menu_items">
-				<div id="pijersi_menu_new" class="pijersi_menu_item_class">New</div>
-				<div id="pijersi_menu_stop" class="pijersi_menu_item_class">Stop</div>
-				<div id="pijersi_menu_resume" class="pijersi_menu_item_class">Resume</div>
-				<div id="pijersi_menu_edit" class="pijersi_menu_item_class">Edit</div>
+				<div id="pijersi_menu_new" class="pijersi_menu_item_class" onclick="pijersi_do_action('New')">New</div>
+				<div id="pijersi_menu_stop" class="pijersi_menu_item_class" onclick="pijersi_do_action('Stop')">Stop</div>
+				<div id="pijersi_menu_resume" class="pijersi_menu_item_class" onclick="pijersi_do_action('Resume')">Resume</div>
+				<div id="pijersi_menu_edit" class="pijersi_menu_item_class" onclick="pijersi_do_action('Edit')">Edit</div>
+
 				<hr class="pijersi_menu_line_class">
 				<div class="pijersi_menu_separator_class">Show :</div>
-				<div class="pijersi_menu_item_class"><input id="pijersi_show_captures" type="checkbox" checked="checked">
-					<span>Captures</span>
+
+				<div class="pijersi_menu_item_class">
+					<input id="pijersi_show_captures" class="pijersi_checkbox_class" type="checkbox" checked="checked">
+					<span onclick="pijersi_toggle_checkbox('pijersi_show_captures')">Captures</span>
 				</div>
-				<div class="pijersi_menu_item_class"><input id="pijersi_show_labels" type="checkbox" checked="checked">
-					<span>Labels</span>
+				<div class="pijersi_menu_item_class">
+					<input id="pijersi_show_labels" class="pijersi_checkbox_class" type="checkbox" checked="checked">
+					<span onclick="pijersi_toggle_checkbox('pijersi_show_labels')">Labels</span>
 				</div>
 
 			</div>
@@ -61,6 +65,57 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 		</div>
 
 	</div>		
+
+	<script>
+
+		pijersi_toggle_checkbox = function(checkbox_id){
+			const checkbox = document.getElementById(checkbox_id);
+			checkbox.checked = ! checkbox.checked ;
+		};
+
+		
+		pijersi_do_action = function(action_name){
+			console.log("pijersi_do_action: action_name = '" + action_name + "'");
+
+			const pijersi_title = document.getElementById("pijersi_title");	
+			const pijersi_credit_decrement = document.getElementById("pijersi_credit_decrement");	
+			const pijersi_credit_increment = document.getElementById("pijersi_credit_increment");	
+
+			switch(action_name) {
+
+  				case 'New':
+					pijersi_title.innerHTML = "Pijersi [running]"
+					pijersi_credit_decrement.style.display = "none"
+					pijersi_credit_increment.style.display = "none"
+ 
+    				break;
+
+  				case 'Stop':
+					pijersi_title.innerHTML = "Pijersi [reviewing]"
+					pijersi_credit_decrement.style.display = "none"
+					pijersi_credit_increment.style.display = "none"
+    				break;
+
+  				case 'Resume':
+					pijersi_title.innerHTML = "Pijersi [running]"
+ 					pijersi_credit_decrement.style.display = "none"
+					pijersi_credit_increment.style.display = "none"
+    				break;
+
+  				case 'Edit':
+					pijersi_title.innerHTML = "Pijersi [editing]"
+ 					pijersi_credit_decrement.style.display = "inherit"
+					pijersi_credit_increment.style.display = "inherit"
+    				break;
+
+  				default:
+					console.log("pijersi_do_action: unknown action_name = '" + action_name + "'");
+			}
+		};
+
+
+
+	</script>
 
 </body>
 </html>
