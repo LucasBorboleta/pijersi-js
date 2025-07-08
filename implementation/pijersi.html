@@ -57,13 +57,7 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 
 		<img src="img/white-chrono.svg" alt="pijersi" id="pijersi_white_turn">
 
-		<div id="pijersi_credit">
-			<img src="img/minus.svg" alt="pijersi" id="pijersi_credit_decrement">
-			<div id="pijersi_credit_value">20</div>
-			<img src="img/plus.svg" alt="pijersi" id="pijersi_credit_increment">
-
-		</div>
-
+		<div id="pijersi_credit">20</div>
 	</div>		
 
 	<script>
@@ -78,34 +72,23 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 			console.log("pijersi_do_action: action_name = '" + action_name + "'");
 
 			const pijersi_title = document.getElementById("pijersi_title");	
-			const pijersi_credit_decrement = document.getElementById("pijersi_credit_decrement");	
-			const pijersi_credit_increment = document.getElementById("pijersi_credit_increment");	
 
 			switch(action_name) {
 
   				case 'New':
 					pijersi_title.innerHTML = "Pijersi [running]"
-					pijersi_credit_decrement.style.display = "none"
-					pijersi_credit_increment.style.display = "none"
- 
     				break;
 
   				case 'Stop':
 					pijersi_title.innerHTML = "Pijersi [reviewing]"
-					pijersi_credit_decrement.style.display = "none"
-					pijersi_credit_increment.style.display = "none"
     				break;
 
   				case 'Resume':
 					pijersi_title.innerHTML = "Pijersi [running]"
- 					pijersi_credit_decrement.style.display = "none"
-					pijersi_credit_increment.style.display = "none"
     				break;
 
   				case 'Edit':
 					pijersi_title.innerHTML = "Pijersi [editing]"
- 					pijersi_credit_decrement.style.display = "inherit"
-					pijersi_credit_increment.style.display = "inherit"
     				break;
 
   				default:
