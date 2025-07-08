@@ -72,6 +72,33 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     justify-self: center;
 }
 
+#pijersi_white_turn{
+    grid-area:bottom_left;
+
+    width: 4em;
+    height: auto;
+
+    align-self: center;
+    justify-self: center;
+}
+
+#pijersi_credit{
+    grid-area:bottom_right;
+ 
+    align-self: center;
+    justify-self: center;
+
+    font-size: 1em;
+    font-weight: bold;
+
+    text-align: center;
+
+    margin: 0em;
+    padding: 1em;
+
+    background-color:#156082;
+ }
+
 #pijersi_title {
     grid-area:top_middle;
     width: 18em;
@@ -142,33 +169,6 @@ PIJERSI-JS-COPYRIGHT-MD-END */
   height:2.0em;
   width:2.0em;
 }
-
-#pijersi_white_turn{
-    grid-area:bottom_left;
-
-    width: 4em;
-    height: auto;
-
-    align-self: center;
-    justify-self: center;
-}
-
-#pijersi_credit{
-    grid-area:bottom_right;
- 
-    align-self: center;
-    justify-self: center;
-
-    font-size: 1em;
-    font-weight: bold;
-
-    text-align: center;
-
-    margin: 0em;
-    padding: 1em;
-
-    background-color:#156082;
- }
 
 /* --- PIJERSI_END: grid-container  --- */
 

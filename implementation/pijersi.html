@@ -28,11 +28,14 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 
 		<img src="img/black-chrono.svg" alt="pijersi" id="pijersi_black_turn">
 		
-		<span id="pijersi_title">Pijersi [running]</span>
+		<span id="pijersi_title"></span>
 		
 		<div id="pijersi_menu">
+
 			<img id="pijersi_hamburger" src="img/hamburger.svg" alt="pijersi" >
+
 			<div id="pijersi_menu_items">
+
 				<div id="pijersi_menu_new" class="pijersi_menu_item_class" onclick="pijersi_do_action('New')">New</div>
 				<div id="pijersi_menu_stop" class="pijersi_menu_item_class" onclick="pijersi_do_action('Stop')">Stop</div>
 				<div id="pijersi_menu_resume" class="pijersi_menu_item_class" onclick="pijersi_do_action('Resume')">Resume</div>
@@ -45,6 +48,7 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 					<input id="pijersi_show_captures" class="pijersi_checkbox_class" type="checkbox" checked="checked">
 					<span onclick="pijersi_toggle_checkbox('pijersi_show_captures')">Captures</span>
 				</div>
+				
 				<div class="pijersi_menu_item_class">
 					<input id="pijersi_show_labels" class="pijersi_checkbox_class" type="checkbox" checked="checked">
 					<span onclick="pijersi_toggle_checkbox('pijersi_show_labels')">Labels</span>
@@ -57,10 +61,20 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 
 		<img src="img/white-chrono.svg" alt="pijersi" id="pijersi_white_turn">
 
-		<div id="pijersi_credit">20</div>
+		<div id="pijersi_credit" onclick="pijersi_increment_credit()"></div>
 	</div>		
 
 	<script>
+		var pijersi_mode = "running";
+
+		const pijersi_title = document.getElementById("pijersi_title");	
+		pijersi_title.innerHTML = "Pijersi [" + pijersi_mode + "]";
+	
+		const pijersi_credit = document.getElementById("pijersi_credit");
+		const pijersi_credit_max = 20;
+		var pijersi_credit_value = pijersi_credit_max;
+		pijersi_credit.innerHTML = pijersi_credit_value.toString().padStart(2, '0');
+
 
 		pijersi_toggle_checkbox = function(checkbox_id){
 			const checkbox = document.getElementById(checkbox_id);
@@ -68,32 +82,45 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 		};
 
 		
+		pijersi_increment_credit = function(){
+			if ( pijersi_mode === "editing" ) {
+
+				pijersi_credit_value = pijersi_credit_value + 1;
+
+				if (pijersi_credit_value >= pijersi_credit_max) pijersi_credit_value = 0;
+				
+				pijersi_credit.innerHTML = pijersi_credit_value.toString().padStart(2, '0');
+			}
+		};
+
+		
 		pijersi_do_action = function(action_name){
 			console.log("pijersi_do_action: action_name = '" + action_name + "'");
-
-			const pijersi_title = document.getElementById("pijersi_title");	
 
 			switch(action_name) {
 
   				case 'New':
-					pijersi_title.innerHTML = "Pijersi [running]"
+					pijersi_mode = "running";
     				break;
 
   				case 'Stop':
-					pijersi_title.innerHTML = "Pijersi [reviewing]"
+					pijersi_mode = "reviewing";
     				break;
 
   				case 'Resume':
-					pijersi_title.innerHTML = "Pijersi [running]"
+					pijersi_mode = "running";
     				break;
 
   				case 'Edit':
-					pijersi_title.innerHTML = "Pijersi [editing]"
-    				break;
+ 					pijersi_mode = "editing";
+   				break;
 
   				default:
 					console.log("pijersi_do_action: unknown action_name = '" + action_name + "'");
 			}
+
+			pijersi_title.innerHTML = "Pijersi [" + pijersi_mode + "]";
+
 		};
 
 
