@@ -32,14 +32,14 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 		
 		<div id="pijersi_menu">
 
-			<img id="pijersi_hamburger" src="img/hamburger.svg" alt="pijersi" >
+			<div id="pijersi_hamburger"></div>
 
 			<div id="pijersi_menu_items">
 
-				<div id="pijersi_menu_new" class="pijersi_menu_item_class" onclick="pijersi_do_action('New')">New</div>
-				<div id="pijersi_menu_stop" class="pijersi_menu_item_class" onclick="pijersi_do_action('Stop')">Stop</div>
-				<div id="pijersi_menu_resume" class="pijersi_menu_item_class" onclick="pijersi_do_action('Resume')">Resume</div>
-				<div id="pijersi_menu_edit" class="pijersi_menu_item_class" onclick="pijersi_do_action('Edit')">Edit</div>
+				<div id="pijersi_menu_new" class="pijersi_menu_item_class" onclick="pijersi_new()">New</div>
+				<div id="pijersi_menu_stop" class="pijersi_menu_item_class" onclick="pijersi_stop()">Stop</div>
+				<div id="pijersi_menu_resume" class="pijersi_menu_item_class" onclick="pijersi_resume()">Resume</div>
+				<div id="pijersi_menu_edit" class="pijersi_menu_item_class" onclick="pijersi_edit()">Edit</div>
 
 				<hr class="pijersi_menu_line_class">
 				<div class="pijersi_menu_separator_class">Show :</div>
@@ -57,7 +57,7 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 			</div>
 		</div>
 
-		<img src="img/board.svg" alt="pijersi" id="pijersi_board">
+		<div id="pijersi_board"></div>
 
 		<img src="img/white-chrono.svg" alt="pijersi" id="pijersi_white_turn">
 
@@ -65,7 +65,10 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 	</div>		
 
 	<script>
-		var pijersi_mode = "running";
+		const pijersi_mode_running = "running";
+		const pijersi_mode_reviewing = "reviewing";
+		const pijersi_mode_editing = "editing";
+		var pijersi_mode = pijersi_mode_running;
 
 		const pijersi_title = document.getElementById("pijersi_title");	
 		pijersi_title.innerHTML = "Pijersi [" + pijersi_mode + "]";
@@ -83,7 +86,7 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 
 		
 		pijersi_increment_credit = function(){
-			if ( pijersi_mode === "editing" ) {
+			if ( pijersi_mode === pijersi_mode_editing ) {
 
 				pijersi_credit_value = pijersi_credit_value + 1;
 
@@ -93,37 +96,33 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 			}
 		};
 
-		
-		pijersi_do_action = function(action_name){
-			console.log("pijersi_do_action: action_name = '" + action_name + "'");
-
-			switch(action_name) {
-
-  				case 'New':
-					pijersi_mode = "running";
-    				break;
-
-  				case 'Stop':
-					pijersi_mode = "reviewing";
-    				break;
-
-  				case 'Resume':
-					pijersi_mode = "running";
-    				break;
-
-  				case 'Edit':
- 					pijersi_mode = "editing";
-   				break;
-
-  				default:
-					console.log("pijersi_do_action: unknown action_name = '" + action_name + "'");
-			}
-
+				
+		pijersi_new = function(){
+			console.log("pijersi_new: ...");
+			pijersi_mode = pijersi_mode_running;
 			pijersi_title.innerHTML = "Pijersi [" + pijersi_mode + "]";
+		}
+				
 
-		};
+		pijersi_stop = function(){
+			console.log("pijersi_stop: ...");
+			pijersi_mode = pijersi_mode_reviewing;
+			pijersi_title.innerHTML = "Pijersi [" + pijersi_mode + "]";
+		}
+				
 
+		pijersi_resume = function(){
+			console.log("pijersi_resume: ...");
+			pijersi_mode = pijersi_mode_running;
+			pijersi_title.innerHTML = "Pijersi [" + pijersi_mode + "]";
+		}
+				
 
+		pijersi_edit = function(){
+			console.log("pijersi_edit: ...");
+			pijersi_mode = pijersi_mode_editing;
+			pijersi_title.innerHTML = "Pijersi [" + pijersi_mode + "]";
+		}
 
 	</script>
 
