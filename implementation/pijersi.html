@@ -65,80 +65,127 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 	</div>		
 
 	<script>
-		const pijersi_mode_running = "running";
-		const pijersi_mode_reviewing = "reviewing";
-		const pijersi_mode_editing = "editing";
-		var pijersi_mode = pijersi_mode_running;
+		"use strict";
 
-		const pijersi_title = document.getElementById("pijersi_title");	
-		pijersi_title.innerHTML = "Pijersi [" + pijersi_mode + "]";
+		const PIJERSI_MODE_RUNNING = "running";
+		const PIJERSI_MODE_REVIEWING = "reviewing";
+		const PIJERSI_MODE_EDITING = "editing";
+		var pijersi_mode = PIJERSI_MODE_RUNNING;
+
+		const PIJERSI_TITLE = document.getElementById("pijersi_title");	
 	
-		const pijersi_credit = document.getElementById("pijersi_credit");
-		const pijersi_credit_max = 20;
-		var pijersi_credit_value = pijersi_credit_max;
-		pijersi_credit.innerHTML = pijersi_credit_value.toString().padStart(2, '0');
+		const PIJERSI_CREDIT = document.getElementById("pijersi_credit");
+		const PIJERSI_CREDIT_MAX = 20;
+		var pijersi_credit_value = PIJERSI_CREDIT_MAX;
+
+		const PIJERSI_PLAYER_WHITE = "white";
+		const PIJERSI_PLAYER_BLACK = "black";
+		var pijersi_player = PIJERSI_PLAYER_WHITE;
 
 
-		pijersi_toggle_checkbox = function(checkbox_id){
+		const pijersi_update_title = function(){
+			PIJERSI_TITLE.innerHTML = "Pijersi [" + pijersi_mode + "]";
+		};
+
+		
+		const pijersi_update_credit = function(){
+			PIJERSI_CREDIT.innerHTML = pijersi_credit_value.toString().padStart(2, '0');
+		};
+
+		
+		const pijersi_increment_credit = function(){
+			pijersi_credit_value = pijersi_credit_value + 1;
+			if ( pijersi_credit_value > PIJERSI_CREDIT_MAX ) pijersi_credit_value = 0;
+			pijersi_update_credit()					
+		};
+
+		
+		const pijersi_decrement_credit = function(){
+			pijersi_credit_value = pijersi_credit_value - 1;
+			if ( pijersi_credit_value < 0 ) pijersi_credit_value = 0;
+			pijersi_update_credit()					
+		};
+
+		
+		const pijersi_reset_credit = function(){
+			pijersi_credit_value = PIJERSI_CREDIT_MAX;
+			pijersi_update_credit()					
+		};
+
+
+		const pijersi_set_player = function(player){
+			if ( player === PIJERSI_PLAYER_WHITE || player === PIJERSI_PLAYER_BLACK ) {
+				pijersi_player = player
+			}
+		};
+
+
+		const pijersi_change_player = function(){
+			if ( pijersi_player === PIJERSI_PLAYER_WHITE ) {
+				pijersi_set_player(PIJERSI_PLAYER_BLACK);
+
+			} else if ( pijersi_player === PIJERSI_PLAYER_BLACK ) {
+				pijersi_set_player(PIJERSI_PLAYER_WHITE);
+			}
+		};
+
+
+		const pijersi_set_mode = function(mode){
+			if ( mode === PIJERSI_MODE_RUNNING || mode === PIJERSI_MODE_REVIEWING || mode === PIJERSI_MODE_EDITING ) {
+		 		pijersi_mode = mode;
+				pijersi_update_title();
+			}
+		};
+
+
+		const pijersi_toggle_checkbox = function(checkbox_id){
 			const checkbox = document.getElementById(checkbox_id);
 			checkbox.checked = ! checkbox.checked ;
 		};
 
-		
-		pijersi_increment_credit = function(){
-			if ( pijersi_mode === pijersi_mode_editing ) {
-
-				pijersi_credit_value = pijersi_credit_value + 1;
-
-				if (pijersi_credit_value >= pijersi_credit_max) pijersi_credit_value = 0;
 				
-				pijersi_credit.innerHTML = pijersi_credit_value.toString().padStart(2, '0');
-			}
-		};
-
-				
-		pijersi_new = function(){
+		const pijersi_new = function(){
 			console.log("pijersi_new: ...");
-			pijersi_mode = pijersi_mode_running;
-			pijersi_title.innerHTML = "Pijersi [" + pijersi_mode + "]";
-
-			pijersi_credit_value = pijersi_credit_max;
-			pijersi_credit.innerHTML = pijersi_credit_value.toString().padStart(2, '0');
-		}
+			pijersi_set_mode(PIJERSI_MODE_RUNNING);
+			pijersi_reset_credit();
+			pijersi_set_player(PIJERSI_PLAYER_WHITE);
+		};
 				
 
-		pijersi_stop = function(){
+		const pijersi_stop = function(){
 			console.log("pijersi_stop: ...");
-			pijersi_mode = pijersi_mode_reviewing;
-			pijersi_title.innerHTML = "Pijersi [" + pijersi_mode + "]";
-		}
+			pijersi_set_mode(PIJERSI_MODE_REVIEWING);
+		};
 				
 
-		pijersi_resume = function(){
+		const pijersi_resume = function(){
 			console.log("pijersi_resume: ...");
-			pijersi_mode = pijersi_mode_running;
-			pijersi_title.innerHTML = "Pijersi [" + pijersi_mode + "]";
-		}
-				
-
-		pijersi_edit = function(){
-			console.log("pijersi_edit: ...");
-			pijersi_mode = pijersi_mode_editing;
-			pijersi_title.innerHTML = "Pijersi [" + pijersi_mode + "]";
-		}
-
-		
-		pijersi_play = function(){
-			if ( pijersi_mode === pijersi_mode_running ) {
-
-				pijersi_credit_value = pijersi_credit_value - 1;
-				pijersi_credit.innerHTML = pijersi_credit_value.toString().padStart(2, '0');
-
-				if ( pijersi_credit_value === 0 ) {
-					pijersi_stop();
-				}
+			if ( pijersi_credit_value !== 0 ) {
+				pijersi_set_mode(PIJERSI_MODE_RUNNING);
 			}
 		};
+				
+
+		const pijersi_edit = function(){
+			console.log("pijersi_edit: ...");
+			pijersi_set_mode(PIJERSI_MODE_EDITING);
+		};
+
+		
+		const pijersi_play = function(){
+			if ( pijersi_mode !== PIJERSI_MODE_RUNNING ) return;
+
+			pijersi_decrement_credit();					
+
+			if ( pijersi_credit_value === 0 ) {
+				pijersi_stop();
+
+			} else {
+				pijersi_change_player();
+			}
+		};
+
+		pijersi_new();
 
 	</script>
 
