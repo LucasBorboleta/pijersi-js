@@ -57,7 +57,7 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 			</div>
 		</div>
 
-		<div id="pijersi_board"></div>
+		<div id="pijersi_board" onclick="pijersi_play()"></div>
 
 		<img src="img/white-chrono.svg" alt="pijersi" id="pijersi_white_turn">
 
@@ -101,6 +101,9 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 			console.log("pijersi_new: ...");
 			pijersi_mode = pijersi_mode_running;
 			pijersi_title.innerHTML = "Pijersi [" + pijersi_mode + "]";
+
+			pijersi_credit_value = pijersi_credit_max;
+			pijersi_credit.innerHTML = pijersi_credit_value.toString().padStart(2, '0');
 		}
 				
 
@@ -123,6 +126,19 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 			pijersi_mode = pijersi_mode_editing;
 			pijersi_title.innerHTML = "Pijersi [" + pijersi_mode + "]";
 		}
+
+		
+		pijersi_play = function(){
+			if ( pijersi_mode === pijersi_mode_running ) {
+
+				pijersi_credit_value = pijersi_credit_value - 1;
+				pijersi_credit.innerHTML = pijersi_credit_value.toString().padStart(2, '0');
+
+				if ( pijersi_credit_value === 0 ) {
+					pijersi_stop();
+				}
+			}
+		};
 
 	</script>
 

@@ -155,6 +155,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     display: none;
     position: absolute;
     z-index: 1;
+    right: 1.5em;
 
     padding: 1.0em;
     background-color: #156082;
