@@ -21,8 +21,13 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     box-sizing: border-box;
 }
 
-.pijersi_show {display: inherit;}
-.pijersi_hide {display: none;}
+.pijersi_show {
+    display: block !important;
+}
+
+.pijersi_hide {
+    display: none !important;
+}
 
 #pijersi_body {
     font-family: Tahoma, Verdana, sans-serif;
@@ -55,7 +60,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     box-shadow: 0.5em 0.5em 0.5em black;
 }
 
-#pijersi_board{
+#pijersi_board {
     grid-area: board;
 
     background-image:url(img/board.svg);
@@ -69,7 +74,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     width: auto;
  }
 
-#pijersi_black_turn{
+#pijersi_black_turn {
     grid-area:top_left;
 
     width: 4em;
@@ -79,7 +84,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     justify-self: center;
 }
 
-#pijersi_white_turn{
+#pijersi_white_turn {
     grid-area:bottom_left;
 
     width: 4em;
@@ -89,7 +94,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     justify-self: center;
 }
 
-#pijersi_credit{
+#pijersi_credit {
     grid-area:bottom_right;
  
     align-self: center;
@@ -121,7 +126,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     line-height:100%;
 }
 
-#pijersi_menu{
+#pijersi_menu {
     grid-area:top_right;
 
     width: 4em;
@@ -131,8 +136,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     justify-self: center;
 }
 
-#pijersi_hamburger{
-
+#pijersi_hamburger {
     background-image:url(img/hamburger.svg);
     background-origin:border-box;
     background-position:center;
@@ -143,44 +147,40 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     height: 4em;
 }
 
-#pijersi_menu:hover{
+#pijersi_hamburger:hover, #pijersi_hamburger:focus {
     background-color:#156082;
 }
 
-#pijersi_menu:hover #pijersi_menu_items {
-    display: block;
-}
-
-#pijersi_menu_items{
+#pijersi_menu_items {
     display: none;
     position: absolute;
     z-index: 1;
-
+    
     padding: 1.0em;
     background-color: #156082;
     box-shadow: 0.5em 0.5em 1.5em black;
 }
 
-.pijersi_menu_line_class{
+.pijersi_menu_line_class {
     border-color: black;
     border-width: 0.2em;
     margin-top: 1.0em;
     margin-bottom: 0.5em;
 }
 
-.pijersi_menu_separator_class{
+.pijersi_menu_separator_class {
       font-size: 2.0em;
 }
 
-.pijersi_menu_item_class{
+.pijersi_menu_item_class {
     font-size: 2.5em;
 }
 
-.pijersi_menu_item_class:hover{
+.pijersi_menu_item_class:hover {
     background-color:#BF9B7A;
 }
 
-.pijersi_checkbox_class{
+.pijersi_checkbox_class {
   height:2.0em;
   width:2.0em;
 }
@@ -190,20 +190,20 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 /* --- PIJERSI_BEGIN: hexagon states  --- */
 
-.pijersi_hexagon_class{
+.pijersi_hexagon_class {
     position:absolute;
 }
 
-.pijersi_hexagon_selected_class{
+.pijersi_hexagon_selected_class {
 /*  outline-style:outset !important;
     outline-color:white !important;
     outline-width:2px !important; */
 }
 
-.pijersi_hexagon_unselected_class{
+.pijersi_hexagon_unselected_class {
 }
 
-.pijersi_hexagon_name_class{
+.pijersi_hexagon_name_class {
     text-align:left;
     font-size:60%;
 
@@ -226,7 +226,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 /* --- PIJERSI_BEGIN: cube states  --- */
 
-.pijersi_cube_class{
+.pijersi_cube_class {
     padding:0px;
     margin:0px;
 
@@ -244,7 +244,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     transition-duration: 300ms;
 }
 
-.pijersi_cube_selected_class{
+.pijersi_cube_selected_class {
     box-shadow: 8px 8px 8px black !important;
     transform: scale(1.25) !important;
     outline-style:outset !important;
@@ -253,7 +253,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     z-index: 1 !important;
 }
 
-.pijersi_cube_unselected_class{
+.pijersi_cube_unselected_class {
 }
 
 .pijersi_cube_void_class{
@@ -265,42 +265,42 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 /* --- PIJERSI_BEGIN: cube sorts  --- */
 
-.pijersi_cube_wise_black_class{
+.pijersi_cube_wise_black_class {
     background-image:url(img/wise-black.png);
     box-shadow: 4px 4px 4px black;
 }
 
-.pijersi_cube_wise_white_class{
+.pijersi_cube_wise_white_class {
     background-image:url(img/wise-white.png);
     box-shadow: 4px 4px 4px black;
 }
 
-.pijersi_cube_rock_black_class{
+.pijersi_cube_rock_black_class {
     background-image:url(img/rock-black.png);
     box-shadow: 4px 4px 4px black;
 }
 
-.pijersi_cube_rock_white_class{
+.pijersi_cube_rock_white_class {
     background-image:url(img/rock-white.png);
     box-shadow: 4px 4px 4px black;
 }
 
-.pijersi_cube_paper_black_class{
+.pijersi_cube_paper_black_class {
     background-image:url(img/paper-black.png);
     box-shadow: 4px 4px 4px black;
 }
 
-.pijersi_cube_paper_white_class{
+.pijersi_cube_paper_white_class {
     background-image:url(img/paper-white.png);
     box-shadow: 4px 4px 4px black;
 }
 
-.pijersi_cube_scissors_black_class{
+.pijersi_cube_scissors_black_class {
     background-image:url(img/scissors-black.png);
     box-shadow: 4px 4px 4px black;
 }
 
-.pijersi_cube_scissors_white_class{
+.pijersi_cube_scissors_white_class {
     background-image:url(img/scissors-white.png);
     box-shadow: 4px 4px 4px black;
 }

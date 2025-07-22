@@ -32,7 +32,7 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 		
 		<div id="pijersi_menu">
 
-			<div id="pijersi_hamburger"></div>
+			<div id="pijersi_hamburger" onclick="pijersi_open_menu()"></div>
 
 			<div id="pijersi_menu_items">
 
@@ -66,6 +66,8 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 
 	<script>
 		"use strict";
+		
+		const PIJERSI_MENU_ITEMS = document.getElementById("pijersi_menu_items");
 
 		const PIJERSI_MODE_RUNNING = "running";
 		const PIJERSI_MODE_REVIEWING = "reviewing";
@@ -143,7 +145,12 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 			checkbox.checked = ! checkbox.checked ;
 		};
 
-				
+
+		const pijersi_open_menu = function(){
+  			PIJERSI_MENU_ITEMS.classList.toggle("pijersi_show");
+		};
+
+
 		const pijersi_new = function(){
 			console.log("pijersi_new: ...");
 			pijersi_set_mode(PIJERSI_MODE_RUNNING);
