@@ -42,7 +42,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
         'board        board          board'
         'bottom_left  bottom_middle  bottom_right';
 
-    width: 70vh;
+    width: 95vw;
     height: auto;
 
     gap: 1.0rem;
@@ -115,6 +115,11 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 }
 
 
+.pijersi_turn_edit:hover {
+    background-color:#156082;
+}
+
+
 #pijersi_credit {
     grid-area:bottom_right;
  
@@ -129,8 +134,15 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     margin: 0rem;
     padding: 1rem;
 
-    background-color:#156082;
+    border-style: solid;
+    border-width: 0.1rem;
+    border-color: black;
  }
+
+
+.pijersi_credit_edit:hover {
+    background-color:#156082;
+}
 
 #pijersi_title {
     grid-area:top_middle;
