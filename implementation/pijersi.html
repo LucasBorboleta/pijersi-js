@@ -45,7 +45,9 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 				<div class="pijersi_menu_separator_class">Show :</div>
 
 				<div class="pijersi_menu_item_class">
-					<input id="pijersi_show_captures" class="pijersi_checkbox_class" type="checkbox" checked="checked">
+					<input id="pijersi_show_captures" class="pijersi_checkbox_class" type="checkbox" checked="checked" 
+					onclick="pijersi_show_captures()">
+
 					<span onclick="pijersi_toggle_checkbox('pijersi_show_captures')">Captures</span>
 				</div>
 				
@@ -142,7 +144,7 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 
 		const pijersi_toggle_checkbox = function(checkbox_id){
 			const checkbox = document.getElementById(checkbox_id);
-			checkbox.checked = ! checkbox.checked ;
+			checkbox.click();
 		};
 
 
@@ -153,6 +155,7 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 
 		const pijersi_new = function(){
 			console.log("pijersi_new: ...");
+			PIJERSI_MENU_ITEMS.classList.toggle("pijersi_show");
 			pijersi_set_mode(PIJERSI_MODE_RUNNING);
 			pijersi_reset_credit();
 			pijersi_set_player(PIJERSI_PLAYER_WHITE);
@@ -161,12 +164,14 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 
 		const pijersi_stop = function(){
 			console.log("pijersi_stop: ...");
+			PIJERSI_MENU_ITEMS.classList.toggle("pijersi_show");
 			pijersi_set_mode(PIJERSI_MODE_REVIEWING);
 		};
 				
 
 		const pijersi_resume = function(){
 			console.log("pijersi_resume: ...");
+			PIJERSI_MENU_ITEMS.classList.toggle("pijersi_show");
 			if ( pijersi_credit_value !== 0 ) {
 				pijersi_set_mode(PIJERSI_MODE_RUNNING);
 			}
@@ -175,7 +180,13 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 
 		const pijersi_edit = function(){
 			console.log("pijersi_edit: ...");
+			PIJERSI_MENU_ITEMS.classList.toggle("pijersi_show");
 			pijersi_set_mode(PIJERSI_MODE_EDITING);
+		};
+
+		
+		const pijersi_show_captures = function(){
+			console.log("pijersi_show_captures: ...");
 		};
 
 		
@@ -193,6 +204,7 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 		};
 
 		pijersi_new();
+		PIJERSI_MENU_ITEMS.classList.toggle("pijersi_show");
 
 	</script>
 

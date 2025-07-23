@@ -16,8 +16,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 /* --- PIJERSI_BEGIN: grid-container  --- */
 
 * {
-    margin: 0em;
-    padding: 0em;
+    margin: 0rem;
+    padding: 0rem;
     box-sizing: border-box;
 }
 
@@ -45,9 +45,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     width: 70vh;
     height: auto;
 
-    gap: 1.0em;
-    padding: 1.0em;
-    margin: 0.5em;
+    gap: 1.0rem;
+    padding: 1.0rem;
+    margin: 0.5rem;
 
     background-color:#BF9B7A;
 
@@ -55,7 +55,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
     outline-style:outset;
     outline-color:white;
-    outline-width: 0.5em;
+    outline-width: 0.5rem;
 
     box-shadow: 0.5em 0.5em 0.5em black;
 }
@@ -77,7 +77,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 #pijersi_black_turn {
     grid-area:top_left;
 
-    width: 4em;
+    width: 4rem;
     height: auto;
 
     align-self: center;
@@ -87,7 +87,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 #pijersi_white_turn {
     grid-area:bottom_left;
 
-    width: 4em;
+    width: 4rem;
     height: auto;
 
     align-self: center;
@@ -100,13 +100,13 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    font-size: 1em;
+    font-size: 1rem;
     font-weight: bold;
 
     text-align: center;
 
-    margin: 0em;
-    padding: 1em;
+    margin: 0rem;
+    padding: 1rem;
 
     background-color:#156082;
  }
@@ -114,9 +114,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 #pijersi_title {
     grid-area:top_middle;
     
-    width: 18em;
+    width: 18rem;
 
-    font-size: 1em;
+    font-size: 1rem;
     font-weight:bold;
 
     align-self: center;
@@ -129,7 +129,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 #pijersi_menu {
     grid-area:top_right;
 
-    width: 4em;
+    width: 4rem;
     height: auto;
 
     align-self: center;
@@ -143,8 +143,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     background-repeat:no-repeat;
     background-size:contain;
 
-    width: 4em;
-    height: 4em;
+    width: 4rem;
+    height: 4rem;
 }
 
 #pijersi_hamburger:hover, #pijersi_hamburger:focus {
@@ -155,25 +155,26 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     display: none;
     position: absolute;
     z-index: 1;
+    left: 20rem;
     
-    padding: 1.0em;
+    padding: 1.0rem;
     background-color: #156082;
     box-shadow: 0.5em 0.5em 1.5em black;
 }
 
 .pijersi_menu_line_class {
     border-color: black;
-    border-width: 0.2em;
-    margin-top: 1.0em;
-    margin-bottom: 0.5em;
+    border-width: 0.2rem;
+    margin-top: 1.0rem;
+    margin-bottom: 0.5rem;
 }
 
 .pijersi_menu_separator_class {
-      font-size: 2.0em;
+      font-size: 2.0rem;
 }
 
 .pijersi_menu_item_class {
-    font-size: 2.5em;
+    font-size: 2.5rem;
 }
 
 .pijersi_menu_item_class:hover {
@@ -181,8 +182,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 }
 
 .pijersi_checkbox_class {
-  height:2.0em;
-  width:2.0em;
+  height:2.0rem;
+  width:2.0rem;
 }
 
 /* --- PIJERSI_END: grid-container  --- */
