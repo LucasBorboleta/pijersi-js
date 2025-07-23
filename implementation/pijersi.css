@@ -77,22 +77,43 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 #pijersi_black_turn {
     grid-area:top_left;
 
+    background-image:url(img/wait-chrono.svg);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+
     width: 4rem;
-    height: auto;
+    height: 4rem;
 
     align-self: center;
     justify-self: center;
+}
+
+.pijersi_black_turn_on {
+    background-image:url(img/black-chrono.svg) !important;
 }
 
 #pijersi_white_turn {
     grid-area:bottom_left;
 
+    background-image:url(img/wait-chrono.svg);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+
     width: 4rem;
-    height: auto;
+    height: 4rem;
 
     align-self: center;
     justify-self: center;
 }
+
+.pijersi_white_turn_on {
+    background-image:url(img/white-chrono.svg) !important;
+}
+
 
 #pijersi_credit {
     grid-area:bottom_right;
@@ -155,7 +176,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     display: none;
     position: absolute;
     z-index: 1;
-    left: 20rem;
+    left: 12rem;
     
     padding: 1.0rem;
     background-color: #156082;

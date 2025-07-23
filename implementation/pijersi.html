@@ -26,7 +26,7 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 <body id="pijersi_body">
 	<div id="pijersi_grid_container">
 
-		<img src="img/black-chrono.svg" alt="pijersi" id="pijersi_black_turn">
+	<div id="pijersi_black_turn"></div>
 		
 		<span id="pijersi_title"></span>
 		
@@ -52,7 +52,8 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 				</div>
 				
 				<div class="pijersi_menu_item_class">
-					<input id="pijersi_show_labels" class="pijersi_checkbox_class" type="checkbox" checked="checked">
+					<input id="pijersi_show_labels" class="pijersi_checkbox_class" type="checkbox" checked="checked"
+					onclick="pijersi_show_labels()">
 					<span onclick="pijersi_toggle_checkbox('pijersi_show_labels')">Labels</span>
 				</div>
 
@@ -61,7 +62,7 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 
 		<div id="pijersi_board" onclick="pijersi_play()"></div>
 
-		<img src="img/white-chrono.svg" alt="pijersi" id="pijersi_white_turn">
+		<div id="pijersi_white_turn"></div>
 
 		<div id="pijersi_credit" onclick="pijersi_increment_credit()"></div>
 	</div>		
@@ -86,12 +87,13 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 		const PIJERSI_PLAYER_BLACK = "black";
 		var pijersi_player = PIJERSI_PLAYER_WHITE;
 
+		const PIJERSI_BLACK_TURN = document.getElementById("pijersi_black_turn");
+		const PIJERSI_WHITE_TURN = document.getElementById("pijersi_white_turn");
 
 		const pijersi_update_title = function(){
 			PIJERSI_TITLE.innerHTML = "Pijersi [" + pijersi_mode + "]";
 		};
 
-		
 		const pijersi_update_credit = function(){
 			PIJERSI_CREDIT.innerHTML = pijersi_credit_value.toString().padStart(2, '0');
 		};
@@ -120,6 +122,15 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 		const pijersi_set_player = function(player){
 			if ( player === PIJERSI_PLAYER_WHITE || player === PIJERSI_PLAYER_BLACK ) {
 				pijersi_player = player
+			}
+
+			if ( pijersi_player === PIJERSI_PLAYER_WHITE ) {
+				PIJERSI_BLACK_TURN.classList.remove("pijersi_black_turn_on");
+				PIJERSI_WHITE_TURN.classList.add("pijersi_white_turn_on");
+
+			} else if ( pijersi_player === PIJERSI_PLAYER_BLACK ) {
+				PIJERSI_WHITE_TURN.classList.remove("pijersi_white_turn_on");
+				PIJERSI_BLACK_TURN.classList.add("pijersi_black_turn_on");
 			}
 		};
 
@@ -154,7 +165,6 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 
 
 		const pijersi_new = function(){
-			console.log("pijersi_new: ...");
 			PIJERSI_MENU_ITEMS.classList.toggle("pijersi_show");
 			pijersi_set_mode(PIJERSI_MODE_RUNNING);
 			pijersi_reset_credit();
@@ -163,14 +173,12 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 				
 
 		const pijersi_stop = function(){
-			console.log("pijersi_stop: ...");
 			PIJERSI_MENU_ITEMS.classList.toggle("pijersi_show");
 			pijersi_set_mode(PIJERSI_MODE_REVIEWING);
 		};
 				
 
 		const pijersi_resume = function(){
-			console.log("pijersi_resume: ...");
 			PIJERSI_MENU_ITEMS.classList.toggle("pijersi_show");
 			if ( pijersi_credit_value !== 0 ) {
 				pijersi_set_mode(PIJERSI_MODE_RUNNING);
@@ -179,14 +187,18 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 				
 
 		const pijersi_edit = function(){
-			console.log("pijersi_edit: ...");
 			PIJERSI_MENU_ITEMS.classList.toggle("pijersi_show");
 			pijersi_set_mode(PIJERSI_MODE_EDITING);
 		};
 
 		
 		const pijersi_show_captures = function(){
-			console.log("pijersi_show_captures: ...");
+			PIJERSI_MENU_ITEMS.classList.toggle("pijersi_show");
+		};
+
+		
+		const pijersi_show_labels = function(){
+			PIJERSI_MENU_ITEMS.classList.toggle("pijersi_show");
 		};
 
 		
@@ -197,6 +209,7 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 
 			if ( pijersi_credit_value === 0 ) {
 				pijersi_stop();
+				PIJERSI_MENU_ITEMS.classList.toggle("pijersi_show");
 
 			} else {
 				pijersi_change_player();
