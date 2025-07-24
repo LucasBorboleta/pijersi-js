@@ -64,6 +64,8 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 
 		<div id="pijersi_white_turn" onclick="pijersi_white_turn()"></div>
 
+		<span id="pijersi_legend"></span>
+
 		<div id="pijersi_credit" onclick="pijersi_increment_credit()"></div>
 	</div>		
 
@@ -80,6 +82,7 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 		var pijersi_mode = PIJERSI_MODE_RUNNING;
 
 		const PIJERSI_TITLE = document.getElementById("pijersi_title");	
+		const PIJERSI_LEGEND = document.getElementById("pijersi_legend");	
 	
 		const PIJERSI_CREDIT = document.getElementById("pijersi_credit");
 		const PIJERSI_CREDIT_MAX = 20;
@@ -91,6 +94,9 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 
 		const PIJERSI_BLACK_TURN = document.getElementById("pijersi_black_turn");
 		const PIJERSI_WHITE_TURN = document.getElementById("pijersi_white_turn");
+
+		var pijersi_turns = undefined;
+		var pijersi_current_turn = undefined;
 
 
 		const pijersi_init = function(){
@@ -120,6 +126,11 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 
 		const pijersi_update_title = function(){
 			PIJERSI_TITLE.innerHTML = "Pijersi [" + pijersi_mode + "]";
+		};
+
+
+		const pijersi_update_legend = function(legend){
+			PIJERSI_LEGEND.innerHTML = legend;
 		};
 
 
@@ -206,6 +217,9 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 			pijersi_set_mode(PIJERSI_MODE_RUNNING);
 			pijersi_reset_credit();
 			pijersi_set_player(PIJERSI_PLAYER_WHITE);
+
+			pijersi_reset_turns();
+			pijersi_update_legend(pijersi_turns[pijersi_current_turn]);
 		};
 				
 
@@ -219,6 +233,7 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 			pijersi_show_menu(false);
 			if ( pijersi_credit_value !== 0 ) {
 				pijersi_set_mode(PIJERSI_MODE_RUNNING);
+				pijersi_update_legend(pijersi_turns[pijersi_current_turn]);
 			}
 		};
 				
@@ -226,6 +241,9 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 		const pijersi_edit = function(){
 			pijersi_show_menu(false);
 			pijersi_set_mode(PIJERSI_MODE_EDITING);
+
+			pijersi_reset_turns();
+			pijersi_update_legend(pijersi_turns[pijersi_current_turn]);
 		};
 
 		
@@ -260,9 +278,27 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 				pijersi_stop();
 
 			} else {
+				pijersi_new_turn();
 				pijersi_change_player();
 			}
 		};
+		
+
+		const pijersi_reset_turns = function(){
+			pijersi_current_turn = 0;
+			pijersi_turns = []
+			pijersi_turns.push("");
+		};
+		
+
+		const pijersi_new_turn = function(){
+			pijersi_current_turn += 1;
+			const new_legend = "move-" + pijersi_current_turn.toString();
+			pijersi_turns.push(new_legend);
+
+			pijersi_update_legend(new_legend);
+		};
+
 	</script>
 
 </body>

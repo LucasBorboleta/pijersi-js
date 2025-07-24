@@ -38,9 +38,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     display: grid;
 
     grid-template-areas:
-        'top_left     top_middle     top_right'
-        'board        board          board'
-        'bottom_left  bottom_middle  bottom_right';
+        'black_turn   title   hamburger'
+        'board        board   board'
+        'white_turn   legend  credit';
 
     width: 95vw;
     height: auto;
@@ -75,7 +75,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
  }
 
 #pijersi_black_turn {
-    grid-area:top_left;
+    grid-area:black_turn;
 
     background-image:url(img/wait-chrono.svg);
     background-origin:border-box;
@@ -95,7 +95,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 }
 
 #pijersi_white_turn {
-    grid-area:bottom_left;
+    grid-area:white_turn;
 
     background-image:url(img/wait-chrono.svg);
     background-origin:border-box;
@@ -121,7 +121,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 
 #pijersi_credit {
-    grid-area:bottom_right;
+    grid-area:credit;
  
     align-self: center;
     justify-self: center;
@@ -145,7 +145,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 }
 
 #pijersi_title {
-    grid-area:top_middle;
+    grid-area:title;
     
     width: 18rem;
 
@@ -159,8 +159,25 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     line-height:100%;
 }
 
+
+#pijersi_legend {
+    grid-area:legend;
+    
+    width: 18rem;
+
+    font-size: 1rem;
+    font-weight:bold;
+
+    align-self: center;
+    justify-self: center;
+
+    text-align:center;
+    line-height:100%;
+}
+
+
 #pijersi_menu {
-    grid-area:top_right;
+    grid-area:hamburger;
 
     width: 4rem;
     height: auto;
