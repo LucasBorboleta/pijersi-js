@@ -64,11 +64,11 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 
 		<div id="pijersi_white_turn" onclick="pijersi_white_turn()"></div>
 		
-		<div id="pijersi_previous" ></div>
+		<div id="pijersi_previous" onclick="pijersi_previous()" ></div>
 
 		<span id="pijersi_legend"></span>
 
-		<div id="pijersi_next" ></div>
+		<div id="pijersi_next"  onclick="pijersi_next()"></div>
 
 	    <div id="pijersi_black_turn" onclick="pijersi_black_turn()"></div>
 	</div>		
@@ -98,6 +98,9 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 
 		const PIJERSI_BLACK_TURN = document.getElementById("pijersi_black_turn");
 		const PIJERSI_WHITE_TURN = document.getElementById("pijersi_white_turn");
+		
+		const PIJERSI_NEXT = document.getElementById("pijersi_next");
+		const PIJERSI_PREVIOUS = document.getElementById("pijersi_previous");
 
 		var pijersi_turns = undefined;
 		var pijersi_current_turn = undefined;
@@ -119,10 +122,18 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 					PIJERSI_BLACK_TURN.classList.add("pijersi_turn_edit");
 					PIJERSI_CREDIT.classList.add("pijersi_credit_edit");
 
+
+				} else if ( mode === PIJERSI_MODE_REVIEWING ) {
+					PIJERSI_NEXT.classList.add("pijersi_show");
+					PIJERSI_PREVIOUS.classList.add("pijersi_show");		
+
 				} else {
 					PIJERSI_WHITE_TURN.classList.remove("pijersi_turn_edit");
 					PIJERSI_BLACK_TURN.classList.remove("pijersi_turn_edit");
 					PIJERSI_CREDIT.classList.remove("pijersi_credit_edit");
+					PIJERSI_NEXT.classList.remove("pijersi_show");
+					PIJERSI_PREVIOUS.classList.remove("pijersi_show");
+
 				}
 			}
 		};
@@ -133,19 +144,22 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 		};
 
 
-		const pijersi_update_legend = function(legend){
+		const pijersi_update_legend = function(){
+			const legend = pijersi_turns[pijersi_current_turn].legend;
 			PIJERSI_LEGEND.innerHTML = legend;
 		};
 
 
 		const pijersi_update_credit = function(){
-			PIJERSI_CREDIT.innerHTML = pijersi_credit_value.toString().padStart(2, '0');
+			const credit = pijersi_turns[pijersi_current_turn].credit;
+			PIJERSI_CREDIT.innerHTML = credit.toString().padStart(2, '0');
 		};
 
 		
 		const pijersi_increment_credit = function(){
 			pijersi_credit_value = pijersi_credit_value + 1;
 			if ( pijersi_credit_value > PIJERSI_CREDIT_MAX ) pijersi_credit_value = 0;
+			pijersi_turns[pijersi_current_turn].credit = pijersi_credit_value;
 			pijersi_update_credit()					
 		};
 
@@ -153,12 +167,14 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 		const pijersi_decrement_credit = function(){
 			pijersi_credit_value = pijersi_credit_value - 1;
 			if ( pijersi_credit_value < 0 ) pijersi_credit_value = 0;
+			pijersi_turns[pijersi_current_turn].credit = pijersi_credit_value;
 			pijersi_update_credit()					
 		};
 
 		
 		const pijersi_reset_credit = function(){
 			pijersi_credit_value = PIJERSI_CREDIT_MAX;
+			pijersi_turns[pijersi_current_turn].credit = pijersi_credit_value;
 			pijersi_update_credit()					
 		};
 
@@ -218,12 +234,14 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 
 		const pijersi_new = function(){
 			pijersi_show_menu(false);
-			pijersi_set_mode(PIJERSI_MODE_RUNNING);
+			pijersi_reset_turns();
 			pijersi_reset_credit();
+
+			pijersi_set_mode(PIJERSI_MODE_RUNNING);
 			pijersi_set_player(PIJERSI_PLAYER_WHITE);
 
-			pijersi_reset_turns();
-			pijersi_update_legend(pijersi_turns[pijersi_current_turn]);
+			pijersi_update_legend();
+			pijersi_update_credit();
 		};
 				
 
@@ -235,9 +253,14 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 
 		const pijersi_resume = function(){
 			pijersi_show_menu(false);
+
+			pijersi_turns = pijersi_turns.slice(0, pijersi_current_turn + 1)
+
+			pijersi_update_legend();
+			pijersi_update_credit();
+
 			if ( pijersi_credit_value !== 0 ) {
 				pijersi_set_mode(PIJERSI_MODE_RUNNING);
-				pijersi_update_legend(pijersi_turns[pijersi_current_turn]);
 			}
 		};
 				
@@ -245,9 +268,6 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 		const pijersi_edit = function(){
 			pijersi_show_menu(false);
 			pijersi_set_mode(PIJERSI_MODE_EDITING);
-
-			pijersi_reset_turns();
-			pijersi_update_legend(pijersi_turns[pijersi_current_turn]);
 		};
 
 		
@@ -271,19 +291,46 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 			if ( pijersi_mode !== PIJERSI_MODE_EDITING ) return;
 			pijersi_change_player();
 		};
+	
+
+		const pijersi_next = function(){
+			if ( pijersi_mode !== PIJERSI_MODE_REVIEWING ) return;
+			
+			if ( pijersi_current_turn + 1 < pijersi_turns.length ) {
+				pijersi_current_turn += 1;
+
+				pijersi_update_legend();
+				pijersi_update_credit();
+			}
+		};
+	
+
+		const pijersi_previous = function(){
+			if ( pijersi_mode !== PIJERSI_MODE_REVIEWING ) return;
+			
+			if ( pijersi_current_turn - 1 >= 0 ) {
+				pijersi_current_turn -= 1;
+
+				pijersi_update_legend();
+				pijersi_update_credit();
+			}
+		};
 
 
 		const pijersi_play = function(){
-			if ( pijersi_mode !== PIJERSI_MODE_RUNNING ) return;
+			if ( pijersi_mode === PIJERSI_MODE_RUNNING && ! pijersi_menu_showed) {
 
-			pijersi_decrement_credit();					
+				pijersi_decrement_credit();					
 
-			if ( pijersi_credit_value === 0 ) {
-				pijersi_stop();
+				if ( pijersi_credit_value === 0 ) {
+					pijersi_stop();
 
-			} else {
-				pijersi_new_turn();
-				pijersi_change_player();
+				} else {
+					pijersi_new_turn();
+					pijersi_update_credit();
+					pijersi_update_legend();
+					pijersi_change_player();
+				}
 			}
 		};
 		
@@ -291,16 +338,21 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 		const pijersi_reset_turns = function(){
 			pijersi_current_turn = 0;
 			pijersi_turns = []
-			pijersi_turns.push("");
+
+			const new_legend = "";
+			const new_turn = {legend: new_legend, credit: PIJERSI_CREDIT_MAX};
+
+			pijersi_turns.push(new_turn);
 		};
 		
 
 		const pijersi_new_turn = function(){
 			pijersi_current_turn += 1;
-			const new_legend = pijersi_current_turn.toString() + " " + "xi-yi=zk"
-			pijersi_turns.push(new_legend);
 
-			pijersi_update_legend(new_legend);
+			const new_legend = pijersi_current_turn.toString() + " " + "xi-yi=zk";
+			const new_turn = {legend: new_legend, credit: pijersi_credit_value};
+
+			pijersi_turns.push(new_turn);
 		};
 
 	</script>
