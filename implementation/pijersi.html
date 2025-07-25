@@ -27,8 +27,8 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 
 	<div id="pijersi_grid_container">
 
-	<div id="pijersi_black_turn" onclick="pijersi_black_turn()"></div>
-		
+		<div id="pijersi_credit" onclick="pijersi_increment_credit()"></div>
+
 		<span id="pijersi_title"></span>
 		
 		<div id="pijersi_menu">
@@ -63,10 +63,14 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 		<div id="pijersi_board" onclick="pijersi_play()"></div>
 
 		<div id="pijersi_white_turn" onclick="pijersi_white_turn()"></div>
+		
+		<div id="pijersi_previous" ></div>
 
 		<span id="pijersi_legend"></span>
 
-		<div id="pijersi_credit" onclick="pijersi_increment_credit()"></div>
+		<div id="pijersi_next" ></div>
+
+	    <div id="pijersi_black_turn" onclick="pijersi_black_turn()"></div>
 	</div>		
 
 	<script>
@@ -293,7 +297,7 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 
 		const pijersi_new_turn = function(){
 			pijersi_current_turn += 1;
-			const new_legend = "move-" + pijersi_current_turn.toString();
+			const new_legend = pijersi_current_turn.toString() + " " + "xi-yi=zk"
 			pijersi_turns.push(new_legend);
 
 			pijersi_update_legend(new_legend);
