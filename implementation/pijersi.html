@@ -23,336 +23,335 @@ You should have received a copy of the GNU General Public License along with thi
 
 PIJERSI-JS-COPYRIGHT-MD-END -->
 
-<body id="pijersi_body" onload="pijersi_init();">
+<body id="pijersi-view-body-id" onload="pijersi_presenter_init();">
 
-	<div id="pijersi_grid_container">
+	<div id="pijersi-view-grid-container-id">
 
-		<div id="pijersi_credit" onclick="pijersi_increment_credit()"></div>
+		<div id="pijersi-view-credit-id" onclick="pijersi_presenter_increment_credit()"></div>
 
-		<span id="pijersi_title"></span>
+		<span id="pijersi-view-title-id"></span>
 		
-		<div id="pijersi_menu">
+		<div id="pijersi-view-menu-id">
 
-			<div id="pijersi_hamburger" onclick="pijersi_click_menu()"></div>
+			<div id="pijersi-view-menu-button-id" onclick="pijersi_presenter_toggle_menu()"></div>
 
-			<div id="pijersi_menu_items">
+			<div id="pijersi-view-menu-items-id">
 
-				<div id="pijersi_new" class="pijersi_menu_item_class" onclick="pijersi_new()">New</div>
-				<div id="pijersi_stop" class="pijersi_menu_item_class" onclick="pijersi_stop()">Stop</div>
-				<div id="pijersi_resume" class="pijersi_menu_item_class" onclick="pijersi_resume()">Resume</div>
-				<div id="pijersi_edit" class="pijersi_menu_item_class" onclick="pijersi_edit()">Edit</div>
+				<div id="pijersi-view-new-game-id" class="pijersi-view-menu-item-style" onclick="pijersi_presenter_new_game()">New</div>
+				<div id="pijersi-view-stop-game-id" class="pijersi-view-menu-item-style" onclick="pijersi_presenter_stop_game()">Stop</div>
+				<div id="pijersi-view-resume-game-id" class="pijersi-view-menu-item-style" onclick="pijersi_presenter_resume_game()">Resume</div>
+				<div id="pijersi-view-edit-game-id" class="pijersi-view-menu-item-style" onclick="pijersi_presenter_edit_game()">Edit</div>
 
-				<hr class="pijersi_menu_line_class">
-				<div class="pijersi_menu_separator_class">Show :</div>
+				<hr class="pijersi-view-menu-line-style">
+				<div class="pijersi-view-menu-separator-style">Show :</div>
 
-				<div class="pijersi_menu_item_class">
-					<input id="pijersi_show_captures" class="pijersi_checkbox_class" type="checkbox" checked="checked" 
-					onclick="pijersi_show_captures()">
-					<span onclick="pijersi_toggle_checkbox('pijersi_show_captures')">Captures</span>
+				<div class="pijersi-view-menu-item-style">
+					<input id="pijersi-view-show-captures-id" class="pijersi-view-checkbox-style" type="checkbox" checked="checked" 
+					onclick="pijersi_presenter_show_captures()">
+					<span onclick="pijersi_view_toggle_checkbox('pijersi-view-show-captures-id')">Captures</span>
 				</div>
 				
-				<div class="pijersi_menu_item_class">
-					<input id="pijersi_show_labels" class="pijersi_checkbox_class" type="checkbox" checked="checked"
-					onclick="pijersi_show_labels()">
-					<span onclick="pijersi_toggle_checkbox('pijersi_show_labels')">Labels</span>
+				<div class="pijersi-view-menu-item-style">
+					<input id="pijersi-view-show-labels-id" class="pijersi-view-checkbox-style" type="checkbox" checked="checked"
+					onclick="pijersi_presenter_show_labels()">
+					<span onclick="pijersi_view_toggle_checkbox('pijersi-view-show-labels-id')">Labels</span>
 				</div>
 
 			</div>
 		</div>
 
-		<div id="pijersi_board" onclick="pijersi_play()"></div>
+		<div id="pijersi-view-board-id" onclick="pijersi_presenter_simulate_play()"></div>
 
-		<div id="pijersi_white_turn" onclick="pijersi_white_turn()"></div>
+		<div id="pijersi-view-white-turn-id" onclick="pijersi_presenter_toggle_player_turn()"></div>
 		
-		<div id="pijersi_previous" onclick="pijersi_previous()" ></div>
+		<div id="pijersi-view-show-previous-turn-id" onclick="pijersi_presenter_show_previous_turn()" ></div>
 
-		<span id="pijersi_legend"></span>
+		<span id="pijersi-view-legend-id"></span>
 
-		<div id="pijersi_next"  onclick="pijersi_next()"></div>
+		<div id="pijersi-view-show-next-turn-id"  onclick="pijersi_presenter_show_next_turn()"></div>
 
-	    <div id="pijersi_black_turn" onclick="pijersi_black_turn()"></div>
+	    <div id="pijersi-view-black-turn-id" onclick="pijersi_presenter_toggle_player_turn()"></div>
 	</div>		
 
 	<script>
 		"use strict";
-		
-		var pijersi_menu_showed = false;
 
-		const PIJERSI_MENU_ITEMS = document.getElementById("pijersi_menu_items");
+		const PIJERSI_MODEL_MODE_RUNNING = "running";
+		const PIJERSI_MODEL_MODE_REVIEWING = "reviewing";
+		const PIJERSI_MODEL_MODE_EDITING = "editing";
+		var pijersi_model_mode = PIJERSI_MODEL_MODE_RUNNING;
 
-		const PIJERSI_MODE_RUNNING = "running";
-		const PIJERSI_MODE_REVIEWING = "reviewing";
-		const PIJERSI_MODE_EDITING = "editing";
-		var pijersi_mode = PIJERSI_MODE_RUNNING;
+		const PIJERSI_MODEL_CREDIT_MAX = 20;
+		var pijersi_model_credit = PIJERSI_MODEL_CREDIT_MAX;
 
-		const PIJERSI_TITLE = document.getElementById("pijersi_title");	
-		const PIJERSI_LEGEND = document.getElementById("pijersi_legend");	
+		var pijersi_model_turns = undefined;
+		var pijersi_model_current_turn = undefined;
+
+		const PIJERSI_MODEL_PLAYER_WHITE = "white";
+		const PIJERSI_MODEL_PLAYER_BLACK = "black";
+		var pijersi_model_player = PIJERSI_MODEL_PLAYER_WHITE;
+
 	
-		const PIJERSI_CREDIT = document.getElementById("pijersi_credit");
-		const PIJERSI_CREDIT_MAX = 20;
-		var pijersi_credit_value = PIJERSI_CREDIT_MAX;
-
-		const PIJERSI_PLAYER_WHITE = "white";
-		const PIJERSI_PLAYER_BLACK = "black";
-		var pijersi_player = PIJERSI_PLAYER_WHITE;
-
-		const PIJERSI_BLACK_TURN = document.getElementById("pijersi_black_turn");
-		const PIJERSI_WHITE_TURN = document.getElementById("pijersi_white_turn");
+		const PIJERSI_VIEW_CREDIT = document.getElementById("pijersi-view-credit-id");
 		
-		const PIJERSI_NEXT = document.getElementById("pijersi_next");
-		const PIJERSI_PREVIOUS = document.getElementById("pijersi_previous");
+		const PIJERSI_VIEW_MENU_ITEMS = document.getElementById("pijersi-view-menu-items-id");
+		var pijersi_view_menu_showed = false;
 
-		var pijersi_turns = undefined;
-		var pijersi_current_turn = undefined;
+		const PIJERSI_VIEW_TITLE = document.getElementById("pijersi-view-title-id");	
+		const PIJERSI_VIEW_LEGEND = document.getElementById("pijersi-view-legend-id");	
 
-
-		const pijersi_init = function(){
-			pijersi_new();
-		};
-
-
-		const pijersi_set_mode = function(mode){
-			if ( mode === PIJERSI_MODE_RUNNING || mode === PIJERSI_MODE_REVIEWING || mode === PIJERSI_MODE_EDITING ) {
-		 		
-				pijersi_mode = mode;
-				pijersi_update_title();
-
-				if ( mode === PIJERSI_MODE_EDITING ) {
-					PIJERSI_WHITE_TURN.classList.add("pijersi_turn_edit");
-					PIJERSI_BLACK_TURN.classList.add("pijersi_turn_edit");
-					PIJERSI_CREDIT.classList.add("pijersi_credit_edit");
-
-
-				} else if ( mode === PIJERSI_MODE_REVIEWING ) {
-					PIJERSI_NEXT.classList.add("pijersi_show");
-					PIJERSI_PREVIOUS.classList.add("pijersi_show");		
-
-				} else {
-					PIJERSI_WHITE_TURN.classList.remove("pijersi_turn_edit");
-					PIJERSI_BLACK_TURN.classList.remove("pijersi_turn_edit");
-					PIJERSI_CREDIT.classList.remove("pijersi_credit_edit");
-					PIJERSI_NEXT.classList.remove("pijersi_show");
-					PIJERSI_PREVIOUS.classList.remove("pijersi_show");
-
-				}
-			}
-		};
-
-
-		const pijersi_update_title = function(){
-			PIJERSI_TITLE.innerHTML = "Pijersi [" + pijersi_mode + "]";
-		};
-
-
-		const pijersi_update_legend = function(){
-			const legend = pijersi_turns[pijersi_current_turn].legend;
-			PIJERSI_LEGEND.innerHTML = legend;
-		};
-
-
-		const pijersi_update_credit = function(){
-			const credit = pijersi_turns[pijersi_current_turn].credit;
-			PIJERSI_CREDIT.innerHTML = credit.toString().padStart(2, '0');
-		};
-
+		const PIJERSI_VIEW_BLACK_TURN = document.getElementById("pijersi-view-black-turn-id");
+		const PIJERSI_VIEW_WHITE_TURN = document.getElementById("pijersi-view-white-turn-id");
 		
-		const pijersi_increment_credit = function(){
-			pijersi_credit_value = pijersi_credit_value + 1;
-			if ( pijersi_credit_value > PIJERSI_CREDIT_MAX ) pijersi_credit_value = 0;
-			pijersi_turns[pijersi_current_turn].credit = pijersi_credit_value;
-			pijersi_update_credit()					
-		};
-
+		const PIJERSI_VIEW_NEXT_TURN = document.getElementById("pijersi-view-show-next-turn-id");
+		const PIJERSI_VIEW_PREVIOUS_TURN = document.getElementById("pijersi-view-show-previous-turn-id");
 		
-		const pijersi_decrement_credit = function(){
-			pijersi_credit_value = pijersi_credit_value - 1;
-			if ( pijersi_credit_value < 0 ) pijersi_credit_value = 0;
-			pijersi_turns[pijersi_current_turn].credit = pijersi_credit_value;
-			pijersi_update_credit()					
-		};
 
+		function pijersi_model_reset_turns(){
+			pijersi_model_current_turn = 0;
+			pijersi_model_turns = []
+
+			const new_legend = "";
+			const new_turn = {legend: new_legend, credit: PIJERSI_MODEL_CREDIT_MAX};
+
+			pijersi_model_turns.push(new_turn);
+		};
 		
-		const pijersi_reset_credit = function(){
-			pijersi_credit_value = PIJERSI_CREDIT_MAX;
-			pijersi_turns[pijersi_current_turn].credit = pijersi_credit_value;
-			pijersi_update_credit()					
+
+		function pijersi_model_new_turn(){
+			pijersi_model_current_turn += 1;
+
+			const new_legend = pijersi_model_current_turn.toString() + " " + "xi-yi=zk";
+			const new_turn = {legend: new_legend, credit: pijersi_model_credit};
+
+			pijersi_model_turns.push(new_turn);
 		};
 
 
-		const pijersi_set_player = function(player){
-			if ( player === PIJERSI_PLAYER_WHITE || player === PIJERSI_PLAYER_BLACK ) {
-				pijersi_player = player
-			}
-
-			if ( pijersi_player === PIJERSI_PLAYER_WHITE ) {
-				PIJERSI_BLACK_TURN.classList.remove("pijersi_black_turn_on");
-				PIJERSI_WHITE_TURN.classList.add("pijersi_white_turn_on");
-
-			} else if ( pijersi_player === PIJERSI_PLAYER_BLACK ) {
-				PIJERSI_WHITE_TURN.classList.remove("pijersi_white_turn_on");
-				PIJERSI_BLACK_TURN.classList.add("pijersi_black_turn_on");
-			}
-		};
-
-
-		const pijersi_change_player = function(){
-			if ( pijersi_player === PIJERSI_PLAYER_WHITE ) {
-				pijersi_set_player(PIJERSI_PLAYER_BLACK);
-
-			} else if ( pijersi_player === PIJERSI_PLAYER_BLACK ) {
-				pijersi_set_player(PIJERSI_PLAYER_WHITE);
-			}
-		};
-
-
-		const pijersi_toggle_checkbox = function(checkbox_id){
+		function pijersi_view_toggle_checkbox(checkbox_id){
 			const checkbox = document.getElementById(checkbox_id);
 			checkbox.click();
 		};
 
 
-		const pijersi_click_menu = function(){
-			pijersi_menu_showed = ! pijersi_menu_showed;
-			pijersi_show_menu(pijersi_menu_showed);
+		function pijersi_presenter_init(){
+			pijersi_presenter_new_game();
 		};
 
 
-		const pijersi_show_menu = function(condition){
+		function pijersi_presenter_set_mode(mode){
+			if ( mode === PIJERSI_MODEL_MODE_RUNNING || mode === PIJERSI_MODEL_MODE_REVIEWING || mode === PIJERSI_MODEL_MODE_EDITING ) {
+		 		
+				pijersi_model_mode = mode;
+				pijersi_presenter_update_title();
 
-			if ( condition !== true && condition !== false ) return ;
+				if ( mode === PIJERSI_MODEL_MODE_EDITING ) {
+					PIJERSI_VIEW_WHITE_TURN.classList.add("pijersi-view-turn-edit-style");
+					PIJERSI_VIEW_BLACK_TURN.classList.add("pijersi-view-turn-edit-style");
+					PIJERSI_VIEW_CREDIT.classList.add("pijersi-view-credit-edit-style");
+					PIJERSI_VIEW_NEXT_TURN.classList.remove("pijersi-view-show-style");
+					PIJERSI_VIEW_PREVIOUS_TURN.classList.remove("pijersi-view-show-style");
 
-			pijersi_menu_showed = condition;
-
-			if ( pijersi_menu_showed ) {
-  				PIJERSI_MENU_ITEMS.classList.add("pijersi_show");
-
-			} else {
-  				PIJERSI_MENU_ITEMS.classList.remove("pijersi_show");
-			}
-		};
-
-
-		const pijersi_new = function(){
-			pijersi_show_menu(false);
-			pijersi_reset_turns();
-			pijersi_reset_credit();
-
-			pijersi_set_mode(PIJERSI_MODE_RUNNING);
-			pijersi_set_player(PIJERSI_PLAYER_WHITE);
-
-			pijersi_update_legend();
-			pijersi_update_credit();
-		};
-				
-
-		const pijersi_stop = function(){
-			pijersi_show_menu(false);
-			pijersi_set_mode(PIJERSI_MODE_REVIEWING);
-		};
-				
-
-		const pijersi_resume = function(){
-			pijersi_show_menu(false);
-
-			pijersi_turns = pijersi_turns.slice(0, pijersi_current_turn + 1)
-
-			pijersi_update_legend();
-			pijersi_update_credit();
-
-			if ( pijersi_credit_value !== 0 ) {
-				pijersi_set_mode(PIJERSI_MODE_RUNNING);
-			}
-		};
-				
-
-		const pijersi_edit = function(){
-			pijersi_show_menu(false);
-			pijersi_set_mode(PIJERSI_MODE_EDITING);
-		};
-
-		
-		const pijersi_show_captures = function(){
-			pijersi_show_menu(false);
-		};
-
-		
-		const pijersi_show_labels = function(){
-			pijersi_show_menu(false);
-		};
-
-	
-		const pijersi_white_turn = function(){
-			if ( pijersi_mode !== PIJERSI_MODE_EDITING ) return;
-			pijersi_change_player();
-		};
-	
-
-		const pijersi_black_turn = function(){
-			if ( pijersi_mode !== PIJERSI_MODE_EDITING ) return;
-			pijersi_change_player();
-		};
-	
-
-		const pijersi_next = function(){
-			if ( pijersi_mode !== PIJERSI_MODE_REVIEWING ) return;
-			
-			if ( pijersi_current_turn + 1 < pijersi_turns.length ) {
-				pijersi_current_turn += 1;
-
-				pijersi_update_legend();
-				pijersi_update_credit();
-			}
-		};
-	
-
-		const pijersi_previous = function(){
-			if ( pijersi_mode !== PIJERSI_MODE_REVIEWING ) return;
-			
-			if ( pijersi_current_turn - 1 >= 0 ) {
-				pijersi_current_turn -= 1;
-
-				pijersi_update_legend();
-				pijersi_update_credit();
-			}
-		};
-
-
-		const pijersi_play = function(){
-			if ( pijersi_mode === PIJERSI_MODE_RUNNING && ! pijersi_menu_showed) {
-
-				pijersi_decrement_credit();					
-
-				if ( pijersi_credit_value === 0 ) {
-					pijersi_stop();
+				} else if ( mode === PIJERSI_MODEL_MODE_REVIEWING ) {
+					PIJERSI_VIEW_NEXT_TURN.classList.add("pijersi-view-show-style");
+					PIJERSI_VIEW_PREVIOUS_TURN.classList.add("pijersi-view-show-style");		
+					PIJERSI_VIEW_WHITE_TURN.classList.remove("pijersi-view-turn-edit-style");
+					PIJERSI_VIEW_BLACK_TURN.classList.remove("pijersi-view-turn-edit-style");
+					PIJERSI_VIEW_CREDIT.classList.remove("pijersi-view-credit-edit-style");
 
 				} else {
-					pijersi_new_turn();
-					pijersi_update_credit();
-					pijersi_update_legend();
-					pijersi_change_player();
+					PIJERSI_VIEW_WHITE_TURN.classList.remove("pijersi-view-turn-edit-style");
+					PIJERSI_VIEW_BLACK_TURN.classList.remove("pijersi-view-turn-edit-style");
+					PIJERSI_VIEW_CREDIT.classList.remove("pijersi-view-credit-edit-style");
+					PIJERSI_VIEW_NEXT_TURN.classList.remove("pijersi-view-show-style");
+					PIJERSI_VIEW_PREVIOUS_TURN.classList.remove("pijersi-view-show-style");
+
 				}
 			}
 		};
-		
 
-		const pijersi_reset_turns = function(){
-			pijersi_current_turn = 0;
-			pijersi_turns = []
 
-			const new_legend = "";
-			const new_turn = {legend: new_legend, credit: PIJERSI_CREDIT_MAX};
-
-			pijersi_turns.push(new_turn);
+		function pijersi_presenter_update_title(){
+			PIJERSI_VIEW_TITLE.innerHTML = "Pijersi [" + pijersi_model_mode + "]";
 		};
+
+
+		function pijersi_presenter_update_legend(){
+			const legend = pijersi_model_turns[pijersi_model_current_turn].legend;
+			PIJERSI_VIEW_LEGEND.innerHTML = legend;
+		};
+
+
+		function pijersi_presenter_update_credit(){
+			const credit = pijersi_model_turns[pijersi_model_current_turn].credit;
+			PIJERSI_VIEW_CREDIT.innerHTML = credit.toString().padStart(2, '0');
+		};
+
 		
+		function pijersi_presenter_increment_credit(){
+			pijersi_model_credit = pijersi_model_credit + 1;
+			if ( pijersi_model_credit > PIJERSI_MODEL_CREDIT_MAX ) pijersi_model_credit = 0;
+			pijersi_model_turns[pijersi_model_current_turn].credit = pijersi_model_credit;
+			pijersi_presenter_update_credit()					
+		};
 
-		const pijersi_new_turn = function(){
-			pijersi_current_turn += 1;
+		
+		function pijersi_presenter_decrement_credit(){
+			pijersi_model_credit = pijersi_model_credit - 1;
+			if ( pijersi_model_credit < 0 ) pijersi_model_credit = 0;
+			pijersi_model_turns[pijersi_model_current_turn].credit = pijersi_model_credit;
+			pijersi_presenter_update_credit()					
+		};
 
-			const new_legend = pijersi_current_turn.toString() + " " + "xi-yi=zk";
-			const new_turn = {legend: new_legend, credit: pijersi_credit_value};
+		
+		function pijersi_presenter_reset_credit(){
+			pijersi_model_credit = PIJERSI_MODEL_CREDIT_MAX;
+			pijersi_model_turns[pijersi_model_current_turn].credit = pijersi_model_credit;
+			pijersi_presenter_update_credit()					
+		};
 
-			pijersi_turns.push(new_turn);
+
+		function pijersi_presenter_set_player(player){
+			if ( player === PIJERSI_MODEL_PLAYER_WHITE || player === PIJERSI_MODEL_PLAYER_BLACK ) {
+				pijersi_model_player = player
+			}
+
+			if ( pijersi_model_player === PIJERSI_MODEL_PLAYER_WHITE ) {
+				PIJERSI_VIEW_BLACK_TURN.classList.remove("pijersi-view-black-turn-on-style");
+				PIJERSI_VIEW_WHITE_TURN.classList.add("pijersi-view-white-turn-on-style");
+
+			} else if ( pijersi_model_player === PIJERSI_MODEL_PLAYER_BLACK ) {
+				PIJERSI_VIEW_WHITE_TURN.classList.remove("pijersi-view-white-turn-on-style");
+				PIJERSI_VIEW_BLACK_TURN.classList.add("pijersi-view-black-turn-on-style");
+			}
+		};
+
+
+		function pijersi_presenter_change_player(){
+			if ( pijersi_model_player === PIJERSI_MODEL_PLAYER_WHITE ) {
+				pijersi_presenter_set_player(PIJERSI_MODEL_PLAYER_BLACK);
+
+			} else if ( pijersi_model_player === PIJERSI_MODEL_PLAYER_BLACK ) {
+				pijersi_presenter_set_player(PIJERSI_MODEL_PLAYER_WHITE);
+			}
+		};
+
+
+		function pijersi_presenter_toggle_menu(){
+			pijersi_view_menu_showed = ! pijersi_view_menu_showed;
+			pijersi_presenter_show_menu(pijersi_view_menu_showed);
+		};
+
+
+		function pijersi_presenter_show_menu(condition){
+
+			if ( condition !== true && condition !== false ) return ;
+
+			pijersi_view_menu_showed = condition;
+
+			if ( pijersi_view_menu_showed ) {
+  				PIJERSI_VIEW_MENU_ITEMS.classList.add("pijersi-view-show-style");
+
+			} else {
+  				PIJERSI_VIEW_MENU_ITEMS.classList.remove("pijersi-view-show-style");
+			}
+		};
+
+
+		function pijersi_presenter_new_game(){
+			pijersi_presenter_show_menu(false);
+			pijersi_model_reset_turns();
+			pijersi_presenter_reset_credit();
+
+			pijersi_presenter_set_mode(PIJERSI_MODEL_MODE_RUNNING);
+			pijersi_presenter_set_player(PIJERSI_MODEL_PLAYER_WHITE);
+
+			pijersi_presenter_update_legend();
+			pijersi_presenter_update_credit();
+		};
+				
+
+		function pijersi_presenter_stop_game(){
+			pijersi_presenter_show_menu(false);
+			pijersi_presenter_set_mode(PIJERSI_MODEL_MODE_REVIEWING);
+		};
+				
+
+		function pijersi_presenter_resume_game(){
+			pijersi_presenter_show_menu(false);
+
+			pijersi_model_turns = pijersi_model_turns.slice(0, pijersi_model_current_turn + 1)
+
+			pijersi_presenter_update_legend();
+			pijersi_presenter_update_credit();
+
+			if ( pijersi_model_credit !== 0 ) {
+				pijersi_presenter_set_mode(PIJERSI_MODEL_MODE_RUNNING);
+			}
+		};
+				
+
+		function pijersi_presenter_edit_game(){
+			pijersi_presenter_show_menu(false);
+			pijersi_presenter_set_mode(PIJERSI_MODEL_MODE_EDITING);
+		};
+
+		
+		function pijersi_presenter_show_captures(){
+			pijersi_presenter_show_menu(false);
+		};
+
+		
+		function pijersi_presenter_show_labels(){
+			pijersi_presenter_show_menu(false);
+		};
+	
+
+		function pijersi_presenter_toggle_player_turn(){
+			if ( pijersi_model_mode !== PIJERSI_MODEL_MODE_EDITING ) return;
+			pijersi_presenter_change_player();
+		};
+	
+
+		function pijersi_presenter_show_next_turn(){
+			if ( pijersi_model_mode !== PIJERSI_MODEL_MODE_REVIEWING ) return;
+			
+			if ( pijersi_model_current_turn + 1 < pijersi_model_turns.length ) {
+				pijersi_model_current_turn += 1;
+
+				pijersi_presenter_update_legend();
+				pijersi_presenter_update_credit();
+			}
+		};
+	
+
+		function pijersi_presenter_show_previous_turn(){
+			if ( pijersi_model_mode !== PIJERSI_MODEL_MODE_REVIEWING ) return;
+			
+			if ( pijersi_model_current_turn - 1 >= 0 ) {
+				pijersi_model_current_turn -= 1;
+
+				pijersi_presenter_update_legend();
+				pijersi_presenter_update_credit();
+			}
+		};
+
+
+		function pijersi_presenter_simulate_play(){
+			if ( pijersi_model_mode === PIJERSI_MODEL_MODE_RUNNING && ! pijersi_view_menu_showed) {
+
+				pijersi_presenter_decrement_credit();					
+
+				if ( pijersi_model_credit === 0 ) {
+					pijersi_presenter_stop_game();
+
+				} else {
+					pijersi_model_new_turn();
+					pijersi_presenter_update_credit();
+					pijersi_presenter_update_legend();
+					pijersi_presenter_change_player();
+				}
+			}
 		};
 
 	</script>
