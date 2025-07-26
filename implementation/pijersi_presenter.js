@@ -66,14 +66,14 @@ pijersi.presenter.set_mode = function(mode){
             pijersi.view.const.CREDIT.classList.remove(pijersi.view.const.CREDIT_EDIT_STYLE);
             pijersi.view.const.NEXT_TURN.classList.remove(pijersi.view.const.SHOW_STYLE);
             pijersi.view.const.PREVIOUS_TURN.classList.remove(pijersi.view.const.SHOW_STYLE);
-
         }
     }
 };
 
 
 pijersi.presenter.update_title = function(){
-    pijersi.view.const.TITLE.innerHTML = "Pijersi [" + pijersi.model.mode + "]";
+    const mode = pijersi.model.mode;
+    pijersi.view.const.TITLE.innerHTML = "Pijersi [" + mode + "]";
 };
 
 
@@ -161,6 +161,7 @@ pijersi.presenter.show_menu = function(condition){
 
 pijersi.presenter.new_game = function(){
     pijersi.presenter.show_menu(false);
+
     pijersi.model.reset_turns();
     pijersi.presenter.reset_credit();
 
@@ -174,6 +175,7 @@ pijersi.presenter.new_game = function(){
 
 pijersi.presenter.stop_game = function(){
     pijersi.presenter.show_menu(false);
+
     pijersi.presenter.set_mode(pijersi.model.const.MODE_REVIEWING);
 };
         
@@ -194,6 +196,7 @@ pijersi.presenter.resume_game = function(){
 
 pijersi.presenter.edit_game = function(){
     pijersi.presenter.show_menu(false);
+    
     pijersi.presenter.set_mode(pijersi.model.const.MODE_EDITING);
 };
 
