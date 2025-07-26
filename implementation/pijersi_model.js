@@ -24,7 +24,7 @@ pijersi.model.__init = function(){
 
     // Init required packages: None
 
-    // Init constants
+    // Init the constants
  
     pijersi.model.const = {};
    
@@ -37,9 +37,11 @@ pijersi.model.__init = function(){
     pijersi.model.const.PLAYER_WHITE = "white";
     pijersi.model.const.PLAYER_BLACK = "black";
  
+    // Freeze the constants
     Object.freeze(pijersi.model.const);
 
-    // Init variables 
+    // Init the variables 
+
     pijersi.model.mode = pijersi.model.const.MODE_RUNNING;
     pijersi.model.credit = pijersi.model.const.CREDIT_MAX;
 
@@ -47,6 +49,7 @@ pijersi.model.__init = function(){
     pijersi.model.current_turn = undefined;
     pijersi.model.player = pijersi.model.const.PLAYER_WHITE;
 
+    // Seal the module
     Object.seal(pijersi.model);
 };
 		

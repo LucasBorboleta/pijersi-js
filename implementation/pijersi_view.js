@@ -47,11 +47,13 @@ pijersi.view.__init = function(){
     pijersi.view.const.BLACK_TURN_ON_STYLE = "pijersi-view-black-turn-on-style";
     pijersi.view.const.WHITE_TURN_ON_STYLE = "pijersi-view-white-turn-on-style";
   
+    // Freeze the constants
     Object.freeze(pijersi.view.const);
  
-    // Init variables 
+    // Init the variables 
     pijersi.view.menu_showed = false;
 
+    // Seal the module
     Object.seal(pijersi.view);
 };
 

@@ -30,6 +30,7 @@ pijersi.presenter.__init = function(){
  
     // Init variables : none
 
+    // Seal the module
     Object.seal(pijersi.presenter);
 };
 

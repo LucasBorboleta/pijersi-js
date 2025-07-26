@@ -28,9 +28,9 @@ pijersi.__init = function(){
     pijersi.presenter.__init();
 
     // Init constants : none
-
     // Init variables : none
     
+    // Seal the module
     Object.seal(pijersi);
 };
 ///////////////////////////////////////////////////////////////////////////////
