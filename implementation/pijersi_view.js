@@ -63,4 +63,156 @@ pijersi.view.toggle_checkbox = function(checkbox_id){
     const checkbox = document.getElementById(checkbox_id);
     checkbox.click();
 };
+
+
+pijersi.view.toggle_menu = function(){
+    pijersi.view.menu_showed = ! pijersi.view.menu_showed;
+    pijersi.view.show_menu(pijersi.view.menu_showed);
+};
+
+
+pijersi.view.show_menu = function(condition){
+
+    if ( condition === true || condition === false ) {
+
+        pijersi.view.menu_showed = condition;
+
+        if ( pijersi.view.menu_showed ) {
+            pijersi.view.const.MENU_ITEMS.classList.add(pijersi.view.const.SHOW_STYLE);
+
+        } else {
+            pijersi.view.const.MENU_ITEMS.classList.remove(pijersi.view.const.SHOW_STYLE);
+        }
+
+    } else {
+        pijersi.log_error("unexpected 'condition' = " + condition);
+    }
+};
+
+
+pijersi.view.set_title = function(title){
+    pijersi.view.const.TITLE.innerHTML = title;
+};
+
+
+pijersi.view.set_legend = function(legend){
+    pijersi.view.const.LEGEND.innerHTML = legend;
+};
+
+
+pijersi.view.set_credit = function(credit){
+    pijersi.view.const.CREDIT.innerHTML = credit;
+};
+
+
+pijersi.view.enable_credit = function(condition){
+    if ( condition === true || condition === false ) {
+
+        if ( condition ) {
+            pijersi.view.const.CREDIT.classList.add(pijersi.view.const.CREDIT_EDIT_STYLE);
+
+        } else {
+            pijersi.view.const.CREDIT.classList.remove(pijersi.view.const.CREDIT_EDIT_STYLE);
+        }
+
+    } else {
+        pijersi.log_error("unexpected 'condition' = " + condition);
+    }
+};
+
+
+pijersi.view.show_black_turn = function(condition){
+    if ( condition === true || condition === false ) {
+
+        if ( condition ) {
+            pijersi.view.const.BLACK_TURN.classList.add(pijersi.view.const.BLACK_TURN_ON_STYLE);
+
+        } else {
+            pijersi.view.const.BLACK_TURN.classList.remove(pijersi.view.const.BLACK_TURN_ON_STYLE);
+        }
+
+    } else {
+        pijersi.log_error("unexpected 'condition' = " + condition);
+    }
+};
+
+
+pijersi.view.enable_black_turn = function(condition){
+    if ( condition === true || condition === false ) {
+
+        if ( condition ) {
+            pijersi.view.const.BLACK_TURN.classList.add(pijersi.view.const.TURN_EDIT_STYLE);
+
+        } else {
+            pijersi.view.const.BLACK_TURN.classList.remove(pijersi.view.const.TURN_EDIT_STYLE);
+        }
+
+    } else {
+        pijersi.log_error("unexpected 'condition' = " + condition);
+    }
+};
+
+
+pijersi.view.show_white_turn = function(condition){
+    if ( condition === true || condition === false ) {
+
+        if ( condition ) {
+            pijersi.view.const.WHITE_TURN.classList.add(pijersi.view.const.WHITE_TURN_ON_STYLE);
+
+        } else {
+            pijersi.view.const.WHITE_TURN.classList.remove(pijersi.view.const.WHITE_TURN_ON_STYLE);
+        }
+
+    } else {
+        pijersi.log_error("unexpected 'condition' = " + condition);
+    }
+};
+
+
+pijersi.view.enable_white_turn = function(condition){
+    if ( condition === true || condition === false ) {
+
+        if ( condition ) {
+            pijersi.view.const.WHITE_TURN.classList.add(pijersi.view.const.TURN_EDIT_STYLE);
+
+        } else {
+            pijersi.view.const.WHITE_TURN.classList.remove(pijersi.view.const.TURN_EDIT_STYLE);
+        }
+
+    } else {
+        pijersi.log_error("unexpected 'condition' = " + condition);
+    }
+};
+
+
+pijersi.view.show_next_turn = function(condition){
+    if ( condition === true || condition === false ) {
+
+        if ( condition ) {
+            pijersi.view.const.NEXT_TURN.classList.add(pijersi.view.const.SHOW_STYLE);
+
+        } else {
+            pijersi.view.const.NEXT_TURN.classList.remove(pijersi.view.const.SHOW_STYLE);
+        }
+
+    } else {
+        pijersi.log_error("unexpected 'condition' = " + condition);
+    }
+};
+
+
+pijersi.view.show_previous_turn = function(condition){
+    if ( condition === true || condition === false ) {
+
+        if ( condition ) {
+            pijersi.view.const.PREVIOUS_TURN.classList.add(pijersi.view.const.SHOW_STYLE);
+
+        } else {
+            pijersi.view.const.PREVIOUS_TURN.classList.remove(pijersi.view.const.SHOW_STYLE);
+        }
+
+    } else {
+        pijersi.log_error("unexpected 'condition' = " + condition);
+    }
+};
 ///////////////////////////////////////////////////////////////////////////////

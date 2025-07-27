@@ -27,10 +27,27 @@ pijersi.__init = function(){
     pijersi.view.__init();
     pijersi.presenter.__init();
 
-    // Init constants : none
-    // Init variables : none
+   // Init the constants
+    pijersi.const = {};
+    pijersi.const.TITLE_DEFAULT = document.title;
+    pijersi.const.ERROR_ICON = "\u26A0";
+
+    // Freeze the constants
+    Object.freeze(pijersi.const);
+
+    // Init variables
+    pijersi.error_count = 0;
     
     // Seal the module
     Object.seal(pijersi);
+};
+
+//TODO: create a pijersi.debug module; because pijersi module should not contain any ressource per se
+pijersi.log_error = function(message){
+    pijersi.error_count += 1;
+    document.title = pijersi.const.TITLE_DEFAULT + " " + pijersi.const.ERROR_ICON + "*" + pijersi.error_count.toString();
+
+    console.error("error:" + pijersi.error_count.toString() + ": " + message);
+    console.trace();
 };
 ///////////////////////////////////////////////////////////////////////////////

@@ -54,6 +54,83 @@ pijersi.model.__init = function(){
 };
 		
 
+pijersi.model.get_mode = function(){
+    return pijersi.model.mode;
+};
+
+
+pijersi.model.set_mode = function(mode){
+    if ( mode === pijersi.model.const.MODE_RUNNING || mode === pijersi.model.const.MODE_REVIEWING || mode === pijersi.model.const.MODE_EDITING ) {
+        pijersi.model.mode = mode;
+
+    } else {
+        pijersi.log_error("unexpected 'mode' = " + mode);
+    }
+};
+
+
+pijersi.model.get_legend = function(){
+    return pijersi.model.turns[pijersi.model.current_turn].legend;
+};
+
+
+pijersi.model.get_credit = function(){
+    return pijersi.model.turns[pijersi.model.current_turn].credit;
+};
+
+
+pijersi.model.increment_credit = function(){
+    if ( pijersi.model.mode !== pijersi.model.const.MODE_EDITING ) return;
+
+    pijersi.model.credit = pijersi.model.credit + 1;
+    if ( pijersi.model.credit > pijersi.model.const.CREDIT_MAX ) pijersi.model.credit = 0;
+
+    pijersi.model.turns[pijersi.model.current_turn].credit = pijersi.model.credit;
+};
+
+
+pijersi.model.decrement_credit = function(){
+    pijersi.model.credit = pijersi.model.credit - 1;
+    if ( pijersi.model.credit < 0 ) pijersi.model.credit = 0;
+
+    pijersi.model.turns[pijersi.model.current_turn].credit = pijersi.model.credit;
+};
+
+
+pijersi.model.reset_credit = function(){
+    pijersi.model.credit = pijersi.model.const.CREDIT_MAX;
+
+    pijersi.model.turns[pijersi.model.current_turn].credit = pijersi.model.credit;
+};
+
+
+pijersi.model.get_player = function(){
+    return pijersi.model.player;
+};
+
+
+pijersi.model.set_player = function(player){
+
+    if ( player === pijersi.model.const.PLAYER_WHITE || player === pijersi.model.const.PLAYER_BLACK ) {
+        pijersi.model.player = player;
+    
+    } else {
+        pijersi.log_error("unexpected 'player' = " + player);
+    }
+};
+
+
+pijersi.model.change_player = function(){
+
+    if ( pijersi.model.player === pijersi.model.const.PLAYER_WHITE ) {
+        pijersi.model.player = pijersi.model.const.PLAYER_BLACK;
+
+    } else if ( pijersi.model.player === pijersi.model.const.PLAYER_BLACK ) {
+        pijersi.model.player = pijersi.model.const.PLAYER_WHITE;
+    }
+};
+
+
 pijersi.model.reset_turns = function(){
     pijersi.model.current_turn = 0;
     pijersi.model.turns = []
