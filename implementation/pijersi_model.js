@@ -22,9 +22,10 @@ pijersi.model.__init = function(){
     if ( pijersi.model.__init_called ) return;
     pijersi.model.__init_called = true;
 
-    // Init required packages: None
+    // Init the required sub-modules
+    pijersi.debug.__init();
 
-    // Init the constants
+    // Init the sub-module constants
  
     pijersi.model.const = {};
    
@@ -37,10 +38,10 @@ pijersi.model.__init = function(){
     pijersi.model.const.PLAYER_WHITE = "white";
     pijersi.model.const.PLAYER_BLACK = "black";
  
-    // Freeze the constants
+    // Freeze the sub-module constants
     Object.freeze(pijersi.model.const);
 
-    // Init the variables 
+    // Init the sub-module variables 
 
     pijersi.model.mode = pijersi.model.const.MODE_RUNNING;
     pijersi.model.credit = pijersi.model.const.CREDIT_MAX;
@@ -49,7 +50,7 @@ pijersi.model.__init = function(){
     pijersi.model.current_turn = undefined;
     pijersi.model.player = pijersi.model.const.PLAYER_WHITE;
 
-    // Seal the module
+    // Seal the sub-module
     Object.seal(pijersi.model);
 };
 		
@@ -60,11 +61,12 @@ pijersi.model.get_mode = function(){
 
 
 pijersi.model.set_mode = function(mode){
+
     if ( mode === pijersi.model.const.MODE_RUNNING || mode === pijersi.model.const.MODE_REVIEWING || mode === pijersi.model.const.MODE_EDITING ) {
         pijersi.model.mode = mode;
 
     } else {
-        pijersi.log_error("unexpected 'mode' = " + mode);
+        pijersi.debug.log_error("unexpected 'mode' = " + mode);
     }
 };
 
@@ -115,7 +117,7 @@ pijersi.model.set_player = function(player){
         pijersi.model.player = player;
     
     } else {
-        pijersi.log_error("unexpected 'player' = " + player);
+        pijersi.debug.log_error("unexpected 'player' = " + player);
     }
 };
 

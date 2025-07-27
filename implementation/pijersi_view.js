@@ -22,9 +22,10 @@ pijersi.view.__init = function(){
     if ( pijersi.view.__init_called ) return;
     pijersi.view.__init_called = true;
 
-    // Init required packages: None
+    // Init the required sub-modules
+    pijersi.debug.__init();
 
-    // Init constants
+    // Init the sub-module constants
 
     pijersi.view.const = {};
 
@@ -47,13 +48,13 @@ pijersi.view.__init = function(){
     pijersi.view.const.BLACK_TURN_ON_STYLE = "pijersi-view-black-turn-on-style";
     pijersi.view.const.WHITE_TURN_ON_STYLE = "pijersi-view-white-turn-on-style";
   
-    // Freeze the constants
+    // Freeze the sub-module constants
     Object.freeze(pijersi.view.const);
  
-    // Init the variables 
+    // Init the sub-module variables 
     pijersi.view.menu_showed = false;
 
-    // Seal the module
+    // Seal the sub-module
     Object.seal(pijersi.view);
 };
 
@@ -85,7 +86,7 @@ pijersi.view.show_menu = function(condition){
         }
 
     } else {
-        pijersi.log_error("unexpected 'condition' = " + condition);
+        pijersi.debug.log_error("unexpected 'condition' = " + condition);
     }
 };
 
@@ -116,7 +117,7 @@ pijersi.view.enable_credit = function(condition){
         }
 
     } else {
-        pijersi.log_error("unexpected 'condition' = " + condition);
+        pijersi.debug.log_error("unexpected 'condition' = " + condition);
     }
 };
 
@@ -132,7 +133,7 @@ pijersi.view.show_black_turn = function(condition){
         }
 
     } else {
-        pijersi.log_error("unexpected 'condition' = " + condition);
+        pijersi.debug.log_error("unexpected 'condition' = " + condition);
     }
 };
 
@@ -148,7 +149,7 @@ pijersi.view.enable_black_turn = function(condition){
         }
 
     } else {
-        pijersi.log_error("unexpected 'condition' = " + condition);
+        pijersi.debug.log_error("unexpected 'condition' = " + condition);
     }
 };
 
@@ -164,7 +165,7 @@ pijersi.view.show_white_turn = function(condition){
         }
 
     } else {
-        pijersi.log_error("unexpected 'condition' = " + condition);
+        pijersi.debug.log_error("unexpected 'condition' = " + condition);
     }
 };
 
@@ -180,7 +181,7 @@ pijersi.view.enable_white_turn = function(condition){
         }
 
     } else {
-        pijersi.log_error("unexpected 'condition' = " + condition);
+        pijersi.debug.log_error("unexpected 'condition' = " + condition);
     }
 };
 
@@ -196,7 +197,7 @@ pijersi.view.show_next_turn = function(condition){
         }
 
     } else {
-        pijersi.log_error("unexpected 'condition' = " + condition);
+        pijersi.debug.log_error("unexpected 'condition' = " + condition);
     }
 };
 
@@ -212,7 +213,7 @@ pijersi.view.show_previous_turn = function(condition){
         }
 
     } else {
-        pijersi.log_error("unexpected 'condition' = " + condition);
+        pijersi.debug.log_error("unexpected 'condition' = " + condition);
     }
 };
 ///////////////////////////////////////////////////////////////////////////////

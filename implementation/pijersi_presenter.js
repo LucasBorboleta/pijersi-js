@@ -22,15 +22,16 @@ pijersi.presenter.__init = function(){
     if ( pijersi.presenter.__init_called ) return;
     pijersi.presenter.__init_called = true;
 
-    // Init required packages
+    // Init the required sub-modules
+    pijersi.debug.__init();
     pijersi.model.__init();
     pijersi.view.__init();
 
-    // Init constants : none
+    // Init the sub-module constants: None
  
-    // Init variables : none
+    // Init the sub-module variables: None
 
-    // Seal the module
+    // Seal the sub-module
     Object.seal(pijersi.presenter);
 };
 
@@ -65,7 +66,7 @@ pijersi.presenter.set_mode = function(mode){
         pijersi.view.enable_credit(true);
 
     } else {
-        pijersi.log_error("unexpected 'mode' = " + mode);
+        pijersi.debug.log_error("unexpected 'mode' = " + mode);
     }
 };
 

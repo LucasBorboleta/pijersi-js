@@ -14,21 +14,39 @@ You should have received a copy of the GNU General Public License along with thi
 
 PIJERSI-JS-COPYRIGHT-MD-END */
 ///////////////////////////////////////////////////////////////////////////////
-const pijersi = { };
-pijersi.__init_called = false;
+pijersi.debug = { };
+pijersi.debug.__init_called = false;
 
-pijersi.__init = function(){
+pijersi.debug.__init = function(){
 
-    if ( pijersi.__init_called ) return;
-    pijersi.__init_called = true;
+    if ( pijersi.debug.__init_called ) return;
+    pijersi.debug.__init_called = true;
 
-    // Init all the sub-modules
-    pijersi.debug.__init();
-    pijersi.model.__init();
-    pijersi.view.__init();
-    pijersi.presenter.__init();
-    
-    // Seal the module
-    Object.seal(pijersi);
+    // Init the required sub-modules: None
+
+    // Init the sub-module constants
+ 
+    pijersi.debug.const = {};
+ 
+    pijersi.debug.const.TITLE_DEFAULT = document.title;
+    pijersi.debug.const.ERROR_ICON = "\u26A0";
+ 
+    // Freeze the sub-module constants
+    Object.freeze(pijersi.debug.const);
+
+    // Init the sub-module variables 
+    pijersi.debug.error_count = 0;
+
+    // Seal the sub-module
+    Object.seal(pijersi.debug);
+};
+
+pijersi.debug.log_error = function(message){
+    pijersi.debug.error_count += 1;
+    document.title = pijersi.debug.const.TITLE_DEFAULT + " " + pijersi.debug.const.ERROR_ICON + "*" + pijersi.debug.error_count.toString();
+
+    console.error("error:" + pijersi.debug.error_count.toString() + ": " + message);
+    console.trace();
 };
 ///////////////////////////////////////////////////////////////////////////////
+		
