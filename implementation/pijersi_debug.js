@@ -25,9 +25,7 @@ pijersi.debug.__init = function(){
     // Init the required sub-modules: None
 
     // Init the sub-module constants
- 
     pijersi.debug.const = {};
- 
     pijersi.debug.const.TITLE_DEFAULT = document.title;
     pijersi.debug.const.ERROR_ICON = "\u26A0";
  
@@ -40,6 +38,7 @@ pijersi.debug.__init = function(){
     // Seal the sub-module
     Object.seal(pijersi.debug);
 };
+
 
 pijersi.debug.log_error = function(message){
     pijersi.debug.error_count += 1;
