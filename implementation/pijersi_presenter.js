@@ -108,65 +108,6 @@ pijersi.presenter.update_player = function(){
 };
 
 
-pijersi.presenter.set_mode = function(mode){
-    pijersi.model.set_mode(mode);
-    pijersi.presenter.update_mode();
-};
-
-pijersi.presenter.increment_credit = function(){
-    pijersi.model.increment_credit();
-    pijersi.presenter.update_credit()					
-};
-
-
-pijersi.presenter.decrement_credit = function(){
-    pijersi.model.decrement_credit();
-    pijersi.presenter.update_credit()					
-};
-
-
-pijersi.presenter.reset_credit = function(){
-    pijersi.model.reset_credit();
-    pijersi.presenter.update_credit()					
-};
-
-
-pijersi.presenter.new_game = function(){
-    pijersi.view.show_menu(false);
-
-    pijersi.model.new_game();
-    pijersi.presenter.update_all();
-};
-        
-
-pijersi.presenter.stop_game = function(){
-    pijersi.view.show_menu(false);
-
-    pijersi.presenter.set_mode(pijersi.model.const.MODE_REVIEWING);
-};
-        
-
-pijersi.presenter.resume_game = function(){
-    pijersi.view.show_menu(false);
-
-    pijersi.model.turns = pijersi.model.turns.slice(0, pijersi.model.current_turn + 1)
-
-    pijersi.presenter.update_legend();
-    pijersi.presenter.update_credit();
-
-    if ( pijersi.model.credit !== 0 ) {
-        pijersi.presenter.set_mode(pijersi.model.const.MODE_RUNNING);
-    }
-};
-        
-
-pijersi.presenter.edit_game = function(){
-    pijersi.view.show_menu(false);
-    
-    pijersi.presenter.set_mode(pijersi.model.const.MODE_EDITING);
-};
-
-
 pijersi.presenter.show_captures = function(){
     pijersi.view.show_menu(false);
 };
@@ -174,6 +115,57 @@ pijersi.presenter.show_captures = function(){
 
 pijersi.presenter.show_labels = function(){
     pijersi.view.show_menu(false);
+};
+
+pijersi.presenter.new_game = function(){
+    pijersi.view.show_menu(false);
+
+    pijersi.model.new_game();
+    pijersi.presenter.update_all();
+};
+
+
+pijersi.presenter.play_game = function(){
+    if ( pijersi.view.menu_showed ) return;
+    if ( pijersi.model.get_mode() !== pijersi.model.const.MODE_RUNNING ) return;
+
+    pijersi.model.new_turn();
+    pijersi.presenter.update_all();
+};
+        
+
+pijersi.presenter.stop_game = function(){
+    pijersi.view.show_menu(false);
+
+    pijersi.model.review_game();
+    pijersi.presenter.update_all();
+};
+        
+
+pijersi.presenter.show_next_turn = function(){
+    pijersi.model.go_next_turn();
+    pijersi.presenter.update_all();
+};
+
+
+pijersi.presenter.show_previous_turn = function(){
+    pijersi.model.go_previous_turn();
+    pijersi.presenter.update_all();
+};
+
+
+pijersi.presenter.resume_game = function(){
+    pijersi.view.show_menu(false);
+
+    pijersi.model.resume_game();
+    pijersi.presenter.update_all();
+};
+        
+
+pijersi.presenter.edit_game = function(){
+    pijersi.view.show_menu(false);
+    
+    pijersi.model.set_mode(pijersi.model.const.MODE_EDITING);
 };
 
 
@@ -184,35 +176,9 @@ pijersi.presenter.toggle_player_turn = function(){
 };
 
 
-pijersi.presenter.show_next_turn = function(){
-    if ( pijersi.model.get_mode() !== pijersi.model.const.MODE_REVIEWING ) return;
-    
-    if ( pijersi.model.current_turn + 1 < pijersi.model.turns.length ) {
-        pijersi.model.current_turn += 1;
-
-        pijersi.presenter.update_legend();
-        pijersi.presenter.update_credit();
-    }
+pijersi.presenter.increment_credit = function(){
+    pijersi.model.increment_credit();
+    pijersi.presenter.update_credit()					
 };
 
-
-pijersi.presenter.show_previous_turn = function(){
-    if ( pijersi.model.get_mode() !== pijersi.model.const.MODE_REVIEWING ) return;
-    
-    if ( pijersi.model.current_turn - 1 >= 0 ) {
-        pijersi.model.current_turn -= 1;
-
-        pijersi.presenter.update_legend();
-        pijersi.presenter.update_credit();
-    }
-};
-
-
-pijersi.presenter.simulate_play = function(){
-    if ( pijersi.view.menu_showed ) return;
-    if ( pijersi.model.get_mode() !== pijersi.model.const.MODE_RUNNING ) return;
-
-    pijersi.model.new_turn();
-    pijersi.presenter.update_all();
-};
 ///////////////////////////////////////////////////////////////////////////////

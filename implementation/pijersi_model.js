@@ -44,11 +44,16 @@ pijersi.model.__init = function(){
     // Init the sub-module variables 
 
     pijersi.model.mode = undefined;
-    pijersi.model.credit = undefined;
+    pijersi.model.terminated = undefined;
+
+    pijersi.model.turn_index = undefined;
 
     pijersi.model.turns = undefined;
-    pijersi.model.current_turn = undefined;
+
     pijersi.model.player = undefined;
+    pijersi.model.credit = undefined;
+    pijersi.model.board = undefined;
+    pijersi.model.legend = undefined;
 
     // Seal the sub-module
     Object.seal(pijersi.model);
@@ -61,12 +66,12 @@ pijersi.model.get_mode = function(){
 
 
 pijersi.model.get_legend = function(){
-    return pijersi.model.turns[pijersi.model.current_turn].legend;
+    return pijersi.model.legend;
 };
 
 
 pijersi.model.get_credit = function(){
-    return pijersi.model.turns[pijersi.model.current_turn].credit;
+    return pijersi.model.credit;
 };
 
 
@@ -86,42 +91,6 @@ pijersi.model.set_mode = function(mode){
 };
 
 
-pijersi.model.increment_credit = function(){
-    if ( pijersi.model.mode !== pijersi.model.const.MODE_EDITING ) return;
-
-    pijersi.model.credit = pijersi.model.credit + 1;
-    if ( pijersi.model.credit > pijersi.model.const.CREDIT_MAX ) pijersi.model.credit = 0;
-
-    pijersi.model.turns[pijersi.model.current_turn].credit = pijersi.model.credit;
-};
-
-
-pijersi.model.decrement_credit = function(){
-    pijersi.model.credit = pijersi.model.credit - 1;
-    if ( pijersi.model.credit < 0 ) pijersi.model.credit = 0;
-
-    pijersi.model.turns[pijersi.model.current_turn].credit = pijersi.model.credit;
-};
-
-
-pijersi.model.reset_credit = function(){
-    pijersi.model.credit = pijersi.model.const.CREDIT_MAX;
-
-    pijersi.model.turns[pijersi.model.current_turn].credit = pijersi.model.credit;
-};
-
-
-pijersi.model.set_player = function(player){
-
-    if ( player === pijersi.model.const.PLAYER_WHITE || player === pijersi.model.const.PLAYER_BLACK ) {
-        pijersi.model.player = player;
-    
-    } else {
-        pijersi.debug.log_error("unexpected 'player' = " + player);
-    }
-};
-
-
 pijersi.model.change_player = function(){
 
     if ( pijersi.model.player === pijersi.model.const.PLAYER_WHITE ) {
@@ -129,6 +98,9 @@ pijersi.model.change_player = function(){
 
     } else if ( pijersi.model.player === pijersi.model.const.PLAYER_BLACK ) {
         pijersi.model.player = pijersi.model.const.PLAYER_WHITE;
+
+    } else {
+         pijersi.debug.log_error("unexpected 'pijersi.model.player' = " + pijersi.model.player);
     }
 };
 
@@ -137,42 +109,167 @@ pijersi.model.new_game = function(){
 
     pijersi.model.set_mode(pijersi.model.const.MODE_RUNNING);
 
-    pijersi.model.credit = pijersi.model.const.CREDIT_MAX;
+    pijersi.model.terminated = false;
+   
+    pijersi.model.turn_index = 0;
 
-    const new_turn = {legend: "", credit: pijersi.model.credit};
+    pijersi.model.player = pijersi.model.const.PLAYER_WHITE;
+    pijersi.model.credit = pijersi.model.const.CREDIT_MAX;
+    pijersi.model.board = [];
+    pijersi.model.legend = "";
+
+    const turn = {
+        turn_index: pijersi.model.turn_index,
+        player: pijersi.model.player,
+        credit: pijersi.model.credit,
+        terminated: pijersi.model.terminated,
+        board: pijersi.model.board,
+        legend: pijersi.model.legend
+    };
 
     pijersi.model.turns = []
-    pijersi.model.turns.push(new_turn);
+    pijersi.model.turns.push(turn);
 
-    pijersi.model.current_turn = 0;
-
-    pijersi.model.player = pijersi.model.const.PLAYER_WHITE
+    pijersi.model.turn_index += 1;
+    pijersi.model.player = pijersi.model.const.PLAYER_WHITE;
 };
 		
 
 pijersi.model.new_turn = function(){
 
-    if ( pijersi.model.get_mode() !== pijersi.model.const.MODE_RUNNING ) return;
-
-    if ( pijersi.model.credit <= 0 ) {
-        pijersi.debug.log_error("unexpected 'pijersi.model.credit' = " + pijersi.model.credit);
+    if ( pijersi.model.mode !== pijersi.model.const.MODE_RUNNING ) {
+        pijersi.debug.log_error("unexpected 'pijersi.model.mode' = " + pijersi.model.mode);
         return;
     }
+
+    if ( pijersi.model.terminated ) return;
+ 
+    pijersi.model.legend = pijersi.model.turn_index.toString().padStart(2, '0') + " " + "xi-yi=zk";
     
-    pijersi.model.current_turn += 1;
-
-    const new_legend = pijersi.model.current_turn.toString() + " " + "xi-yi=zk";
-    const new_turn = {legend: new_legend, credit: pijersi.model.credit};
-
-    pijersi.model.turns.push(new_turn);
-
     pijersi.model.credit = pijersi.model.credit - 1;
 
-    if ( pijersi.model.credit > 0 ) {
-        pijersi.model.change_player();
+    if ( pijersi.model.credit <= 0 ) {
+        pijersi.model.terminated = true;
+        pijersi.model.legend += " game-over"
 
     } else {
-        pijersi.model.set_mode(pijersi.model.const.MODE_REVIEWING);
+        pijersi.model.terminated = false;
     }
+
+    const turn = {
+        turn_index: pijersi.model.turn_index,
+        player: pijersi.model.player,
+        credit: pijersi.model.credit,
+        terminated: pijersi.model.terminated,
+        board: pijersi.model.board,
+        legend: pijersi.model.legend
+    };
+
+    pijersi.model.turns.push(turn);
+
+    if ( ! pijersi.model.terminated ) {
+        pijersi.model.turn_index += 1;
+        pijersi.model.change_player();
+    }
+};
+
+
+pijersi.model.review_game = function(){
+
+    if ( pijersi.model.mode !== pijersi.model.const.MODE_RUNNING ) {
+        pijersi.debug.log_error("unexpected 'pijersi.model.mode' = " + pijersi.model.mode);
+        return;
+    }
+
+    pijersi.model.set_mode(pijersi.model.const.MODE_REVIEWING);
+
+    const last_turn_index = pijersi.model.turns.length - 1;
+    const last_turn = pijersi.model.turns[last_turn_index];
+
+    pijersi.model.turn_index = last_turn.turn_index;
+    pijersi.model.player = last_turn.player;
+    pijersi.model.credit = last_turn.credit;
+    pijersi.model.terminated = last_turn.terminated;
+    pijersi.model.board = last_turn.board;
+    pijersi.model.legend = last_turn.legend;
+};
+
+
+pijersi.model.go_next_turn = function(){
+
+    if ( pijersi.model.mode !== pijersi.model.const.MODE_REVIEWING ) {
+        pijersi.debug.log_error("unexpected 'pijersi.model.mode' = " + pijersi.model.mode);
+        return;
+    }
+
+    const first_turn_index = 0;
+    const last_turn_index = pijersi.model.turns.length - 1;
+
+    let next_turn_index = pijersi.model.turn_index + 1;
+    if ( next_turn_index > last_turn_index ) {
+        next_turn_index = first_turn_index;
+    }
+
+    const next_turn = pijersi.model.turns[next_turn_index];
+
+    pijersi.model.turn_index = next_turn.turn_index;
+    pijersi.model.player = next_turn.player;
+    pijersi.model.credit = next_turn.credit;
+    pijersi.model.terminated = next_turn.terminated;
+    pijersi.model.board = next_turn.board;
+    pijersi.model.legend = next_turn.legend;
+};
+
+
+pijersi.model.go_previous_turn = function(){
+
+    if ( pijersi.model.mode !== pijersi.model.const.MODE_REVIEWING ) {
+        pijersi.debug.log_error("unexpected 'pijersi.model.mode' = " + pijersi.model.mode);
+        return;
+    }
+
+    const first_turn_index = 0;
+    const last_turn_index = pijersi.model.turns.length - 1;
+    
+    let previous_turn_index = pijersi.model.turn_index - 1;
+    if ( previous_turn_index < first_turn_index ) {
+        previous_turn_index = last_turn_index;
+    }
+
+    const previous_turn = pijersi.model.turns[previous_turn_index];
+
+    pijersi.model.turn_index = previous_turn.turn_index;
+    pijersi.model.player = previous_turn.player;
+    pijersi.model.credit = previous_turn.credit;
+    pijersi.model.terminated = previous_turn.terminated;
+    pijersi.model.board = previous_turn.board;
+    pijersi.model.legend = previous_turn.legend;
+};
+
+
+pijersi.model.resume_game = function(){
+
+    if ( pijersi.model.mode !== pijersi.model.const.MODE_REVIEWING ) {
+        pijersi.debug.log_error("unexpected 'pijersi.model.mode' = " + pijersi.model.mode);
+        return;
+    }
+
+    pijersi.model.set_mode(pijersi.model.const.MODE_RUNNING);
+    pijersi.model.turns = pijersi.model.turns.slice(0, pijersi.model.turn_index + 1)
+
+    if ( ! pijersi.model.terminated ) {
+        pijersi.model.turn_index += 1;
+        pijersi.model.change_player();
+    }
+};
+
+
+pijersi.model.increment_credit = function(){
+    if ( pijersi.model.mode !== pijersi.model.const.MODE_EDITING ) return;
+
+    pijersi.model.credit = pijersi.model.credit + 1;
+    if ( pijersi.model.credit > pijersi.model.const.CREDIT_MAX ) pijersi.model.credit = 0;
+
+    pijersi.model.turns[pijersi.model.turn_index].credit = pijersi.model.credit;
 };
 ///////////////////////////////////////////////////////////////////////////////
