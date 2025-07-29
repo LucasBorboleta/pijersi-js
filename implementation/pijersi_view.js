@@ -42,7 +42,7 @@ pijersi.view.__init = function(){
     pijersi.view.const.NEXT_TURN = document.getElementById("pijersi-view-show-next-turn-id");
     pijersi.view.const.PREVIOUS_TURN = document.getElementById("pijersi-view-show-previous-turn-id");
 
-    pijersi.view.const.TURN_EDIT_STYLE = "pijersi-view-turn-edit-style";
+    pijersi.view.const.PLAYER_TURN_EDIT_STYLE = "pijersi-view-player-turn-edit-style";
     pijersi.view.const.CREDIT_EDIT_STYLE = "pijersi-view-credit-edit-style";
     pijersi.view.const.SHOW_STYLE = "pijersi-view-show-style";
     pijersi.view.const.BLACK_TURN_ON_STYLE = "pijersi-view-black-turn-on-style";
@@ -142,10 +142,10 @@ pijersi.view.enable_black_turn = function(condition){
     if ( condition === true || condition === false ) {
 
         if ( condition ) {
-            pijersi.view.const.BLACK_TURN.classList.add(pijersi.view.const.TURN_EDIT_STYLE);
+            pijersi.view.const.BLACK_TURN.classList.add(pijersi.view.const.PLAYER_TURN_EDIT_STYLE);
 
         } else {
-            pijersi.view.const.BLACK_TURN.classList.remove(pijersi.view.const.TURN_EDIT_STYLE);
+            pijersi.view.const.BLACK_TURN.classList.remove(pijersi.view.const.PLAYER_TURN_EDIT_STYLE);
         }
 
     } else {
@@ -174,10 +174,10 @@ pijersi.view.enable_white_turn = function(condition){
     if ( condition === true || condition === false ) {
 
         if ( condition ) {
-            pijersi.view.const.WHITE_TURN.classList.add(pijersi.view.const.TURN_EDIT_STYLE);
+            pijersi.view.const.WHITE_TURN.classList.add(pijersi.view.const.PLAYER_TURN_EDIT_STYLE);
 
         } else {
-            pijersi.view.const.WHITE_TURN.classList.remove(pijersi.view.const.TURN_EDIT_STYLE);
+            pijersi.view.const.WHITE_TURN.classList.remove(pijersi.view.const.PLAYER_TURN_EDIT_STYLE);
         }
 
     } else {

@@ -128,6 +128,7 @@ pijersi.presenter.new_game = function(){
 
 pijersi.presenter.play_game = function(){
     if ( pijersi.view.menu_showed ) return;
+
     if ( pijersi.model.get_mode() !== pijersi.model.const.MODE_RUNNING ) return;
 
     pijersi.model.new_turn();
@@ -135,21 +136,25 @@ pijersi.presenter.play_game = function(){
 };
         
 
-pijersi.presenter.stop_game = function(){
+pijersi.presenter.stop_review_game = function(){
     pijersi.view.show_menu(false);
 
-    pijersi.model.review_game();
+    pijersi.model.stop_review_game();
     pijersi.presenter.update_all();
 };
         
 
 pijersi.presenter.show_next_turn = function(){
+    if ( pijersi.view.menu_showed ) return;
+    
     pijersi.model.goto_next_turn();
     pijersi.presenter.update_all();
 };
 
 
 pijersi.presenter.show_previous_turn = function(){
+    if ( pijersi.view.menu_showed ) return;
+    
     pijersi.model.goto_previous_turn();
     pijersi.presenter.update_all();
 };
@@ -171,14 +176,18 @@ pijersi.presenter.edit_game = function(){
 };
 
 
-pijersi.presenter.increment_credit = function(){
-    pijersi.model.increment_credit();
+pijersi.presenter.edit_credit = function(){
+    if ( pijersi.view.menu_showed ) return;
+    
+    pijersi.model.edit_credit();
     pijersi.presenter.update_all();
 };
 
 
-pijersi.presenter.toggle_player_turn = function(){
-    pijersi.model.toggle_player_turn();
+pijersi.presenter.edit_player_turn = function(){
+    if ( pijersi.view.menu_showed ) return;
+
+    pijersi.model.edit_player_turn();
     pijersi.presenter.update_all();
 };
 ///////////////////////////////////////////////////////////////////////////////

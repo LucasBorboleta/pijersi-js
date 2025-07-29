@@ -80,17 +80,6 @@ pijersi.model.get_player = function(){
 };
 
 
-pijersi.model.set_mode = function(mode){
-
-    if ( mode === pijersi.model.const.MODE_RUNNING || mode === pijersi.model.const.MODE_REVIEWING || mode === pijersi.model.const.MODE_EDITING ) {
-        pijersi.model.mode = mode;
-
-    } else {
-        pijersi.debug.log_error("unexpected 'mode' = " + mode);
-    }
-};
-
-
 pijersi.model.next_player = function(){
 
     if ( pijersi.model.player === pijersi.model.const.PLAYER_WHITE ) {
@@ -107,7 +96,7 @@ pijersi.model.next_player = function(){
 
 pijersi.model.new_game = function(){
 
-    pijersi.model.set_mode(pijersi.model.const.MODE_RUNNING);
+    pijersi.model.mode = pijersi.model.const.MODE_RUNNING;
 
     pijersi.model.terminated = false;
    
@@ -174,11 +163,11 @@ pijersi.model.new_turn = function(){
 };
 
 
-pijersi.model.review_game = function(){
+pijersi.model.stop_review_game = function(){
     
     if ( pijersi.model.mode === pijersi.model.const.MODE_REVIEWING ) return;
 
-    pijersi.model.set_mode(pijersi.model.const.MODE_REVIEWING);
+    pijersi.model.mode = pijersi.model.const.MODE_REVIEWING;
 
     const last_turn_index = pijersi.model.turns.length - 1;
     const last_turn = pijersi.model.turns[last_turn_index];
@@ -248,8 +237,8 @@ pijersi.model.resume_game = function(){
 
     if ( pijersi.model.mode === pijersi.model.const.MODE_RUNNING ) return;
 
-    pijersi.model.set_mode(pijersi.model.const.MODE_RUNNING);
-    
+    pijersi.model.mode = pijersi.model.const.MODE_RUNNING;
+
     pijersi.model.turns = pijersi.model.turns.slice(0, pijersi.model.turn_index + 1)
 
     if ( ! pijersi.model.terminated ) {
@@ -262,7 +251,7 @@ pijersi.model.resume_game = function(){
 pijersi.model.edit_game = function(){
     if ( pijersi.model.mode === pijersi.model.const.MODE_EDITING ) return;
 
-    pijersi.model.set_mode(pijersi.model.const.MODE_EDITING);
+    pijersi.model.mode = pijersi.model.const.MODE_EDITING;
 
     pijersi.model.turn_index = 0;
     pijersi.model.legend = "";
@@ -289,7 +278,7 @@ pijersi.model.edit_game = function(){
 };
 
 
-pijersi.model.increment_credit = function(){
+pijersi.model.edit_credit = function(){
 
     if ( pijersi.model.mode !== pijersi.model.const.MODE_EDITING ) {
         pijersi.debug.log_error("unexpected 'pijersi.model.mode' = " + pijersi.model.mode);
@@ -324,7 +313,7 @@ pijersi.model.increment_credit = function(){
 };
 
 
-pijersi.model.toggle_player_turn = function(){
+pijersi.model.edit_player_turn = function(){
 
     if ( pijersi.model.mode !== pijersi.model.const.MODE_EDITING ) {
         pijersi.debug.log_error("unexpected 'pijersi.model.mode' = " + pijersi.model.mode);
