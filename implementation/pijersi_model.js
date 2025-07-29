@@ -91,7 +91,7 @@ pijersi.model.set_mode = function(mode){
 };
 
 
-pijersi.model.change_player = function(){
+pijersi.model.next_player = function(){
 
     if ( pijersi.model.player === pijersi.model.const.PLAYER_WHITE ) {
         pijersi.model.player = pijersi.model.const.PLAYER_BLACK;
@@ -169,7 +169,7 @@ pijersi.model.new_turn = function(){
 
     if ( ! pijersi.model.terminated ) {
         pijersi.model.turn_index += 1;
-        pijersi.model.change_player();
+        pijersi.model.next_player();
     }
 };
 
@@ -192,7 +192,7 @@ pijersi.model.review_game = function(){
 };
 
 
-pijersi.model.go_next_turn = function(){
+pijersi.model.goto_next_turn = function(){
 
     if ( pijersi.model.mode !== pijersi.model.const.MODE_REVIEWING ) {
         pijersi.debug.log_error("unexpected 'pijersi.model.mode' = " + pijersi.model.mode);
@@ -218,7 +218,7 @@ pijersi.model.go_next_turn = function(){
 };
 
 
-pijersi.model.go_previous_turn = function(){
+pijersi.model.goto_previous_turn = function(){
 
     if ( pijersi.model.mode !== pijersi.model.const.MODE_REVIEWING ) {
         pijersi.debug.log_error("unexpected 'pijersi.model.mode' = " + pijersi.model.mode);
@@ -246,17 +246,15 @@ pijersi.model.go_previous_turn = function(){
 
 pijersi.model.resume_game = function(){
 
-    if ( pijersi.model.mode !== pijersi.model.const.MODE_REVIEWING && pijersi.model.mode !== pijersi.model.const.MODE_EDITING ) {
-        pijersi.debug.log_error("unexpected 'pijersi.model.mode' = " + pijersi.model.mode);
-        return;
-    }
+    if ( pijersi.model.mode === pijersi.model.const.MODE_RUNNING ) return;
 
     pijersi.model.set_mode(pijersi.model.const.MODE_RUNNING);
+    
     pijersi.model.turns = pijersi.model.turns.slice(0, pijersi.model.turn_index + 1)
 
     if ( ! pijersi.model.terminated ) {
         pijersi.model.turn_index += 1;
-        pijersi.model.change_player();
+        pijersi.model.next_player();
     }
 };
 
@@ -333,7 +331,7 @@ pijersi.model.toggle_player_turn = function(){
         return;
     }
     
-    pijersi.model.change_player();
+    pijersi.model.next_player();
 
     pijersi.model.turn_index = 0;
     pijersi.model.legend = "";

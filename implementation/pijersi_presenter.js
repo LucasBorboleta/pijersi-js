@@ -144,13 +144,13 @@ pijersi.presenter.stop_game = function(){
         
 
 pijersi.presenter.show_next_turn = function(){
-    pijersi.model.go_next_turn();
+    pijersi.model.goto_next_turn();
     pijersi.presenter.update_all();
 };
 
 
 pijersi.presenter.show_previous_turn = function(){
-    pijersi.model.go_previous_turn();
+    pijersi.model.goto_previous_turn();
     pijersi.presenter.update_all();
 };
 
