@@ -175,11 +175,8 @@ pijersi.model.new_turn = function(){
 
 
 pijersi.model.review_game = function(){
-
-    if ( pijersi.model.mode !== pijersi.model.const.MODE_RUNNING ) {
-        pijersi.debug.log_error("unexpected 'pijersi.model.mode' = " + pijersi.model.mode);
-        return;
-    }
+    
+    if ( pijersi.model.mode === pijersi.model.const.MODE_REVIEWING ) return;
 
     pijersi.model.set_mode(pijersi.model.const.MODE_REVIEWING);
 
@@ -249,7 +246,7 @@ pijersi.model.go_previous_turn = function(){
 
 pijersi.model.resume_game = function(){
 
-    if ( pijersi.model.mode !== pijersi.model.const.MODE_REVIEWING ) {
+    if ( pijersi.model.mode !== pijersi.model.const.MODE_REVIEWING && pijersi.model.mode !== pijersi.model.const.MODE_EDITING ) {
         pijersi.debug.log_error("unexpected 'pijersi.model.mode' = " + pijersi.model.mode);
         return;
     }
@@ -264,12 +261,101 @@ pijersi.model.resume_game = function(){
 };
 
 
+pijersi.model.edit_game = function(){
+    if ( pijersi.model.mode === pijersi.model.const.MODE_EDITING ) return;
+
+    pijersi.model.set_mode(pijersi.model.const.MODE_EDITING);
+
+    pijersi.model.turn_index = 0;
+    pijersi.model.legend = "";
+    
+    if ( pijersi.model.credit <= 0 ) {
+        pijersi.model.terminated = true;
+        pijersi.model.legend += " game-over"
+
+    } else {
+        pijersi.model.terminated = false;
+    }
+
+    const turn = {
+        turn_index: pijersi.model.turn_index,
+        player: pijersi.model.player,
+        credit: pijersi.model.credit,
+        terminated: pijersi.model.terminated,
+        board: pijersi.model.board,
+        legend: pijersi.model.legend
+    };
+
+    pijersi.model.turns = []
+    pijersi.model.turns.push(turn);
+};
+
+
 pijersi.model.increment_credit = function(){
-    if ( pijersi.model.mode !== pijersi.model.const.MODE_EDITING ) return;
+
+    if ( pijersi.model.mode !== pijersi.model.const.MODE_EDITING ) {
+        pijersi.debug.log_error("unexpected 'pijersi.model.mode' = " + pijersi.model.mode);
+        return;
+    }
 
     pijersi.model.credit = pijersi.model.credit + 1;
     if ( pijersi.model.credit > pijersi.model.const.CREDIT_MAX ) pijersi.model.credit = 0;
 
-    pijersi.model.turns[pijersi.model.turn_index].credit = pijersi.model.credit;
+    pijersi.model.turn_index = 0;
+    pijersi.model.legend = "";
+    
+    if ( pijersi.model.credit <= 0 ) {
+        pijersi.model.terminated = true;
+        pijersi.model.legend += " game-over"
+
+    } else {
+        pijersi.model.terminated = false;
+    }
+
+    const turn = {
+        turn_index: pijersi.model.turn_index,
+        player: pijersi.model.player,
+        credit: pijersi.model.credit,
+        terminated: pijersi.model.terminated,
+        board: pijersi.model.board,
+        legend: pijersi.model.legend
+    };
+
+    pijersi.model.turns = []
+    pijersi.model.turns.push(turn);
+};
+
+
+pijersi.model.toggle_player_turn = function(){
+
+    if ( pijersi.model.mode !== pijersi.model.const.MODE_EDITING ) {
+        pijersi.debug.log_error("unexpected 'pijersi.model.mode' = " + pijersi.model.mode);
+        return;
+    }
+    
+    pijersi.model.change_player();
+
+    pijersi.model.turn_index = 0;
+    pijersi.model.legend = "";
+    
+    if ( pijersi.model.credit <= 0 ) {
+        pijersi.model.terminated = true;
+        pijersi.model.legend += " game-over"
+
+    } else {
+        pijersi.model.terminated = false;
+    }
+
+    const turn = {
+        turn_index: pijersi.model.turn_index,
+        player: pijersi.model.player,
+        credit: pijersi.model.credit,
+        terminated: pijersi.model.terminated,
+        board: pijersi.model.board,
+        legend: pijersi.model.legend
+    };
+
+    pijersi.model.turns = []
+    pijersi.model.turns.push(turn);
 };
 ///////////////////////////////////////////////////////////////////////////////

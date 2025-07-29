@@ -117,6 +117,7 @@ pijersi.presenter.show_labels = function(){
     pijersi.view.show_menu(false);
 };
 
+
 pijersi.presenter.new_game = function(){
     pijersi.view.show_menu(false);
 
@@ -165,20 +166,19 @@ pijersi.presenter.resume_game = function(){
 pijersi.presenter.edit_game = function(){
     pijersi.view.show_menu(false);
     
-    pijersi.model.set_mode(pijersi.model.const.MODE_EDITING);
-};
-
-
-pijersi.presenter.toggle_player_turn = function(){
-    if ( pijersi.model.get_mode() !== pijersi.model.const.MODE_EDITING ) return;
-    pijersi.model.change_player();
+    pijersi.model.edit_game();
     pijersi.presenter.update_all();
 };
 
 
 pijersi.presenter.increment_credit = function(){
     pijersi.model.increment_credit();
-    pijersi.presenter.update_credit()					
+    pijersi.presenter.update_all();
 };
 
+
+pijersi.presenter.toggle_player_turn = function(){
+    pijersi.model.toggle_player_turn();
+    pijersi.presenter.update_all();
+};
 ///////////////////////////////////////////////////////////////////////////////
