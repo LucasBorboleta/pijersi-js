@@ -146,7 +146,9 @@ pijersi.presenter.stop_review_game = function(){
 
 pijersi.presenter.show_next_turn = function(){
     if ( pijersi.view.menu_showed ) return;
-    
+
+    if ( pijersi.model.get_mode() !== pijersi.model.const.MODE_REVIEWING ) return;
+
     pijersi.model.goto_next_turn();
     pijersi.presenter.update_all();
 };
@@ -154,6 +156,8 @@ pijersi.presenter.show_next_turn = function(){
 
 pijersi.presenter.show_previous_turn = function(){
     if ( pijersi.view.menu_showed ) return;
+
+    if ( pijersi.model.get_mode() !== pijersi.model.const.MODE_REVIEWING ) return;
     
     pijersi.model.goto_previous_turn();
     pijersi.presenter.update_all();
@@ -178,7 +182,9 @@ pijersi.presenter.edit_game = function(){
 
 pijersi.presenter.edit_credit = function(){
     if ( pijersi.view.menu_showed ) return;
-    
+
+    if ( pijersi.model.get_mode() !== pijersi.model.const.MODE_EDITING ) return;
+
     pijersi.model.edit_credit();
     pijersi.presenter.update_all();
 };
@@ -186,6 +192,8 @@ pijersi.presenter.edit_credit = function(){
 
 pijersi.presenter.edit_player_turn = function(){
     if ( pijersi.view.menu_showed ) return;
+
+    if ( pijersi.model.get_mode() !== pijersi.model.const.MODE_EDITING ) return;
 
     pijersi.model.edit_player_turn();
     pijersi.presenter.update_all();

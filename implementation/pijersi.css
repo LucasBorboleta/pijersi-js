@@ -110,6 +110,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     justify-self: center;
 }
 
+
 .pijersi-view-white-turn-on-style {
     background-image:url(img/white-chrono.svg) !important;
 }
@@ -121,14 +122,6 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 #pijersi-view-show-previous-turn-id {
     grid-area:previous;
 
-    display: none;
-
-    background-image:url(img/previous.svg);
-    background-origin:border-box;
-    background-position:center;
-    background-repeat:no-repeat;
-    background-size:contain;
-
     width: 4rem;
     height: 4rem;
 
@@ -136,21 +129,21 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     justify-self: center;
 }
 
-#pijersi-view-show-previous-turn-id:hover {
+.pijersi-view-show-previous-on-style {
+    background-image:url(img/previous.svg);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+.pijersi-view-show-previous-on-style:hover {
     background-color:#156082;
 }
 
 #pijersi-view-show-next-turn-id {
     grid-area:next;
 
-    display: none;
-
-    background-image:url(img/next.svg);
-    background-origin:border-box;
-    background-position:center;
-    background-repeat:no-repeat;
-    background-size:contain;
-
     width: 4rem;
     height: 4rem;
 
@@ -158,7 +151,15 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     justify-self: center;
 }
 
-#pijersi-view-show-next-turn-id:hover {
+.pijersi-view-show-next-on-style {
+    background-image:url(img/next.svg);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+.pijersi-view-show-next-on-style:hover {
     background-color:#156082;
 }
 

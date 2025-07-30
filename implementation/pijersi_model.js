@@ -319,7 +319,7 @@ pijersi.model.edit_player_turn = function(){
         pijersi.debug.log_error("unexpected 'pijersi.model.mode' = " + pijersi.model.mode);
         return;
     }
-    
+        
     pijersi.model.next_player();
 
     pijersi.model.turn_index = 0;

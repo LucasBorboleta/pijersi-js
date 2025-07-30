@@ -42,11 +42,17 @@ pijersi.view.__init = function(){
     pijersi.view.const.NEXT_TURN = document.getElementById("pijersi-view-show-next-turn-id");
     pijersi.view.const.PREVIOUS_TURN = document.getElementById("pijersi-view-show-previous-turn-id");
 
+    pijersi.view.const.SHOW_STYLE = "pijersi-view-show-style";
+
     pijersi.view.const.PLAYER_TURN_EDIT_STYLE = "pijersi-view-player-turn-edit-style";
     pijersi.view.const.CREDIT_EDIT_STYLE = "pijersi-view-credit-edit-style";
-    pijersi.view.const.SHOW_STYLE = "pijersi-view-show-style";
+
     pijersi.view.const.BLACK_TURN_ON_STYLE = "pijersi-view-black-turn-on-style";
     pijersi.view.const.WHITE_TURN_ON_STYLE = "pijersi-view-white-turn-on-style";
+
+    pijersi.view.const.SHOW_PREVIOUS_ON_STYLE = "pijersi-view-show-previous-on-style";
+    pijersi.view.const.SHOW_NEXT_ON_STYLE = "pijersi-view-show-next-on-style";
+
   
     // Freeze the sub-module constants
     Object.freeze(pijersi.view.const);
@@ -190,10 +196,10 @@ pijersi.view.show_next_turn = function(condition){
     if ( condition === true || condition === false ) {
 
         if ( condition ) {
-            pijersi.view.const.NEXT_TURN.classList.add(pijersi.view.const.SHOW_STYLE);
+            pijersi.view.const.NEXT_TURN.classList.add(pijersi.view.const.SHOW_NEXT_ON_STYLE);
 
         } else {
-            pijersi.view.const.NEXT_TURN.classList.remove(pijersi.view.const.SHOW_STYLE);
+            pijersi.view.const.NEXT_TURN.classList.remove(pijersi.view.const.SHOW_NEXT_ON_STYLE);
         }
 
     } else {
@@ -206,10 +212,10 @@ pijersi.view.show_previous_turn = function(condition){
     if ( condition === true || condition === false ) {
 
         if ( condition ) {
-            pijersi.view.const.PREVIOUS_TURN.classList.add(pijersi.view.const.SHOW_STYLE);
+            pijersi.view.const.PREVIOUS_TURN.classList.add(pijersi.view.const.SHOW_PREVIOUS_ON_STYLE);
 
         } else {
-            pijersi.view.const.PREVIOUS_TURN.classList.remove(pijersi.view.const.SHOW_STYLE);
+            pijersi.view.const.PREVIOUS_TURN.classList.remove(pijersi.view.const.SHOW_PREVIOUS_ON_STYLE);
         }
 
     } else {
