@@ -53,23 +53,38 @@ pijersi.presenter.update_mode = function(){
     if ( mode === pijersi.model.const.MODE_RUNNING ) {
         pijersi.view.show_next_turn(false);
         pijersi.view.show_previous_turn(false);
+
         pijersi.view.enable_white_turn(false);
         pijersi.view.enable_black_turn(false);
+
         pijersi.view.enable_credit(false);
+
+        pijersi.view.show_white_swap(false);
+        pijersi.view.show_black_swap(false);
 
     } else if ( mode === pijersi.model.const.MODE_REVIEWING ) {
         pijersi.view.show_next_turn(true);
-        pijersi.view.show_previous_turn(true);		
+        pijersi.view.show_previous_turn(true);	
+
         pijersi.view.enable_white_turn(false);
         pijersi.view.enable_black_turn(false);
+
         pijersi.view.enable_credit(false);
+
+        pijersi.view.show_white_swap(false);
+        pijersi.view.show_black_swap(false);
 
     } else if ( mode === pijersi.model.const.MODE_EDITING ) {
         pijersi.view.show_next_turn(false);
         pijersi.view.show_previous_turn(false);
+
         pijersi.view.enable_white_turn(true);
         pijersi.view.enable_black_turn(true);
+
         pijersi.view.enable_credit(true);
+
+        pijersi.view.show_white_swap(true);
+        pijersi.view.show_black_swap(true);
     }
 };
 

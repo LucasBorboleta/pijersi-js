@@ -42,6 +42,9 @@ pijersi.view.__init = function(){
     pijersi.view.const.NEXT_TURN = document.getElementById("pijersi-view-show-next-turn-id");
     pijersi.view.const.PREVIOUS_TURN = document.getElementById("pijersi-view-show-previous-turn-id");
 
+    pijersi.view.const.BLACK_SWAP = document.getElementById("pijersi-view-black-swap-id");
+    pijersi.view.const.WHITE_SWAP = document.getElementById("pijersi-view-white-swap-id");
+
     pijersi.view.const.SHOW_STYLE = "pijersi-view-show-style";
 
     pijersi.view.const.PLAYER_TURN_EDIT_STYLE = "pijersi-view-player-turn-edit-style";
@@ -53,6 +56,9 @@ pijersi.view.__init = function(){
     pijersi.view.const.SHOW_PREVIOUS_ON_STYLE = "pijersi-view-show-previous-on-style";
     pijersi.view.const.SHOW_NEXT_ON_STYLE = "pijersi-view-show-next-on-style";
 
+    pijersi.view.const.BLACK_SWAP_ON_STYLE = "pijersi-view-black-swap-on";
+    pijersi.view.const.WHITE_SWAP_ON_STYLE = "pijersi-view-white-swap-on";
+ 
   
     // Freeze the sub-module constants
     Object.freeze(pijersi.view.const);
@@ -222,4 +228,37 @@ pijersi.view.show_previous_turn = function(condition){
         pijersi.debug.log_error("unexpected 'condition' = " + condition);
     }
 };
+
+
+pijersi.view.show_white_swap = function(condition){
+    if ( condition === true || condition === false ) {
+
+        if ( condition ) {
+            pijersi.view.const.WHITE_SWAP.classList.add(pijersi.view.const.WHITE_SWAP_ON_STYLE);
+
+        } else {
+            pijersi.view.const.WHITE_SWAP.classList.remove(pijersi.view.const.WHITE_SWAP_ON_STYLE);
+        }
+
+    } else {
+        pijersi.debug.log_error("unexpected 'condition' = " + condition);
+    }
+};
+
+
+pijersi.view.show_black_swap = function(condition){
+    if ( condition === true || condition === false ) {
+
+        if ( condition ) {
+            pijersi.view.const.BLACK_SWAP.classList.add(pijersi.view.const.BLACK_SWAP_ON_STYLE);
+
+        } else {
+            pijersi.view.const.BLACK_SWAP.classList.remove(pijersi.view.const.BLACK_SWAP_ON_STYLE);
+        }
+
+    } else {
+        pijersi.debug.log_error("unexpected 'condition' = " + condition);
+    }
+};
+
 ///////////////////////////////////////////////////////////////////////////////
