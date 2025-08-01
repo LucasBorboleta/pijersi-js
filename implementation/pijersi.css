@@ -235,7 +235,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 #pijersi-view-title-id {
     grid-area:title;
     
-    width: 12rm;
+    width: 8rm;
 
     font-size: 1rem;
     font-weight:bold;
@@ -251,7 +251,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 #pijersi-view-legend-id {
     grid-area:legend;
     
-    width: 12rem;
+    width: 8rem;
 
     font-size: 1rem;
     font-weight:bold;

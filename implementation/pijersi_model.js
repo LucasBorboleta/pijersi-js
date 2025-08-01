@@ -139,7 +139,7 @@ pijersi.model.new_turn = function(){
 
     if ( pijersi.model.credit <= 0 ) {
         pijersi.model.terminated = true;
-        pijersi.model.legend += " game-over"
+        pijersi.model.legend += " 0-0"
 
     } else {
         pijersi.model.terminated = false;
@@ -258,7 +258,7 @@ pijersi.model.edit_game = function(){
     
     if ( pijersi.model.credit <= 0 ) {
         pijersi.model.terminated = true;
-        pijersi.model.legend += " game-over"
+        pijersi.model.legend += " 0-0"
 
     } else {
         pijersi.model.terminated = false;
@@ -293,7 +293,7 @@ pijersi.model.edit_credit = function(){
     
     if ( pijersi.model.credit <= 0 ) {
         pijersi.model.terminated = true;
-        pijersi.model.legend += " game-over"
+        pijersi.model.legend += " 0-0"
 
     } else {
         pijersi.model.terminated = false;
@@ -327,7 +327,7 @@ pijersi.model.edit_player_turn = function(){
     
     if ( pijersi.model.credit <= 0 ) {
         pijersi.model.terminated = true;
-        pijersi.model.legend += " game-over"
+        pijersi.model.legend += " 0-0"
 
     } else {
         pijersi.model.terminated = false;
