@@ -42,12 +42,12 @@ PIJERSI-JS-COPYRIGHT-MD-END */
         'board        board       board     board   board  board       board'
         'white-turn   white-swap  previous  legend  next   black-swap  black-turn';
 
-    width: 95vw;
+    width: 99vw;
     height: auto;
 
-    gap: 1.0rem;
-    padding: 1.0rem;
-    margin: 0.5rem;
+    gap: 0rem;
+    padding: 1rem;
+    margin: 0rem;
 
     background-color:#BF9B7A;
 
@@ -118,6 +118,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 .pijersi-view-player-turn-edit-style:hover {
     background-color:#156082;
 }
+
 #pijersi-view-show-previous-turn-id {
     grid-area:previous;
 
@@ -234,33 +235,31 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 #pijersi-view-title-id {
     grid-area:title;
-    
-    width: 8rm;
-
+ 
+    align-self: center;
+    justify-self: center;
+   
     font-size: 1rem;
     font-weight:bold;
 
-    align-self: center;
-    justify-self: center;
-
     text-align:center;
-    line-height:100%;
+    vertical-align:middle;
 }
 
 
 #pijersi-view-legend-id {
     grid-area:legend;
-    
+ 
+    align-self: center;
+    justify-self: center;
+     
     width: 8rem;
-
+      
     font-size: 1rem;
     font-weight:bold;
 
-    align-self: center;
-    justify-self: center;
-
     text-align:center;
-    line-height:100%;
+    vertical-align:middle;
 }
 
 

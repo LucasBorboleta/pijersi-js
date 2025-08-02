@@ -37,7 +37,12 @@ pijersi.model.__init = function(){
 
     pijersi.model.const.PLAYER_WHITE = "white";
     pijersi.model.const.PLAYER_BLACK = "black";
- 
+
+    pijersi.model.const.LEGEND_WIN_SCORE = "1";
+    pijersi.model.const.LEGEND_LOSS_SCORE = "0";
+    pijersi.model.const.LEGEND_TIE_SCORE = "½";
+    pijersi.model.const.LEGEND_FAKE_SCORE = " " + pijersi.model.const.LEGEND_WIN_SCORE + "-" + pijersi.model.const.LEGEND_LOSS_SCORE;
+
     // Freeze the sub-module constants
     Object.freeze(pijersi.model.const);
 
@@ -139,7 +144,7 @@ pijersi.model.new_turn = function(){
 
     if ( pijersi.model.credit <= 0 ) {
         pijersi.model.terminated = true;
-        pijersi.model.legend += " 0-0"
+        pijersi.model.legend += pijersi.model.const.LEGEND_FAKE_SCORE;
 
     } else {
         pijersi.model.terminated = false;
@@ -258,7 +263,7 @@ pijersi.model.edit_game = function(){
     
     if ( pijersi.model.credit <= 0 ) {
         pijersi.model.terminated = true;
-        pijersi.model.legend += " 0-0"
+        pijersi.model.legend += pijersi.model.const.LEGEND_FAKE_SCORE;
 
     } else {
         pijersi.model.terminated = false;
@@ -293,7 +298,7 @@ pijersi.model.edit_credit = function(){
     
     if ( pijersi.model.credit <= 0 ) {
         pijersi.model.terminated = true;
-        pijersi.model.legend += " 0-0"
+        pijersi.model.legend += pijersi.model.const.LEGEND_FAKE_SCORE;
 
     } else {
         pijersi.model.terminated = false;
@@ -327,7 +332,7 @@ pijersi.model.edit_player_turn = function(){
     
     if ( pijersi.model.credit <= 0 ) {
         pijersi.model.terminated = true;
-        pijersi.model.legend += " 0-0"
+        pijersi.model.legend += pijersi.model.const.LEGEND_FAKE_SCORE;
 
     } else {
         pijersi.model.terminated = false;
