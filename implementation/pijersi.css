@@ -34,7 +34,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     font-style: normal;
 }
 
-#pijersi-view-grid-container-id {
+#pijersi-view-body-grid-id {
     display: grid;
 
     grid-template-areas:
@@ -214,31 +214,313 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     grid-area:captures;
     display: none;
 
-    height: 5.5vh;
+    height: 10vh;
     width: 100%;
 
     align-self: center;
     justify-self: center;
 }
 
-#pijersi-view-captures-content-id {
+#pijersi-view-captures-grid-id {
     display: grid;
 
-    height: 5.5vh;
+    height: 100%;
     width: 100%;
 
     align-self: center;
     justify-self: center;
 
-    gap: 0.2rem;
+    gap: 0rem;
     padding: 0rem;
-    margin: 0.5rem;
+    margin: 0rem;
     
-    grid-template-areas:
-        'black-rock-1  black-rock-2  black-paper-1  black-paper-2  black-scissors-1  black-scissors-2  black-wise-1  white-rock-1  white-rock-2  white-paper-1  white-paper-2  white-scissors-1  white-scissors-2  white-wise-1'
-        'black-rock-3  black-rock-4  black-paper-3  black-paper-4  black-scissors-3  black-scissors-4  black-wise-2  white-rock-3  white-rock-4  white-paper-3  white-paper-4  white-scissors-3  white-scissors-4  white-wise-2'
-    ;
+    grid-template-areas: 'blacks whites';
 }
+
+#pijersi-view-capture-blacks-id {
+    grid-area:blacks;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+}
+
+#pijersi-view-capture-blacks-grid-id {
+    display: grid;
+
+    height: 100%;
+    width: 100%;
+
+    align-self: center;
+    justify-self: center;
+
+    gap: 0rem;
+    padding: 0rem;
+    margin: 0rem;
+    
+    grid-template-areas: 'black-rocks black-papers black-scissors black-wises';
+}
+
+#pijersi-view-capture-black-rocks-id {
+    grid-area:black-rocks;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+}
+
+#pijersi-view-capture-black-rocks-grid-id {
+    display: grid;
+
+    height: 100%;
+    width: 100%;
+
+    align-self: center;
+    justify-self: center;
+
+    gap: 0.1rem;
+    padding: 0rem;
+    margin: 0.2rem;
+    
+    grid-template-areas: 
+        'black-rock-1 black-rock-2'
+        'black-rock-3 black-rock-4'
+        ;
+}
+
+#pijersi-view-capture-black-papers-id {
+    grid-area:black-papers;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+}
+
+#pijersi-view-capture-black-papers-grid-id {
+    display: grid;
+
+    height: 100%;
+    width: 100%;
+
+    align-self: center;
+    justify-self: center;
+
+    gap: 0.1rem;
+    padding: 0rem;
+    margin: 0.2rem;
+    
+    grid-template-areas: 
+        'black-paper-1 black-paper-2'
+        'black-paper-3 black-paper-4'
+        ;
+}
+
+#pijersi-view-capture-black-scissors-id {
+    grid-area:black-scissors;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+}
+
+#pijersi-view-capture-black-scissors-grid-id {
+    display: grid;
+
+    height: 100%;
+    width: 100%;
+
+    align-self: center;
+    justify-self: center;
+
+    gap: 0.1rem;
+    padding: 0rem;
+    margin: 0.2rem;
+    
+    grid-template-areas: 
+        'black-scissors-1 black-scissors-2'
+        'black-scissors-3 black-scissors-4'
+        ;
+}
+
+#pijersi-view-capture-black-wises-id {
+    grid-area:black-wises;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+}
+
+#pijersi-view-capture-black-wises-grid-id {
+    display: grid;
+
+    height: 100%;
+    width: 100%;
+
+    align-self: center;
+    justify-self: center;
+
+    gap: 0.1rem;
+    padding: 0rem;
+    margin: 0.2rem;
+    
+    grid-template-areas: 
+        'black-wise-1'
+        'black-wise-2'
+        ;
+}
+
+#pijersi-view-capture-whites-id {
+    grid-area:whites;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+}
+
+#pijersi-view-capture-whites-grid-id {
+    display: grid;
+
+    height: 100%;
+    width: 100%;
+
+    align-self: center;
+    justify-self: center;
+
+    gap: 0rem;
+    padding: 0rem;
+    margin: 0rem;
+    
+    grid-template-areas: 'white-rocks white-papers white-scissors white-wises';
+}
+
+#pijersi-view-capture-white-rocks-id {
+    grid-area:white-rocks;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+}
+
+#pijersi-view-capture-white-rocks-grid-id {
+    display: grid;
+
+    height: 100%;
+    width: 100%;
+
+    align-self: center;
+    justify-self: center;
+
+    gap: 0.1rem;
+    padding: 0rem;
+    margin: 0.2rem;
+    
+    grid-template-areas: 
+        'white-rock-1 white-rock-2'
+        'white-rock-3 white-rock-4'
+        ;
+}
+
+#pijersi-view-capture-white-papers-id {
+    grid-area:white-papers;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+}
+
+#pijersi-view-capture-white-papers-grid-id {
+    display: grid;
+
+    height: 100%;
+    width: 100%;
+
+    align-self: center;
+    justify-self: center;
+
+    gap: 0.1rem;
+    padding: 0rem;
+    margin: 0.2rem;
+    
+    grid-template-areas: 
+        'white-paper-1 white-paper-2'
+        'white-paper-3 white-paper-4'
+        ;
+}
+
+#pijersi-view-capture-white-scissors-id {
+    grid-area:white-scissors;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+}
+
+#pijersi-view-capture-white-scissors-grid-id {
+    display: grid;
+
+    height: 100%;
+    width: 100%;
+
+    align-self: center;
+    justify-self: center;
+
+    gap: 0.1rem;
+    padding: 0rem;
+    margin: 0.2rem;
+    
+    grid-template-areas: 
+        'white-scissors-1 white-scissors-2'
+        'white-scissors-3 white-scissors-4'
+        ;
+}
+
+#pijersi-view-capture-white-wises-id {
+    grid-area:white-wises;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+}
+
+#pijersi-view-capture-white-wises-grid-id {
+    display: grid;
+
+    height: 100%;
+    width: 100%;
+
+    align-self: center;
+    justify-self: center;
+
+    gap: 0.1rem;
+    padding: 0rem;
+    margin: 0.2rem;
+    
+    grid-template-areas: 
+        'white-wise-1'
+        'white-wise-2'
+        ;
+}
+
 
 #pijersi-view-capture-black-rock-1-id {
     grid-area:black-rock-1;
