@@ -214,7 +214,231 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     grid-area:captures;
     display: none;
 
-    height: 10vh;
+    height: 5.5vh;
+    width: 100%;
+
+    align-self: center;
+    justify-self: center;
+}
+
+#pijersi-view-captures-content-id {
+    display: grid;
+
+    height: 5.5vh;
+    width: 100%;
+
+    align-self: center;
+    justify-self: center;
+
+    gap: 0.2rem;
+    padding: 0rem;
+    margin: 0.5rem;
+    
+    grid-template-areas:
+        'black-rock-1  black-rock-2  black-paper-1  black-paper-2  black-scissors-1  black-scissors-2  black-wise-1  white-rock-1  white-rock-2  white-paper-1  white-paper-2  white-scissors-1  white-scissors-2  white-wise-1'
+        'black-rock-3  black-rock-4  black-paper-3  black-paper-4  black-scissors-3  black-scissors-4  black-wise-2  white-rock-3  white-rock-4  white-paper-3  white-paper-4  white-scissors-3  white-scissors-4  white-wise-2'
+    ;
+}
+
+#pijersi-view-capture-black-rock-1-id {
+    grid-area:black-rock-1;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+
+    background-image:url(img/rock-black.png);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+#pijersi-view-capture-black-rock-2-id {
+    grid-area:black-rock-2;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+
+    background-image:url(img/rock-black.png);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+#pijersi-view-capture-black-rock-3-id {
+    grid-area:black-rock-3;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+
+    background-image:url(img/rock-black.png);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+#pijersi-view-capture-black-rock-4-id {
+    grid-area:black-rock-4;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+
+    background-image:url(img/rock-black.png);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+#pijersi-view-capture-black-paper-1-id {
+    grid-area:black-paper-1;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+
+    background-image:url(img/paper-black.png);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+#pijersi-view-capture-black-paper-2-id {
+    grid-area:black-paper-2;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+
+    background-image:url(img/paper-black.png);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+#pijersi-view-capture-black-paper-3-id {
+    grid-area:black-paper-3;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+
+    background-image:url(img/paper-black.png);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+#pijersi-view-capture-black-paper-4-id {
+    grid-area:black-paper-4;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+
+    background-image:url(img/paper-black.png);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+#pijersi-view-capture-black-scissors-1-id {
+    grid-area:black-scissors-1;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+
+    background-image:url(img/scissors-black.png);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+#pijersi-view-capture-black-scissors-2-id {
+    grid-area:black-scissors-2;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+
+    background-image:url(img/scissors-black.png);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+#pijersi-view-capture-black-scissors-3-id {
+    grid-area:black-scissors-3;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+
+    background-image:url(img/scissors-black.png);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+#pijersi-view-capture-black-scissors-4-id {
+    grid-area:black-scissors-4;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+
+    background-image:url(img/scissors-black.png);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+#pijersi-view-capture-black-wise-1-id {
+    grid-area:black-wise-1;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
     width: 100%;
 
     background-image:url(img/wise-black.png);
@@ -222,10 +446,249 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     background-position:center;
     background-repeat:no-repeat;
     background-size:contain;
+}
+
+#pijersi-view-capture-black-wise-2-id {
+    grid-area:black-wise-2;
 
     align-self: center;
     justify-self: center;
+
+    height: 100%;
+    width: 100%;
+
+    background-image:url(img/wise-black.png);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
 }
+
+
+#pijersi-view-capture-white-rock-1-id {
+    grid-area:white-rock-1;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+
+    background-image:url(img/rock-white.png);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+#pijersi-view-capture-white-rock-2-id {
+    grid-area:white-rock-2;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+
+    background-image:url(img/rock-white.png);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+#pijersi-view-capture-white-rock-3-id {
+    grid-area:white-rock-3;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+
+    background-image:url(img/rock-white.png);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+#pijersi-view-capture-white-rock-4-id {
+    grid-area:white-rock-4;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+
+    background-image:url(img/rock-white.png);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+#pijersi-view-capture-white-paper-1-id {
+    grid-area:white-paper-1;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+
+    background-image:url(img/paper-white.png);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+#pijersi-view-capture-white-paper-2-id {
+    grid-area:white-paper-2;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+
+    background-image:url(img/paper-white.png);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+#pijersi-view-capture-white-paper-3-id {
+    grid-area:white-paper-3;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+
+    background-image:url(img/paper-white.png);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+#pijersi-view-capture-white-paper-4-id {
+    grid-area:white-paper-4;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+
+    background-image:url(img/paper-white.png);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+#pijersi-view-capture-white-scissors-1-id {
+    grid-area:white-scissors-1;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+
+    background-image:url(img/scissors-white.png);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+#pijersi-view-capture-white-scissors-2-id {
+    grid-area:white-scissors-2;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+
+    background-image:url(img/scissors-white.png);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+#pijersi-view-capture-white-scissors-3-id {
+    grid-area:white-scissors-3;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+
+    background-image:url(img/scissors-white.png);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+#pijersi-view-capture-white-scissors-4-id {
+    grid-area:white-scissors-4;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+
+    background-image:url(img/scissors-white.png);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+#pijersi-view-capture-white-wise-1-id {
+    grid-area:white-wise-1;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+
+    background-image:url(img/wise-white.png);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
+#pijersi-view-capture-white-wise-2-id {
+    grid-area:white-wise-2;
+
+    align-self: center;
+    justify-self: center;
+
+    height: 100%;
+    width: 100%;
+
+    background-image:url(img/wise-white.png);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+}
+
 
 #pijersi-view-credit-id {
     grid-area:credit;
