@@ -47,13 +47,13 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 
 				<div class="pijersi-view-menu-item-style">
 					<input id="pijersi-view-show-captures-id" class="pijersi-view-checkbox-style" type="checkbox" checked="checked" 
-					onclick="pijersi.presenter.show_captures()">
+					onclick="pijersi.presenter.toggle_captures()">
 					<span onclick="pijersi.view.toggle_checkbox('pijersi-view-show-captures-id')">Captures</span>
 				</div>
 				
 				<div class="pijersi-view-menu-item-style">
 					<input id="pijersi-view-show-labels-id" class="pijersi-view-checkbox-style" type="checkbox" checked="checked"
-					onclick="pijersi.presenter.show_labels()">
+					onclick="pijersi.presenter.toggle_labels()">
 					<span onclick="pijersi.view.toggle_checkbox('pijersi-view-show-labels-id')">Labels</span>
 				</div>
 
@@ -75,6 +75,9 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 		<div id="pijersi-view-black-swap-id"></div>
 
 	    <div id="pijersi-view-black-turn-id" onclick="pijersi.presenter.edit_player_turn()"></div>
+
+		<div id="pijersi-view-captures-id"></div>
+
 	</div>		
 
 	<script src="./pijersi.js"></script>

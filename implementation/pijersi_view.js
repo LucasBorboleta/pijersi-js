@@ -45,6 +45,9 @@ pijersi.view.__init = function(){
     pijersi.view.const.BLACK_SWAP = document.getElementById("pijersi-view-black-swap-id");
     pijersi.view.const.WHITE_SWAP = document.getElementById("pijersi-view-white-swap-id");
 
+    pijersi.view.const.CAPTURES = document.getElementById("pijersi-view-captures-id");
+
+
     pijersi.view.const.SHOW_STYLE = "pijersi-view-show-style";
 
     pijersi.view.const.PLAYER_TURN_EDIT_STYLE = "pijersi-view-player-turn-edit-style";
@@ -65,6 +68,7 @@ pijersi.view.__init = function(){
  
     // Init the sub-module variables 
     pijersi.view.menu_showed = false;
+    pijersi.view.captures_showed = false;
 
     // Seal the sub-module
     Object.seal(pijersi.view);
@@ -95,6 +99,31 @@ pijersi.view.show_menu = function(condition){
 
         } else {
             pijersi.view.const.MENU_ITEMS.classList.remove(pijersi.view.const.SHOW_STYLE);
+        }
+
+    } else {
+        pijersi.debug.log_error("unexpected 'condition' = " + condition);
+    }
+};
+
+
+pijersi.view.toggle_captures = function(condition){
+    pijersi.view.captures_showed = ! pijersi.view.captures_showed;
+    pijersi.view.show_captures(pijersi.view.captures_showed);
+};
+
+
+pijersi.view.show_captures = function(condition){
+
+    if ( condition === true || condition === false ) {
+
+        pijersi.view.captures_showed = condition;
+
+        if ( pijersi.view.captures_showed ) {
+            pijersi.view.const.CAPTURES.classList.add(pijersi.view.const.SHOW_STYLE);
+
+        } else {
+            pijersi.view.const.CAPTURES.classList.remove(pijersi.view.const.SHOW_STYLE);
         }
 
     } else {

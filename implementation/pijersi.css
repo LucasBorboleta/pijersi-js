@@ -38,11 +38,13 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     display: grid;
 
     grid-template-areas:
-        'credit       title       title     title   title  title       menu'
-        'board        board       board     board   board  board       board'
-        'white-turn   white-swap  previous  legend  next   black-swap  black-turn';
+        'credit       title       title     title     title     title       menu'
+        'board        board       board     board     board     board       board'
+        'white-turn   white-swap  previous  legend    next      black-swap  black-turn'
+        'captures     captures    captures  captures  captures  captures    captures'
+        ;
 
-    width: 99vw;
+    width: 95vw;
     height: auto;
 
     gap: 0rem;
@@ -109,7 +111,6 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 }
-
 
 .pijersi-view-white-turn-on-style {
     background-image:url(img/white-sun.svg) !important;
@@ -198,7 +199,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 .pijersi-view-black-swap-on {
 
-   background-image:url(img/black-arrows-up-down.svg);
+    background-image:url(img/black-arrows-up-down.svg);
     background-origin:border-box;
     background-position:center;
     background-repeat:no-repeat;
@@ -207,6 +208,23 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 .pijersi-view-black-swap-on:hover {
     background-color:#156082;
+}
+
+#pijersi-view-captures-id {
+    grid-area:captures;
+    display: none;
+
+    height: 10vh;
+    width: 100%;
+
+    background-image:url(img/wise-black.png);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+
+    align-self: center;
+    justify-self: center;
 }
 
 #pijersi-view-credit-id {

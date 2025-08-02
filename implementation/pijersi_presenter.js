@@ -123,12 +123,13 @@ pijersi.presenter.update_player = function(){
 };
 
 
-pijersi.presenter.show_captures = function(){
+pijersi.presenter.toggle_captures = function(){
     pijersi.view.show_menu(false);
+    pijersi.view.toggle_captures();
 };
 
 
-pijersi.presenter.show_labels = function(){
+pijersi.presenter.toggle_labels = function(){
     pijersi.view.show_menu(false);
 };
 
