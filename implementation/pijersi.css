@@ -214,11 +214,12 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     grid-area:captures;
     display: none;
 
-    height: 10vh;
+    height: 8vh;
     width: 100%;
 
-    align-self: center;
-    justify-self: center;
+    justify-content:center;
+
+    margin: 0.2rem;
 }
 
 #pijersi-view-captures-grid-id {
@@ -227,10 +228,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     height: 100%;
     width: 100%;
 
-    align-self: center;
-    justify-self: center;
+    justify-content: center;
 
-    gap: 0rem;
+    gap: 2rem;
     padding: 0rem;
     margin: 0rem;
     
@@ -240,8 +240,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 #pijersi-view-capture-blacks-id {
     grid-area:blacks;
 
-    align-self: center;
-    justify-self: center;
+    justify-content:left;
 
     height: 100%;
     width: 100%;
@@ -253,10 +252,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     height: 100%;
     width: 100%;
 
-    align-self: center;
-    justify-self: center;
-
-    gap: 0rem;
+    gap: 0.2rem;
     padding: 0rem;
     margin: 0rem;
     
@@ -265,9 +261,6 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 #pijersi-view-capture-black-rocks-id {
     grid-area:black-rocks;
-
-    align-self: center;
-    justify-self: center;
 
     height: 100%;
     width: 100%;
@@ -279,12 +272,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     height: 100%;
     width: 100%;
 
-    align-self: center;
-    justify-self: center;
-
-    gap: 0.1rem;
+    gap: 0.2rem;
     padding: 0rem;
-    margin: 0.2rem;
+    margin: 0rem;
     
     grid-template-areas: 
         'black-rock-1 black-rock-2'
@@ -294,9 +284,6 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 #pijersi-view-capture-black-papers-id {
     grid-area:black-papers;
-
-    align-self: center;
-    justify-self: center;
 
     height: 100%;
     width: 100%;
@@ -308,12 +295,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     height: 100%;
     width: 100%;
 
-    align-self: center;
-    justify-self: center;
-
-    gap: 0.1rem;
+    gap: 0.2rem;
     padding: 0rem;
-    margin: 0.2rem;
+    margin: 0rem;
     
     grid-template-areas: 
         'black-paper-1 black-paper-2'
@@ -323,9 +307,6 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 #pijersi-view-capture-black-scissors-id {
     grid-area:black-scissors;
-
-    align-self: center;
-    justify-self: center;
 
     height: 100%;
     width: 100%;
@@ -337,12 +318,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     height: 100%;
     width: 100%;
 
-    align-self: center;
-    justify-self: center;
-
-    gap: 0.1rem;
+    gap: 0.2rem;
     padding: 0rem;
-    margin: 0.2rem;
+    margin: 0rem;
     
     grid-template-areas: 
         'black-scissors-1 black-scissors-2'
@@ -352,9 +330,6 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 #pijersi-view-capture-black-wises-id {
     grid-area:black-wises;
-
-    align-self: center;
-    justify-self: center;
 
     height: 100%;
     width: 100%;
@@ -366,12 +341,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     height: 100%;
     width: 100%;
 
-    align-self: center;
-    justify-self: center;
-
-    gap: 0.1rem;
+    gap: 0.2rem;
     padding: 0rem;
-    margin: 0.2rem;
+    margin: 0rem;
     
     grid-template-areas: 
         'black-wise-1'
@@ -381,9 +353,6 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 #pijersi-view-capture-whites-id {
     grid-area:whites;
-
-    align-self: center;
-    justify-self: center;
 
     height: 100%;
     width: 100%;
@@ -395,10 +364,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     height: 100%;
     width: 100%;
 
-    align-self: center;
-    justify-self: center;
-
-    gap: 0rem;
+    gap: 0.2rem;
     padding: 0rem;
     margin: 0rem;
     
@@ -407,9 +373,6 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 #pijersi-view-capture-white-rocks-id {
     grid-area:white-rocks;
-
-    align-self: center;
-    justify-self: center;
 
     height: 100%;
     width: 100%;
@@ -421,12 +384,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     height: 100%;
     width: 100%;
 
-    align-self: center;
-    justify-self: center;
-
-    gap: 0.1rem;
+    gap: 0.2rem;
     padding: 0rem;
-    margin: 0.2rem;
+    margin: 0rem;
     
     grid-template-areas: 
         'white-rock-1 white-rock-2'
@@ -436,9 +396,6 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 #pijersi-view-capture-white-papers-id {
     grid-area:white-papers;
-
-    align-self: center;
-    justify-self: center;
 
     height: 100%;
     width: 100%;
@@ -450,12 +407,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     height: 100%;
     width: 100%;
 
-    align-self: center;
-    justify-self: center;
-
-    gap: 0.1rem;
+    gap: 0.2rem;
     padding: 0rem;
-    margin: 0.2rem;
+    margin: 0rem;
     
     grid-template-areas: 
         'white-paper-1 white-paper-2'
@@ -465,9 +419,6 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 #pijersi-view-capture-white-scissors-id {
     grid-area:white-scissors;
-
-    align-self: center;
-    justify-self: center;
 
     height: 100%;
     width: 100%;
@@ -479,12 +430,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     height: 100%;
     width: 100%;
 
-    align-self: center;
-    justify-self: center;
-
-    gap: 0.1rem;
+    gap: 0.2rem;
     padding: 0rem;
-    margin: 0.2rem;
+    margin: 0rem;
     
     grid-template-areas: 
         'white-scissors-1 white-scissors-2'
@@ -494,9 +442,6 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 #pijersi-view-capture-white-wises-id {
     grid-area:white-wises;
-
-    align-self: center;
-    justify-self: center;
 
     height: 100%;
     width: 100%;
@@ -508,12 +453,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     height: 100%;
     width: 100%;
 
-    align-self: center;
-    justify-self: center;
-
-    gap: 0.1rem;
+    gap: 0.2rem;
     padding: 0rem;
-    margin: 0.2rem;
+    margin: 0rem;
     
     grid-template-areas: 
         'white-wise-1'
@@ -528,8 +470,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: 100%;
-    width: 100%;
+    height: 2rem;
+    width: 2rem;
 
     background-image:url(img/rock-black.svg);
     background-origin:border-box;
@@ -544,8 +486,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: 100%;
-    width: 100%;
+    height: 2rem;
+    width: 2rem;
 
     background-image:url(img/rock-black.svg);
     background-origin:border-box;
@@ -560,8 +502,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: 100%;
-    width: 100%;
+    height: 2rem;
+    width: 2rem;
 
     background-image:url(img/rock-black.svg);
     background-origin:border-box;
@@ -576,8 +518,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: 100%;
-    width: 100%;
+    height: 2rem;
+    width: 2rem;
 
     background-image:url(img/rock-black.svg);
     background-origin:border-box;
@@ -592,8 +534,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: 100%;
-    width: 100%;
+    height: 2rem;
+    width: 2rem;
 
     background-image:url(img/paper-black.svg);
     background-origin:border-box;
@@ -608,8 +550,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: 100%;
-    width: 100%;
+    height: 2rem;
+    width: 2rem;
 
     background-image:url(img/paper-black.svg);
     background-origin:border-box;
@@ -624,8 +566,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: 100%;
-    width: 100%;
+    height: 2rem;
+    width: 2rem;
 
     background-image:url(img/paper-black.svg);
     background-origin:border-box;
@@ -640,8 +582,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: 100%;
-    width: 100%;
+    height: 2rem;
+    width: 2rem;
 
     background-image:url(img/paper-black.svg);
     background-origin:border-box;
@@ -656,8 +598,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: 100%;
-    width: 100%;
+    height: 2rem;
+    width: 2rem;
 
     background-image:url(img/scissors-black.svg);
     background-origin:border-box;
@@ -672,8 +614,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: 100%;
-    width: 100%;
+    height: 2rem;
+    width: 2rem;
 
     background-image:url(img/scissors-black.svg);
     background-origin:border-box;
@@ -688,8 +630,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: 100%;
-    width: 100%;
+    height: 2rem;
+    width: 2rem;
 
     background-image:url(img/scissors-black.svg);
     background-origin:border-box;
@@ -704,8 +646,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: 100%;
-    width: 100%;
+    height: 2rem;
+    width: 2rem;
 
     background-image:url(img/scissors-black.svg);
     background-origin:border-box;
@@ -720,8 +662,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: 100%;
-    width: 100%;
+    height: 2rem;
+    width: 2rem;
 
     background-image:url(img/wise-black.svg);
     background-origin:border-box;
@@ -736,8 +678,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: 100%;
-    width: 100%;
+    height: 2rem;
+    width: 2rem;
 
     background-image:url(img/wise-black.svg);
     background-origin:border-box;
@@ -753,8 +695,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: 100%;
-    width: 100%;
+    height: 2rem;
+    width: 2rem;
 
     background-image:url(img/rock-white.svg);
     background-origin:border-box;
@@ -769,8 +711,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: 100%;
-    width: 100%;
+    height: 2rem;
+    width: 2rem;
 
     background-image:url(img/rock-white.svg);
     background-origin:border-box;
@@ -785,8 +727,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: 100%;
-    width: 100%;
+    height: 2rem;
+    width: 2rem;
 
     background-image:url(img/rock-white.svg);
     background-origin:border-box;
@@ -801,8 +743,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: 100%;
-    width: 100%;
+    height: 2rem;
+    width: 2rem;
 
     background-image:url(img/rock-white.svg);
     background-origin:border-box;
@@ -817,8 +759,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: 100%;
-    width: 100%;
+    height: 2rem;
+    width: 2rem;
 
     background-image:url(img/paper-white.svg);
     background-origin:border-box;
@@ -833,8 +775,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: 100%;
-    width: 100%;
+    height: 2rem;
+    width: 2rem;
 
     background-image:url(img/paper-white.svg);
     background-origin:border-box;
@@ -849,8 +791,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: 100%;
-    width: 100%;
+    height: 2rem;
+    width: 2rem;
 
     background-image:url(img/paper-white.svg);
     background-origin:border-box;
@@ -865,8 +807,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: 100%;
-    width: 100%;
+    height: 2rem;
+    width: 2rem;
 
     background-image:url(img/paper-white.svg);
     background-origin:border-box;
@@ -881,8 +823,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: 100%;
-    width: 100%;
+    height: 2rem;
+    width: 2rem;
 
     background-image:url(img/scissors-white.svg);
     background-origin:border-box;
@@ -897,8 +839,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: 100%;
-    width: 100%;
+    height: 2rem;
+    width: 2rem;
 
     background-image:url(img/scissors-white.svg);
     background-origin:border-box;
@@ -913,8 +855,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: 100%;
-    width: 100%;
+    height: 2rem;
+    width: 2rem;
 
     background-image:url(img/scissors-white.svg);
     background-origin:border-box;
@@ -929,8 +871,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: 100%;
-    width: 100%;
+    height: 2rem;
+    width: 2rem;
 
     background-image:url(img/scissors-white.svg);
     background-origin:border-box;
@@ -945,8 +887,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: 100%;
-    width: 100%;
+    height: 2rem;
+    width: 2rem;
 
     background-image:url(img/wise-white.svg);
     background-origin:border-box;
@@ -961,8 +903,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: 100%;
-    width: 100%;
+    height: 2rem;
+    width: 2rem;
 
     background-image:url(img/wise-white.svg);
     background-origin:border-box;
