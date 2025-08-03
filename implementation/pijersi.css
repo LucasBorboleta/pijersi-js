@@ -16,13 +16,20 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 /* --- PIJERSI-BEGIN: grid-container  --- */
 
 :root {
-  --cube-size: 1.25em;
   --font-size: 15px;
+  --board-height: 70vh;
+
+  --button-size: 3rem;
+
+  --captures-margin: 1rem;
+  --captures-by-color-gap: 0.5rem;
+  --captures-by-type-gap: 0.2rem;
+  --captures-cube-size: 1.25em;
 }
 
 * {
-    margin: 0rem;
-    padding: 0rem;
+    margin:0;
+    padding:0;
     box-sizing: border-box;
 }
 
@@ -53,9 +60,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
         'captures     captures    captures  captures  captures  captures    captures'
         ;
 
-    gap: 0rem;
-    padding: 1rem;
-    margin: 0rem;
+    gap:0;
+    padding:0;
+    margin:0;
 
     width: 100%;
     height: 100%;
@@ -72,7 +79,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     background-repeat:no-repeat;
     background-size:contain;
 
-    height: 70vh;
+    height: var(--board-height);
  }
 
 #pijersi-view-black-turn-id {
@@ -84,8 +91,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     background-repeat:no-repeat;
     background-size:contain;
 
-    width: 3rem;
-    height: 3rem;
+    width: var(--button-size);
+    height: var(--button-size);
 
     align-self: center;
     justify-self: center;
@@ -104,8 +111,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     background-repeat:no-repeat;
     background-size:contain;
 
-    width: 3rem;
-    height: 3rem;
+    width: var(--button-size);
+    height: var(--button-size);
 
     align-self: center;
     justify-self: center;
@@ -122,8 +129,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 #pijersi-view-show-previous-turn-id {
     grid-area:previous;
 
-    width: 3rem;
-    height: 3rem;
+    width: var(--button-size);
+    height: var(--button-size);
 
     align-self: center;
     justify-self: center;
@@ -144,8 +151,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 #pijersi-view-show-next-turn-id {
     grid-area:next;
 
-    width: 3rem;
-    height: 3rem;
+    width: var(--button-size);
+    height: var(--button-size);
 
     align-self: center;
     justify-self: center;
@@ -166,8 +173,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 #pijersi-view-white-swap-id {
     grid-area:white-swap;
 
-    width: 3rem;
-    height: 3rem;
+    width: var(--button-size);
+    height: var(--button-size);
 
     align-self: center;
     justify-self: center;
@@ -189,8 +196,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 #pijersi-view-black-swap-id {
     grid-area:black-swap;
 
-    width: 3rem;
-    height: 3rem;
+    width: var(--button-size);
+    height: var(--button-size);
 
     align-self: center;
     justify-self: center;
@@ -215,7 +222,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
     justify-content:center;
 
-    margin-top: 1rem;
+    margin: var(--captures-margin)
 }
 
 #pijersi-view-captures-grid-id {
@@ -225,9 +232,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
     justify-content:space-between;
 
-    gap: 0rem;
-    padding: 0rem;
-    margin: 0rem;
+    gap:0;
+    padding:0;
+    margin:0;
 }
 
 #pijersi-view-capture-blacks-id {
@@ -239,9 +246,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
  
     grid-template-areas: 'black-rocks black-papers black-scissors black-wises';
 
-    gap: 0.5rem;
-    padding: 0rem;
-    margin: 0rem;
+    gap: var(--captures-by-color-gap);
+    padding:0;
+    margin:0;
 }
 
 #pijersi-view-capture-black-rocks-id {
@@ -256,9 +263,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
         'black-rock-3 black-rock-4'
         ;
 
-    gap: 0.2rem;
-    padding: 0rem;
-    margin: 0rem;
+    gap: var(--captures-by-type-gap);
+    padding:0;
+    margin:0;
  }
 
 #pijersi-view-capture-black-papers-id {
@@ -273,9 +280,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
         'black-paper-3 black-paper-4'
         ;
 
-    gap: 0.2rem;
-    padding: 0rem;
-    margin: 0rem;
+    gap: var(--captures-by-type-gap);
+    padding:0;
+    margin:0;
 }
 
 #pijersi-view-capture-black-scissors-id {
@@ -290,9 +297,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
         'black-scissors-3 black-scissors-4'
         ;
 
-    gap: 0.2rem;
-    padding: 0rem;
-    margin: 0rem;
+    gap: var(--captures-by-type-gap);
+    padding:0;
+    margin:0;
 }
 
 #pijersi-view-capture-black-wises-id {
@@ -307,9 +314,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
         'black-wise-2'
         ;
 
-    gap: 0.2rem;
-    padding: 0rem;
-    margin: 0rem;
+    gap: var(--captures-by-type-gap);
+    padding:0;
+    margin:0;
 }
 
 #pijersi-view-capture-whites-id {
@@ -321,9 +328,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     
     grid-template-areas: 'white-rocks white-papers white-scissors white-wises';
 
-    gap: 0.5rem;
-    padding: 0rem;
-    margin: 0rem;
+    gap: var(--captures-by-color-gap);
+    padding:0;
+    margin:0;
 }
 
 #pijersi-view-capture-white-rocks-id {
@@ -338,9 +345,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
         'white-rock-3 white-rock-4'
         ;
 
-    gap: 0.2rem;
-    padding: 0rem;
-    margin: 0rem;
+    gap: var(--captures-by-type-gap);
+    padding:0;
+    margin:0;
 }
 
 #pijersi-view-capture-white-papers-id {
@@ -355,9 +362,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
         'white-paper-3 white-paper-4'
         ;
 
-    gap: 0.2rem;
-    padding: 0rem;
-    margin: 0rem;
+    gap: var(--captures-by-type-gap);
+    padding:0;
+    margin:0;
 }
 
 #pijersi-view-capture-white-scissors-id {
@@ -372,9 +379,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
         'white-scissors-3 white-scissors-4'
         ;
 
-    gap: 0.2rem;
-    padding: 0rem;
-    margin: 0rem;
+    gap: var(--captures-by-type-gap);
+    padding:0;
+    margin:0;
 }
 
 #pijersi-view-capture-white-wises-id {
@@ -389,9 +396,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
         'white-wise-2'
         ;
 
-    gap: 0.2rem;
-    padding: 0rem;
-    margin: 0rem;
+    gap: var(--captures-by-type-gap);
+    padding:0;
+    margin:0;
 }
 
 
@@ -401,8 +408,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: var(--cube-size);
-    width: var(--cube-size);
+    height: var(--captures-cube-size);
+    width: var(--captures-cube-size);
 
     background-image:url(img/rock-black.svg);
     background-origin:border-box;
@@ -417,8 +424,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: var(--cube-size);
-    width: var(--cube-size);
+    height: var(--captures-cube-size);
+    width: var(--captures-cube-size);
 
     background-image:url(img/rock-black.svg);
     background-origin:border-box;
@@ -433,8 +440,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: var(--cube-size);
-    width: var(--cube-size);
+    height: var(--captures-cube-size);
+    width: var(--captures-cube-size);
 
     background-image:url(img/rock-black.svg);
     background-origin:border-box;
@@ -449,8 +456,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: var(--cube-size);
-    width: var(--cube-size);
+    height: var(--captures-cube-size);
+    width: var(--captures-cube-size);
 
     background-image:url(img/rock-black.svg);
     background-origin:border-box;
@@ -465,8 +472,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: var(--cube-size);
-    width: var(--cube-size);
+    height: var(--captures-cube-size);
+    width: var(--captures-cube-size);
 
     background-image:url(img/paper-black.svg);
     background-origin:border-box;
@@ -481,8 +488,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: var(--cube-size);
-    width: var(--cube-size);
+    height: var(--captures-cube-size);
+    width: var(--captures-cube-size);
 
     background-image:url(img/paper-black.svg);
     background-origin:border-box;
@@ -497,8 +504,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: var(--cube-size);
-    width: var(--cube-size);
+    height: var(--captures-cube-size);
+    width: var(--captures-cube-size);
 
     background-image:url(img/paper-black.svg);
     background-origin:border-box;
@@ -513,8 +520,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: var(--cube-size);
-    width: var(--cube-size);
+    height: var(--captures-cube-size);
+    width: var(--captures-cube-size);
 
     background-image:url(img/paper-black.svg);
     background-origin:border-box;
@@ -529,8 +536,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: var(--cube-size);
-    width: var(--cube-size);
+    height: var(--captures-cube-size);
+    width: var(--captures-cube-size);
 
     background-image:url(img/scissors-black.svg);
     background-origin:border-box;
@@ -545,8 +552,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: var(--cube-size);
-    width: var(--cube-size);
+    height: var(--captures-cube-size);
+    width: var(--captures-cube-size);
 
     background-image:url(img/scissors-black.svg);
     background-origin:border-box;
@@ -561,8 +568,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: var(--cube-size);
-    width: var(--cube-size);
+    height: var(--captures-cube-size);
+    width: var(--captures-cube-size);
 
     background-image:url(img/scissors-black.svg);
     background-origin:border-box;
@@ -577,8 +584,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: var(--cube-size);
-    width: var(--cube-size);
+    height: var(--captures-cube-size);
+    width: var(--captures-cube-size);
 
     background-image:url(img/scissors-black.svg);
     background-origin:border-box;
@@ -593,8 +600,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: var(--cube-size);
-    width: var(--cube-size);
+    height: var(--captures-cube-size);
+    width: var(--captures-cube-size);
 
     background-image:url(img/wise-black.svg);
     background-origin:border-box;
@@ -609,8 +616,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: var(--cube-size);
-    width: var(--cube-size);
+    height: var(--captures-cube-size);
+    width: var(--captures-cube-size);
 
     background-image:url(img/wise-black.svg);
     background-origin:border-box;
@@ -626,8 +633,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: var(--cube-size);
-    width: var(--cube-size);
+    height: var(--captures-cube-size);
+    width: var(--captures-cube-size);
 
     background-image:url(img/rock-white.svg);
     background-origin:border-box;
@@ -642,8 +649,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: var(--cube-size);
-    width: var(--cube-size);
+    height: var(--captures-cube-size);
+    width: var(--captures-cube-size);
 
     background-image:url(img/rock-white.svg);
     background-origin:border-box;
@@ -658,8 +665,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: var(--cube-size);
-    width: var(--cube-size);
+    height: var(--captures-cube-size);
+    width: var(--captures-cube-size);
 
     background-image:url(img/rock-white.svg);
     background-origin:border-box;
@@ -674,8 +681,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: var(--cube-size);
-    width: var(--cube-size);
+    height: var(--captures-cube-size);
+    width: var(--captures-cube-size);
 
     background-image:url(img/rock-white.svg);
     background-origin:border-box;
@@ -690,8 +697,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: var(--cube-size);
-    width: var(--cube-size);
+    height: var(--captures-cube-size);
+    width: var(--captures-cube-size);
 
     background-image:url(img/paper-white.svg);
     background-origin:border-box;
@@ -706,8 +713,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: var(--cube-size);
-    width: var(--cube-size);
+    height: var(--captures-cube-size);
+    width: var(--captures-cube-size);
 
     background-image:url(img/paper-white.svg);
     background-origin:border-box;
@@ -722,8 +729,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: var(--cube-size);
-    width: var(--cube-size);
+    height: var(--captures-cube-size);
+    width: var(--captures-cube-size);
 
     background-image:url(img/paper-white.svg);
     background-origin:border-box;
@@ -738,8 +745,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: var(--cube-size);
-    width: var(--cube-size);
+    height: var(--captures-cube-size);
+    width: var(--captures-cube-size);
 
     background-image:url(img/paper-white.svg);
     background-origin:border-box;
@@ -754,8 +761,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: var(--cube-size);
-    width: var(--cube-size);
+    height: var(--captures-cube-size);
+    width: var(--captures-cube-size);
 
     background-image:url(img/scissors-white.svg);
     background-origin:border-box;
@@ -770,8 +777,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: var(--cube-size);
-    width: var(--cube-size);
+    height: var(--captures-cube-size);
+    width: var(--captures-cube-size);
 
     background-image:url(img/scissors-white.svg);
     background-origin:border-box;
@@ -786,8 +793,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: var(--cube-size);
-    width: var(--cube-size);
+    height: var(--captures-cube-size);
+    width: var(--captures-cube-size);
 
     background-image:url(img/scissors-white.svg);
     background-origin:border-box;
@@ -802,8 +809,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: var(--cube-size);
-    width: var(--cube-size);
+    height: var(--captures-cube-size);
+    width: var(--captures-cube-size);
 
     background-image:url(img/scissors-white.svg);
     background-origin:border-box;
@@ -818,8 +825,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: var(--cube-size);
-    width: var(--cube-size);
+    height: var(--captures-cube-size);
+    width: var(--captures-cube-size);
 
     background-image:url(img/wise-white.svg);
     background-origin:border-box;
@@ -834,8 +841,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
 
-    height: var(--cube-size);
-    width: var(--cube-size);
+    height: var(--captures-cube-size);
+    width: var(--captures-cube-size);
 
     background-image:url(img/wise-white.svg);
     background-origin:border-box;
@@ -856,7 +863,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
     text-align: center;
 
-    margin: 0rem;
+    margin:0;
     padding: 0.7rem;
 
     border-style: solid;
@@ -902,8 +909,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 #pijersi-view-menu-id {
     grid-area:menu;
 
-    width: 3rem;
-    height: 3rem;
+    width: var(--button-size);
+    height: var(--button-size);
 
     align-self: center;
     justify-self: center;
@@ -916,8 +923,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     background-repeat:no-repeat;
     background-size:contain;
 
-    width: 3rem;
-    height: 3rem;
+    width: var(--button-size);
+    height: var(--button-size);
 }
 
 #pijersi-view-menu-button-id:hover, #pijersi-view-menu-button-id:focus {
