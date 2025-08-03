@@ -67,7 +67,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     background-repeat:no-repeat;
     background-size:contain;
 
-    height: 80vh;
+    height: 75vh;
     width: 100%;
  }
 
@@ -211,7 +211,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
     justify-content:center;
 
-    margin: 0.2rem;
+    margin-top: 1rem;
 }
 
 #pijersi-view-captures-grid-id {
