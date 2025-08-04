@@ -16,15 +16,22 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 /* --- PIJERSI-BEGIN: grid-container  --- */
 
 :root {
-  --font-size: 15px;
-  --board-height: 70vh;
+    --font-size: 15px;
 
-  --button-size: 3rem;
+    --board-height: 70vh;
 
-  --captures-margin: 1rem;
-  --captures-by-color-gap: 0.5rem;
-  --captures-by-type-gap: 0.2rem;
-  --captures-cube-size: 1.25em;
+    --button-size: 3rem;
+
+    --title-width: 8rem;
+    --legend-width: 8rem;
+
+    --credit-padding: 0.7rem;
+    --credit-border-width: 0.1rem;
+
+    --captures-margin: 1rem;
+    --captures-by-color-gap: 0.5rem;
+    --captures-by-type-gap: 0.2rem;
+    --captures-cube-size: 1.25em;
 }
 
 * {
@@ -864,10 +871,10 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     text-align: center;
 
     margin:0;
-    padding: 0.7rem;
+    padding: var(--credit-padding);
 
     border-style: solid;
-    border-width: 0.1rem;
+    border-width: var(--credit-border-width);
     border-color: black;
  }
 
@@ -881,7 +888,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
  
     align-self: center;
     justify-self: center;
-   
+ 
+    width: var(--title-width);
+  
     font-size: var(--font-size);
     font-weight:bold;
 
@@ -896,8 +905,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     align-self: center;
     justify-self: center;
      
-    width: 8rem;
-      
+    width: var(--legend-width);
+       
     font-size: var(--font-size);
     font-weight:bold;
 
