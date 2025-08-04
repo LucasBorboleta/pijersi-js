@@ -50,7 +50,7 @@ pijersi.presenter.update_mode = function(){
  
     const mode = pijersi.model.get_mode();
 
-    if ( mode === pijersi.model.const.MODE_RUNNING ) {
+    if ( mode === pijersi.model.const.MODE_RUN ) {
         pijersi.view.show_next_turn(false);
         pijersi.view.show_previous_turn(false);
 
@@ -62,7 +62,7 @@ pijersi.presenter.update_mode = function(){
         pijersi.view.show_white_swap(false);
         pijersi.view.show_black_swap(false);
 
-    } else if ( mode === pijersi.model.const.MODE_REVIEWING ) {
+    } else if ( mode === pijersi.model.const.MODE_REVIEW ) {
         pijersi.view.show_next_turn(true);
         pijersi.view.show_previous_turn(true);	
 
@@ -74,7 +74,7 @@ pijersi.presenter.update_mode = function(){
         pijersi.view.show_white_swap(false);
         pijersi.view.show_black_swap(false);
 
-    } else if ( mode === pijersi.model.const.MODE_EDITING ) {
+    } else if ( mode === pijersi.model.const.MODE_EDIT ) {
         pijersi.view.show_next_turn(false);
         pijersi.view.show_previous_turn(false);
 
@@ -145,7 +145,7 @@ pijersi.presenter.new_game = function(){
 pijersi.presenter.play_game = function(){
     if ( pijersi.view.menu_showed ) return;
 
-    if ( pijersi.model.get_mode() !== pijersi.model.const.MODE_RUNNING ) return;
+    if ( pijersi.model.get_mode() !== pijersi.model.const.MODE_RUN ) return;
 
     pijersi.model.new_turn();
     pijersi.presenter.update_all();
@@ -163,7 +163,7 @@ pijersi.presenter.stop_review_game = function(){
 pijersi.presenter.show_next_turn = function(){
     if ( pijersi.view.menu_showed ) return;
 
-    if ( pijersi.model.get_mode() !== pijersi.model.const.MODE_REVIEWING ) return;
+    if ( pijersi.model.get_mode() !== pijersi.model.const.MODE_REVIEW ) return;
 
     pijersi.model.goto_next_turn();
     pijersi.presenter.update_all();
@@ -173,7 +173,7 @@ pijersi.presenter.show_next_turn = function(){
 pijersi.presenter.show_previous_turn = function(){
     if ( pijersi.view.menu_showed ) return;
 
-    if ( pijersi.model.get_mode() !== pijersi.model.const.MODE_REVIEWING ) return;
+    if ( pijersi.model.get_mode() !== pijersi.model.const.MODE_REVIEW ) return;
     
     pijersi.model.goto_previous_turn();
     pijersi.presenter.update_all();
@@ -199,7 +199,7 @@ pijersi.presenter.edit_game = function(){
 pijersi.presenter.edit_credit = function(){
     if ( pijersi.view.menu_showed ) return;
 
-    if ( pijersi.model.get_mode() !== pijersi.model.const.MODE_EDITING ) return;
+    if ( pijersi.model.get_mode() !== pijersi.model.const.MODE_EDIT ) return;
 
     pijersi.model.edit_credit();
     pijersi.presenter.update_all();
@@ -209,7 +209,7 @@ pijersi.presenter.edit_credit = function(){
 pijersi.presenter.edit_player_turn = function(){
     if ( pijersi.view.menu_showed ) return;
 
-    if ( pijersi.model.get_mode() !== pijersi.model.const.MODE_EDITING ) return;
+    if ( pijersi.model.get_mode() !== pijersi.model.const.MODE_EDIT ) return;
 
     pijersi.model.edit_player_turn();
     pijersi.presenter.update_all();
