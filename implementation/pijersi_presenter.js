@@ -174,7 +174,7 @@ pijersi.presenter.show_previous_turn = function(){
     if ( pijersi.view.menu_showed ) return;
 
     if ( pijersi.model.get_mode() !== pijersi.model.const.MODE_REVIEW ) return;
-    
+       
     pijersi.model.goto_previous_turn();
     pijersi.presenter.update_all();
 };
@@ -214,4 +214,23 @@ pijersi.presenter.edit_player_turn = function(){
     pijersi.model.edit_player_turn();
     pijersi.presenter.update_all();
 };
+
+
+pijersi.presenter.swap_whites = function(){
+    if ( pijersi.view.menu_showed ) return;
+
+    if ( pijersi.model.get_mode() !== pijersi.model.const.MODE_EDIT ) return;
+
+    console.log("pijersi.presenter.swap_whites: NOT-IMPLEMENTED");
+};
+
+
+pijersi.presenter.swap_blacks = function(){
+    if ( pijersi.view.menu_showed ) return;
+
+    if ( pijersi.model.get_mode() !== pijersi.model.const.MODE_EDIT ) return;
+
+    console.log("pijersi.presenter.swap_blacks: NOT-IMPLEMENTED");
+};
+
 ///////////////////////////////////////////////////////////////////////////////
