@@ -39,11 +39,8 @@ pijersi.view.__init = function(){
     pijersi.view.const.BLACK_TURN = document.getElementById("pijersi-view-black-turn-id");
     pijersi.view.const.WHITE_TURN = document.getElementById("pijersi-view-white-turn-id");
 
-    pijersi.view.const.NEXT_TURN = document.getElementById("pijersi-view-show-next-turn-id");
-    pijersi.view.const.PREVIOUS_TURN = document.getElementById("pijersi-view-show-previous-turn-id");
-
-    pijersi.view.const.BLACK_SWAP = document.getElementById("pijersi-view-black-swap-id");
-    pijersi.view.const.WHITE_SWAP = document.getElementById("pijersi-view-white-swap-id");
+    pijersi.view.const.LEFT_PROXY = document.getElementById("pijersi-view-left-proxy-button-id");
+    pijersi.view.const.RIGHT_PROXY = document.getElementById("pijersi-view-right-proxy-button-id");
 
     pijersi.view.const.CAPTURES = document.getElementById("pijersi-view-captures-id");
 
@@ -68,6 +65,11 @@ pijersi.view.__init = function(){
     // Init the sub-module variables 
     pijersi.view.menu_showed = false;
     pijersi.view.captures_showed = false;
+
+    pijersi.view.show_previous_showed = false;
+    pijersi.view.show_next_showed = false;
+    pijersi.view.swap_blacks_showed = false;
+    pijersi.view.swap_whites_showed = false;
 
     // Seal the sub-module
     Object.seal(pijersi.view);
@@ -228,14 +230,14 @@ pijersi.view.enable_white_turn = function(condition){
 
 pijersi.view.show_next_turn = function(condition){
     if ( condition === true || condition === false ) {
+        
+        pijersi.view.show_next_showed = condition;
 
-        if ( condition ) {
-            pijersi.view.const.NEXT_TURN.classList.add(pijersi.view.const.SHOW_STYLE);
-            pijersi.view.const.NEXT_TURN.classList.add(pijersi.view.const.SHOW_NEXT_ON_STYLE);
+        if ( pijersi.view.show_next_showed ) {
+            pijersi.view.const.RIGHT_PROXY.classList.add(pijersi.view.const.SHOW_NEXT_ON_STYLE);
 
         } else {
-            pijersi.view.const.NEXT_TURN.classList.remove(pijersi.view.const.SHOW_STYLE);
-            pijersi.view.const.NEXT_TURN.classList.remove(pijersi.view.const.SHOW_NEXT_ON_STYLE);
+            pijersi.view.const.RIGHT_PROXY.classList.remove(pijersi.view.const.SHOW_NEXT_ON_STYLE);
         }
 
     } else {
@@ -247,14 +249,14 @@ pijersi.view.show_next_turn = function(condition){
 pijersi.view.show_previous_turn = function(condition){
     if ( condition === true || condition === false ) {
 
-        if ( condition ) {
-            pijersi.view.const.PREVIOUS_TURN.classList.add(pijersi.view.const.SHOW_STYLE);
-            pijersi.view.const.PREVIOUS_TURN.classList.add(pijersi.view.const.SHOW_PREVIOUS_ON_STYLE);
+        pijersi.view.show_previous_showed = condition;
+
+        if ( pijersi.view.show_previous_showed ) {
+            pijersi.view.const.LEFT_PROXY.classList.add(pijersi.view.const.SHOW_PREVIOUS_ON_STYLE);
 
         } else {
-            pijersi.view.const.PREVIOUS_TURN.classList.remove(pijersi.view.const.SHOW_STYLE);
-            pijersi.view.const.PREVIOUS_TURN.classList.remove(pijersi.view.const.SHOW_PREVIOUS_ON_STYLE);
-       }
+            pijersi.view.const.LEFT_PROXY.classList.remove(pijersi.view.const.SHOW_PREVIOUS_ON_STYLE);
+        }
 
     } else {
         pijersi.debug.log_error("unexpected 'condition' = " + condition);
@@ -264,14 +266,14 @@ pijersi.view.show_previous_turn = function(condition){
 
 pijersi.view.show_white_swap = function(condition){
     if ( condition === true || condition === false ) {
+        
+        pijersi.view.swap_whites_showed = condition;
 
-        if ( condition ) {
-            pijersi.view.const.WHITE_SWAP.classList.add(pijersi.view.const.SHOW_STYLE);
-            pijersi.view.const.WHITE_SWAP.classList.add(pijersi.view.const.WHITE_SWAP_ON_STYLE);
+        if ( pijersi.view.swap_whites_showed ) {
+            pijersi.view.const.RIGHT_PROXY.classList.add(pijersi.view.const.WHITE_SWAP_ON_STYLE);
 
         } else {
-            pijersi.view.const.WHITE_SWAP.classList.remove(pijersi.view.const.SHOW_STYLE);
-            pijersi.view.const.WHITE_SWAP.classList.remove(pijersi.view.const.WHITE_SWAP_ON_STYLE);
+            pijersi.view.const.RIGHT_PROXY.classList.remove(pijersi.view.const.WHITE_SWAP_ON_STYLE);
         }
 
     } else {
@@ -282,14 +284,14 @@ pijersi.view.show_white_swap = function(condition){
 
 pijersi.view.show_black_swap = function(condition){
     if ( condition === true || condition === false ) {
+        
+        pijersi.view.swap_blacks_showed = condition;
 
-        if ( condition ) {
-            pijersi.view.const.BLACK_SWAP.classList.add(pijersi.view.const.SHOW_STYLE);
-            pijersi.view.const.BLACK_SWAP.classList.add(pijersi.view.const.BLACK_SWAP_ON_STYLE);
+        if ( pijersi.view.swap_blacks_showed ) {
+            pijersi.view.const.LEFT_PROXY.classList.add(pijersi.view.const.BLACK_SWAP_ON_STYLE);
 
         } else {
-            pijersi.view.const.BLACK_SWAP.classList.remove(pijersi.view.const.SHOW_STYLE);
-            pijersi.view.const.BLACK_SWAP.classList.remove(pijersi.view.const.BLACK_SWAP_ON_STYLE);
+            pijersi.view.const.LEFT_PROXY.classList.remove(pijersi.view.const.BLACK_SWAP_ON_STYLE);
         }
 
     } else {
@@ -297,4 +299,31 @@ pijersi.view.show_black_swap = function(condition){
     }
 };
 
+
+pijersi.view.click_right_proxy = function(){
+
+    if ( pijersi.view.show_next_showed ) {
+        pijersi.presenter.show_next_turn();
+
+    } else if ( pijersi.view.swap_whites_showed ) {
+        pijersi.presenter.swap_whites();
+        
+    } else {
+        return;
+    }
+};
+
+
+pijersi.view.click_left_proxy = function(){
+
+    if ( pijersi.view.show_previous_showed ) {
+        pijersi.presenter.show_previous_turn();
+
+    } else if ( pijersi.view.swap_blacks_showed ) {
+        pijersi.presenter.swap_blacks();
+        
+    } else {
+        return;
+    }
+};
 ///////////////////////////////////////////////////////////////////////////////

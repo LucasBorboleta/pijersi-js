@@ -86,10 +86,10 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     display: grid;
 
     grid-template-areas:
-        'credit       title                title     title                 menu'
-        'board        board                board     board                 board'
-        'white-turn   left-virtual-button  legend    right-virtual-button  black-turn'
-        'captures     captures             captures  captures              captures'
+        'credit       title       title     title        menu'
+        'board        board       board     board        board'
+        'white-turn   left-proxy  legend    right-proxy  black-turn'
+        'captures     captures    captures  captures     captures'
         ;
 
     gap:0;
@@ -273,19 +273,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     background-color: var(--pijersi-view-button-hover-background-color);
 }
 
-#pijersi-view-left-virtual-button-id {
-    grid-area:left-virtual-button;
-
-    width: var(--pijersi-view-button-size);
-    height: var(--pijersi-view-button-size);
-
-    align-self: center;
-    justify-self: center;
-}
-
-#pijersi-view-show-previous-turn-id {
-    grid-area:left-virtual-button;
-    display: none;
+#pijersi-view-left-proxy-button-id {
+    grid-area:left-proxy;
 
     width: var(--pijersi-view-button-size);
     height: var(--pijersi-view-button-size);
@@ -306,19 +295,21 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     background-color: var(--pijersi-view-button-hover-background-color);
 }
 
-#pijersi-view-right-virtual-button-id {
-    grid-area:right-virtual-button;
+.pijersi-view-black-swap-on-syle {
 
-    width: var(--pijersi-view-button-size);
-    height: var(--pijersi-view-button-size);
-
-    align-self: center;
-    justify-self: center;
+    background-image:url(img/black-arrows-up-down.svg);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
 }
 
-#pijersi-view-show-next-turn-id {
-    grid-area:right-virtual-button;
-    display: none;
+.pijersi-view-black-swap-on-syle:hover {
+    background-color: var(--pijersi-view-button-hover-background-color);
+}
+
+#pijersi-view-right-proxy-button-id {
+    grid-area:right-proxy;
 
     width: var(--pijersi-view-button-size);
     height: var(--pijersi-view-button-size);
@@ -339,17 +330,6 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     background-color: var(--pijersi-view-button-hover-background-color);
 }
 
-#pijersi-view-white-swap-id {
-    grid-area:right-virtual-button;
-    display: none;
-
-    width: var(--pijersi-view-button-size);
-    height: var(--pijersi-view-button-size);
-
-    align-self: center;
-    justify-self: center;
-}
-
 .pijersi-view-white-swap-on-syle {
     background-image:url(img/white-arrows-up-down.svg);
     background-origin:border-box;
@@ -359,30 +339,6 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 }
 
 .pijersi-view-white-swap-on-syle:hover {
-    background-color: var(--pijersi-view-button-hover-background-color);
-}
-
-#pijersi-view-black-swap-id {
-    grid-area:left-virtual-button;
-    display: none;
-
-    width: var(--pijersi-view-button-size);
-    height: var(--pijersi-view-button-size);
-
-    align-self: center;
-    justify-self: center;
-}
-
-.pijersi-view-black-swap-on-syle {
-
-    background-image:url(img/black-arrows-up-down.svg);
-    background-origin:border-box;
-    background-position:center;
-    background-repeat:no-repeat;
-    background-size:contain;
-}
-
-.pijersi-view-black-swap-on-syle:hover {
     background-color: var(--pijersi-view-button-hover-background-color);
 }
 
