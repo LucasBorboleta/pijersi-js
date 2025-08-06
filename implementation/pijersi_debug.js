@@ -28,11 +28,11 @@ pijersi.debug.__init = function(){
     pijersi.debug.const = {};
     pijersi.debug.const.TITLE_DEFAULT = document.title;
     pijersi.debug.const.ERROR_ICON = "\u26A0";
- 
+
     // Freeze the sub-module constants
     Object.freeze(pijersi.debug.const);
 
-    // Init the sub-module variables 
+    // Init the sub-module variables
     pijersi.debug.error_count = 0;
 
     // Seal the sub-module

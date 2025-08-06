@@ -36,7 +36,7 @@ pijersi.presenter.__init = function(){
 
 
 pijersi.presenter.update_all = function(){
-    
+
     pijersi.presenter.update_mode();
 
     pijersi.presenter.update_title();
@@ -47,7 +47,7 @@ pijersi.presenter.update_all = function(){
 
 
 pijersi.presenter.update_mode = function(){
- 
+
     const mode = pijersi.model.get_mode();
 
     if ( mode === pijersi.model.const.MODE_RUN ) {
@@ -150,7 +150,7 @@ pijersi.presenter.play_game = function(){
     pijersi.model.new_turn();
     pijersi.presenter.update_all();
 };
-        
+
 
 pijersi.presenter.stop_review_game = function(){
     pijersi.view.show_menu(false);
@@ -158,7 +158,7 @@ pijersi.presenter.stop_review_game = function(){
     pijersi.model.stop_review_game();
     pijersi.presenter.update_all();
 };
-        
+
 
 pijersi.presenter.show_next_turn = function(){
     if ( pijersi.view.menu_showed ) return;
@@ -174,7 +174,7 @@ pijersi.presenter.show_previous_turn = function(){
     if ( pijersi.view.menu_showed ) return;
 
     if ( pijersi.model.get_mode() !== pijersi.model.const.MODE_REVIEW ) return;
-       
+
     pijersi.model.goto_previous_turn();
     pijersi.presenter.update_all();
 };
@@ -186,11 +186,11 @@ pijersi.presenter.resume_game = function(){
     pijersi.model.resume_game();
     pijersi.presenter.update_all();
 };
-        
+
 
 pijersi.presenter.edit_game = function(){
     pijersi.view.show_menu(false);
-    
+
     pijersi.model.edit_game();
     pijersi.presenter.update_all();
 };

@@ -41,7 +41,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     --pijersi-view-menu-items-shadow: 0.5em 0.5em 1.5em black;
     --pijersi-view-menu-items-background-color: var(--pijersi-color-blue);
     --pijersi-view-menu-item-hover-background-color: var(--pijersi-color-brown);
-    
+
     --pijersi-view-menu-item-font-size: 1rem;
     --pijersi-view-menu-separator-font-size: 1rem;
     --pijersi-view-checkbox-size: 0.75rem;
@@ -74,7 +74,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 #pijersi-view-body-id {
     height: 100vh;
     width: 100%;
-    
+
     font-family: Tahoma, Verdana, sans-serif;
     font-style: normal;
     font-size: var(--pijersi-view-font-size);
@@ -102,12 +102,12 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 #pijersi-view-title-id {
     grid-area:title;
- 
+
     align-self: center;
     justify-self: center;
- 
+
     width: var(--pijersi-view-title-width);
-  
+
     font-size: var(--pijersi-view-font-size);
     font-weight:bold;
 
@@ -117,12 +117,12 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 #pijersi-view-legend-id {
     grid-area:legend;
- 
+
     align-self: center;
     justify-self: center;
-     
+
     width: var(--pijersi-view-legend-width);
-       
+
     font-size: var(--pijersi-view-font-size);
     font-weight:bold;
 
@@ -142,10 +142,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     height: var(--pijersi-view-board-height);
  }
 
-
 #pijersi-view-credit-id {
     grid-area:credit;
- 
+
     align-self: center;
     justify-self: center;
 
@@ -161,7 +160,6 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     border-width: var(--pijersi-view-credit-border-width);
     border-color: var(--pijersi-view-credit-border-color);
  }
-
 
 .pijersi-view-credit-edit-style:hover {
     background-color: var(--pijersi-view-button-hover-background-color);
@@ -199,7 +197,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     left: var(--pijersi-view-menu-items-left);
 
     font-weight: bold;
-   
+
     padding: var(--pijersi-view-menu-items-padding);
     background-color:var(--pijersi-view-menu-items-background-color);
     box-shadow: var(--pijersi-view-menu-items-shadow);
@@ -295,7 +293,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     background-color: var(--pijersi-view-button-hover-background-color);
 }
 
-.pijersi-view-black-swap-on-syle {
+.pijersi-view-swap-blacks-on-syle {
 
     background-image:url(img/black-arrows-up-down.svg);
     background-origin:border-box;
@@ -304,7 +302,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     background-size:contain;
 }
 
-.pijersi-view-black-swap-on-syle:hover {
+.pijersi-view-swap-blacks-on-syle:hover {
     background-color: var(--pijersi-view-button-hover-background-color);
 }
 
@@ -330,7 +328,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     background-color: var(--pijersi-view-button-hover-background-color);
 }
 
-.pijersi-view-white-swap-on-syle {
+.pijersi-view-swap-whites-on-syle {
     background-image:url(img/white-arrows-up-down.svg);
     background-origin:border-box;
     background-position:center;
@@ -338,7 +336,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     background-size:contain;
 }
 
-.pijersi-view-white-swap-on-syle:hover {
+.pijersi-view-swap-whites-on-syle:hover {
     background-color: var(--pijersi-view-button-hover-background-color);
 }
 
@@ -353,7 +351,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 #pijersi-view-captures-grid-id {
     display: grid;
-    
+
     grid-template-areas: 'blacks whites';
 
     justify-content:space-between;
@@ -369,7 +367,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 #pijersi-view-capture-blacks-grid-id {
     display: grid;
- 
+
     grid-template-areas: 'black-rocks black-papers black-scissors black-wises';
 
     gap: var(--pijersi-view-captures-by-color-gap);
@@ -383,8 +381,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 #pijersi-view-capture-black-rocks-grid-id {
     display: grid;
-   
-    grid-template-areas: 
+
+    grid-template-areas:
         'black-rock-1 black-rock-2'
         'black-rock-3 black-rock-4'
         ;
@@ -400,8 +398,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 #pijersi-view-capture-black-papers-grid-id {
     display: grid;
-    
-    grid-template-areas: 
+
+    grid-template-areas:
         'black-paper-1 black-paper-2'
         'black-paper-3 black-paper-4'
         ;
@@ -417,8 +415,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 #pijersi-view-capture-black-scissors-grid-id {
     display: grid;
-    
-    grid-template-areas: 
+
+    grid-template-areas:
         'black-scissors-1 black-scissors-2'
         'black-scissors-3 black-scissors-4'
         ;
@@ -434,8 +432,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 #pijersi-view-capture-black-wises-grid-id {
     display: grid;
-    
-    grid-template-areas: 
+
+    grid-template-areas:
         'black-wise-1'
         'black-wise-2'
         ;
@@ -451,7 +449,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 #pijersi-view-capture-whites-grid-id {
     display: grid;
-    
+
     grid-template-areas: 'white-rocks white-papers white-scissors white-wises';
 
     gap: var(--pijersi-view-captures-by-color-gap);
@@ -465,8 +463,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 #pijersi-view-capture-white-rocks-grid-id {
     display: grid;
-    
-    grid-template-areas: 
+
+    grid-template-areas:
         'white-rock-1 white-rock-2'
         'white-rock-3 white-rock-4'
         ;
@@ -482,8 +480,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 #pijersi-view-capture-white-papers-grid-id {
     display: grid;
-    
-    grid-template-areas: 
+
+    grid-template-areas:
         'white-paper-1 white-paper-2'
         'white-paper-3 white-paper-4'
         ;
@@ -499,8 +497,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 #pijersi-view-capture-white-scissors-grid-id {
     display: grid;
-    
-    grid-template-areas: 
+
+    grid-template-areas:
         'white-scissors-1 white-scissors-2'
         'white-scissors-3 white-scissors-4'
         ;
@@ -516,8 +514,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 #pijersi-view-capture-white-wises-grid-id {
     display: grid;
-    
-    grid-template-areas: 
+
+    grid-template-areas:
         'white-wise-1'
         'white-wise-2'
         ;

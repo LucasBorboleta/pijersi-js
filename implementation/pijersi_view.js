@@ -39,12 +39,15 @@ pijersi.view.__init = function(){
     pijersi.view.const.BLACK_TURN = document.getElementById("pijersi-view-black-turn-id");
     pijersi.view.const.WHITE_TURN = document.getElementById("pijersi-view-white-turn-id");
 
+    // "proxy buttons" allows compact layout ; see also CSS at "#pijersi-view-body-grid-id" :
+    //  - "left-proxy-button" triggers either "show_previous_turn()" or "swap_blacks()"
+    //  - "left-proxy-button" triggers either "show_next_turn()" or "swap_whites()"
     pijersi.view.const.LEFT_PROXY = document.getElementById("pijersi-view-left-proxy-button-id");
     pijersi.view.const.RIGHT_PROXY = document.getElementById("pijersi-view-right-proxy-button-id");
 
     pijersi.view.const.CAPTURES = document.getElementById("pijersi-view-captures-id");
 
-    
+
     pijersi.view.const.SHOW_STYLE = "pijersi-view-show-style";
 
     pijersi.view.const.PLAYER_TURN_EDIT_STYLE = "pijersi-view-player-turn-edit-style";
@@ -56,13 +59,13 @@ pijersi.view.__init = function(){
     pijersi.view.const.SHOW_PREVIOUS_ON_STYLE = "pijersi-view-show-previous-on-style";
     pijersi.view.const.SHOW_NEXT_ON_STYLE = "pijersi-view-show-next-on-style";
 
-    pijersi.view.const.BLACK_SWAP_ON_STYLE = "pijersi-view-black-swap-on-syle";
-    pijersi.view.const.WHITE_SWAP_ON_STYLE = "pijersi-view-white-swap-on-syle"; 
-  
+    pijersi.view.const.SWAP_BLACKS_ON_STYLE = "pijersi-view-swap-blacks-on-syle";
+    pijersi.view.const.SWAP_WHITES_ON_STYLE = "pijersi-view-swap-whites-on-syle";
+
     // Freeze the sub-module constants
     Object.freeze(pijersi.view.const);
- 
-    // Init the sub-module variables 
+
+    // Init the sub-module variables
     pijersi.view.menu_showed = false;
     pijersi.view.captures_showed = false;
 
@@ -230,7 +233,7 @@ pijersi.view.enable_white_turn = function(condition){
 
 pijersi.view.show_next_turn = function(condition){
     if ( condition === true || condition === false ) {
-        
+
         pijersi.view.show_next_showed = condition;
 
         if ( pijersi.view.show_next_showed ) {
@@ -266,14 +269,14 @@ pijersi.view.show_previous_turn = function(condition){
 
 pijersi.view.show_white_swap = function(condition){
     if ( condition === true || condition === false ) {
-        
+
         pijersi.view.swap_whites_showed = condition;
 
         if ( pijersi.view.swap_whites_showed ) {
-            pijersi.view.const.RIGHT_PROXY.classList.add(pijersi.view.const.WHITE_SWAP_ON_STYLE);
+            pijersi.view.const.RIGHT_PROXY.classList.add(pijersi.view.const.SWAP_WHITES_ON_STYLE);
 
         } else {
-            pijersi.view.const.RIGHT_PROXY.classList.remove(pijersi.view.const.WHITE_SWAP_ON_STYLE);
+            pijersi.view.const.RIGHT_PROXY.classList.remove(pijersi.view.const.SWAP_WHITES_ON_STYLE);
         }
 
     } else {
@@ -284,14 +287,14 @@ pijersi.view.show_white_swap = function(condition){
 
 pijersi.view.show_black_swap = function(condition){
     if ( condition === true || condition === false ) {
-        
+
         pijersi.view.swap_blacks_showed = condition;
 
         if ( pijersi.view.swap_blacks_showed ) {
-            pijersi.view.const.LEFT_PROXY.classList.add(pijersi.view.const.BLACK_SWAP_ON_STYLE);
+            pijersi.view.const.LEFT_PROXY.classList.add(pijersi.view.const.SWAP_BLACKS_ON_STYLE);
 
         } else {
-            pijersi.view.const.LEFT_PROXY.classList.remove(pijersi.view.const.BLACK_SWAP_ON_STYLE);
+            pijersi.view.const.LEFT_PROXY.classList.remove(pijersi.view.const.SWAP_BLACKS_ON_STYLE);
         }
 
     } else {
@@ -307,7 +310,7 @@ pijersi.view.click_right_proxy = function(){
 
     } else if ( pijersi.view.swap_whites_showed ) {
         pijersi.presenter.swap_whites();
-        
+
     } else {
         return;
     }
@@ -321,7 +324,7 @@ pijersi.view.click_left_proxy = function(){
 
     } else if ( pijersi.view.swap_blacks_showed ) {
         pijersi.presenter.swap_blacks();
-        
+
     } else {
         return;
     }

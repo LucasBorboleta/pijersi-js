@@ -42,7 +42,7 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 				<div class="pijersi-view-menu-separator-style">Show :</div>
 
 				<div class="pijersi-view-menu-item-style">
-					<input id="pijersi-view-show-captures-id" class="pijersi-view-checkbox-style" type="checkbox" 
+					<input id="pijersi-view-show-captures-id" class="pijersi-view-checkbox-style" type="checkbox"
 					onclick="pijersi.presenter.toggle_captures()">
 					<span onclick="pijersi.view.toggle_checkbox('pijersi-view-show-captures-id')">Captures</span>
 				</div>
@@ -65,6 +65,11 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 		<div id="pijersi-view-white-turn-id" onclick="pijersi.presenter.edit_player_turn()"></div>
 		<div id="pijersi-view-black-turn-id" onclick="pijersi.presenter.edit_player_turn()"></div>
 
+		<!-- "proxy buttons" allows compact layout ; see also CSS at "#pijersi-view-body-grid-id" :
+				- "left-proxy-button" triggers either "show_previous_turn()" or "swap_blacks()" ;
+				- "left-proxy-button" triggers either "show_next_turn()" or "swap_whites()" ;
+				- the redirections of "proxy buttons" are managed in "pijersi.view".
+		-->
 		<div id="pijersi-view-left-proxy-button-id" onclick="pijersi.view.click_left_proxy()"></div>
 		<div id="pijersi-view-right-proxy-button-id" onclick="pijersi.view.click_right_proxy()"></div>
 

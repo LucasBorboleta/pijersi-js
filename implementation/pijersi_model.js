@@ -26,9 +26,9 @@ pijersi.model.__init = function(){
     pijersi.debug.__init();
 
     // Init the sub-module constants
- 
+
     pijersi.model.const = {};
-   
+
     pijersi.model.const.MODE_RUN = "run";
     pijersi.model.const.MODE_REVIEW = "review";
     pijersi.model.const.MODE_EDIT = "edit";
@@ -46,7 +46,7 @@ pijersi.model.__init = function(){
     // Freeze the sub-module constants
     Object.freeze(pijersi.model.const);
 
-    // Init the sub-module variables 
+    // Init the sub-module variables
 
     pijersi.model.mode = undefined;
     pijersi.model.terminated = undefined;
@@ -104,7 +104,7 @@ pijersi.model.new_game = function(){
     pijersi.model.mode = pijersi.model.const.MODE_RUN;
 
     pijersi.model.terminated = false;
-   
+
     pijersi.model.turn_index = 0;
 
     pijersi.model.player = pijersi.model.const.PLAYER_WHITE;
@@ -137,9 +137,9 @@ pijersi.model.new_turn = function(){
     }
 
     if ( pijersi.model.terminated ) return;
- 
+
     pijersi.model.legend = pijersi.model.turn_index.toString().padStart(2, '0') + " " + "xi-yi=zk";
-    
+
     pijersi.model.credit = pijersi.model.credit - 1;
 
     if ( pijersi.model.credit <= 0 ) {
@@ -169,7 +169,7 @@ pijersi.model.new_turn = function(){
 
 
 pijersi.model.stop_review_game = function(){
-    
+
     if ( pijersi.model.mode === pijersi.model.const.MODE_REVIEW ) return;
 
     pijersi.model.mode = pijersi.model.const.MODE_REVIEW;
@@ -221,7 +221,7 @@ pijersi.model.goto_previous_turn = function(){
 
     const first_turn_index = 0;
     const last_turn_index = pijersi.model.turns.length - 1;
-    
+
     let previous_turn_index = pijersi.model.turn_index - 1;
     if ( previous_turn_index < first_turn_index ) {
         previous_turn_index = last_turn_index;
@@ -260,7 +260,7 @@ pijersi.model.edit_game = function(){
 
     pijersi.model.turn_index = 0;
     pijersi.model.legend = "";
-    
+
     if ( pijersi.model.credit <= 0 ) {
         pijersi.model.terminated = true;
         pijersi.model.legend += pijersi.model.const.LEGEND_FAKE_SCORE;
@@ -295,7 +295,7 @@ pijersi.model.edit_credit = function(){
 
     pijersi.model.turn_index = 0;
     pijersi.model.legend = "";
-    
+
     if ( pijersi.model.credit <= 0 ) {
         pijersi.model.terminated = true;
         pijersi.model.legend += pijersi.model.const.LEGEND_FAKE_SCORE;
@@ -324,12 +324,12 @@ pijersi.model.edit_player_turn = function(){
         pijersi.debug.log_error("unexpected 'pijersi.model.mode' = " + pijersi.model.mode);
         return;
     }
-        
+
     pijersi.model.next_player();
 
     pijersi.model.turn_index = 0;
     pijersi.model.legend = "";
-    
+
     if ( pijersi.model.credit <= 0 ) {
         pijersi.model.terminated = true;
         pijersi.model.legend += pijersi.model.const.LEGEND_FAKE_SCORE;

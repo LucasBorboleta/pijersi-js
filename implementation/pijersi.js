@@ -27,7 +27,7 @@ pijersi.__init = function(){
     pijersi.model.__init();
     pijersi.view.__init();
     pijersi.presenter.__init();
-    
+
     // Seal the module
     Object.seal(pijersi);
 };
