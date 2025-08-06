@@ -37,20 +37,19 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     --pijersi-view-credit-border-color: black;
 
     --pijersi-view-menu-items-left: 12rem;
-    --pijersi-view-menu-items-padding: 1.0rem;
+    --pijersi-view-menu-items-padding: 0.5rem;
     --pijersi-view-menu-items-shadow: 0.5em 0.5em 1.5em black;
     --pijersi-view-menu-items-background-color: var(--pijersi-color-blue);
     --pijersi-view-menu-item-hover-background-color: var(--pijersi-color-brown);
     
-    --pijersi-view-checkbox-size: 2.0rem;
-
-    --pijersi-view-menu-separator-font-size: 2.0rem;
-    --pijersi-view-menu-item-font-size: 2.5rem;
+    --pijersi-view-menu-item-font-size: 1rem;
+    --pijersi-view-menu-separator-font-size: 1rem;
+    --pijersi-view-checkbox-size: 0.75rem;
 
     --pijersi-view-menu-line-border-color: black;
-    --pijersi-view-menu-line-border-width: 0.2rem;
-    --pijersi-view-menu-line-margin-top: 1.0rem;
-    --pijersi-view-menu-line-margin-bottom: 0.5rem;
+    --pijersi-view-menu-line-border-width: 0.05rem;
+    --pijersi-view-menu-line-margin-top: 0.5rem;
+    --pijersi-view-menu-line-margin-bottom: 0.25rem;
 
     --pijersi-view-captures-margin: 1rem;
     --pijersi-view-captures-by-color-gap: 0.5rem;
@@ -198,6 +197,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     position: absolute;
     z-index: 1;
     left: var(--pijersi-view-menu-items-left);
+
+    font-weight: bold;
    
     padding: var(--pijersi-view-menu-items-padding);
     background-color:var(--pijersi-view-menu-items-background-color);
@@ -207,7 +208,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 .pijersi-view-menu-line-style {
     border-color: var(--pijersi-view-menu-line-border-color);
     border-width: var(--pijersi-view-menu-line-border-width);
-    margin-top: var(--pijersi-view-menu-linemargin-top);
+    margin-top: var(--pijersi-view-menu-line-margin-top);
     margin-bottom: var(--pijersi-view-menu-line-margin-bottom);
 }
 
@@ -569,7 +570,6 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     padding:0;
     margin:0;
 }
-
 
 #pijersi-view-capture-black-rock-1-id {
     grid-area:black-rock-1;
