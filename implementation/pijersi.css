@@ -86,10 +86,10 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     display: grid;
 
     grid-template-areas:
-        'credit       title       title     title        menu'
-        'board        board       board     board        board'
-        'white-turn   left-proxy  legend    right-proxy  black-turn'
-        'captures     captures    captures  captures     captures'
+        'credit       title            title     title             menu'
+        'board        board            board     board             board'
+        'white-turn   left-multi-func  legend    right-multi-func  black-turn'
+        'captures     captures         captures  captures          captures'
         ;
 
     gap:0;
@@ -271,8 +271,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     background-color: var(--pijersi-view-button-hover-background-color);
 }
 
-#pijersi-view-left-proxy-button-id {
-    grid-area:left-proxy;
+#pijersi-view-left-multi-func-button-id {
+    grid-area:left-multi-func;
 
     width: var(--pijersi-view-button-size);
     height: var(--pijersi-view-button-size);
@@ -306,8 +306,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     background-color: var(--pijersi-view-button-hover-background-color);
 }
 
-#pijersi-view-right-proxy-button-id {
-    grid-area:right-proxy;
+#pijersi-view-right-multi-func-button-id {
+    grid-area:right-multi-func;
 
     width: var(--pijersi-view-button-size);
     height: var(--pijersi-view-button-size);

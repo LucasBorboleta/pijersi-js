@@ -39,11 +39,11 @@ pijersi.view.__init = function(){
     pijersi.view.const.BLACK_TURN = document.getElementById("pijersi-view-black-turn-id");
     pijersi.view.const.WHITE_TURN = document.getElementById("pijersi-view-white-turn-id");
 
-    // "proxy buttons" allows compact layout ; see also CSS at "#pijersi-view-body-grid-id" :
-    //  - "left-proxy-button" triggers either "show_previous_turn()" or "swap_blacks()"
-    //  - "left-proxy-button" triggers either "show_next_turn()" or "swap_whites()"
-    pijersi.view.const.LEFT_PROXY = document.getElementById("pijersi-view-left-proxy-button-id");
-    pijersi.view.const.RIGHT_PROXY = document.getElementById("pijersi-view-right-proxy-button-id");
+    // "multi-func buttons" allows compact layout ; see also CSS at "#pijersi-view-body-grid-id" :
+    //  - "left-multi-func-button" triggers either "show_previous_turn()" or "swap_blacks()"
+    //  - "left-multi-func-button" triggers either "show_next_turn()" or "swap_whites()"
+    pijersi.view.const.LEFT_MULTI_FUNC = document.getElementById("pijersi-view-left-multi-func-button-id");
+    pijersi.view.const.RIGHT_MULTI_FUNC = document.getElementById("pijersi-view-right-multi-func-button-id");
 
     pijersi.view.const.CAPTURES = document.getElementById("pijersi-view-captures-id");
 
@@ -237,10 +237,10 @@ pijersi.view.show_next_turn = function(condition){
         pijersi.view.show_next_showed = condition;
 
         if ( pijersi.view.show_next_showed ) {
-            pijersi.view.const.RIGHT_PROXY.classList.add(pijersi.view.const.SHOW_NEXT_ON_STYLE);
+            pijersi.view.const.RIGHT_MULTI_FUNC.classList.add(pijersi.view.const.SHOW_NEXT_ON_STYLE);
 
         } else {
-            pijersi.view.const.RIGHT_PROXY.classList.remove(pijersi.view.const.SHOW_NEXT_ON_STYLE);
+            pijersi.view.const.RIGHT_MULTI_FUNC.classList.remove(pijersi.view.const.SHOW_NEXT_ON_STYLE);
         }
 
     } else {
@@ -255,10 +255,10 @@ pijersi.view.show_previous_turn = function(condition){
         pijersi.view.show_previous_showed = condition;
 
         if ( pijersi.view.show_previous_showed ) {
-            pijersi.view.const.LEFT_PROXY.classList.add(pijersi.view.const.SHOW_PREVIOUS_ON_STYLE);
+            pijersi.view.const.LEFT_MULTI_FUNC.classList.add(pijersi.view.const.SHOW_PREVIOUS_ON_STYLE);
 
         } else {
-            pijersi.view.const.LEFT_PROXY.classList.remove(pijersi.view.const.SHOW_PREVIOUS_ON_STYLE);
+            pijersi.view.const.LEFT_MULTI_FUNC.classList.remove(pijersi.view.const.SHOW_PREVIOUS_ON_STYLE);
         }
 
     } else {
@@ -273,10 +273,10 @@ pijersi.view.show_white_swap = function(condition){
         pijersi.view.swap_whites_showed = condition;
 
         if ( pijersi.view.swap_whites_showed ) {
-            pijersi.view.const.RIGHT_PROXY.classList.add(pijersi.view.const.SWAP_WHITES_ON_STYLE);
+            pijersi.view.const.RIGHT_MULTI_FUNC.classList.add(pijersi.view.const.SWAP_WHITES_ON_STYLE);
 
         } else {
-            pijersi.view.const.RIGHT_PROXY.classList.remove(pijersi.view.const.SWAP_WHITES_ON_STYLE);
+            pijersi.view.const.RIGHT_MULTI_FUNC.classList.remove(pijersi.view.const.SWAP_WHITES_ON_STYLE);
         }
 
     } else {
@@ -291,10 +291,10 @@ pijersi.view.show_black_swap = function(condition){
         pijersi.view.swap_blacks_showed = condition;
 
         if ( pijersi.view.swap_blacks_showed ) {
-            pijersi.view.const.LEFT_PROXY.classList.add(pijersi.view.const.SWAP_BLACKS_ON_STYLE);
+            pijersi.view.const.LEFT_MULTI_FUNC.classList.add(pijersi.view.const.SWAP_BLACKS_ON_STYLE);
 
         } else {
-            pijersi.view.const.LEFT_PROXY.classList.remove(pijersi.view.const.SWAP_BLACKS_ON_STYLE);
+            pijersi.view.const.LEFT_MULTI_FUNC.classList.remove(pijersi.view.const.SWAP_BLACKS_ON_STYLE);
         }
 
     } else {
@@ -303,7 +303,7 @@ pijersi.view.show_black_swap = function(condition){
 };
 
 
-pijersi.view.click_right_proxy = function(){
+pijersi.view.click_right_multi_func = function(){
 
     if ( pijersi.view.show_next_showed ) {
         pijersi.presenter.show_next_turn();
@@ -317,7 +317,7 @@ pijersi.view.click_right_proxy = function(){
 };
 
 
-pijersi.view.click_left_proxy = function(){
+pijersi.view.click_left_multi_func = function(){
 
     if ( pijersi.view.show_previous_showed ) {
         pijersi.presenter.show_previous_turn();
