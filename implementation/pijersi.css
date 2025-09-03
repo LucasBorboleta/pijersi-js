@@ -54,6 +54,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     --pijersi-view-captures-margin: 1rem;
     --pijersi-view-captures-by-color-gap: 0.5rem;
     --pijersi-view-captures-by-type-gap: 0.2rem;
+    --pijersi-view-captures-by-type-margin: 0.2rem;
     --pijersi-view-captures-cube-size: 1.25em;
 }
 
@@ -393,7 +394,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
     gap: var(--pijersi-view-captures-by-type-gap);
     padding:0;
-    margin:0;
+    margin: var(--pijersi-view-captures-by-type-margin);
  }
 
 #pijersi-view-capture-black-papers-id {
@@ -414,7 +415,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
     gap: var(--pijersi-view-captures-by-type-gap);
     padding:0;
-    margin:0;
+    margin: var(--pijersi-view-captures-by-type-margin);
 }
 
 #pijersi-view-capture-black-scissors-id {
@@ -435,7 +436,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
     gap: var(--pijersi-view-captures-by-type-gap);
     padding:0;
-    margin:0;
+    margin: var(--pijersi-view-captures-by-type-margin);
 }
 
 #pijersi-view-capture-black-wises-id {
@@ -456,7 +457,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
     gap: var(--pijersi-view-captures-by-type-gap);
     padding:0;
-    margin:0;
+    margin: var(--pijersi-view-captures-by-type-margin);
 }
 
 #pijersi-view-capture-whites-id {
@@ -491,7 +492,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
     gap: var(--pijersi-view-captures-by-type-gap);
     padding:0;
-    margin:0;
+    margin: var(--pijersi-view-captures-by-type-margin);
 }
 
 #pijersi-view-capture-white-papers-id {
@@ -512,7 +513,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
     gap: var(--pijersi-view-captures-by-type-gap);
     padding:0;
-    margin:0;
+    margin: var(--pijersi-view-captures-by-type-margin);
 }
 
 #pijersi-view-capture-white-scissors-id {
@@ -533,7 +534,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
     gap: var(--pijersi-view-captures-by-type-gap);
     padding:0;
-    margin:0;
+    margin: var(--pijersi-view-captures-by-type-margin);
 }
 
 #pijersi-view-capture-white-wises-id {
@@ -554,7 +555,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
     gap: var(--pijersi-view-captures-by-type-gap);
     padding:0;
-    margin:0;
+    margin: var(--pijersi-view-captures-by-type-margin);
 }
 
 #pijersi-view-capture-black-rock-1-id {
