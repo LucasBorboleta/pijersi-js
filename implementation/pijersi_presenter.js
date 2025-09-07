@@ -61,6 +61,8 @@ pijersi.presenter.update_mode = function(){
 
         pijersi.view.show_white_swap(false);
         pijersi.view.show_black_swap(false);
+        
+        pijersi.view.enable_capture_groups(false);
 
     } else if ( mode === pijersi.model.const.MODE_REVIEW ) {
         pijersi.view.show_next_turn(true);
@@ -74,6 +76,8 @@ pijersi.presenter.update_mode = function(){
         pijersi.view.show_white_swap(false);
         pijersi.view.show_black_swap(false);
 
+        pijersi.view.enable_capture_groups(false);
+
     } else if ( mode === pijersi.model.const.MODE_EDIT ) {
         pijersi.view.show_next_turn(false);
         pijersi.view.show_previous_turn(false);
@@ -85,6 +89,9 @@ pijersi.presenter.update_mode = function(){
 
         pijersi.view.show_white_swap(true);
         pijersi.view.show_black_swap(true);
+
+        pijersi.view.enable_capture_groups(true);
+
     }
 };
 

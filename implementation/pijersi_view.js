@@ -47,6 +47,27 @@ pijersi.view.__init = function(){
 
     pijersi.view.const.CAPTURES = document.getElementById("pijersi-view-captures-id");
 
+    pijersi.view.const.CAPTURE_BLACK_ROCKS = document.getElementById("pijersi-view-capture-black-rocks-id");
+    pijersi.view.const.CAPTURE_BLACK_PAPERS = document.getElementById("pijersi-view-capture-black-papers-id");
+    pijersi.view.const.CAPTURE_BLACK_SCISSORS = document.getElementById("pijersi-view-capture-black-scissors-id");
+    pijersi.view.const.CAPTURE_BLACK_WISES = document.getElementById("pijersi-view-capture-black-wises-id");
+
+    pijersi.view.const.CAPTURE_WHITE_ROCKS = document.getElementById("pijersi-view-capture-white-rocks-id");
+    pijersi.view.const.CAPTURE_WHITE_PAPERS = document.getElementById("pijersi-view-capture-white-papers-id");
+    pijersi.view.const.CAPTURE_WHITE_SCISSORS = document.getElementById("pijersi-view-capture-white-scissors-id");
+    pijersi.view.const.CAPTURE_WHITE_WISES = document.getElementById("pijersi-view-capture-white-wises-id");
+
+    pijersi.view.const.CAPTURE_GROUPS = [];
+
+    pijersi.view.const.CAPTURE_GROUPS.push(pijersi.view.const.CAPTURE_BLACK_ROCKS);
+    pijersi.view.const.CAPTURE_GROUPS.push(pijersi.view.const.CAPTURE_BLACK_PAPERS);
+    pijersi.view.const.CAPTURE_GROUPS.push(pijersi.view.const.CAPTURE_BLACK_SCISSORS);
+    pijersi.view.const.CAPTURE_GROUPS.push(pijersi.view.const.CAPTURE_BLACK_WISES);
+    
+    pijersi.view.const.CAPTURE_GROUPS.push(pijersi.view.const.CAPTURE_WHITE_ROCKS);
+    pijersi.view.const.CAPTURE_GROUPS.push(pijersi.view.const.CAPTURE_WHITE_PAPERS);
+    pijersi.view.const.CAPTURE_GROUPS.push(pijersi.view.const.CAPTURE_WHITE_SCISSORS);
+    pijersi.view.const.CAPTURE_GROUPS.push(pijersi.view.const.CAPTURE_WHITE_WISES);
 
     pijersi.view.const.SHOW_STYLE = "pijersi-view-show-style";
 
@@ -61,6 +82,8 @@ pijersi.view.__init = function(){
 
     pijersi.view.const.SWAP_BLACKS_ON_STYLE = "pijersi-view-swap-blacks-on-syle";
     pijersi.view.const.SWAP_WHITES_ON_STYLE = "pijersi-view-swap-whites-on-syle";
+
+    pijersi.view.const.CAPTURE_GROUP_EDIT_STYLE = "pijersi-view-capture-group-style";
 
     // Freeze the sub-module constants
     Object.freeze(pijersi.view.const);
@@ -128,6 +151,26 @@ pijersi.view.show_captures = function(condition){
 
         } else {
             pijersi.view.const.CAPTURES.classList.remove(pijersi.view.const.SHOW_STYLE);
+        }
+
+    } else {
+        pijersi.debug.log_error("unexpected 'condition' = " + condition);
+    }
+};
+
+
+pijersi.view.enable_capture_groups = function(condition){
+    if ( condition === true || condition === false ) {
+
+        if ( condition ) {
+            pijersi.view.const.CAPTURE_GROUPS.forEach(function(capture_group){
+                capture_group.classList.add(pijersi.view.const.CAPTURE_GROUP_EDIT_STYLE);
+            });
+
+        } else {
+            pijersi.view.const.CAPTURE_GROUPS.forEach(function(capture_group){
+                capture_group.classList.remove(pijersi.view.const.CAPTURE_GROUP_EDIT_STYLE);
+            });
         }
 
     } else {

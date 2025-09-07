@@ -341,6 +341,10 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     background-color: var(--pijersi-view-button-hover-background-color);
 }
 
+.pijersi-view-capture-group-style:hover {
+    background-color: var(--pijersi-view-button-hover-background-color);
+}
+
 #pijersi-view-captures-id {
     grid-area:captures;
     display: none;
@@ -380,10 +384,6 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     grid-area:black-rocks;
 }
 
-#pijersi-view-capture-black-rocks-id:hover {
-    background-color: var(--pijersi-view-button-hover-background-color);
-}
-
 #pijersi-view-capture-black-rocks-grid-id {
     display: grid;
 
@@ -399,10 +399,6 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 #pijersi-view-capture-black-papers-id {
     grid-area:black-papers;
-}
-
-#pijersi-view-capture-black-papers-id:hover {
-    background-color: var(--pijersi-view-button-hover-background-color);
 }
 
 #pijersi-view-capture-black-papers-grid-id {
@@ -422,10 +418,6 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     grid-area:black-scissors;
 }
 
-#pijersi-view-capture-black-scissors-id:hover {
-    background-color: var(--pijersi-view-button-hover-background-color);
-}
-
 #pijersi-view-capture-black-scissors-grid-id {
     display: grid;
 
@@ -441,10 +433,6 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 #pijersi-view-capture-black-wises-id {
     grid-area:black-wises;
-}
-
-#pijersi-view-capture-black-wises-id:hover {
-    background-color: var(--pijersi-view-button-hover-background-color);
 }
 
 #pijersi-view-capture-black-wises-grid-id {
@@ -478,10 +466,6 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     grid-area:white-rocks;
 }
 
-#pijersi-view-capture-white-rocks-id:hover {
-    background-color: var(--pijersi-view-button-hover-background-color);
-}
-
 #pijersi-view-capture-white-rocks-grid-id {
     display: grid;
 
@@ -497,10 +481,6 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 #pijersi-view-capture-white-papers-id {
     grid-area:white-papers;
-}
-
-#pijersi-view-capture-white-papers-id:hover {
-    background-color: var(--pijersi-view-button-hover-background-color);
 }
 
 #pijersi-view-capture-white-papers-grid-id {
@@ -520,10 +500,6 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     grid-area:white-scissors;
 }
 
-#pijersi-view-capture-white-scissors-id:hover {
-    background-color: var(--pijersi-view-button-hover-background-color);
-}
-
 #pijersi-view-capture-white-scissors-grid-id {
     display: grid;
 
@@ -539,10 +515,6 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 #pijersi-view-capture-white-wises-id {
     grid-area:white-wises;
-}
-
-#pijersi-view-capture-white-wises-id:hover {
-    background-color: var(--pijersi-view-button-hover-background-color);
 }
 
 #pijersi-view-capture-white-wises-grid-id {
