@@ -47,5 +47,6 @@ pijersi.debug.log_error = function(message){
     console.error("error:" + pijersi.debug.error_count.toString() + ": " + message);
     console.trace();
 };
+
 ///////////////////////////////////////////////////////////////////////////////
 		

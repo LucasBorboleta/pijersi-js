@@ -30,5 +30,8 @@ pijersi.__init = function(){
 
     // Seal the module
     Object.seal(pijersi);
+
+    pijersi.presenter.new_game();
 };
+
 ///////////////////////////////////////////////////////////////////////////////

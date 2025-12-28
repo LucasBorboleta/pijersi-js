@@ -60,6 +60,9 @@ pijersi.model.__init = function(){
     pijersi.model.board = undefined;
     pijersi.model.legend = undefined;
 
+    pijersi.model.hexagons = pijersi.model.make_all_hexagons();
+    pijersi.model.hexagons_states = pijersi.model.make_all_hexagons_states(pijersi.model.hexagons);
+
     // Seal the sub-module
     Object.seal(pijersi.model);
 };
@@ -351,3 +354,106 @@ pijersi.model.edit_player_turn = function(){
     pijersi.model.turns.push(turn);
 };
 ///////////////////////////////////////////////////////////////////////////////
+
+
+pijersi.model.make_hexagon = function(hexagon_index, hexagon_name, position_uv){
+
+    const hexagon = {
+        index: hexagon_index,
+        name: hexagon_name,
+        u: position_uv[0],
+        v: position_uv[1]
+    };
+
+    return  hexagon;
+};
+
+
+pijersi.model.make_hexagon_state = function(hexagon){
+
+     const hexagon_state = {
+        index: hexagon.index,
+        bottom: null,
+        top: null
+    };
+
+    return  hexagon_state;
+};
+
+
+pijersi.model.make_all_hexagons = function(){
+
+    let hexagons = []
+
+    // Row "a"
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'a1',  [-1, -3] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'a2',  [-0, -3] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'a3',  [1, -3] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'a4',  [2, -3] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'a5',  [3, -3] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'a6',  [4, -3] ));
+
+    // Row "b"
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'b1',  [-2, -2] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'b2',  [-1, -2] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'b3',  [0, -2] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'b4',  [1, -2] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'b5',  [2, -2] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'b6',  [3, -2] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'b7',  [4, -2] ));
+
+    // Row "c"
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'c1',  [-2, -1] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'c2',  [-1, -1] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'c3',  [0, -1] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'c4',  [1, -1] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'c5',  [2, -1] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'c6',  [3, -1] ));
+
+    // Row "d"
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'd1',  [-3, 0] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'd2',  [-2, 0] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'd3',  [-1, 0] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'd4',  [0, 0] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'd5',  [1, 0] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'd6',  [2, 0] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'd7',  [3, 0] ));
+
+    // Row "e"
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'e1',  [-3, 1] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'e2',  [-2, 1] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'e3',  [-1, 1] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'e4',  [0, 1] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'e5',  [1, 1] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'e6',  [2, 1] ));
+
+    // Row "f"
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'f1',  [-4, 2] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'f2',  [-3, 2] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'f3',  [-2, 2] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'f4',  [-1, 2] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'f5',  [0, 2] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'f6',  [1, 2] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'f7',  [2, 2] ));
+
+    // Row "g"
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'g1', [-4, 3] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'g2', [-3, 3] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'g3', [-2, 3] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'g4', [-1, 3] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'g5', [0, 3] ));
+    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'g6', [1, 3] ));
+    
+    return hexagons;
+};
+
+
+pijersi.model.make_all_hexagons_states = function(hexagons){
+    let hexagons_states = [];
+
+    for ( const hexagon of hexagons ) {
+        hexagons_states[hexagon.index] = pijersi.model.make_hexagon_state(hexagon);
+    }
+
+    return hexagons_states;
+};

@@ -29,6 +29,13 @@ pijersi.view.__init = function(){
 
     pijersi.view.const = {};
 
+    pijersi.view.const.MOUSE_DEBUG = document.getElementById("pijersi-view-mouse-debug-id");
+    pijersi.view.const.OTHER_DEBUG = document.getElementById("pijersi-view-other-debug-id");
+
+    pijersi.view.const.BODY = document.getElementById("pijersi-view-body-id");
+
+    pijersi.view.const.BOARD_IMAGE = document.getElementById("pijersi-view-board-image-id");
+
     pijersi.view.const.CREDIT = document.getElementById("pijersi-view-credit-id");
  	
     pijersi.view.const.MENU_ITEMS = document.getElementById("pijersi-view-menu-items-id");
@@ -97,8 +104,89 @@ pijersi.view.__init = function(){
     pijersi.view.swap_blacks_showed = false;
     pijersi.view.swap_whites_showed = false;
 
+    pijersi.view.debug_showed = false;
+    pijersi.view.show_debug(pijersi.view.debug_showed);
+
     // Seal the sub-module
     Object.seal(pijersi.view);
+
+    pijersi.view.const.BOARD_IMAGE.addEventListener( "mousemove" , pijersi.view.mouse_listner);
+
+    pijersi.view.const.BODY.addEventListener( "keydown" , pijersi.view.key_listner);
+
+    pijersi.view.testit();
+};
+
+
+pijersi.view.testit = function(){
+
+    const board_image_rectangle = pijersi.view.const.BOARD_IMAGE.getBoundingClientRect();
+    console.log("board_image_rectangle = " + board_image_rectangle);
+
+    console.log("board_image_rectangle.left = " + board_image_rectangle.left);
+    console.log("board_image_rectangle.top = " + board_image_rectangle.top);
+    console.log("board_image_rectangle.right = " + board_image_rectangle.right);
+    console.log("board_image_rectangle.bottom = " + board_image_rectangle.bottom);
+    console.log("board_image_rectangle.x = " + board_image_rectangle.x);
+    console.log("board_image_rectangle.y = " + board_image_rectangle.y);
+    console.log("board_image_rectangle.width = " + board_image_rectangle.width);
+    console.log("board_image_rectangle.height = " + board_image_rectangle.height);
+};
+
+
+pijersi.view.mouse_listner = function(event){
+    const mouse_position = pijersi.view.get_mouse_position(event);
+    pijersi.view.write_mouse_position(Math.round(mouse_position.x), Math.round(mouse_position.y));
+};
+
+
+pijersi.view.get_mouse_position = function(event){
+    const board_image_rectangle = pijersi.view.const.BOARD_IMAGE.getBoundingClientRect();
+
+    return { x: event.clientX - board_image_rectangle.left,
+             y: event.clientY - board_image_rectangle.top };
+};
+
+
+pijersi.view.write_mouse_position = function(x, y){
+    const x_text = x.toString().padStart(3, "0");
+    const y_text = y.toString().padStart(3, "0");
+    
+    pijersi.view.const.MOUSE_DEBUG.innerHTML = "(x,y) = (" + x_text + ", " + y_text + ")" ;
+};
+
+
+pijersi.view.key_listner = function(event){
+    if ( event.key === 'd' ) {
+        pijersi.view.toggle_debug();
+    } 
+};
+
+
+pijersi.view.toggle_debug = function(){
+    pijersi.view.debug_showed = ! pijersi.view.debug_showed;
+    pijersi.view.show_debug(pijersi.view.debug_showed);
+};
+
+
+pijersi.view.show_debug = function(condition){
+
+    if ( condition === true || condition === false ) {
+
+        pijersi.view.debug_showed = condition;
+
+        if ( pijersi.view.debug_showed ) {
+            pijersi.view.const.MOUSE_DEBUG.classList.add(pijersi.view.const.SHOW_STYLE);
+            pijersi.view.const.OTHER_DEBUG.classList.add(pijersi.view.const.SHOW_STYLE);
+
+        } else {
+            pijersi.view.const.MOUSE_DEBUG.classList.remove(pijersi.view.const.SHOW_STYLE);
+            pijersi.view.const.OTHER_DEBUG.classList.remove(pijersi.view.const.SHOW_STYLE);
+        }
+
+    } else {
+        pijersi.debug.log_error("unexpected 'condition' = " + condition);
+    }
 };
 
 
