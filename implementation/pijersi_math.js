@@ -45,6 +45,9 @@ pijersi.math.__init = function(){
             };
 
 
+            toString() { return "TinyVector(" + this.x + "," + this.y + ")" ;  };
+
+
             neg() { return new TinyVector( -this.x, -this.y ) ;  };
 
 

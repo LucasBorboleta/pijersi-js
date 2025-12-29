@@ -136,6 +136,7 @@ pijersi.view.testit = function(){
     let aaa = new pijersi.math.TinyVector(1, 2);
     console.log("aaa.x = " + aaa.x);
     console.log("aaa.y = " + aaa.y);
+    console.log("aaa = " + aaa.toString());
 
     let bbb = aaa.neg();
     console.log("bbb.x = " + bbb.x);
