@@ -24,6 +24,7 @@ pijersi.view.__init = function(){
 
     // Init the required sub-modules
     pijersi.debug.__init();
+    pijersi.math.__init();
 
     // Init the sub-module constants
 
@@ -131,6 +132,40 @@ pijersi.view.testit = function(){
     console.log("board_image_rectangle.y = " + board_image_rectangle.y);
     console.log("board_image_rectangle.width = " + board_image_rectangle.width);
     console.log("board_image_rectangle.height = " + board_image_rectangle.height);
+
+    let aaa = new pijersi.math.TinyVector(1, 2);
+    console.log("aaa.x = " + aaa.x);
+    console.log("aaa.y = " + aaa.y);
+
+    let bbb = aaa.neg();
+    console.log("bbb.x = " + bbb.x);
+    console.log("bbb.y = " + bbb.y);
+
+    let ccc = new pijersi.math.TinyVector(10, 200);
+
+    let ddd = ccc.add(aaa);
+    console.log("ddd.x = " + ddd.x);
+    console.log("ddd.y = " + ddd.y);
+
+    let eee = ccc.sub(aaa);
+    console.log("eee.x = " + eee.x);
+    console.log("eee.y = " + eee.y);
+
+    let fff = aaa.add(0.5);
+    console.log("fff.x = " + fff.x);
+    console.log("fff.y = " + fff.y);
+
+    let ggg = aaa.sub(0.1);
+    console.log("ggg.x = " + ggg.x);
+    console.log("ggg.y = " + ggg.y);
+
+    let hhh = aaa.mul(1000);
+    console.log("hhh.x = " + hhh.x);
+    console.log("hhh.y = " + hhh.y);
+
+    console.log("aaa.inner(bbb) = " + aaa.inner(bbb));
+    console.log("aaa.norm() = " + aaa.norm());
+
 };
 
 

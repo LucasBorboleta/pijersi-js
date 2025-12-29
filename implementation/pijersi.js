@@ -24,6 +24,7 @@ pijersi.__init = function(){
 
     // Init all the sub-modules
     pijersi.debug.__init();
+    pijersi.math.__init();
     pijersi.model.__init();
     pijersi.view.__init();
     pijersi.presenter.__init();
