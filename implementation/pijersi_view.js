@@ -164,7 +164,7 @@ pijersi.view.testit = function(){
     console.log("hhh.x = " + hhh.x);
     console.log("hhh.y = " + hhh.y);
 
-    console.log("aaa.inner(bbb) = " + aaa.inner(bbb));
+    console.log("aaa.dot(bbb) = " + aaa.dot(bbb));
     console.log("aaa.norm() = " + aaa.norm());
 
 };

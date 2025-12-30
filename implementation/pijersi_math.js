@@ -33,7 +33,6 @@ pijersi.math.__init = function(){
     Object.freeze(pijersi.math.const);
 
     // Init the sub-module variables
-    pijersi.math.xxx = undefined;
 
     pijersi.math.TinyVector = ( function(){
 
@@ -87,7 +86,7 @@ pijersi.math.__init = function(){
              };
 
 
-            inner(that) { 
+            dot(that) { 
                 if ( that instanceof TinyVector ) {
                     return (this.x*that.x + this.y*that.y) ; 
 
