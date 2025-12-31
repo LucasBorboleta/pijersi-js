@@ -157,6 +157,8 @@ pijersi.view.__init = function(){
     pijersi.view.debug_showed = false;
     pijersi.view.show_debug(pijersi.view.debug_showed);
 
+    pijersi.view.hexagon_divs = pijersi.view.make_all_hexagon_div(pijersi.model.hexagons);
+
     // Seal the sub-module
     Object.seal(pijersi.view);
 
@@ -184,10 +186,6 @@ pijersi.view.testit = function(){
 
     let aaa = new pijersi.math.TinyVector(1, 2);
     console.log("aaa = " + aaa.toString());
-
-    const hexagon = pijersi.model.hexagons[0];
-    const hexagon_div = pijersi.view.make_hexagon_div(hexagon);
-
 };
 
 
@@ -196,14 +194,8 @@ pijersi.view.make_hexagon_div = function(hexagon){
     const hexagon_div = document.createElement("DIV");
     hexagon_div.id = "pijersi-hexagon-" + hexagon.name + "-id";
 
-    //const x_central_hexagon = 6*pijersi.view.const.HEXA_WIDTH;
-    //const y_central_hexagon = 5/2*pijersi.view.const.HEXA_HEIGHT + 3*pijersi.view.const.HEXA_SIDE;
-
-    //const x_hexagon = pijersi.view.const.BOARD_ORIGIN.x + (hexagon.u + hexagon.v/2)*pijersi.view.const.HEXA_WIDTH;
-    //const y_hexagon = pijersi.view.const.BOARD_ORIGIN.y - hexagon.v*Math.sqrt(3)/2*pijersi.view.const.HEXA_WIDTH;
-
-    const x_hexagon = pijersi.view.const.BOARD_ORIGIN.x ;
-    const y_hexagon = pijersi.view.const.BOARD_ORIGIN.y ;
+    const x_hexagon = pijersi.view.const.BOARD_ORIGIN.x + (hexagon.u + hexagon.v/2)*pijersi.view.const.HEXA_WIDTH;
+    const y_hexagon = pijersi.view.const.BOARD_ORIGIN.y - hexagon.v*Math.sqrt(3)/2*pijersi.view.const.HEXA_WIDTH;
 
     console.log("x_hexagon = " + x_hexagon);
     console.log("y_hexagon = " + y_hexagon);
@@ -211,11 +203,11 @@ pijersi.view.make_hexagon_div = function(hexagon){
     const x_hexagon_div = x_hexagon - pijersi.view.const.HEXA_WIDTH/2 ; // hexagon left
     const y_hexagon_div = y_hexagon - pijersi.view.const.HEXA_HEIGHT/2; // hexagon top
 
-    hexagon_div.style.left = Math.floor(x_hexagon_div) + "px";
-    hexagon_div.style.top = Math.floor(y_hexagon_div) + "px";
+    hexagon_div.style.left = x_hexagon_div/pijersi.view.const.BOARD_WIDTH*100 + "%";
+    hexagon_div.style.top = y_hexagon_div/pijersi.view.const.BOARD_HEIGHT*100 + "%";
 
-    hexagon_div.style.width = Math.floor(pijersi.view.const.HEXA_WIDTH) + "px";
-    hexagon_div.style.height = Math.floor(pijersi.view.const.HEXA_HEIGHT) + "px";
+    hexagon_div.style.width = pijersi.view.const.HEXA_WIDTH/pijersi.view.const.BOARD_WIDTH*100 + "%";
+    hexagon_div.style.height = pijersi.view.const.HEXA_HEIGHT/pijersi.view.const.BOARD_HEIGHT*100 + "%";
 
     console.log("hexagon_div.style.width = " + hexagon_div.style.width);
     console.log("hexagon_div.style.height = " + hexagon_div.style.height);
@@ -230,6 +222,17 @@ pijersi.view.make_hexagon_div = function(hexagon){
     return hexagon_div;
 };
 
+
+pijersi.view.make_all_hexagon_div = function(hexagons){
+
+    let hexagon_divs = [];
+
+    for ( const hexagon of hexagons ) {
+        hexagon_divs.push(pijersi.view.make_hexagon_div(hexagon));
+    }
+
+    return hexagon_divs;
+};
 
 
 pijersi.view.mouse_listner = function(event){

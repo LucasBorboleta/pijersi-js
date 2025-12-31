@@ -1023,11 +1023,13 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 /* --- PIJERSI-BEGIN: hexagon states  --- */
 
 .pijersi-view-hexagon-style {
-    position: absolute;
-    border-width: 5px;
+    border-width: 2px;
+    border-style:solid;
     border-color: blue;
     background-color: red;
     opacity: 0.25;
+
+    position: absolute;
 }
 
 .pijersi-view-hexagon-selected-style {
