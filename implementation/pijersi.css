@@ -25,6 +25,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     --pijersi-view-body-background-color: var(--pijersi-color-brown);
 
     --pijersi-view-board-height: 70vh;
+    --pijersi-view-board-width: calc(var(--pijersi-view-board-height) * 1.0659);
 
     --pijersi-view-button-size: 3rem;
     --pijersi-view-button-hover-background-color: var(--pijersi-color-blue);
@@ -87,7 +88,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     display: grid;
 
     grid-template-areas:
-        'credit       mouse-debug       title     other-debug       menu'
+        'credit       mouse-debug      title     other-debug       menu'
         'board        board            board     board             board'
         'white-turn   left-multi-func  legend    right-multi-func  black-turn'
         'captures     captures         captures  captures          captures'
@@ -164,13 +165,21 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 #pijersi-view-board-id {
     grid-area: board;
 
+    background-image:url(img/board.svg);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+
+    height: var(--pijersi-view-board-height);
+    width: var(--pijersi-view-board-width);
+
     align-self: center;
     justify-self: center;
+
+    position: relative;
  }
 
-#pijersi-view-board-image-id {
-    height: var(--pijersi-view-board-height);
-}
 
 #pijersi-view-credit-id {
     grid-area:credit;
@@ -1014,7 +1023,11 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 /* --- PIJERSI-BEGIN: hexagon states  --- */
 
 .pijersi-view-hexagon-style {
-    position:absolute;
+    position: absolute;
+    border-width: 5px;
+    border-color: blue;
+    background-color: red;
+    opacity: 0.25;
 }
 
 .pijersi-view-hexagon-selected-style {
