@@ -93,22 +93,31 @@ pijersi.view.__init = function(){
 
     pijersi.view.const.CAPTURE_GROUP_EDIT_STYLE = "pijersi-view-capture-group-style";
 
-    // Canvas x-y dimensions in hexagon width units
+
+    // >> All dimensions of board, hexagons and cubes are expressed in pixels
+    // >> As resize of window could change such dimensions, 
+    // >> those memorized dimensions should be understood as initial dimensions
+    // >> and should be applied in % of the board dimensions when constructing DIV, etc.
+
+    // Board x-y dimensions in hexagon width units
     // >> This complex formula is related to the construction of the background picture for the board
     pijersi.view.const.BOARD_NX = 8;
     pijersi.view.const.BOARD_NY = (4 + 5/2)*2/Math.sqrt(3);
 
-    // Canvas x-y dimensions in pixels
+    // Check board x-y ratio and record its dimensions
     {
         const board_rectangle = pijersi.view.const.BOARD.getBoundingClientRect();
-        pijersi.view.const.BOARD_HEIGHT = board_rectangle.height;
-        pijersi.view.const.BOARD_WIDTH = board_rectangle.width;
  
-        let expected_ratio = pijersi.view.const.BOARD_NX / pijersi.view.const.BOARD_NY;
-        let actual_ratio = pijersi.view.const.BOARD_WIDTH / pijersi.view.const.BOARD_HEIGHT;
+        const expected_ratio = pijersi.view.const.BOARD_NX / pijersi.view.const.BOARD_NY;
+        const actual_ratio = board_rectangle.width / board_rectangle.height;
+
         if ( Math.abs(actual_ratio - expected_ratio) > 0.001 ) {
             pijersi.debug.log_error("unexpected 'actual_ratio' = " + actual_ratio + " ; expected_ratio = " + expected_ratio);
         };
+
+        pijersi.view.const.BOARD_HEIGHT = board_rectangle.height;
+        pijersi.view.const.BOARD_WIDTH = board_rectangle.width;
+
     }
 
     // Hexagon geometrical data
@@ -204,8 +213,8 @@ pijersi.view.make_hexagon_div = function(hexagon){
     hexagon_div.style.left = (x_hexagon_div + pijersi.view.const.HEX_X_PAD)/pijersi.view.const.BOARD_WIDTH*100 + "%";
     hexagon_div.style.top = (y_hexagon_div + pijersi.view.const.HEX_Y_PAD)/pijersi.view.const.BOARD_HEIGHT*100 + "%";
 
-    hexagon_div.style.width = (pijersi.view.const.HEXA_WIDTH -2*pijersi.view.const.HEX_X_PAD)/pijersi.view.const.BOARD_WIDTH*100 + "%";
-    hexagon_div.style.height = (pijersi.view.const.HEXA_HEIGHT -2*pijersi.view.const.HEX_Y_PAD)/pijersi.view.const.BOARD_HEIGHT*100 + "%";
+    hexagon_div.style.width = (pijersi.view.const.HEXA_WIDTH - 2*pijersi.view.const.HEX_X_PAD)/pijersi.view.const.BOARD_WIDTH*100 + "%";
+    hexagon_div.style.height = (pijersi.view.const.HEXA_HEIGHT - 2*pijersi.view.const.HEX_Y_PAD)/pijersi.view.const.BOARD_HEIGHT*100 + "%";
  
     hexagon_div.className = "pijersi-view-hexagon-style";
 
@@ -234,6 +243,9 @@ pijersi.view.mouse_listner = function(event){
 
 
 pijersi.view.get_mouse_position = function(event){
+
+   // Return the mouse position in % relatively to the actual BOARD rectangle
+
    const board_rectangle = pijersi.view.const.BOARD.getBoundingClientRect();
  
     return { x: (event.clientX - board_rectangle.left)/board_rectangle.width*100,
