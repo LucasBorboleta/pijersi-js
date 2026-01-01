@@ -117,13 +117,15 @@ pijersi.view.__init = function(){
     pijersi.view.const.HEXA_WIDTH = pijersi.view.const.BOARD_WIDTH/pijersi.view.const.BOARD_NX;
     pijersi.view.const.HEXA_SIDE = pijersi.view.const.HEXA_WIDTH*Math.tan(pijersi.view.const.HEXA_SIDE_ANGLE/2);
     pijersi.view.const.HEXA_HEIGHT = 2*pijersi.view.const.HEXA_SIDE;
+    {
+        const hex_pad_fraction = 0.04;
+        pijersi.view.const.HEX_X_PAD = hex_pad_fraction*pijersi.view.const.HEXA_WIDTH;
+        pijersi.view.const.HEX_Y_PAD = hex_pad_fraction*pijersi.view.const.HEXA_HEIGHT;
+    }
+
     pijersi.view.const.HEXA_DELTA_Y = Math.sqrt(pijersi.view.const.HEXA_SIDE**2 - (pijersi.view.const.HEXA_WIDTH/2)**2);
     pijersi.view.const.HEXA_COS_SIDE_ANGLE = Math.cos(pijersi.view.const.HEXA_SIDE_ANGLE);
     pijersi.view.const.HEXA_SIN_SIDE_ANGLE = Math.sin(pijersi.view.const.HEXA_SIDE_ANGLE);
-
-    console.log("pijersi.view.const.HEXA_WIDTH = " + pijersi.view.const.HEXA_WIDTH);
-    console.log("pijersi.view.const.HEXA_SIDE_ANGLE = " + pijersi.view.const.HEXA_SIDE_ANGLE);
-    console.log("pijersi.view.const.HEXA_HEIGHT = " + pijersi.view.const.HEXA_HEIGHT);
 
     // Cube (square) geometrical data
     pijersi.view.const.BOARD_CUBE_VERTEX_COUNT = 4;
@@ -131,7 +133,6 @@ pijersi.view.__init = function(){
 
     // Origin of the orthonormal x-y frame and the oblic u-v frame
     pijersi.view.const.BOARD_ORIGIN = new pijersi.math.TinyVector(pijersi.view.const.BOARD_WIDTH/2, pijersi.view.const.BOARD_HEIGHT/2);
-    console.log("pijersi.view.const.BOARD_ORIGIN = " + pijersi.view.const.BOARD_ORIGIN.toString());
 
     // Unit vectors of the orthonormal x-y frame
     pijersi.view.const.BOARD_UNIT_X = new pijersi.math.TinyVector(1, 0);
@@ -197,23 +198,14 @@ pijersi.view.make_hexagon_div = function(hexagon){
     const x_hexagon = pijersi.view.const.BOARD_ORIGIN.x + (hexagon.u + hexagon.v/2)*pijersi.view.const.HEXA_WIDTH;
     const y_hexagon = pijersi.view.const.BOARD_ORIGIN.y - hexagon.v*Math.sqrt(3)/2*pijersi.view.const.HEXA_WIDTH;
 
-    console.log("x_hexagon = " + x_hexagon);
-    console.log("y_hexagon = " + y_hexagon);
+    const x_hexagon_div = x_hexagon - pijersi.view.const.HEXA_WIDTH/2 ; // hexagon left before padding
+    const y_hexagon_div = y_hexagon - pijersi.view.const.HEXA_HEIGHT/2; // hexagon top before padding
 
-    const x_hexagon_div = x_hexagon - pijersi.view.const.HEXA_WIDTH/2 ; // hexagon left
-    const y_hexagon_div = y_hexagon - pijersi.view.const.HEXA_HEIGHT/2; // hexagon top
+    hexagon_div.style.left = (x_hexagon_div + pijersi.view.const.HEX_X_PAD)/pijersi.view.const.BOARD_WIDTH*100 + "%";
+    hexagon_div.style.top = (y_hexagon_div + pijersi.view.const.HEX_Y_PAD)/pijersi.view.const.BOARD_HEIGHT*100 + "%";
 
-    hexagon_div.style.left = x_hexagon_div/pijersi.view.const.BOARD_WIDTH*100 + "%";
-    hexagon_div.style.top = y_hexagon_div/pijersi.view.const.BOARD_HEIGHT*100 + "%";
-
-    hexagon_div.style.width = pijersi.view.const.HEXA_WIDTH/pijersi.view.const.BOARD_WIDTH*100 + "%";
-    hexagon_div.style.height = pijersi.view.const.HEXA_HEIGHT/pijersi.view.const.BOARD_HEIGHT*100 + "%";
-
-    console.log("hexagon_div.style.width = " + hexagon_div.style.width);
-    console.log("hexagon_div.style.height = " + hexagon_div.style.height);
-
-    console.log("x_hexagon_div = " + x_hexagon_div);
-    console.log("y_hexagon_div = " + y_hexagon_div);
+    hexagon_div.style.width = (pijersi.view.const.HEXA_WIDTH -2*pijersi.view.const.HEX_X_PAD)/pijersi.view.const.BOARD_WIDTH*100 + "%";
+    hexagon_div.style.height = (pijersi.view.const.HEXA_HEIGHT -2*pijersi.view.const.HEX_Y_PAD)/pijersi.view.const.BOARD_HEIGHT*100 + "%";
  
     hexagon_div.className = "pijersi-view-hexagon-style";
 
@@ -242,8 +234,10 @@ pijersi.view.mouse_listner = function(event){
 
 
 pijersi.view.get_mouse_position = function(event){
-    return { x: event.clientX,
-             y: event.clientY };
+   const board_rectangle = pijersi.view.const.BOARD.getBoundingClientRect();
+ 
+    return { x: (event.clientX - board_rectangle.left)/board_rectangle.width*100,
+             y: (event.clientY - board_rectangle.top)/board_rectangle.height*100 };
 };
 
 
