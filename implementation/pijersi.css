@@ -1042,6 +1042,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 }
 
 .pijersi-view-label-text-style {
+    display: none;
+    
     font-size: var(--pijersi-view-font-size);
     font-weight: normal;
 

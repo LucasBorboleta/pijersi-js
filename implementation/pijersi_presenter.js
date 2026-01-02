@@ -138,6 +138,8 @@ pijersi.presenter.toggle_captures = function(){
 
 pijersi.presenter.toggle_labels = function(){
     pijersi.view.show_menu(false);
+    pijersi.view.toggle_labels();
+
 };
 
 
