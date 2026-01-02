@@ -20,12 +20,12 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     --pijersi-color-brown: #BF9B7A;
     --pijersi-color-blue: #156082;
 
-    --pijersi-view-font-size: 15px;
-    --pijersi-view-label-font-size: 12px;
+    --pijersi-view-font-size: 1rem;
+    --pijersi-view-label-font-size: 0.75 rem;
 
     --pijersi-view-body-background-color: var(--pijersi-color-brown);
 
-    --pijersi-view-board-height: 70vh;
+    --pijersi-view-board-height: 75vh;
     --pijersi-view-board-width: calc(var(--pijersi-view-board-height) * 1.10221);
 
     --pijersi-view-button-size: 3rem;
@@ -1060,24 +1060,6 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 }
 
 .pijersi-view-hexagon-unselected-style {
-}
-
-.pijersi-view-hexagon-name-style {
-    text-align:left;
-    font-size:60%;
-
-    padding-left:2px;
-    padding-right:0px;
-    padding-top:67%;
-    padding-bottom:0px;
-
-    border-style:none;
-    border-width:0px;
-
-    margin:0px;
-
-    outline-style:none;
-    outline-width:0px;
 }
 
 /* --- PIJERSI-END: hexagon states  --- */
