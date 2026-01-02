@@ -21,6 +21,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     --pijersi-color-blue: #156082;
 
     --pijersi-view-font-size: 15px;
+    --pijersi-view-label-font-size: 12px;
 
     --pijersi-view-body-background-color: var(--pijersi-color-brown);
 
@@ -1043,9 +1044,11 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 .pijersi-view-label-text-style {
     display: none;
-    
-    font-size: var(--pijersi-view-font-size);
+
+    font-size: var(--pijersi-view-label-font-size);
     font-weight: normal;
+    background-color: var(--pijersi-color-blue);
+    opacity: 0.75;
 
     text-align: center;
 }
