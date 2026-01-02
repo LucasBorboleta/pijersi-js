@@ -105,8 +105,9 @@ pijersi.view.__init = function(){
 
     // Board x-y dimensions in hexagon width units
     // >> This complex formula is related to the construction of the background picture for the board
-    pijersi.view.const.BOARD_NX = 8;
-    pijersi.view.const.BOARD_NY = (4 + 5/2)*2/Math.sqrt(3);
+    pijersi.view.const.BOARD_NX = 7;
+    pijersi.view.const.BOARD_NY = 11/Math.sqrt(3);
+
 
     // Check board x-y ratio and record its dimensions
     {
@@ -232,7 +233,7 @@ pijersi.view.make_label_divs = function(hexagons){
 
     let label_divs = [];
 
-    const label_div_width = 0.30*pijersi.view.const.HEXA_WIDTH;
+    const label_div_width = 0.20*pijersi.view.const.HEXA_WIDTH;
 
     for ( const hexagon of hexagons ) {
             

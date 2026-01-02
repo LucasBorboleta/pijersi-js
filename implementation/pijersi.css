@@ -26,7 +26,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     --pijersi-view-body-background-color: var(--pijersi-color-brown);
 
     --pijersi-view-board-height: 70vh;
-    --pijersi-view-board-width: calc(var(--pijersi-view-board-height) * 1.0659);
+    --pijersi-view-board-width: calc(var(--pijersi-view-board-height) * 1.10221);
 
     --pijersi-view-button-size: 3rem;
     --pijersi-view-button-hover-background-color: var(--pijersi-color-blue);
@@ -1031,7 +1031,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     background-color: red;
     opacity: 0.25;
     */
-
+    
     position: absolute;
 }
 
