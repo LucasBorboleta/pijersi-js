@@ -38,6 +38,11 @@ pijersi.model.__init = function(){
     pijersi.model.const.PLAYER_WHITE = "white";
     pijersi.model.const.PLAYER_BLACK = "black";
 
+    pijersi.model.const.CUBE_ROCK = "rock";
+    pijersi.model.const.CUBE_PAPER = "paper";
+    pijersi.model.const.CUBE_SCISSORS = "sicssors";
+    pijersi.model.const.CUBE_WISE = "wise";
+
     pijersi.model.const.LEGEND_WIN_SCORE = "1";
     pijersi.model.const.LEGEND_LOSS_SCORE = "0";
     pijersi.model.const.LEGEND_TIE_SCORE = "½";
@@ -62,6 +67,8 @@ pijersi.model.__init = function(){
 
     pijersi.model.hexagons = pijersi.model.make_all_hexagons();
     pijersi.model.hexagons_states = pijersi.model.make_all_hexagons_states(pijersi.model.hexagons);
+
+    pijersi.model.captures = pijersi.model.make_captures();
 
     // Seal the sub-module
     Object.seal(pijersi.model);
@@ -456,4 +463,24 @@ pijersi.model.make_all_hexagons_states = function(hexagons){
     }
 
     return hexagons_states;
+};
+
+
+pijersi.model.make_captures = function(){
+
+    let captures = {};
+
+    captures[pijersi.model.const.PLAYER_WHITE] = {};
+    captures[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_ROCK] = 0;
+    captures[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_PAPER] = 0;
+    captures[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_SCISSORS] = 0;
+    captures[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_WISE] = 0;
+     
+    captures[pijersi.model.const.PLAYER_BLACK] = {};
+    captures[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_ROCK] = 0;
+    captures[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_PAPER] = 0;
+    captures[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_SCISSORS] = 0;
+    captures[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_WISE] = 0;
+ 
+    return captures;
 };

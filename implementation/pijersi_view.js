@@ -172,8 +172,9 @@ pijersi.view.__init = function(){
     pijersi.view.debug_showed = false;
     pijersi.view.show_debug(pijersi.view.debug_showed);
 
-    pijersi.view.hexagon_divs = pijersi.view.make_all_hexagon_div(pijersi.model.hexagons);
+    pijersi.view.hexagon_divs = pijersi.view.make_all_hexagon_divs(pijersi.model.hexagons);
     pijersi.view.label_divs = pijersi.view.make_label_divs(pijersi.model.hexagons);
+    pijersi.view.capture_divs = pijersi.view.make_all_capture_divs();
 
     // Seal the sub-module
     Object.seal(pijersi.view);
@@ -188,7 +189,99 @@ pijersi.view.__init = function(){
 
 pijersi.view.testit = function(){
     console.log("testit: hello");
+
+    pijersi.model.captures[pijersi.model.const.PLAYER_WHITE]["rock"] = 4;
+    pijersi.model.captures[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_PAPER] = 3;
+    pijersi.model.captures[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_SCISSORS] = 2;
+    pijersi.model.captures[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_WISE] = 2;
+     
+    pijersi.model.captures[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_ROCK] = 1;
+    pijersi.model.captures[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_PAPER] = 0;
+    pijersi.model.captures[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_SCISSORS] = 2;
+    pijersi.model.captures[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_WISE] = 1;
+
     console.log("testit: bye");
+};
+
+
+pijersi.view.make_all_capture_divs = function(){
+    let capture_divs = {};
+
+    capture_divs[pijersi.model.const.PLAYER_WHITE] = {};
+
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_ROCK] = [];
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_ROCK].push(document.getElementById("pijersi-view-capture-black-rock-1-id"));
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_ROCK].push(document.getElementById("pijersi-view-capture-black-rock-2-id"));
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_ROCK].push(document.getElementById("pijersi-view-capture-black-rock-3-id"));
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_ROCK].push(document.getElementById("pijersi-view-capture-black-rock-4-id"));
+
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_PAPER] = [];
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_PAPER].push(document.getElementById("pijersi-view-capture-black-paper-1-id"));
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_PAPER].push(document.getElementById("pijersi-view-capture-black-paper-2-id"));
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_PAPER].push(document.getElementById("pijersi-view-capture-black-paper-3-id"));
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_PAPER].push(document.getElementById("pijersi-view-capture-black-paper-4-id"));
+
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_SCISSORS] = [];
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_SCISSORS].push(document.getElementById("pijersi-view-capture-black-scissors-1-id"));
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_SCISSORS].push(document.getElementById("pijersi-view-capture-black-scissors-2-id"));
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_SCISSORS].push(document.getElementById("pijersi-view-capture-black-scissors-3-id"));
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_SCISSORS].push(document.getElementById("pijersi-view-capture-black-scissors-4-id"));
+   
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_WISE] = [];
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_WISE].push(document.getElementById("pijersi-view-capture-black-wise-1-id"));
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_WISE].push(document.getElementById("pijersi-view-capture-black-wise-2-id"));
+ 
+    capture_divs[pijersi.model.const.PLAYER_BLACK] = {};
+
+    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_ROCK] = [];
+    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_ROCK].push(document.getElementById("pijersi-view-capture-white-rock-1-id"));
+    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_ROCK].push(document.getElementById("pijersi-view-capture-white-rock-2-id"));
+    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_ROCK].push(document.getElementById("pijersi-view-capture-white-rock-3-id"));
+    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_ROCK].push(document.getElementById("pijersi-view-capture-white-rock-4-id"));
+
+    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_PAPER] = [];
+    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_PAPER].push(document.getElementById("pijersi-view-capture-white-paper-1-id"));
+    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_PAPER].push(document.getElementById("pijersi-view-capture-white-paper-2-id"));
+    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_PAPER].push(document.getElementById("pijersi-view-capture-white-paper-3-id"));
+    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_PAPER].push(document.getElementById("pijersi-view-capture-white-paper-4-id"));
+
+    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_SCISSORS] = [];
+    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_SCISSORS].push(document.getElementById("pijersi-view-capture-white-scissors-1-id"));
+    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_SCISSORS].push(document.getElementById("pijersi-view-capture-white-scissors-2-id"));
+    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_SCISSORS].push(document.getElementById("pijersi-view-capture-white-scissors-3-id"));
+    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_SCISSORS].push(document.getElementById("pijersi-view-capture-white-scissors-4-id"));
+   
+    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_WISE] = [];
+    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_WISE].push(document.getElementById("pijersi-view-capture-white-wise-1-id"));
+    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_WISE].push(document.getElementById("pijersi-view-capture-white-wise-2-id"));
+
+    return capture_divs;
+};
+
+
+pijersi.view.update_captures = function(){
+ 
+    for (const player in pijersi.model.captures ) {
+
+        for (const cube_sort in pijersi.model.captures[player] ) {
+            
+            const capture_count = pijersi.model.captures[player][cube_sort];
+
+            const cube_count = pijersi.view.capture_divs[player][cube_sort].length;
+
+            for ( let cube_index = 0; cube_index  < cube_count ; cube_index++ ) {
+
+                const capture_div = pijersi.view.capture_divs[player][cube_sort][cube_index];
+
+                if ( cube_index < capture_count ) {
+                    capture_div.classList.add(pijersi.view.const.SHOW_STYLE);
+
+                } else {
+                    capture_div.classList.remove(pijersi.view.const.SHOW_STYLE);
+                }
+            }
+        }
+    }
 };
 
 
@@ -217,7 +310,7 @@ pijersi.view.make_hexagon_div = function(hexagon){
 };
 
 
-pijersi.view.make_all_hexagon_div = function(hexagons){
+pijersi.view.make_all_hexagon_divs = function(hexagons){
 
     let hexagon_divs = [];
 

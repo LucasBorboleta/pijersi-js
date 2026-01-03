@@ -91,8 +91,10 @@ pijersi.presenter.update_mode = function(){
         pijersi.view.show_black_swap(true);
 
         pijersi.view.enable_capture_groups(true);
-
     }
+
+    pijersi.view.update_captures();
+
 };
 
 
