@@ -1047,8 +1047,6 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
     font-size: var(--pijersi-view-label-font-size);
     font-weight: normal;
-    background-color: var(--pijersi-color-blue);
-    opacity: 0.75;
 
     text-align: center;
 }
