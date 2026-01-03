@@ -78,6 +78,7 @@ pijersi.view.__init = function(){
     pijersi.view.const.CAPTURE_GROUPS.push(pijersi.view.const.CAPTURE_WHITE_WISES);
 
     pijersi.view.const.SHOW_STYLE = "pijersi-view-show-style";
+    pijersi.view.const.HIDE_STYLE = "pijersi-view-hide-style";
 
     pijersi.view.const.PLAYER_TURN_EDIT_STYLE = "pijersi-view-player-turn-edit-style";
     pijersi.view.const.CREDIT_EDIT_STYLE = "pijersi-view-credit-edit-style";
@@ -190,12 +191,12 @@ pijersi.view.__init = function(){
 pijersi.view.testit = function(){
     console.log("testit: hello");
 
-    pijersi.model.captures[pijersi.model.const.PLAYER_WHITE]["rock"] = 4;
+    pijersi.model.captures[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_ROCK] = 2;
     pijersi.model.captures[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_PAPER] = 3;
     pijersi.model.captures[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_SCISSORS] = 2;
     pijersi.model.captures[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_WISE] = 2;
      
-    pijersi.model.captures[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_ROCK] = 1;
+    pijersi.model.captures[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_ROCK] = 4;
     pijersi.model.captures[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_PAPER] = 0;
     pijersi.model.captures[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_SCISSORS] = 2;
     pijersi.model.captures[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_WISE] = 1;
@@ -207,53 +208,53 @@ pijersi.view.testit = function(){
 pijersi.view.make_all_capture_divs = function(){
     let capture_divs = {};
 
-    capture_divs[pijersi.model.const.PLAYER_WHITE] = {};
-
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_ROCK] = [];
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_ROCK].push(document.getElementById("pijersi-view-capture-black-rock-1-id"));
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_ROCK].push(document.getElementById("pijersi-view-capture-black-rock-2-id"));
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_ROCK].push(document.getElementById("pijersi-view-capture-black-rock-3-id"));
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_ROCK].push(document.getElementById("pijersi-view-capture-black-rock-4-id"));
-
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_PAPER] = [];
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_PAPER].push(document.getElementById("pijersi-view-capture-black-paper-1-id"));
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_PAPER].push(document.getElementById("pijersi-view-capture-black-paper-2-id"));
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_PAPER].push(document.getElementById("pijersi-view-capture-black-paper-3-id"));
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_PAPER].push(document.getElementById("pijersi-view-capture-black-paper-4-id"));
-
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_SCISSORS] = [];
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_SCISSORS].push(document.getElementById("pijersi-view-capture-black-scissors-1-id"));
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_SCISSORS].push(document.getElementById("pijersi-view-capture-black-scissors-2-id"));
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_SCISSORS].push(document.getElementById("pijersi-view-capture-black-scissors-3-id"));
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_SCISSORS].push(document.getElementById("pijersi-view-capture-black-scissors-4-id"));
-   
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_WISE] = [];
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_WISE].push(document.getElementById("pijersi-view-capture-black-wise-1-id"));
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_WISE].push(document.getElementById("pijersi-view-capture-black-wise-2-id"));
- 
     capture_divs[pijersi.model.const.PLAYER_BLACK] = {};
 
     capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_ROCK] = [];
-    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_ROCK].push(document.getElementById("pijersi-view-capture-white-rock-1-id"));
-    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_ROCK].push(document.getElementById("pijersi-view-capture-white-rock-2-id"));
-    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_ROCK].push(document.getElementById("pijersi-view-capture-white-rock-3-id"));
-    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_ROCK].push(document.getElementById("pijersi-view-capture-white-rock-4-id"));
+    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_ROCK].push(document.getElementById("pijersi-view-capture-black-rock-1-id"));
+    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_ROCK].push(document.getElementById("pijersi-view-capture-black-rock-2-id"));
+    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_ROCK].push(document.getElementById("pijersi-view-capture-black-rock-3-id"));
+    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_ROCK].push(document.getElementById("pijersi-view-capture-black-rock-4-id"));
 
     capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_PAPER] = [];
-    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_PAPER].push(document.getElementById("pijersi-view-capture-white-paper-1-id"));
-    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_PAPER].push(document.getElementById("pijersi-view-capture-white-paper-2-id"));
-    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_PAPER].push(document.getElementById("pijersi-view-capture-white-paper-3-id"));
-    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_PAPER].push(document.getElementById("pijersi-view-capture-white-paper-4-id"));
+    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_PAPER].push(document.getElementById("pijersi-view-capture-black-paper-1-id"));
+    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_PAPER].push(document.getElementById("pijersi-view-capture-black-paper-2-id"));
+    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_PAPER].push(document.getElementById("pijersi-view-capture-black-paper-3-id"));
+    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_PAPER].push(document.getElementById("pijersi-view-capture-black-paper-4-id"));
 
     capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_SCISSORS] = [];
-    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_SCISSORS].push(document.getElementById("pijersi-view-capture-white-scissors-1-id"));
-    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_SCISSORS].push(document.getElementById("pijersi-view-capture-white-scissors-2-id"));
-    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_SCISSORS].push(document.getElementById("pijersi-view-capture-white-scissors-3-id"));
-    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_SCISSORS].push(document.getElementById("pijersi-view-capture-white-scissors-4-id"));
+    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_SCISSORS].push(document.getElementById("pijersi-view-capture-black-scissors-1-id"));
+    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_SCISSORS].push(document.getElementById("pijersi-view-capture-black-scissors-2-id"));
+    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_SCISSORS].push(document.getElementById("pijersi-view-capture-black-scissors-3-id"));
+    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_SCISSORS].push(document.getElementById("pijersi-view-capture-black-scissors-4-id"));
    
     capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_WISE] = [];
-    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_WISE].push(document.getElementById("pijersi-view-capture-white-wise-1-id"));
-    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_WISE].push(document.getElementById("pijersi-view-capture-white-wise-2-id"));
+    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_WISE].push(document.getElementById("pijersi-view-capture-black-wise-1-id"));
+    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_WISE].push(document.getElementById("pijersi-view-capture-black-wise-2-id"));
+ 
+    capture_divs[pijersi.model.const.PLAYER_WHITE] = {};
+
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_ROCK] = [];
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_ROCK].push(document.getElementById("pijersi-view-capture-white-rock-1-id"));
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_ROCK].push(document.getElementById("pijersi-view-capture-white-rock-2-id"));
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_ROCK].push(document.getElementById("pijersi-view-capture-white-rock-3-id"));
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_ROCK].push(document.getElementById("pijersi-view-capture-white-rock-4-id"));
+
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_PAPER] = [];
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_PAPER].push(document.getElementById("pijersi-view-capture-white-paper-1-id"));
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_PAPER].push(document.getElementById("pijersi-view-capture-white-paper-2-id"));
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_PAPER].push(document.getElementById("pijersi-view-capture-white-paper-3-id"));
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_PAPER].push(document.getElementById("pijersi-view-capture-white-paper-4-id"));
+
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_SCISSORS] = [];
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_SCISSORS].push(document.getElementById("pijersi-view-capture-white-scissors-1-id"));
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_SCISSORS].push(document.getElementById("pijersi-view-capture-white-scissors-2-id"));
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_SCISSORS].push(document.getElementById("pijersi-view-capture-white-scissors-3-id"));
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_SCISSORS].push(document.getElementById("pijersi-view-capture-white-scissors-4-id"));
+   
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_WISE] = [];
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_WISE].push(document.getElementById("pijersi-view-capture-white-wise-1-id"));
+    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_WISE].push(document.getElementById("pijersi-view-capture-white-wise-2-id"));
 
     return capture_divs;
 };
@@ -491,6 +492,8 @@ pijersi.view.show_captures = function(condition){
     } else {
         pijersi.debug.log_error("unexpected 'condition' = " + condition);
     }
+
+    pijersi.view.update_captures();
 };
 
 

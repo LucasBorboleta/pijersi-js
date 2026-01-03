@@ -40,7 +40,7 @@ pijersi.model.__init = function(){
 
     pijersi.model.const.CUBE_ROCK = "rock";
     pijersi.model.const.CUBE_PAPER = "paper";
-    pijersi.model.const.CUBE_SCISSORS = "sicssors";
+    pijersi.model.const.CUBE_SCISSORS = "scissors";
     pijersi.model.const.CUBE_WISE = "wise";
 
     pijersi.model.const.LEGEND_WIN_SCORE = "1";
