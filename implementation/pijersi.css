@@ -695,16 +695,6 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     display: none;
 }
 
-#pijersi-view-capture-black-wise-3-id {
-    grid-area:black-wise-3;
-    display: none;
-}
-
-#pijersi-view-capture-black-wise-4-id {
-    grid-area:black-wise-4;
-    display: none;
-}
-
 .pijersi-view-capture-white-rock-style {
     align-self: center;
     justify-self: center;
@@ -828,16 +818,6 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 #pijersi-view-capture-white-wise-2-id {
     grid-area:white-wise-2;
-    display: none;
-}
-
-#pijersi-view-capture-white-wise-3-id {
-    grid-area:white-wise-3;
-    display: none;
-}
-
-#pijersi-view-capture-white-wise-4-id {
-    grid-area:white-wise-4;
     display: none;
 }
 
