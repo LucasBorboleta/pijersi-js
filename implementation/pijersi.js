@@ -31,11 +31,6 @@ pijersi.__init = function(){
 
     // Seal the module
     Object.seal(pijersi);
-
-    pijersi.view.toggle_checkbox('pijersi-view-show-captures-id')
-    pijersi.view.toggle_checkbox('pijersi-view-show-labels-id')
-    
-    pijersi.presenter.new_game();
 };
 
 ///////////////////////////////////////////////////////////////////////////////

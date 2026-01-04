@@ -105,10 +105,9 @@ pijersi.view.__init = function(){
     // >> and should be applied in % of the board dimensions when constructing DIV, etc.
 
     // Board x-y dimensions in hexagon width units
-    // >> This complex formula is related to the construction of the background picture for the board
+    // >> This formula is related to the construction of the background picture for the board
     pijersi.view.const.BOARD_NX = 7;
     pijersi.view.const.BOARD_NY = 11/Math.sqrt(3);
-
 
     // Check board x-y ratio and record its dimensions
     {
@@ -173,9 +172,9 @@ pijersi.view.__init = function(){
     pijersi.view.debug_showed = false;
     pijersi.view.show_debug(pijersi.view.debug_showed);
 
-    pijersi.view.hexagon_divs = pijersi.view.make_all_hexagon_divs(pijersi.model.hexagons);
-    pijersi.view.label_divs = pijersi.view.make_label_divs(pijersi.model.hexagons);
-    pijersi.view.capture_divs = pijersi.view.make_all_capture_divs();
+    pijersi.view.hexagon_divs = undefined;
+    pijersi.view.label_divs = undefined;
+    pijersi.view.capture_divs = undefined;
 
     // Seal the sub-module
     Object.seal(pijersi.view);
@@ -183,98 +182,49 @@ pijersi.view.__init = function(){
     pijersi.view.const.BOARD.addEventListener( "mousemove" , pijersi.view.mouse_listner);
 
     pijersi.view.const.BODY.addEventListener( "keydown" , pijersi.view.key_listner);
-
-    pijersi.view.testit();
 };
 
 
-pijersi.view.testit = function(){
-    console.log("testit: hello");
+pijersi.view.make_all_capture_divs = function(captures){
 
-    pijersi.model.captures[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_ROCK] = 2;
-    pijersi.model.captures[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_PAPER] = 3;
-    pijersi.model.captures[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_SCISSORS] = 2;
-    pijersi.model.captures[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_WISE] = 2;
-     
-    pijersi.model.captures[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_ROCK] = 4;
-    pijersi.model.captures[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_PAPER] = 0;
-    pijersi.model.captures[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_SCISSORS] = 2;
-    pijersi.model.captures[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_WISE] = 1;
+    if ( pijersi.view.capture_divs === undefined ) {
 
-    console.log("testit: bye");
-};
+        let capture_divs = {};
 
+        for ( const player in captures ) {
+            capture_divs[player] = {};
 
-pijersi.view.make_all_capture_divs = function(){
-    let capture_divs = {};
-
-    capture_divs[pijersi.model.const.PLAYER_BLACK] = {};
-
-    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_ROCK] = [];
-    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_ROCK].push(document.getElementById("pijersi-view-capture-black-rock-1-id"));
-    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_ROCK].push(document.getElementById("pijersi-view-capture-black-rock-2-id"));
-    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_ROCK].push(document.getElementById("pijersi-view-capture-black-rock-3-id"));
-    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_ROCK].push(document.getElementById("pijersi-view-capture-black-rock-4-id"));
-
-    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_PAPER] = [];
-    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_PAPER].push(document.getElementById("pijersi-view-capture-black-paper-1-id"));
-    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_PAPER].push(document.getElementById("pijersi-view-capture-black-paper-2-id"));
-    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_PAPER].push(document.getElementById("pijersi-view-capture-black-paper-3-id"));
-    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_PAPER].push(document.getElementById("pijersi-view-capture-black-paper-4-id"));
-
-    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_SCISSORS] = [];
-    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_SCISSORS].push(document.getElementById("pijersi-view-capture-black-scissors-1-id"));
-    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_SCISSORS].push(document.getElementById("pijersi-view-capture-black-scissors-2-id"));
-    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_SCISSORS].push(document.getElementById("pijersi-view-capture-black-scissors-3-id"));
-    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_SCISSORS].push(document.getElementById("pijersi-view-capture-black-scissors-4-id"));
-   
-    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_WISE] = [];
-    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_WISE].push(document.getElementById("pijersi-view-capture-black-wise-1-id"));
-    capture_divs[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_WISE].push(document.getElementById("pijersi-view-capture-black-wise-2-id"));
- 
-    capture_divs[pijersi.model.const.PLAYER_WHITE] = {};
-
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_ROCK] = [];
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_ROCK].push(document.getElementById("pijersi-view-capture-white-rock-1-id"));
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_ROCK].push(document.getElementById("pijersi-view-capture-white-rock-2-id"));
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_ROCK].push(document.getElementById("pijersi-view-capture-white-rock-3-id"));
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_ROCK].push(document.getElementById("pijersi-view-capture-white-rock-4-id"));
-
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_PAPER] = [];
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_PAPER].push(document.getElementById("pijersi-view-capture-white-paper-1-id"));
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_PAPER].push(document.getElementById("pijersi-view-capture-white-paper-2-id"));
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_PAPER].push(document.getElementById("pijersi-view-capture-white-paper-3-id"));
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_PAPER].push(document.getElementById("pijersi-view-capture-white-paper-4-id"));
-
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_SCISSORS] = [];
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_SCISSORS].push(document.getElementById("pijersi-view-capture-white-scissors-1-id"));
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_SCISSORS].push(document.getElementById("pijersi-view-capture-white-scissors-2-id"));
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_SCISSORS].push(document.getElementById("pijersi-view-capture-white-scissors-3-id"));
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_SCISSORS].push(document.getElementById("pijersi-view-capture-white-scissors-4-id"));
-   
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_WISE] = [];
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_WISE].push(document.getElementById("pijersi-view-capture-white-wise-1-id"));
-    capture_divs[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_WISE].push(document.getElementById("pijersi-view-capture-white-wise-2-id"));
-
-    return capture_divs;
-};
-
-
-pijersi.view.update_captures = function(){
- 
-    for (const player in pijersi.model.captures ) {
-
-        for (const cube_sort in pijersi.model.captures[player] ) {
+            for ( const cube_sort in captures[player] ) {
+                capture_divs[player][cube_sort] = [];
             
-            const capture_count = pijersi.model.captures[player][cube_sort];
+                const cube_count = captures[player][cube_sort].length;
 
-            const cube_count = pijersi.view.capture_divs[player][cube_sort].length;
+                for ( let cube_index = 0 ; cube_index  < cube_count ; cube_index++ ) {
+                    const element_id = "pijersi-view-capture-" + player + "-" + cube_sort + "-"+ (cube_index + 1) + "-id" ;
+                    capture_divs[player][cube_sort].push(document.getElementById(element_id));
+                }
+            }
+        }
+
+        pijersi.view.capture_divs = capture_divs;
+    }
+};
+
+
+pijersi.view.update_captures = function(captures){
+ 
+    for ( const player in captures ) {
+
+        for ( const cube_sort in captures[player] ) {
+
+            const cube_count = captures[player][cube_sort].length;
 
             for ( let cube_index = 0; cube_index  < cube_count ; cube_index++ ) {
 
                 const capture_div = pijersi.view.capture_divs[player][cube_sort][cube_index];
 
-                if ( cube_index < capture_count ) {
+                if ( captures[player][cube_sort][cube_index] ) {
+
                     capture_div.classList.add(pijersi.view.const.SHOW_STYLE);
 
                 } else {
@@ -312,64 +262,70 @@ pijersi.view.make_hexagon_div = function(hexagon){
 
 
 pijersi.view.make_all_hexagon_divs = function(hexagons){
+    
+    if ( pijersi.view.hexagon_divs == undefined ) {
 
-    let hexagon_divs = [];
+        let hexagon_divs = [];
 
-    for ( const hexagon of hexagons ) {
-        hexagon_divs.push(pijersi.view.make_hexagon_div(hexagon));
+        for ( const hexagon of hexagons ) {
+            hexagon_divs.push(pijersi.view.make_hexagon_div(hexagon));
+        }
+       
+        pijersi.view.hexagon_divs = hexagon_divs;
     }
-
-    return hexagon_divs;
 };
 
 
 pijersi.view.make_label_divs = function(hexagons){
 
-    let label_divs = [];
+    if ( pijersi.view.label_divs === undefined ) {
 
-    const left_labels = [ "a1", "b1", "c1", "d1", "e1", "f1", "g1" ];
-    const right_labels = [ "a6", "b7", "c6", "d7", "e6", "f7", "g6" ]
+        let label_divs = [];
 
-    const label_div_width = 0.20*pijersi.view.const.HEXA_WIDTH;
+        const left_labels = [ "a1", "b1", "c1", "d1", "e1", "f1", "g1" ];
+        const right_labels = [ "a6", "b7", "c6", "d7", "e6", "f7", "g6" ]
 
-    for ( const hexagon of hexagons ) {
+        const label_div_width = 0.20*pijersi.view.const.HEXA_WIDTH;
 
-        if ( left_labels.includes(hexagon.name) || right_labels.includes(hexagon.name) ) {
-            
-            const text_node = document.createTextNode(hexagon.name);
+        for ( const hexagon of hexagons ) {
 
-            const paragraph_node = document.createElement("P");
-            paragraph_node.className = pijersi.view.const.LABEL_TEXT_STYLE;
-            paragraph_node.appendChild(text_node);
+            if ( left_labels.includes(hexagon.name) || right_labels.includes(hexagon.name) ) {
+                
+                const text_node = document.createTextNode(hexagon.name);
 
-            const label_div = document.createElement("DIV");
-            label_div.id = "pijersi-label-" + hexagon.name + "-id";
-            label_div.className = pijersi.view.const.LABEL_BOX_STYLE;
-            label_div.appendChild(paragraph_node);
+                const paragraph_node = document.createElement("P");
+                paragraph_node.className = pijersi.view.const.LABEL_TEXT_STYLE;
+                paragraph_node.appendChild(text_node);
 
-            const x_hexagon = pijersi.view.const.BOARD_ORIGIN.x + (hexagon.u + hexagon.v/2)*pijersi.view.const.HEXA_WIDTH;
-            const y_hexagon = pijersi.view.const.BOARD_ORIGIN.y - hexagon.v*Math.sqrt(3)/2*pijersi.view.const.HEXA_WIDTH;
+                const label_div = document.createElement("DIV");
+                label_div.id = "pijersi-label-" + hexagon.name + "-id";
+                label_div.className = pijersi.view.const.LABEL_BOX_STYLE;
+                label_div.appendChild(paragraph_node);
 
-            const x_hexagon_div = x_hexagon - pijersi.view.const.HEXA_WIDTH/2; 
-            const y_hexagon_div = y_hexagon - pijersi.view.const.HEXA_HEIGHT/2; 
+                const x_hexagon = pijersi.view.const.BOARD_ORIGIN.x + (hexagon.u + hexagon.v/2)*pijersi.view.const.HEXA_WIDTH;
+                const y_hexagon = pijersi.view.const.BOARD_ORIGIN.y - hexagon.v*Math.sqrt(3)/2*pijersi.view.const.HEXA_WIDTH;
 
-            label_div.style.left = (x_hexagon_div - label_div_width)/pijersi.view.const.BOARD_WIDTH*100 + "%";
-            label_div.style.top = (y_hexagon_div + pijersi.view.const.HEXA_SIDE/2)/pijersi.view.const.BOARD_HEIGHT*100 + "%";
+                const x_hexagon_div = x_hexagon - pijersi.view.const.HEXA_WIDTH/2; 
+                const y_hexagon_div = y_hexagon - pijersi.view.const.HEXA_HEIGHT/2; 
 
-            if ( right_labels.includes(hexagon.name) ) {
-                label_div.style.left = (x_hexagon_div + pijersi.view.const.HEXA_WIDTH)/pijersi.view.const.BOARD_WIDTH*100 + "%";
+                label_div.style.left = (x_hexagon_div - label_div_width)/pijersi.view.const.BOARD_WIDTH*100 + "%";
+                label_div.style.top = (y_hexagon_div + pijersi.view.const.HEXA_SIDE/2)/pijersi.view.const.BOARD_HEIGHT*100 + "%";
+
+                if ( right_labels.includes(hexagon.name) ) {
+                    label_div.style.left = (x_hexagon_div + pijersi.view.const.HEXA_WIDTH)/pijersi.view.const.BOARD_WIDTH*100 + "%";
+                }
+
+                label_div.style.height = (pijersi.view.const.HEXA_SIDE)/pijersi.view.const.BOARD_HEIGHT*100 + "%";
+                label_div.style.width = label_div_width/pijersi.view.const.BOARD_WIDTH*100 + "%";
+
+                pijersi.view.const.BOARD.appendChild(label_div);
+
+                label_divs.push(label_div);
             }
-
-            label_div.style.height = (pijersi.view.const.HEXA_SIDE)/pijersi.view.const.BOARD_HEIGHT*100 + "%";
-            label_div.style.width = label_div_width/pijersi.view.const.BOARD_WIDTH*100 + "%";
-
-            pijersi.view.const.BOARD.appendChild(label_div);
-
-            label_divs.push(label_div);
         }
-    }
 
-    return label_divs;
+        pijersi.view.label_divs = label_divs;
+    }
 };
 
 
@@ -432,16 +388,10 @@ pijersi.view.show_debug = function(condition){
 };
 
 
-pijersi.view.toggle_checkbox = function(checkbox_id){
+pijersi.view.click_element_by_id = function(element_id){
 
-    const checkbox = document.getElementById(checkbox_id);
-    checkbox.click();
-};
-
-
-pijersi.view.toggle_menu = function(){
-    pijersi.view.menu_showed = ! pijersi.view.menu_showed;
-    pijersi.view.show_menu(pijersi.view.menu_showed);
+    const element = document.getElementById(element_id);
+    element.click();
 };
 
 
@@ -493,7 +443,6 @@ pijersi.view.show_captures = function(condition){
         pijersi.debug.log_error("unexpected 'condition' = " + condition);
     }
 
-    pijersi.view.update_captures();
 };
 
 
@@ -713,30 +662,4 @@ pijersi.view.show_black_swap = function(condition){
 };
 
 
-pijersi.view.click_right_multi_func = function(){
-
-    if ( pijersi.view.show_next_showed ) {
-        pijersi.presenter.show_next_turn();
-
-    } else if ( pijersi.view.swap_whites_showed ) {
-        pijersi.presenter.swap_whites();
-
-    } else {
-        return;
-    }
-};
-
-
-pijersi.view.click_left_multi_func = function(){
-
-    if ( pijersi.view.show_previous_showed ) {
-        pijersi.presenter.show_previous_turn();
-
-    } else if ( pijersi.view.swap_blacks_showed ) {
-        pijersi.presenter.swap_blacks();
-
-    } else {
-        return;
-    }
-};
 ///////////////////////////////////////////////////////////////////////////////

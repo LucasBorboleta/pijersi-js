@@ -32,6 +32,47 @@ pijersi.presenter.__init = function(){
 
     // Seal the sub-module
     Object.seal(pijersi.presenter);
+
+    pijersi.model.make_all_hexagons();
+    pijersi.model.make_all_hexagons_states(pijersi.model.hexagons);
+    pijersi.model.make_all_captures();
+
+    pijersi.view.make_all_hexagon_divs(pijersi.model.hexagons);
+    pijersi.view.make_label_divs(pijersi.model.hexagons);
+    pijersi.view.make_all_capture_divs(pijersi.model.captures);
+  
+    if ( ! pijersi.view.labels_showed ) {
+        // >> the 'labels' must be showed, but also the associated checkbox must be 'checked' !
+        pijersi.view.click_element_by_id('pijersi-view-show-labels-id');
+    }
+
+    if ( ! pijersi.view.captures_showed ) {
+        // >> the 'captures' must be showed, but also the associated checkbox must be 'checked' !
+       pijersi.view.click_element_by_id('pijersi-view-show-captures-id');
+    }
+
+    pijersi.presenter.new_game();
+
+    pijersi.presenter.testit();
+};
+
+
+pijersi.presenter.testit = function(){
+    console.log("testit: hello");
+
+    pijersi.model.captures[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_ROCK] = [false, true, false, false];
+    pijersi.model.captures[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_PAPER] = [true, true, true, false];
+    pijersi.model.captures[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_SCISSORS] = [true, true, false, false];
+    pijersi.model.captures[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_WISE] = [true, true];
+     
+    pijersi.model.captures[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_ROCK] = [true, false, false, true];
+    pijersi.model.captures[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_PAPER] = [false, false, false, false];
+    pijersi.model.captures[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_SCISSORS] = [true, true, false, false];
+    pijersi.model.captures[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_WISE] = [true, false];
+
+    pijersi.presenter.update_all();
+
+    console.log("testit: bye");
 };
 
 
@@ -43,6 +84,7 @@ pijersi.presenter.update_all = function(){
     pijersi.presenter.update_legend();
     pijersi.presenter.update_credit();
     pijersi.presenter.update_player();
+    pijersi.presenter.update_captures();
 };
 
 
@@ -93,8 +135,6 @@ pijersi.presenter.update_mode = function(){
         pijersi.view.enable_capture_groups(true);
     }
 
-    pijersi.view.update_captures();
-
 };
 
 
@@ -129,6 +169,17 @@ pijersi.presenter.update_player = function(){
         pijersi.view.show_black_turn(true);
         pijersi.view.show_white_turn(false);
     }
+};
+
+
+pijersi.presenter.toggle_menu = function(){
+    pijersi.view.menu_showed = ! pijersi.view.menu_showed;
+    pijersi.view.show_menu(pijersi.view.menu_showed);
+};
+
+
+pijersi.presenter.update_captures = function(){
+    pijersi.view.update_captures(pijersi.model.captures);
 };
 
 
@@ -244,4 +295,31 @@ pijersi.presenter.swap_blacks = function(){
     console.log("pijersi.presenter.swap_blacks: NOT-IMPLEMENTED");
 };
 
+
+pijersi.presenter.click_right_multi_func = function(){
+
+    if ( pijersi.view.show_next_showed ) {
+        pijersi.presenter.show_next_turn();
+
+    } else if ( pijersi.view.swap_whites_showed ) {
+        pijersi.presenter.swap_whites();
+
+    } else {
+        return;
+    }
+};
+
+
+pijersi.presenter.click_left_multi_func = function(){
+
+    if ( pijersi.view.show_previous_showed ) {
+        pijersi.presenter.show_previous_turn();
+
+    } else if ( pijersi.view.swap_blacks_showed ) {
+        pijersi.presenter.swap_blacks();
+
+    } else {
+        return;
+    }
+};
 ///////////////////////////////////////////////////////////////////////////////

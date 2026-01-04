@@ -32,7 +32,7 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 		
 		<div id="pijersi-view-menu-id">
 
-			<div id="pijersi-view-menu-button-id" onclick="pijersi.view.toggle_menu()"></div>
+			<div id="pijersi-view-menu-button-id" onclick="pijersi.presenter.toggle_menu()"></div>
 
 			<div id="pijersi-view-menu-items-id">
 
@@ -46,12 +46,12 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 
 				<div class="pijersi-view-menu-item-style">
 					<input id="pijersi-view-show-captures-id" class="pijersi-view-checkbox-style" type="checkbox" onclick="pijersi.presenter.toggle_captures()">
-					<span onclick="pijersi.view.toggle_checkbox('pijersi-view-show-captures-id')">Captures</span>
+					<span onclick="pijersi.view.click_element_by_id('pijersi-view-show-captures-id')">Captures</span>
 				</div>
 				
 				<div class="pijersi-view-menu-item-style">
 					<input id="pijersi-view-show-labels-id" class="pijersi-view-checkbox-style" type="checkbox" onclick="pijersi.presenter.toggle_labels()">
-					<span onclick="pijersi.view.toggle_checkbox('pijersi-view-show-labels-id')">Labels</span>
+					<span onclick="pijersi.view.click_element_by_id('pijersi-view-show-labels-id')">Labels</span>
 				</div>
 
 			</div>
@@ -71,8 +71,8 @@ PIJERSI-JS-COPYRIGHT-MD-END -->
 				- "left-multi-func-button" triggers either "show_next_turn()" or "swap_whites()" ;
 				- the redirections of "multi_func buttons" are managed in "pijersi.view".
 		-->
-		<div id="pijersi-view-left-multi-func-button-id" onclick="pijersi.view.click_left_multi_func()"></div>
-		<div id="pijersi-view-right-multi-func-button-id" onclick="pijersi.view.click_right_multi_func()"></div>
+		<div id="pijersi-view-left-multi-func-button-id" onclick="pijersi.presenter.click_left_multi_func()"></div>
+		<div id="pijersi-view-right-multi-func-button-id" onclick="pijersi.presenter.click_right_multi_func()"></div>
 
 		<div id="pijersi-view-captures-id">
 			<div id="pijersi-view-captures-grid-id">

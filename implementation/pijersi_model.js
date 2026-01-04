@@ -38,10 +38,26 @@ pijersi.model.__init = function(){
     pijersi.model.const.PLAYER_WHITE = "white";
     pijersi.model.const.PLAYER_BLACK = "black";
 
+    pijersi.model.const.PLAYERS = [];
+    pijersi.model.const.PLAYERS.push(pijersi.model.const.PLAYER_WHITE);
+    pijersi.model.const.PLAYERS.push(pijersi.model.const.PLAYER_BLACK);
+
     pijersi.model.const.CUBE_ROCK = "rock";
     pijersi.model.const.CUBE_PAPER = "paper";
     pijersi.model.const.CUBE_SCISSORS = "scissors";
     pijersi.model.const.CUBE_WISE = "wise";
+
+    pijersi.model.const.CUBES = [];
+    pijersi.model.const.CUBES.push(pijersi.model.const.CUBE_ROCK);
+    pijersi.model.const.CUBES.push(pijersi.model.const.CUBE_PAPER);
+    pijersi.model.const.CUBES.push(pijersi.model.const.CUBE_SCISSORS);
+    pijersi.model.const.CUBES.push(pijersi.model.const.CUBE_WISE);
+    
+    pijersi.model.const.CUBE_COUNTS = {}
+    pijersi.model.const.CUBE_COUNTS[pijersi.model.const.CUBE_ROCK] = 4;
+    pijersi.model.const.CUBE_COUNTS[pijersi.model.const.CUBE_PAPER] = 4;
+    pijersi.model.const.CUBE_COUNTS[pijersi.model.const.CUBE_SCISSORS] = 4;
+    pijersi.model.const.CUBE_COUNTS[pijersi.model.const.CUBE_WISE] = 2;
 
     pijersi.model.const.LEGEND_WIN_SCORE = "1";
     pijersi.model.const.LEGEND_LOSS_SCORE = "0";
@@ -65,10 +81,9 @@ pijersi.model.__init = function(){
     pijersi.model.board = undefined;
     pijersi.model.legend = undefined;
 
-    pijersi.model.hexagons = pijersi.model.make_all_hexagons();
-    pijersi.model.hexagons_states = pijersi.model.make_all_hexagons_states(pijersi.model.hexagons);
-
-    pijersi.model.captures = pijersi.model.make_captures();
+    pijersi.model.hexagons = undefined;
+    pijersi.model.hexagons_states = undefined;
+    pijersi.model.captures = undefined;    
 
     // Seal the sub-module
     Object.seal(pijersi.model);
@@ -390,97 +405,109 @@ pijersi.model.make_hexagon_state = function(hexagon){
 
 pijersi.model.make_all_hexagons = function(){
 
-    let hexagons = []
+    if ( pijersi.model.hexagons === undefined ) {
 
-    // Row "a"
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'a1',  [-1, -3] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'a2',  [-0, -3] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'a3',  [1, -3] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'a4',  [2, -3] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'a5',  [3, -3] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'a6',  [4, -3] ));
+        let hexagons = []
 
-    // Row "b"
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'b1',  [-2, -2] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'b2',  [-1, -2] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'b3',  [0, -2] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'b4',  [1, -2] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'b5',  [2, -2] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'b6',  [3, -2] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'b7',  [4, -2] ));
+        // Row "a"
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'a1',  [-1, -3] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'a2',  [-0, -3] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'a3',  [1, -3] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'a4',  [2, -3] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'a5',  [3, -3] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'a6',  [4, -3] ));
 
-    // Row "c"
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'c1',  [-2, -1] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'c2',  [-1, -1] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'c3',  [0, -1] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'c4',  [1, -1] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'c5',  [2, -1] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'c6',  [3, -1] ));
+        // Row "b"
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'b1',  [-2, -2] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'b2',  [-1, -2] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'b3',  [0, -2] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'b4',  [1, -2] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'b5',  [2, -2] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'b6',  [3, -2] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'b7',  [4, -2] ));
 
-    // Row "d"
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'd1',  [-3, 0] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'd2',  [-2, 0] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'd3',  [-1, 0] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'd4',  [0, 0] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'd5',  [1, 0] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'd6',  [2, 0] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'd7',  [3, 0] ));
+        // Row "c"
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'c1',  [-2, -1] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'c2',  [-1, -1] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'c3',  [0, -1] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'c4',  [1, -1] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'c5',  [2, -1] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'c6',  [3, -1] ));
 
-    // Row "e"
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'e1',  [-3, 1] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'e2',  [-2, 1] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'e3',  [-1, 1] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'e4',  [0, 1] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'e5',  [1, 1] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'e6',  [2, 1] ));
+        // Row "d"
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'd1',  [-3, 0] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'd2',  [-2, 0] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'd3',  [-1, 0] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'd4',  [0, 0] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'd5',  [1, 0] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'd6',  [2, 0] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'd7',  [3, 0] ));
 
-    // Row "f"
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'f1',  [-4, 2] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'f2',  [-3, 2] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'f3',  [-2, 2] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'f4',  [-1, 2] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'f5',  [0, 2] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'f6',  [1, 2] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'f7',  [2, 2] ));
+        // Row "e"
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'e1',  [-3, 1] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'e2',  [-2, 1] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'e3',  [-1, 1] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'e4',  [0, 1] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'e5',  [1, 1] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'e6',  [2, 1] ));
 
-    // Row "g"
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'g1', [-4, 3] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'g2', [-3, 3] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'g3', [-2, 3] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'g4', [-1, 3] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'g5', [0, 3] ));
-    hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'g6', [1, 3] ));
-    
-    return hexagons;
+        // Row "f"
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'f1',  [-4, 2] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'f2',  [-3, 2] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'f3',  [-2, 2] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'f4',  [-1, 2] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'f5',  [0, 2] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'f6',  [1, 2] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'f7',  [2, 2] ));
+
+        // Row "g"
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'g1', [-4, 3] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'g2', [-3, 3] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'g3', [-2, 3] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'g4', [-1, 3] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'g5', [0, 3] ));
+        hexagons.push( pijersi.model.make_hexagon( hexagons.length , 'g6', [1, 3] ));
+        
+        pijersi.model.hexagons = hexagons;
+    }
 };
 
 
 pijersi.model.make_all_hexagons_states = function(hexagons){
-    let hexagons_states = [];
 
-    for ( const hexagon of hexagons ) {
-        hexagons_states[hexagon.index] = pijersi.model.make_hexagon_state(hexagon);
+    if ( pijersi.model.hexagons_states === undefined ) {
+
+        let hexagons_states = [];
+
+        for ( const hexagon of hexagons ) {
+            hexagons_states[hexagon.index] = pijersi.model.make_hexagon_state(hexagon);
+        }
+
+        pijersi.model.hexagons_states = hexagons_states;
     }
-
-    return hexagons_states;
 };
 
 
-pijersi.model.make_captures = function(){
+pijersi.model.make_all_captures = function(){
 
-    let captures = {};
+    if ( pijersi.model.captures === undefined ) {
 
-    captures[pijersi.model.const.PLAYER_WHITE] = {};
-    captures[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_ROCK] = 0;
-    captures[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_PAPER] = 0;
-    captures[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_SCISSORS] = 0;
-    captures[pijersi.model.const.PLAYER_WHITE][pijersi.model.const.CUBE_WISE] = 0;
-     
-    captures[pijersi.model.const.PLAYER_BLACK] = {};
-    captures[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_ROCK] = 0;
-    captures[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_PAPER] = 0;
-    captures[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_SCISSORS] = 0;
-    captures[pijersi.model.const.PLAYER_BLACK][pijersi.model.const.CUBE_WISE] = 0;
- 
-    return captures;
+        let captures = {};
+
+        for ( const player of pijersi.model.const.PLAYERS ) {
+            captures[player] = {};
+
+            for ( const cube_sort of pijersi.model.const.CUBES ) {
+                captures[player][cube_sort] = [];
+
+                const cube_count =  pijersi.model.const.CUBE_COUNTS[cube_sort];
+            
+                for ( let cube_index = 0 ; cube_index < cube_count ;  cube_index++ ) {
+                    captures[player][cube_sort].push(false);
+                }
+            }
+        }
+    
+        pijersi.model.captures = captures;
+    }
 };
