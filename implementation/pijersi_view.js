@@ -175,6 +175,7 @@ pijersi.view.__init = function(){
     pijersi.view.hexagon_divs = undefined;
     pijersi.view.label_divs = undefined;
     pijersi.view.capture_divs = undefined;
+    pijersi.view.canvas = undefined;
 
     // Seal the sub-module
     Object.seal(pijersi.view);
@@ -182,6 +183,25 @@ pijersi.view.__init = function(){
     pijersi.view.const.BOARD.addEventListener( "mousemove" , pijersi.view.mouse_listner);
 
     pijersi.view.const.BODY.addEventListener( "keydown" , pijersi.view.key_listner);
+};
+
+
+pijersi.view.make_canvas = function(){
+    if ( pijersi.view.canvas === undefined ) {
+        let canvas = document.createElement("canvas");
+
+        canvas.id = "pijersi-view-canvas-id";
+
+        canvas.style.left = "0%";
+        canvas.style.top = "0%";
+
+        canvas.style.width = "100%";
+        canvas.style.height = "100%";
+
+        pijersi.view.const.BOARD.appendChild(canvas);
+
+        pijersi.view.canvas = canvas;
+    }
 };
 
 

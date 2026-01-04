@@ -40,6 +40,8 @@ pijersi.presenter.__init = function(){
     pijersi.view.make_all_hexagon_divs(pijersi.model.hexagons);
     pijersi.view.make_label_divs(pijersi.model.hexagons);
     pijersi.view.make_all_capture_divs(pijersi.model.captures);
+
+    pijersi.view.make_canvas();
   
     if ( ! pijersi.view.labels_showed ) {
         // >> the 'labels' must be showed, but also the associated checkbox must be 'checked' !
