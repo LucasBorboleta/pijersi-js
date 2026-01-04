@@ -13,7 +13,7 @@ You should have received a copy of the GNU General Public License along with thi
 
 PIJERSI-JS-COPYRIGHT-MD-END */
 
-/* --- PIJERSI-BEGIN: grid-container  --- */
+/* --- PIJERSI-BEGIN: main --- */
 
 :root {
 
@@ -102,6 +102,25 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     width: 100%;
     height: 100%;
 }
+
+#pijersi-view-board-id {
+    grid-area: board;
+
+    background-image:url(img/board.svg);
+    background-origin:border-box;
+    background-position:center;
+    background-repeat:no-repeat;
+    background-size:contain;
+
+    height: var(--pijersi-view-board-height);
+    width: var(--pijersi-view-board-width);
+
+    align-self: center;
+    justify-self: center;
+
+    position: relative;
+ }
+
         
 #pijersi-view-mouse-debug-id {
      display: none;
@@ -162,25 +181,6 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     text-align:center;
     vertical-align:middle;
 }
-
-#pijersi-view-board-id {
-    grid-area: board;
-
-    background-image:url(img/board.svg);
-    background-origin:border-box;
-    background-position:center;
-    background-repeat:no-repeat;
-    background-size:contain;
-
-    height: var(--pijersi-view-board-height);
-    width: var(--pijersi-view-board-width);
-
-    align-self: center;
-    justify-self: center;
-
-    position: relative;
- }
-
 
 #pijersi-view-credit-id {
     grid-area:credit;
@@ -569,259 +569,162 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     margin: var(--pijersi-view-captures-by-type-margin);
 }
 
-.pijersi-view-capture-black-rock-style {
+.pijersi-view-capture-cube-style {
     align-self: center;
     justify-self: center;
 
     height: var(--pijersi-view-captures-cube-size);
     width: var(--pijersi-view-captures-cube-size);
 
-    background-image:url(img/rock-black.svg);
     background-origin:border-box;
     background-position:center;
     background-repeat:no-repeat;
     background-size:contain;
+    
+    display: none;
 }
 
 #pijersi-view-capture-black-rock-1-id {
     grid-area:black-rock-1;
-    display: none;
+    background-image:url(img/rock-black.svg);
 }
 
 #pijersi-view-capture-black-rock-2-id {
     grid-area:black-rock-2;
-    display: none;
+    background-image:url(img/rock-black.svg);
 }
 
 #pijersi-view-capture-black-rock-3-id {
     grid-area:black-rock-3;
-    display: none;
+    background-image:url(img/rock-black.svg);
 }
 
 #pijersi-view-capture-black-rock-4-id {
     grid-area:black-rock-4;
-    display: none;
-}
-
-.pijersi-view-capture-black-paper-style {
-    align-self: center;
-    justify-self: center;
-
-    height: var(--pijersi-view-captures-cube-size);
-    width: var(--pijersi-view-captures-cube-size);
-
-    background-image:url(img/paper-black.svg);
-    background-origin:border-box;
-    background-position:center;
-    background-repeat:no-repeat;
-    background-size:contain;
+    background-image:url(img/rock-black.svg);
 }
 
 #pijersi-view-capture-black-paper-1-id {
     grid-area:black-paper-1;
-    display: none;
+    background-image:url(img/paper-black.svg);
 }
 
 #pijersi-view-capture-black-paper-2-id {
     grid-area:black-paper-2;
-    display: none;
+    background-image:url(img/paper-black.svg);
 }
 
 #pijersi-view-capture-black-paper-3-id {
     grid-area:black-paper-3;
-    display: none;
+    background-image:url(img/paper-black.svg);
 }
 
 #pijersi-view-capture-black-paper-4-id {
     grid-area:black-paper-4;
-    display: none;
-}
-
-.pijersi-view-capture-black-scissors-style {
-    align-self: center;
-    justify-self: center;
-
-    height: var(--pijersi-view-captures-cube-size);
-    width: var(--pijersi-view-captures-cube-size);
-
-    background-image:url(img/scissors-black.svg);
-    background-origin:border-box;
-    background-position:center;
-    background-repeat:no-repeat;
-    background-size:contain;
+    background-image:url(img/paper-black.svg);
 }
 
 #pijersi-view-capture-black-scissors-1-id {
     grid-area:black-scissors-1;
-    display: none;
+    background-image:url(img/scissors-black.svg);
 }
 
 #pijersi-view-capture-black-scissors-2-id {
     grid-area:black-scissors-2;
-    display: none;
+    background-image:url(img/scissors-black.svg);
 }
 
 #pijersi-view-capture-black-scissors-3-id {
     grid-area:black-scissors-3;
-    display: none;
+    background-image:url(img/scissors-black.svg);
 }
 
 #pijersi-view-capture-black-scissors-4-id {
     grid-area:black-scissors-4;
-    display: none;
-}
-
-.pijersi-view-capture-black-wise-style {
-    align-self: center;
-    justify-self: center;
-
-    height: var(--pijersi-view-captures-cube-size);
-    width: var(--pijersi-view-captures-cube-size);
-
-    background-image:url(img/wise-black.svg);
-    background-origin:border-box;
-    background-position:center;
-    background-repeat:no-repeat;
-    background-size:contain;
+    background-image:url(img/scissors-black.svg);
 }
 
 #pijersi-view-capture-black-wise-1-id {
     grid-area:black-wise-1;
-    display: none;
+    background-image:url(img/wise-black.svg);
 }
 
 #pijersi-view-capture-black-wise-2-id {
     grid-area:black-wise-2;
-    display: none;
-}
-
-.pijersi-view-capture-white-rock-style {
-    align-self: center;
-    justify-self: center;
-
-    height: var(--pijersi-view-captures-cube-size);
-    width: var(--pijersi-view-captures-cube-size);
-
-    background-image:url(img/rock-white.svg);
-    background-origin:border-box;
-    background-position:center;
-    background-repeat:no-repeat;
-    background-size:contain;
+    background-image:url(img/wise-black.svg);
 }
 
 #pijersi-view-capture-white-rock-1-id {
     grid-area:white-rock-1;
-    display: none;
+    background-image:url(img/rock-white.svg);
 }
 
 #pijersi-view-capture-white-rock-2-id {
     grid-area:white-rock-2;
-    display: none;
+    background-image:url(img/rock-white.svg);
 }
 
 #pijersi-view-capture-white-rock-3-id {
     grid-area:white-rock-3;
-    display: none;
+    background-image:url(img/rock-white.svg);
 }
 
 #pijersi-view-capture-white-rock-4-id {
     grid-area:white-rock-4;
-    display: none;
-}
-
-.pijersi-view-capture-white-paper-style {
-    align-self: center;
-    justify-self: center;
-
-    height: var(--pijersi-view-captures-cube-size);
-    width: var(--pijersi-view-captures-cube-size);
-
-    background-image:url(img/paper-white.svg);
-    background-origin:border-box;
-    background-position:center;
-    background-repeat:no-repeat;
-    background-size:contain;
+    background-image:url(img/rock-white.svg);
 }
 
 #pijersi-view-capture-white-paper-1-id {
     grid-area:white-paper-1;
-    display: none;
+    background-image:url(img/paper-white.svg);
 }
 
 #pijersi-view-capture-white-paper-2-id {
     grid-area:white-paper-2;
-    display: none;
+    background-image:url(img/paper-white.svg);
 }
 
 #pijersi-view-capture-white-paper-3-id {
     grid-area:white-paper-3;
-    display: none;
+    background-image:url(img/paper-white.svg);
 }
 
 #pijersi-view-capture-white-paper-4-id {
     grid-area:white-paper-4;
-    display: none;
-}
-
-.pijersi-view-capture-white-scissors-style {
-    align-self: center;
-    justify-self: center;
-
-    height: var(--pijersi-view-captures-cube-size);
-    width: var(--pijersi-view-captures-cube-size);
-
-    background-image:url(img/scissors-white.svg);
-    background-origin:border-box;
-    background-position:center;
-    background-repeat:no-repeat;
-    background-size:contain;
+    background-image:url(img/paper-white.svg);
 }
 
 #pijersi-view-capture-white-scissors-1-id {
     grid-area:white-scissors-1;
-    display: none;
+    background-image:url(img/scissors-white.svg);
 }
 
 #pijersi-view-capture-white-scissors-2-id {
     grid-area:white-scissors-2;
-    display: none;
+    background-image:url(img/scissors-white.svg);
 }
 
 #pijersi-view-capture-white-scissors-3-id {
     grid-area:white-scissors-3;
-    display: none;
+    background-image:url(img/scissors-white.svg);
 }
 
 #pijersi-view-capture-white-scissors-4-id {
     grid-area:white-scissors-4;
-    display: none;
-}
-
-.pijersi-view-capture-white-wise-style {
-    align-self: center;
-    justify-self: center;
-
-    height: var(--pijersi-view-captures-cube-size);
-    width: var(--pijersi-view-captures-cube-size);
-
-    background-image:url(img/wise-white.svg);
-    background-origin:border-box;
-    background-position:center;
-    background-repeat:no-repeat;
-    background-size:contain;
+    background-image:url(img/scissors-white.svg);
 }
 
 #pijersi-view-capture-white-wise-1-id {
     grid-area:white-wise-1;
-    display: none;
+    background-image:url(img/wise-white.svg);
 }
 
 #pijersi-view-capture-white-wise-2-id {
     grid-area:white-wise-2;
-    display: none;
+    background-image:url(img/wise-white.svg);
 }
 
-/* --- PIJERSI-END: grid-container  --- */
+/* --- PIJERSI-END: main  --- */
 
 
 /* --- PIJERSI-BEGIN: hexagon states  --- */
