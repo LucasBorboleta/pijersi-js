@@ -190,24 +190,80 @@ pijersi.view.__init = function(){
 
 pijersi.view.hexagon_shape = function(hexagon){
 
+    const hexagon_center_x = pijersi.view.const.BOARD_ORIGIN.x + (hexagon.u + hexagon.v/2)*pijersi.view.const.HEXA_WIDTH;
+    const hexagon_center_y = pijersi.view.const.BOARD_ORIGIN.y - hexagon.v*Math.sqrt(3)/2*pijersi.view.const.HEXA_WIDTH;
+
+    const box_left = hexagon_center_x - pijersi.view.const.HEXA_WIDTH/2 + pijersi.view.const.HEX_X_PAD;
+    const box_top = hexagon_center_y - pijersi.view.const.HEXA_HEIGHT/2 + pijersi.view.const.HEX_Y_PAD;
+
+    const box_width = pijersi.view.const.HEXA_WIDTH - 2*pijersi.view.const.HEX_X_PAD;
+    const box_height = pijersi.view.const.HEXA_HEIGHT - 2*pijersi.view.const.HEX_Y_PAD;
+
     const hexagon_shape = document.createElement("canvas");
     hexagon_shape.id = "pijersi-hexagon-shape-" + hexagon.name + "-id";
 
-    const x_hexagon = pijersi.view.const.BOARD_ORIGIN.x + (hexagon.u + hexagon.v/2)*pijersi.view.const.HEXA_WIDTH;
-    const y_hexagon = pijersi.view.const.BOARD_ORIGIN.y - hexagon.v*Math.sqrt(3)/2*pijersi.view.const.HEXA_WIDTH;
+    hexagon_shape.style.left = box_left/pijersi.view.const.BOARD_WIDTH*100 + "%";
+    hexagon_shape.style.top = box_top/pijersi.view.const.BOARD_HEIGHT*100 + "%";
 
-    const x_hexagon_div = x_hexagon - pijersi.view.const.HEXA_WIDTH/2 ; // hexagon left before padding
-    const y_hexagon_div = y_hexagon - pijersi.view.const.HEXA_HEIGHT/2; // hexagon top before padding
-
-    hexagon_shape.style.left = (x_hexagon_div + pijersi.view.const.HEX_X_PAD)/pijersi.view.const.BOARD_WIDTH*100 + "%";
-    hexagon_shape.style.top = (y_hexagon_div + pijersi.view.const.HEX_Y_PAD)/pijersi.view.const.BOARD_HEIGHT*100 + "%";
-
-    hexagon_shape.style.width = (pijersi.view.const.HEXA_WIDTH - 2*pijersi.view.const.HEX_X_PAD)/pijersi.view.const.BOARD_WIDTH*100 + "%";
-    hexagon_shape.style.height = (pijersi.view.const.HEXA_HEIGHT - 2*pijersi.view.const.HEX_Y_PAD)/pijersi.view.const.BOARD_HEIGHT*100 + "%";
+    hexagon_shape.style.width = box_width/pijersi.view.const.BOARD_WIDTH*100 + "%";
+    hexagon_shape.style.height = box_height/pijersi.view.const.BOARD_HEIGHT*100 + "%";
  
     hexagon_shape.className = pijersi.view.const.HEXA_SHAPE_STYLE;
 
     pijersi.view.const.BOARD.appendChild(hexagon_shape);
+
+    {   // >> Here starts the intern world of the canvas
+
+        // Redefine box origin
+        const box_left = 0;
+        const box_top = 0;
+
+        // Redefine box size
+        const box_width = hexagon_shape.width;
+        const box_height = hexagon_shape.height;
+
+        // Compute the 6 vertices of the hexagon shape
+
+        const north_x = box_left + box_width/2;
+        const north_y = box_top;
+
+        const north_west_x = box_left;
+        const north_west_y = box_top + box_height/4;
+
+        const south_west_x = box_left;
+        const south_west_y = box_top + box_height/4 + box_height/2;
+
+        const south_x = box_left + box_width/2;
+        const south_y = box_top + box_height;
+    
+        const south_east_x = box_left + box_width;
+        const south_east_y = box_top + box_height/4 + box_height/2;
+    
+        const north_east_x = box_left + box_width;
+        const north_east_y = box_top + box_height/4;
+
+        // Draw the hexagon shape from its 6 vertices
+
+        const ctx = hexagon_shape.getContext("2d");
+
+        ctx.beginPath();
+        ctx.moveTo(north_x, north_y);
+        ctx.lineTo(north_west_x, north_west_y);
+        ctx.lineTo(south_west_x, south_west_y);
+        ctx.lineTo(south_x, south_y);
+        ctx.lineTo(south_east_x, south_east_y);
+        ctx.lineTo(north_east_x, north_east_y);
+        ctx.lineTo(north_x, north_y);
+        ctx.closePath();
+        
+        ctx.globalAlpha = 0.5;
+        ctx.fillStyle = "yellow";
+        ctx.lineWidth = 5;
+        ctx.strokeStyle = "blue";
+
+        ctx.stroke();
+        ctx.fill();
+    }
 
     return hexagon_shape;
 };
@@ -281,20 +337,23 @@ pijersi.view.update_captures = function(captures){
 
 pijersi.view.make_hexagon_div = function(hexagon){
 
+    const hexagon_center_x = pijersi.view.const.BOARD_ORIGIN.x + (hexagon.u + hexagon.v/2)*pijersi.view.const.HEXA_WIDTH;
+    const hexagon_center_y = pijersi.view.const.BOARD_ORIGIN.y - hexagon.v*Math.sqrt(3)/2*pijersi.view.const.HEXA_WIDTH;
+
+    const box_left = hexagon_center_x - pijersi.view.const.HEXA_WIDTH/2 + pijersi.view.const.HEX_X_PAD; 
+    const box_top = hexagon_center_y - pijersi.view.const.HEXA_HEIGHT/2 + + pijersi.view.const.HEX_Y_PAD; 
+
+    const box_width = pijersi.view.const.HEXA_WIDTH - 2*pijersi.view.const.HEX_X_PAD;
+    const box_height = pijersi.view.const.HEXA_HEIGHT - 2*pijersi.view.const.HEX_Y_PAD;
+
     const hexagon_div = document.createElement("DIV");
     hexagon_div.id = "pijersi-hexagon-" + hexagon.name + "-id";
 
-    const x_hexagon = pijersi.view.const.BOARD_ORIGIN.x + (hexagon.u + hexagon.v/2)*pijersi.view.const.HEXA_WIDTH;
-    const y_hexagon = pijersi.view.const.BOARD_ORIGIN.y - hexagon.v*Math.sqrt(3)/2*pijersi.view.const.HEXA_WIDTH;
+    hexagon_div.style.left = box_left/pijersi.view.const.BOARD_WIDTH*100 + "%";
+    hexagon_div.style.top = box_top/pijersi.view.const.BOARD_HEIGHT*100 + "%";
 
-    const x_hexagon_div = x_hexagon - pijersi.view.const.HEXA_WIDTH/2 ; // hexagon left before padding
-    const y_hexagon_div = y_hexagon - pijersi.view.const.HEXA_HEIGHT/2; // hexagon top before padding
-
-    hexagon_div.style.left = (x_hexagon_div + pijersi.view.const.HEX_X_PAD)/pijersi.view.const.BOARD_WIDTH*100 + "%";
-    hexagon_div.style.top = (y_hexagon_div + pijersi.view.const.HEX_Y_PAD)/pijersi.view.const.BOARD_HEIGHT*100 + "%";
-
-    hexagon_div.style.width = (pijersi.view.const.HEXA_WIDTH - 2*pijersi.view.const.HEX_X_PAD)/pijersi.view.const.BOARD_WIDTH*100 + "%";
-    hexagon_div.style.height = (pijersi.view.const.HEXA_HEIGHT - 2*pijersi.view.const.HEX_Y_PAD)/pijersi.view.const.BOARD_HEIGHT*100 + "%";
+    hexagon_div.style.width = box_width/pijersi.view.const.BOARD_WIDTH*100 + "%";
+    hexagon_div.style.height = box_height/pijersi.view.const.BOARD_HEIGHT*100 + "%";
  
     hexagon_div.className = pijersi.view.const.HEXA_STYLE;
 
@@ -345,21 +404,28 @@ pijersi.view.make_label_divs = function(hexagons){
                 label_div.className = pijersi.view.const.LABEL_BOX_STYLE;
                 label_div.appendChild(paragraph_node);
 
-                const x_hexagon = pijersi.view.const.BOARD_ORIGIN.x + (hexagon.u + hexagon.v/2)*pijersi.view.const.HEXA_WIDTH;
-                const y_hexagon = pijersi.view.const.BOARD_ORIGIN.y - hexagon.v*Math.sqrt(3)/2*pijersi.view.const.HEXA_WIDTH;
+                const hexagon_center_x = pijersi.view.const.BOARD_ORIGIN.x + (hexagon.u + hexagon.v/2)*pijersi.view.const.HEXA_WIDTH;
+                const hexagon_center_y = pijersi.view.const.BOARD_ORIGIN.y - hexagon.v*Math.sqrt(3)/2*pijersi.view.const.HEXA_WIDTH;
 
-                const x_hexagon_div = x_hexagon - pijersi.view.const.HEXA_WIDTH/2; 
-                const y_hexagon_div = y_hexagon - pijersi.view.const.HEXA_HEIGHT/2; 
+                let box_left = undefined;
 
-                label_div.style.left = (x_hexagon_div - label_div_width)/pijersi.view.const.BOARD_WIDTH*100 + "%";
-                label_div.style.top = (y_hexagon_div + pijersi.view.const.HEXA_SIDE/2)/pijersi.view.const.BOARD_HEIGHT*100 + "%";
+                 if ( left_labels.includes(hexagon.name) ) {
+                    box_left = hexagon_center_x - pijersi.view.const.HEXA_WIDTH/2 - label_div_width; 
 
-                if ( right_labels.includes(hexagon.name) ) {
-                    label_div.style.left = (x_hexagon_div + pijersi.view.const.HEXA_WIDTH)/pijersi.view.const.BOARD_WIDTH*100 + "%";
+                 } else if ( right_labels.includes(hexagon.name) ) {
+                    box_left = hexagon_center_x + pijersi.view.const.HEXA_WIDTH/2; 
                 }
+                
+                const box_top = hexagon_center_y - pijersi.view.const.HEXA_HEIGHT/2 + pijersi.view.const.HEXA_SIDE/2; 
 
-                label_div.style.height = (pijersi.view.const.HEXA_SIDE)/pijersi.view.const.BOARD_HEIGHT*100 + "%";
-                label_div.style.width = label_div_width/pijersi.view.const.BOARD_WIDTH*100 + "%";
+                const box_width = label_div_width;
+                const box_height = pijersi.view.const.HEXA_SIDE;
+
+                label_div.style.left = box_left/pijersi.view.const.BOARD_WIDTH*100 + "%";
+                label_div.style.top = box_top/pijersi.view.const.BOARD_HEIGHT*100 + "%";
+
+                label_div.style.width = box_width/pijersi.view.const.BOARD_WIDTH*100 + "%";
+                label_div.style.height = box_height/pijersi.view.const.BOARD_HEIGHT*100 + "%";
 
                 pijersi.view.const.BOARD.appendChild(label_div);
 
