@@ -120,14 +120,6 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
     position: relative;
  }
-
- #pijersi-view-canvas-id {
-    position: absolute;
-    
-    border-width: 1px;
-    border-color: green;
-    border-style: dotted;
- }
   
 #pijersi-view-mouse-debug-id {
      display: none;
@@ -735,6 +727,14 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 
 /* --- PIJERSI-BEGIN: hexagon states  --- */
+
+ .pijersi-view-hexagon-shape-style {
+    position: absolute;
+    
+    border-width: 1px;
+    border-color: green;
+    border-style: dotted;
+ }
 
 .pijersi-view-hexagon-style {
     /*
