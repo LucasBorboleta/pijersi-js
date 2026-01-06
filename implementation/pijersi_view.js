@@ -94,12 +94,15 @@ pijersi.view.__init = function(){
 
     pijersi.view.const.CAPTURE_GROUP_EDIT_STYLE = "pijersi-view-capture-group-style";
 
-    pijersi.view.const.HEXA_STYLE = "pijersi-view-hexagon-style";
+    pijersi.view.const.HEXA_BOX_STYLE = "pijersi-view-hexagon-box-style";
 
-    pijersi.view.const.HEXA_SHAPE_STYLE = "pijersi-view-hexagon-shape-style";
+    pijersi.view.const.HEXA_SELECTION_STYLE = "pijersi-view-hexagon-selection-style";
 
     pijersi.view.const.LABEL_BOX_STYLE = "pijersi-view-label-box-style";
     pijersi.view.const.LABEL_TEXT_STYLE = "pijersi-view-label-text-style";
+
+    pijersi.view.const.HEXA_SELECTION_1 = "selection-1";
+    pijersi.view.const.HEXA_SELECTION_2 = "selection-2";
 
     // >> All dimensions of board, hexagons and cubes are expressed in pixels
     // >> As resize of window could change such dimensions, 
@@ -179,7 +182,7 @@ pijersi.view.__init = function(){
     pijersi.view.hexagon_boxes = undefined;
     pijersi.view.label_boxes = undefined;
     pijersi.view.capture_boxes = undefined;
-    pijersi.view.hexagon_shapes = undefined;
+    pijersi.view.hexagon_selections = undefined;
 
     // Seal the sub-module
     Object.seal(pijersi.view);
@@ -190,7 +193,7 @@ pijersi.view.__init = function(){
 };
 
 
-pijersi.view.make_hexagon_selection = function(hexagon){
+pijersi.view.make_hexagon_selection = function(hexagon, selection_sort){
 
     const hexagon_center_x = pijersi.view.const.BOARD_ORIGIN.x + (hexagon.u + hexagon.v/2)*pijersi.view.const.HEXA_WIDTH;
     const hexagon_center_y = pijersi.view.const.BOARD_ORIGIN.y - hexagon.v*Math.sqrt(3)/2*pijersi.view.const.HEXA_WIDTH;
@@ -210,7 +213,7 @@ pijersi.view.make_hexagon_selection = function(hexagon){
     canvas.style.width = box_width/pijersi.view.const.BOARD_WIDTH*100 + "%";
     canvas.style.height = box_height/pijersi.view.const.BOARD_HEIGHT*100 + "%";
  
-    canvas.className = pijersi.view.const.HEXA_SHAPE_STYLE;
+    canvas.className = pijersi.view.const.HEXA_SELECTION_STYLE;
 
     pijersi.view.const.BOARD.appendChild(canvas);
 
@@ -257,31 +260,36 @@ pijersi.view.make_hexagon_selection = function(hexagon){
         ctx.lineTo(north_east_x, north_east_y);
         ctx.lineTo(north_x, north_y);
         ctx.closePath();
-        
-        ctx.globalAlpha = 0.5;
-        ctx.fillStyle = "yellow";
-        ctx.lineWidth = 5;
-        ctx.strokeStyle = "blue";
 
-        ctx.stroke();
+        const style = window.getComputedStyle(document.documentElement);
+        const color = style.getPropertyValue('--pijersi-view-hexagon-' + selection_sort + '-color');
+        const opacity = style.getPropertyValue('--pijersi-view-hexagon-' + selection_sort + '-opacity');
+        
+        ctx.fillStyle = color;
+        ctx.globalAlpha = opacity;
         ctx.fill();
+        ctx.globalAlpha = 1.0;
     }
 
     return canvas;
 };
 
 
-pijersi.view.make_hexagon_selections = function(hexagons){
-    
-    if ( pijersi.view.hexagon_shapes == undefined ) {
+pijersi.view.make_hexagon_selections = function(hexagons, selection_sort){
 
-        let hexagon_shapes = [];
+    if ( pijersi.view.hexagon_selections == undefined ) {
+        pijersi.view.hexagon_selections = {};
+    }
+    
+    if ( pijersi.view.hexagon_selections[selection_sort] == undefined ) {
+
+        let hexagon_selections = [];
 
         for ( const hexagon of hexagons ) {
-            hexagon_shapes.push(pijersi.view.make_hexagon_selection(hexagon));
+            hexagon_selections.push(pijersi.view.make_hexagon_selection(hexagon, selection_sort));
         }
        
-        pijersi.view.hexagon_shapes = hexagon_shapes;
+        pijersi.view.hexagon_selections[selection_sort] = hexagon_selections;
     }
 };
 
@@ -357,7 +365,7 @@ pijersi.view.make_hexagon_box = function(hexagon){
     hexagon_box.style.width = box_width/pijersi.view.const.BOARD_WIDTH*100 + "%";
     hexagon_box.style.height = box_height/pijersi.view.const.BOARD_HEIGHT*100 + "%";
  
-    hexagon_box.className = pijersi.view.const.HEXA_STYLE;
+    hexagon_box.className = pijersi.view.const.HEXA_BOX_STYLE;
 
     pijersi.view.const.BOARD.appendChild(hexagon_box);
 

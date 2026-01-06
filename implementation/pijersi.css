@@ -17,19 +17,27 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 :root {
 
-    --pijersi-color-brown: #BF9B7A;
-    --pijersi-color-blue: #156082;
+    --pijersi-view-color-brown: #BF9B7A;
+    --pijersi-view-color-blue: #156082;
+    --pijersi-view-color-grey-1: lightgray;
+    --pijersi-view-color-grey-2: grey;
+
+    --pijersi-view-hexagon-selection-1-color: var(--pijersi-view-color-grey-1);
+    --pijersi-view-hexagon-selection-1-opacity: 0.25;
+
+    --pijersi-view-hexagon-selection-2-color: var(--pijersi-view-color-grey-2);
+    --pijersi-view-hexagon-selection-2-opacity: 0.25;
 
     --pijersi-view-font-size: 1rem;
     --pijersi-view-label-font-size: 0.75 rem;
 
-    --pijersi-view-body-background-color: var(--pijersi-color-brown);
+    --pijersi-view-body-background-color: var(--pijersi-view-color-brown);
 
     --pijersi-view-board-height: 75vh;
     --pijersi-view-board-width: calc(var(--pijersi-view-board-height) * 1.10221);
  
     --pijersi-view-button-size: 3rem;
-    --pijersi-view-button-hover-background-color: var(--pijersi-color-blue);
+    --pijersi-view-button-hover-background-color: var(--pijersi-view-color-blue);
 
     --pijersi-view-title-width: 8rem;
     --pijersi-view-legend-width: 8rem;
@@ -41,8 +49,8 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     --pijersi-view-menu-items-left: 12rem;
     --pijersi-view-menu-items-padding: 0.5rem;
     --pijersi-view-menu-items-shadow: 0.5em 0.5em 1.5em black;
-    --pijersi-view-menu-items-background-color: var(--pijersi-color-blue);
-    --pijersi-view-menu-item-hover-background-color: var(--pijersi-color-brown);
+    --pijersi-view-menu-items-background-color: var(--pijersi-view-color-blue);
+    --pijersi-view-menu-item-hover-background-color: var(--pijersi-view-color-brown);
 
     --pijersi-view-menu-item-font-size: 1rem;
     --pijersi-view-menu-separator-font-size: 1rem;
@@ -728,21 +736,12 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 /* --- PIJERSI-BEGIN: hexagon states  --- */
 
- .pijersi-view-hexagon-shape-style {
+ .pijersi-view-hexagon-selection-style {
     position: absolute;
-    
-     /*display: none;*/
+    display: none;
  }
 
-.pijersi-view-hexagon-style {
-    /*
-    border-width: 1px;
-    border-style:solid;
-    border-color: blue;
-    background-color: red;
-    opacity: 0.25;
-    */
-    
+.pijersi-view-hexagon-box-style {
     position: absolute;
 }
 
