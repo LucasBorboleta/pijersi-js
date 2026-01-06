@@ -37,10 +37,10 @@ pijersi.presenter.__init = function(){
     pijersi.model.make_all_hexagons_states(pijersi.model.hexagons);
     pijersi.model.make_all_captures();
 
-    pijersi.view.make_all_hexagon_divs(pijersi.model.hexagons);
-    pijersi.view.make_label_divs(pijersi.model.hexagons);
-    pijersi.view.make_all_capture_divs(pijersi.model.captures);
-    pijersi.view.make_all_hexagon_shapes(pijersi.model.hexagons);
+    pijersi.view.make_hexagon_boxes(pijersi.model.hexagons);
+    pijersi.view.make_label_boxes(pijersi.model.hexagons);
+    pijersi.view.make_capture_boxes(pijersi.model.captures);
+    pijersi.view.make_hexagon_selections(pijersi.model.hexagons);
   
     if ( ! pijersi.view.labels_showed ) {
         // >> the 'labels' must be showed, but also the associated checkbox must be 'checked' !

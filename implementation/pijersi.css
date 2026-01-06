@@ -731,9 +731,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
  .pijersi-view-hexagon-shape-style {
     position: absolute;
     
-    border-width: 1px;
-    border-color: green;
-    border-style: dotted;
+     /*display: none;*/
  }
 
 .pijersi-view-hexagon-style {
