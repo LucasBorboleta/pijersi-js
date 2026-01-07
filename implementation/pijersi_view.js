@@ -193,6 +193,30 @@ pijersi.view.__init = function(){
 };
 
 
+pijersi.view.show_selection = function(condition, selection_sort, hexagon){
+
+    if ( ! ( condition === true || condition === false ) ){
+        pijersi.debug.log_error("unexpected 'condition' = " + condition);
+        return;
+    }
+
+    const selection_element = pijersi.view.hexagon_selections[selection_sort][hexagon.index];
+
+    if ( selection_element === undefined ) {
+        pijersi.debug.log_error("unexpected 'selection_sort' = " + selection_sort + " or 'hexagon' = " + JSON.stringify(hexagon));
+        return;
+    }
+
+    if ( condition ) {
+        selection_element.classList.add(pijersi.view.const.SHOW_STYLE);
+
+    } else {
+        selection_element.classList.remove(pijersi.view.const.SHOW_STYLE);
+    }
+
+};
+
+
 pijersi.view.make_hexagon_selection = function(hexagon, selection_sort){
 
     const hexagon_center_x = pijersi.view.const.BOARD_ORIGIN.x + (hexagon.u + hexagon.v/2)*pijersi.view.const.HEXA_WIDTH;

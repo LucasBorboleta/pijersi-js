@@ -74,6 +74,15 @@ pijersi.presenter.testit = function(){
 
     pijersi.presenter.update_all();
 
+    pijersi.view.show_selection(true, pijersi.view.const.HEXA_SELECTION_1, pijersi.model.get_hexagon_by_name("d4"));
+    pijersi.view.show_selection(true, pijersi.view.const.HEXA_SELECTION_2, pijersi.model.get_hexagon_by_name("d3"));
+
+    pijersi.view.show_selection(true, pijersi.view.const.HEXA_SELECTION_1, pijersi.model.get_hexagon_by_name("d2"));
+    pijersi.view.show_selection(false, pijersi.view.const.HEXA_SELECTION_1, pijersi.model.get_hexagon_by_name("d2"));
+
+    pijersi.view.show_selection(false, pijersi.view.const.HEXA_SELECTION_1, pijersi.model.get_hexagon_by_name("d1"));
+    pijersi.view.show_selection(true, pijersi.view.const.HEXA_SELECTION_1, pijersi.model.get_hexagon_by_name("d1"));
+
     console.log("testit: bye");
 };
 

@@ -511,3 +511,9 @@ pijersi.model.make_all_captures = function(){
         pijersi.model.captures = captures;
     }
 };
+
+
+pijersi.model.get_hexagon_by_name = function(name){
+    const maybe_hexagon = pijersi.model.hexagons.find(hexagon => hexagon.name === name);
+    return maybe_hexagon;
+};
