@@ -40,8 +40,15 @@ pijersi.presenter.__init = function(){
     pijersi.view.make_hexagon_boxes(pijersi.model.hexagons);
     pijersi.view.make_label_boxes(pijersi.model.hexagons);
     pijersi.view.make_capture_boxes(pijersi.model.captures);
+
     pijersi.view.make_hexagon_selections(pijersi.model.hexagons, pijersi.view.const.HEXA_SELECTION_1);
     pijersi.view.make_hexagon_selections(pijersi.model.hexagons, pijersi.view.const.HEXA_SELECTION_2);
+
+    pijersi.view.make_hexagon_markers(pijersi.model.hexagons, pijersi.view.const.HEXA_MARKER_1, pijersi.model.const.PLAYER_WHITE);
+    pijersi.view.make_hexagon_markers(pijersi.model.hexagons, pijersi.view.const.HEXA_MARKER_2, pijersi.model.const.PLAYER_WHITE);
+
+    pijersi.view.make_hexagon_markers(pijersi.model.hexagons, pijersi.view.const.HEXA_MARKER_1, pijersi.model.const.PLAYER_BLACK);
+    pijersi.view.make_hexagon_markers(pijersi.model.hexagons, pijersi.view.const.HEXA_MARKER_2, pijersi.model.const.PLAYER_BLACK);
   
     if ( ! pijersi.view.labels_showed ) {
         // >> the 'labels' must be showed, but also the associated checkbox must be 'checked' !
@@ -82,6 +89,9 @@ pijersi.presenter.testit = function(){
 
     pijersi.view.show_selection(false, pijersi.view.const.HEXA_SELECTION_1, pijersi.model.get_hexagon_by_name("d1"));
     pijersi.view.show_selection(true, pijersi.view.const.HEXA_SELECTION_1, pijersi.model.get_hexagon_by_name("d1"));
+
+    pijersi.view.show_marker(true, pijersi.view.const.HEXA_MARKER_1, pijersi.model.const.PLAYER_WHITE, pijersi.model.get_hexagon_by_name("a1"));
+    pijersi.view.show_marker(true, pijersi.view.const.HEXA_MARKER_2, pijersi.model.const.PLAYER_BLACK, pijersi.model.get_hexagon_by_name("a2"));
 
     console.log("testit: bye");
 };

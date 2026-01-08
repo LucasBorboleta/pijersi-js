@@ -28,6 +28,19 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     --pijersi-view-hexagon-selection-2-color: var(--pijersi-view-color-grey-2);
     --pijersi-view-hexagon-selection-2-opacity: 0.25;
 
+    --pijersi-view-hexagon-marker-1-white-color: red;
+    --pijersi-view-hexagon-marker-1-white-width: 2;
+
+    --pijersi-view-hexagon-marker-2-white-color: red;
+    --pijersi-view-hexagon-marker-2-white-width: 6;
+
+    --pijersi-view-hexagon-marker-1-black-color: green;
+    --pijersi-view-hexagon-maker-1-black-width: 2;
+
+    --pijersi-view-hexagon-marker-2-black-color: green;
+    --pijersi-view-hexagon-marker-2-black-width: 6;
+
+
     --pijersi-view-font-size: 1rem;
     --pijersi-view-label-font-size: 0.75 rem;
 
@@ -735,6 +748,13 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 
 /* --- PIJERSI-BEGIN: hexagon states  --- */
+
+ .pijersi-view-hexagon-marker-style {
+    position: absolute;
+    display: none;
+    z-index: 2;
+
+ }
 
  .pijersi-view-hexagon-selection-style {
     position: absolute;

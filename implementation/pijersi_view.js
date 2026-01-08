@@ -97,12 +97,16 @@ pijersi.view.__init = function(){
     pijersi.view.const.HEXA_BOX_STYLE = "pijersi-view-hexagon-box-style";
 
     pijersi.view.const.HEXA_SELECTION_STYLE = "pijersi-view-hexagon-selection-style";
+    pijersi.view.const.HEXA_MARKER_STYLE = "pijersi-view-hexagon-marker-style";
 
     pijersi.view.const.LABEL_BOX_STYLE = "pijersi-view-label-box-style";
     pijersi.view.const.LABEL_TEXT_STYLE = "pijersi-view-label-text-style";
 
     pijersi.view.const.HEXA_SELECTION_1 = "selection-1";
     pijersi.view.const.HEXA_SELECTION_2 = "selection-2";
+
+    pijersi.view.const.HEXA_MARKER_1 = "marker-1";
+    pijersi.view.const.HEXA_MARKER_2 = "marker-2";
 
     // >> All dimensions of board, hexagons and cubes are expressed in pixels
     // >> As resize of window could change such dimensions, 
@@ -183,6 +187,7 @@ pijersi.view.__init = function(){
     pijersi.view.label_boxes = undefined;
     pijersi.view.capture_boxes = undefined;
     pijersi.view.hexagon_selections = undefined;
+    pijersi.view.hexagon_markers = undefined;
 
     // Seal the sub-module
     Object.seal(pijersi.view);
@@ -192,6 +197,139 @@ pijersi.view.__init = function(){
     pijersi.view.const.BODY.addEventListener( "keydown" , pijersi.view.key_listner);
 };
 
+
+pijersi.view.show_marker = function(condition, marker_sort, player, hexagon){
+
+    if ( ! ( condition === true || condition === false ) ){
+        pijersi.debug.log_error("unexpected 'condition' = " + condition);
+        return;
+    }
+
+    const marker_element = pijersi.view.hexagon_markers[marker_sort][player][hexagon.index];
+
+    if ( marker_element === undefined ) {
+        pijersi.debug.log_error("unexpected 'marker_sort' = " + marker_sort + " or 'player' = " + player + " or 'hexagon' = " + JSON.stringify(hexagon));
+        return;
+    }
+
+    if ( condition ) {
+        marker_element.classList.add(pijersi.view.const.SHOW_STYLE);
+
+    } else {
+        marker_element.classList.remove(pijersi.view.const.SHOW_STYLE);
+    }
+
+};
+
+pijersi.view.make_hexagon_marker = function(hexagon, marker_sort, player){
+
+    const hexagon_center_x = pijersi.view.const.BOARD_ORIGIN.x + (hexagon.u + hexagon.v/2)*pijersi.view.const.HEXA_WIDTH;
+    const hexagon_center_y = pijersi.view.const.BOARD_ORIGIN.y - hexagon.v*Math.sqrt(3)/2*pijersi.view.const.HEXA_WIDTH;
+
+    const box_left = hexagon_center_x - pijersi.view.const.HEXA_WIDTH/2 + pijersi.view.const.HEX_X_PAD;
+    const box_top = hexagon_center_y - pijersi.view.const.HEXA_HEIGHT/2 + pijersi.view.const.HEX_Y_PAD;
+
+    const box_width = pijersi.view.const.HEXA_WIDTH - 2*pijersi.view.const.HEX_X_PAD;
+    const box_height = pijersi.view.const.HEXA_HEIGHT - 2*pijersi.view.const.HEX_Y_PAD;
+
+    const canvas = document.createElement("canvas");
+    canvas.id = "pijersi-hexagon-marker-" + hexagon.name + "-id";
+
+    canvas.style.left = box_left/pijersi.view.const.BOARD_WIDTH*100 + "%";
+    canvas.style.top = box_top/pijersi.view.const.BOARD_HEIGHT*100 + "%";
+
+    canvas.style.width = box_width/pijersi.view.const.BOARD_WIDTH*100 + "%";
+    canvas.style.height = box_height/pijersi.view.const.BOARD_HEIGHT*100 + "%";
+ 
+    canvas.className = pijersi.view.const.HEXA_MARKER_STYLE;
+
+    pijersi.view.const.BOARD.appendChild(canvas);
+
+    {   // >> Here starts the intern world of the canvas
+
+        // Redefine box origin
+        const box_left = 0;
+        const box_top = 0;
+
+        // Redefine box size
+        const box_width = canvas.width;
+        const box_height = canvas.height;
+
+        // Compute the 6 vertices of the hexagon shape
+
+        const north_x = box_left + box_width/2;
+        const north_y = box_top;
+
+        const north_west_x = box_left;
+        const north_west_y = box_top + box_height/4;
+
+        const south_west_x = box_left;
+        const south_west_y = box_top + box_height/4 + box_height/2;
+
+        const south_x = box_left + box_width/2;
+        const south_y = box_top + box_height;
+    
+        const south_east_x = box_left + box_width;
+        const south_east_y = box_top + box_height/4 + box_height/2;
+    
+        const north_east_x = box_left + box_width;
+        const north_east_y = box_top + box_height/4;
+
+        // Draw the hexagon shape from its 6 vertices
+
+        const ctx = canvas.getContext("2d");
+
+        ctx.beginPath();
+        ctx.moveTo(north_x, north_y);
+        ctx.lineTo(north_west_x, north_west_y);
+        ctx.lineTo(south_west_x, south_west_y);
+        ctx.lineTo(south_x, south_y);
+        ctx.lineTo(south_east_x, south_east_y);
+        ctx.lineTo(north_east_x, north_east_y);
+        ctx.lineTo(north_x, north_y);
+        ctx.closePath();
+
+        const style = window.getComputedStyle(document.documentElement);
+        const color_property = '--pijersi-view-hexagon-' + marker_sort + '-' + player + '-color';
+        const width_property = '--pijersi-view-hexagon-' + marker_sort + '-' + player + '-width';
+
+        console.log("color_property = " + color_property);
+        console.log("width_property = " + width_property);
+        
+        const color = style.getPropertyValue(color_property);
+        const width = style.getPropertyValue(width_property);
+
+        
+        ctx.strokeStyle = color;
+        ctx.lineWidth = width;
+        ctx.stroke();
+    }
+
+    return canvas;
+};
+
+
+pijersi.view.make_hexagon_markers = function(hexagons, marker_sort, player){
+
+    if ( pijersi.view.hexagon_markers == undefined ) {
+        pijersi.view.hexagon_markers = {};
+    }
+ 
+    if ( pijersi.view.hexagon_markers[marker_sort] == undefined ) {
+        pijersi.view.hexagon_markers[marker_sort] = {};
+    }
+   
+    if ( pijersi.view.hexagon_markers[marker_sort][player] == undefined ) {
+
+        let hexagon_markers = [];
+
+        for ( const hexagon of hexagons ) {
+            hexagon_markers.push(pijersi.view.make_hexagon_marker(hexagon, marker_sort, player));
+        }
+       
+        pijersi.view.hexagon_markers[marker_sort][player] = hexagon_markers;
+    }
+};
 
 pijersi.view.show_selection = function(condition, selection_sort, hexagon){
 
@@ -229,7 +367,7 @@ pijersi.view.make_hexagon_selection = function(hexagon, selection_sort){
     const box_height = pijersi.view.const.HEXA_HEIGHT - 2*pijersi.view.const.HEX_Y_PAD;
 
     const canvas = document.createElement("canvas");
-    canvas.id = "pijersi-hexagon-shape-" + hexagon.name + "-id";
+    canvas.id = "pijersi-hexagon-selection-" + hexagon.name + "-id";
 
     canvas.style.left = box_left/pijersi.view.const.BOARD_WIDTH*100 + "%";
     canvas.style.top = box_top/pijersi.view.const.BOARD_HEIGHT*100 + "%";
