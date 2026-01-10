@@ -110,7 +110,7 @@ pijersi.view.__init = function(){
 
     // >> All dimensions of board, hexagons and cubes are expressed in pixels
     // >> As resize of window could change such dimensions, 
-    // >> those memorized dimensions should be understood as initial dimensions
+    // >> those memorized dimensions should be understood as initial or reference dimensions
     // >> and should be applied in % of the board dimensions when constructing DIV, etc.
 
     // Board x-y dimensions in hexagon width units
@@ -223,14 +223,19 @@ pijersi.view.show_marker = function(condition, marker_sort, player, hexagon){
 
 pijersi.view.make_hexagon_marker = function(hexagon, marker_sort, player){
 
+    // >> Enlarge with largins the box that will contain the surrounding hexagon marker.
+    // >> Otherwise some drawn lines of such surrounding hexagon marker can be masked.
+    const maker_x_margin = pijersi.view.const.HEX_X_PAD;
+    const maker_y_margin = pijersi.view.const.HEX_Y_PAD;
+
     const hexagon_center_x = pijersi.view.const.BOARD_ORIGIN.x + (hexagon.u + hexagon.v/2)*pijersi.view.const.HEXA_WIDTH;
     const hexagon_center_y = pijersi.view.const.BOARD_ORIGIN.y - hexagon.v*Math.sqrt(3)/2*pijersi.view.const.HEXA_WIDTH;
 
-    const box_left = hexagon_center_x - pijersi.view.const.HEXA_WIDTH/2 + pijersi.view.const.HEX_X_PAD;
-    const box_top = hexagon_center_y - pijersi.view.const.HEXA_HEIGHT/2 + pijersi.view.const.HEX_Y_PAD;
+    const box_left = hexagon_center_x - pijersi.view.const.HEXA_WIDTH/2 - maker_x_margin;
+    const box_top = hexagon_center_y - pijersi.view.const.HEXA_HEIGHT/2 - maker_y_margin;
 
-    const box_width = pijersi.view.const.HEXA_WIDTH - 2*pijersi.view.const.HEX_X_PAD;
-    const box_height = pijersi.view.const.HEXA_HEIGHT - 2*pijersi.view.const.HEX_Y_PAD;
+    const box_width = pijersi.view.const.HEXA_WIDTH + 2*maker_x_margin;
+    const box_height = pijersi.view.const.HEXA_HEIGHT + 2*maker_y_margin ;
 
     const canvas = document.createElement("canvas");
     canvas.id = "pijersi-hexagon-marker-" + hexagon.name + "-id";
@@ -247,58 +252,47 @@ pijersi.view.make_hexagon_marker = function(hexagon, marker_sort, player){
 
     {   // >> Here starts the intern world of the canvas
 
-        // Redefine box origin
-        const box_left = 0;
-        const box_top = 0;
+        // Force the intern dimensions of the canvas to the reference dimensions
+        canvas.width = box_width;
+        canvas.height = box_height;
+        
+        // Compute the vertices of the hexagon
 
-        // Redefine box size
-        const box_width = canvas.width;
-        const box_height = canvas.height;
+        const hexagon_center = new pijersi.math.TinyVector(box_width/2, box_height/2);
+        const hexagon_side = pijersi.view.const.HEXA_SIDE;
 
-        // Compute the 6 vertices of the hexagon shape
+        const unit_y = new pijersi.math.TinyVector(0, 1);
 
-        const north_x = box_left + box_width/2;
-        const north_y = box_top;
+        let vertices = []
+        let radius_vector = unit_y.mul(hexagon_side);
+        
+        for ( let vertex_index = 0 ; vertex_index < pijersi.view.const.HEXA_VERTEX_COUNT ; vertex_index++  ) {
+            const hexagon_vertex = hexagon_center.add(radius_vector);
+            vertices.push(hexagon_vertex);
+            radius_vector = radius_vector.rotate(pijersi.view.const.HEXA_SIDE_ANGLE);
+        }
 
-        const north_west_x = box_left;
-        const north_west_y = box_top + box_height/4;
-
-        const south_west_x = box_left;
-        const south_west_y = box_top + box_height/4 + box_height/2;
-
-        const south_x = box_left + box_width/2;
-        const south_y = box_top + box_height;
-    
-        const south_east_x = box_left + box_width;
-        const south_east_y = box_top + box_height/4 + box_height/2;
-    
-        const north_east_x = box_left + box_width;
-        const north_east_y = box_top + box_height/4;
-
-        // Draw the hexagon shape from its 6 vertices
+        // Draw the hexagon from its vertices
 
         const ctx = canvas.getContext("2d");
 
         ctx.beginPath();
-        ctx.moveTo(north_x, north_y);
-        ctx.lineTo(north_west_x, north_west_y);
-        ctx.lineTo(south_west_x, south_west_y);
-        ctx.lineTo(south_x, south_y);
-        ctx.lineTo(south_east_x, south_east_y);
-        ctx.lineTo(north_east_x, north_east_y);
-        ctx.lineTo(north_x, north_y);
+        ctx.moveTo(vertices[0].x, vertices[0].y);
+
+        const vertex_count = vertices.length;
+        for ( let vertex_index = 1 ; vertex_index < vertex_count ; vertex_index++  ) {
+            ctx.lineTo(vertices[vertex_index].x, vertices[vertex_index].y);
+        }
+
+        ctx.lineTo(vertices[0].x, vertices[0].y);
         ctx.closePath();
 
         const style = window.getComputedStyle(document.documentElement);
         const color_property = '--pijersi-view-hexagon-' + marker_sort + '-' + player + '-color';
         const width_property = '--pijersi-view-hexagon-' + marker_sort + '-' + player + '-width';
-
-        console.log("color_property = " + color_property);
-        console.log("width_property = " + width_property);
-        
+       
         const color = style.getPropertyValue(color_property);
         const width = style.getPropertyValue(width_property);
-
         
         ctx.strokeStyle = color;
         ctx.lineWidth = width;
@@ -381,46 +375,39 @@ pijersi.view.make_hexagon_selection = function(hexagon, selection_sort){
 
     {   // >> Here starts the intern world of the canvas
 
-        // Redefine box origin
-        const box_left = 0;
-        const box_top = 0;
+        // Force the intern dimensions of the canvas to the reference dimensions
+        canvas.width = box_width;
+        canvas.height = box_height;
+        
+        // Compute the vertices of the hexagon
 
-        // Redefine box size
-        const box_width = canvas.width;
-        const box_height = canvas.height;
+        const hexagon_center = new pijersi.math.TinyVector(box_width/2, box_height/2);
+        const hexagon_side = pijersi.view.const.HEXA_SIDE*(1 - 2*pijersi.view.const.HEX_X_PAD/pijersi.view.const.HEXA_WIDTH);
 
-        // Compute the 6 vertices of the hexagon shape
+        const unit_y = new pijersi.math.TinyVector(0, 1);
 
-        const north_x = box_left + box_width/2;
-        const north_y = box_top;
+        let vertices = []
+        let radius_vector = unit_y.mul(hexagon_side);
+        
+        for ( let vertex_index = 0 ; vertex_index < pijersi.view.const.HEXA_VERTEX_COUNT ; vertex_index++  ) {
+            const hexagon_vertex = hexagon_center.add(radius_vector);
+            vertices.push(hexagon_vertex);
+            radius_vector = radius_vector.rotate(pijersi.view.const.HEXA_SIDE_ANGLE);
+        }
 
-        const north_west_x = box_left;
-        const north_west_y = box_top + box_height/4;
-
-        const south_west_x = box_left;
-        const south_west_y = box_top + box_height/4 + box_height/2;
-
-        const south_x = box_left + box_width/2;
-        const south_y = box_top + box_height;
-    
-        const south_east_x = box_left + box_width;
-        const south_east_y = box_top + box_height/4 + box_height/2;
-    
-        const north_east_x = box_left + box_width;
-        const north_east_y = box_top + box_height/4;
-
-        // Draw the hexagon shape from its 6 vertices
+        // Draw the hexagon from its vertices
 
         const ctx = canvas.getContext("2d");
 
         ctx.beginPath();
-        ctx.moveTo(north_x, north_y);
-        ctx.lineTo(north_west_x, north_west_y);
-        ctx.lineTo(south_west_x, south_west_y);
-        ctx.lineTo(south_x, south_y);
-        ctx.lineTo(south_east_x, south_east_y);
-        ctx.lineTo(north_east_x, north_east_y);
-        ctx.lineTo(north_x, north_y);
+        ctx.moveTo(vertices[0].x, vertices[0].y);
+
+        const vertex_count = vertices.length;
+        for ( let vertex_index = 1 ; vertex_index < vertex_count ; vertex_index++  ) {
+            ctx.lineTo(vertices[vertex_index].x, vertices[vertex_index].y);
+        }
+
+        ctx.lineTo(vertices[0].x, vertices[0].y);
         ctx.closePath();
 
         const style = window.getComputedStyle(document.documentElement);

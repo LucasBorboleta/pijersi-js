@@ -38,19 +38,19 @@ pijersi.math.__init = function(){
 
         class TinyVector {
 
-            constructor(x, y) {
+            constructor(x, y){
                 this.x = x;
                 this.y = y;
             };
 
 
-            toString() { return "TinyVector(" + this.x + "," + this.y + ")" ;  };
+            toString(){ return "TinyVector(" + this.x + "," + this.y + ")" ;  };
 
 
-            neg() { return new TinyVector( -this.x, -this.y ) ;  };
+            neg(){ return new TinyVector( -this.x, -this.y ) ;  };
 
 
-            add(that) { 
+            add(that){ 
                 if ( that instanceof TinyVector ) {
                     return new TinyVector(this.x + that.x, this.y + that.y) ; 
 
@@ -63,7 +63,7 @@ pijersi.math.__init = function(){
              };
 
 
-           sub(that) { 
+           sub(that){ 
                 if ( that instanceof TinyVector ) {
                     return new TinyVector(this.x - that.x, this.y - that.y) ; 
 
@@ -76,7 +76,7 @@ pijersi.math.__init = function(){
              };
 
 
-           mul(that) { 
+           mul(that){ 
                 if ( typeof that === "number" ) {
                     return new TinyVector(that*this.x , that*this.y ) ; 
 
@@ -86,7 +86,7 @@ pijersi.math.__init = function(){
              };
 
 
-            dot(that) { 
+            dot(that){ 
                 if ( that instanceof TinyVector ) {
                     return (this.x*that.x + this.y*that.y) ; 
 
@@ -96,7 +96,18 @@ pijersi.math.__init = function(){
              };
 
 
-            norm() { return Math.sqrt(this.x**2 + this.y**2) ;  };
+            norm(){ return Math.sqrt(this.x**2 + this.y**2) ;  };
+
+
+            rotate(angle){
+                const cos_angle = Math.cos(angle);
+                const sin_angle = Math.sin(angle);
+
+                const new_x = cos_angle*this.x - sin_angle*this.y;
+                const new_y = sin_angle*this.x + cos_angle*this.y;
+
+                return new TinyVector(new_x, new_y);
+            };
 
         } ;
 

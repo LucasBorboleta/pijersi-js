@@ -90,8 +90,12 @@ pijersi.presenter.testit = function(){
     pijersi.view.show_selection(false, pijersi.view.const.HEXA_SELECTION_1, pijersi.model.get_hexagon_by_name("d1"));
     pijersi.view.show_selection(true, pijersi.view.const.HEXA_SELECTION_1, pijersi.model.get_hexagon_by_name("d1"));
 
+    pijersi.view.show_selection(true, pijersi.view.const.HEXA_SELECTION_1, pijersi.model.get_hexagon_by_name("a1"));
+
     pijersi.view.show_marker(true, pijersi.view.const.HEXA_MARKER_1, pijersi.model.const.PLAYER_WHITE, pijersi.model.get_hexagon_by_name("a1"));
-    pijersi.view.show_marker(true, pijersi.view.const.HEXA_MARKER_2, pijersi.model.const.PLAYER_BLACK, pijersi.model.get_hexagon_by_name("a2"));
+    pijersi.view.show_marker(true, pijersi.view.const.HEXA_MARKER_1, pijersi.model.const.PLAYER_BLACK, pijersi.model.get_hexagon_by_name("a2"));
+    pijersi.view.show_marker(true, pijersi.view.const.HEXA_MARKER_2, pijersi.model.const.PLAYER_WHITE, pijersi.model.get_hexagon_by_name("d4"));
+    pijersi.view.show_marker(true, pijersi.view.const.HEXA_MARKER_2, pijersi.model.const.PLAYER_BLACK, pijersi.model.get_hexagon_by_name("d2"));
 
     console.log("testit: bye");
 };
