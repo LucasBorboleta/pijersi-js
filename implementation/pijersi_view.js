@@ -110,7 +110,7 @@ pijersi.view.__init = function(){
 
     // >> All dimensions of board, hexagons and cubes are expressed in pixels
     // >> As resize of window could change such dimensions, 
-    // >> those memorized dimensions should be understood as initial or reference dimensions
+    // >> those memorized dimensions should be understood as initial or "reference dimensions"
     // >> and should be applied in % of the board dimensions when constructing DIV, etc.
 
     // Board x-y dimensions in hexagon width units
@@ -145,10 +145,7 @@ pijersi.view.__init = function(){
         pijersi.view.const.HEX_Y_PAD = hex_pad_fraction*pijersi.view.const.HEXA_HEIGHT;
     }
 
-    pijersi.view.const.HEXA_DELTA_Y = Math.sqrt(pijersi.view.const.HEXA_SIDE**2 - (pijersi.view.const.HEXA_WIDTH/2)**2);
-    pijersi.view.const.HEXA_COS_SIDE_ANGLE = Math.cos(pijersi.view.const.HEXA_SIDE_ANGLE);
-    pijersi.view.const.HEXA_SIN_SIDE_ANGLE = Math.sin(pijersi.view.const.HEXA_SIDE_ANGLE);
-
+    // Hexagon label geometrical data
     pijersi.view.const.LABEL_BOX_WIDTH = 0.20*pijersi.view.const.HEXA_WIDTH;
 
     // Cube (square) geometrical data
@@ -164,8 +161,8 @@ pijersi.view.__init = function(){
 
     // Unit vectors of the oblic u-v frame
     pijersi.view.const.BOARD_UNIT_U = pijersi.view.const.BOARD_UNIT_X;
-    pijersi.view.const.BOARD_UNIT_V = ( pijersi.view.const.HEXA_COS_SIDE_ANGLE*pijersi.view.const.BOARD_UNIT_X 
-                                      + pijersi.view.const.HEXA_SIN_SIDE_ANGLE*pijersi.view.const.BOARD_UNIT_Y );
+    pijersi.view.const.BOARD_UNIT_V = ( Math.cos(pijersi.view.const.HEXA_SIDE_ANGLE)*pijersi.view.const.BOARD_UNIT_X 
+                                      + Math.sin(pijersi.view.const.HEXA_SIDE_ANGLE)*pijersi.view.const.BOARD_UNIT_Y );
 
     // Freeze the sub-module constants
     Object.freeze(pijersi.view.const);
@@ -223,7 +220,13 @@ pijersi.view.show_marker = function(condition, marker_sort, player, hexagon){
 
 pijersi.view.make_hexagon_marker = function(hexagon, marker_sort, player){
 
-    // >> Enlarge with largins the box that will contain the surrounding hexagon marker.
+    const canvas = document.createElement("canvas");
+    canvas.id = "pijersi-hexagon-marker-" + hexagon.name + "-id";
+    canvas.className = pijersi.view.const.HEXA_MARKER_STYLE;
+
+    // Compute geometry in "reference dimensions"
+
+    // >> Enlarge, using some margins, the box that will contain the surrounding hexagon marker.
     // >> Otherwise some drawn lines of such surrounding hexagon marker can be masked.
     const maker_x_margin = pijersi.view.const.HEX_X_PAD;
     const maker_y_margin = pijersi.view.const.HEX_Y_PAD;
@@ -237,39 +240,36 @@ pijersi.view.make_hexagon_marker = function(hexagon, marker_sort, player){
     const box_width = pijersi.view.const.HEXA_WIDTH + 2*maker_x_margin;
     const box_height = pijersi.view.const.HEXA_HEIGHT + 2*maker_y_margin ;
 
-    const canvas = document.createElement("canvas");
-    canvas.id = "pijersi-hexagon-marker-" + hexagon.name + "-id";
+    // Convert geometry in "relative dimensions"
 
     canvas.style.left = box_left/pijersi.view.const.BOARD_WIDTH*100 + "%";
     canvas.style.top = box_top/pijersi.view.const.BOARD_HEIGHT*100 + "%";
 
     canvas.style.width = box_width/pijersi.view.const.BOARD_WIDTH*100 + "%";
     canvas.style.height = box_height/pijersi.view.const.BOARD_HEIGHT*100 + "%";
- 
-    canvas.className = pijersi.view.const.HEXA_MARKER_STYLE;
 
     pijersi.view.const.BOARD.appendChild(canvas);
 
     {   // >> Here starts the intern world of the canvas
 
-        // Force the intern dimensions of the canvas to the reference dimensions
+        // Force the canvas dimensions into the "reference dimensions"
         canvas.width = box_width;
         canvas.height = box_height;
         
         // Compute the vertices of the hexagon
+ 
+        let vertices = []
 
         const hexagon_center = new pijersi.math.TinyVector(box_width/2, box_height/2);
         const hexagon_side = pijersi.view.const.HEXA_SIDE;
 
-        const unit_y = new pijersi.math.TinyVector(0, 1);
-
-        let vertices = []
-        let radius_vector = unit_y.mul(hexagon_side);
+        const canvas_unit_y = new pijersi.math.TinyVector(0, 1);
+        let hexgaon_radius_vector = canvas_unit_y.mul(hexagon_side);
         
         for ( let vertex_index = 0 ; vertex_index < pijersi.view.const.HEXA_VERTEX_COUNT ; vertex_index++  ) {
-            const hexagon_vertex = hexagon_center.add(radius_vector);
+            const hexagon_vertex = hexagon_center.add(hexgaon_radius_vector);
             vertices.push(hexagon_vertex);
-            radius_vector = radius_vector.rotate(pijersi.view.const.HEXA_SIDE_ANGLE);
+            hexgaon_radius_vector = hexgaon_radius_vector.rotate(pijersi.view.const.HEXA_SIDE_ANGLE);
         }
 
         // Draw the hexagon from its vertices
@@ -351,48 +351,51 @@ pijersi.view.show_selection = function(condition, selection_sort, hexagon){
 
 pijersi.view.make_hexagon_selection = function(hexagon, selection_sort){
 
+    const canvas = document.createElement("canvas");
+    canvas.id = "pijersi-hexagon-selection-" + hexagon.name + "-id";
+    canvas.className = pijersi.view.const.HEXA_SELECTION_STYLE;
+
+    // Compute geometry in "reference dimensions"
+
     const hexagon_center_x = pijersi.view.const.BOARD_ORIGIN.x + (hexagon.u + hexagon.v/2)*pijersi.view.const.HEXA_WIDTH;
     const hexagon_center_y = pijersi.view.const.BOARD_ORIGIN.y - hexagon.v*Math.sqrt(3)/2*pijersi.view.const.HEXA_WIDTH;
 
     const box_left = hexagon_center_x - pijersi.view.const.HEXA_WIDTH/2 + pijersi.view.const.HEX_X_PAD;
     const box_top = hexagon_center_y - pijersi.view.const.HEXA_HEIGHT/2 + pijersi.view.const.HEX_Y_PAD;
+ 
+    // Convert geometry in "relative dimensions"
 
     const box_width = pijersi.view.const.HEXA_WIDTH - 2*pijersi.view.const.HEX_X_PAD;
     const box_height = pijersi.view.const.HEXA_HEIGHT - 2*pijersi.view.const.HEX_Y_PAD;
-
-    const canvas = document.createElement("canvas");
-    canvas.id = "pijersi-hexagon-selection-" + hexagon.name + "-id";
 
     canvas.style.left = box_left/pijersi.view.const.BOARD_WIDTH*100 + "%";
     canvas.style.top = box_top/pijersi.view.const.BOARD_HEIGHT*100 + "%";
 
     canvas.style.width = box_width/pijersi.view.const.BOARD_WIDTH*100 + "%";
     canvas.style.height = box_height/pijersi.view.const.BOARD_HEIGHT*100 + "%";
- 
-    canvas.className = pijersi.view.const.HEXA_SELECTION_STYLE;
 
     pijersi.view.const.BOARD.appendChild(canvas);
 
     {   // >> Here starts the intern world of the canvas
 
-        // Force the intern dimensions of the canvas to the reference dimensions
+        // Force the canvas dimensions into the "reference dimensions"
         canvas.width = box_width;
         canvas.height = box_height;
         
         // Compute the vertices of the hexagon
 
+        let vertices = []
+
         const hexagon_center = new pijersi.math.TinyVector(box_width/2, box_height/2);
         const hexagon_side = pijersi.view.const.HEXA_SIDE*(1 - 2*pijersi.view.const.HEX_X_PAD/pijersi.view.const.HEXA_WIDTH);
 
-        const unit_y = new pijersi.math.TinyVector(0, 1);
-
-        let vertices = []
-        let radius_vector = unit_y.mul(hexagon_side);
+        const canvas_unit_y = new pijersi.math.TinyVector(0, 1);
+        let hexgaon_radius_vector = canvas_unit_y.mul(hexagon_side);
         
         for ( let vertex_index = 0 ; vertex_index < pijersi.view.const.HEXA_VERTEX_COUNT ; vertex_index++  ) {
-            const hexagon_vertex = hexagon_center.add(radius_vector);
+            const hexagon_vertex = hexagon_center.add(hexgaon_radius_vector);
             vertices.push(hexagon_vertex);
-            radius_vector = radius_vector.rotate(pijersi.view.const.HEXA_SIDE_ANGLE);
+            hexgaon_radius_vector = hexgaon_radius_vector.rotate(pijersi.view.const.HEXA_SIDE_ANGLE);
         }
 
         // Draw the hexagon from its vertices
@@ -496,25 +499,28 @@ pijersi.view.update_captures = function(captures){
 
 pijersi.view.make_hexagon_box = function(hexagon){
 
+    const hexagon_box = document.createElement("DIV");
+    hexagon_box.id = "pijersi-hexagon-" + hexagon.name + "-id";
+    hexagon_box.className = pijersi.view.const.HEXA_BOX_STYLE;
+ 
+    // Compute geometry in "reference dimensions"
+
     const hexagon_center_x = pijersi.view.const.BOARD_ORIGIN.x + (hexagon.u + hexagon.v/2)*pijersi.view.const.HEXA_WIDTH;
     const hexagon_center_y = pijersi.view.const.BOARD_ORIGIN.y - hexagon.v*Math.sqrt(3)/2*pijersi.view.const.HEXA_WIDTH;
 
     const box_left = hexagon_center_x - pijersi.view.const.HEXA_WIDTH/2 + pijersi.view.const.HEX_X_PAD; 
-    const box_top = hexagon_center_y - pijersi.view.const.HEXA_HEIGHT/2 + + pijersi.view.const.HEX_Y_PAD; 
+    const box_top = hexagon_center_y - pijersi.view.const.HEXA_HEIGHT/2 + pijersi.view.const.HEX_Y_PAD; 
 
     const box_width = pijersi.view.const.HEXA_WIDTH - 2*pijersi.view.const.HEX_X_PAD;
     const box_height = pijersi.view.const.HEXA_HEIGHT - 2*pijersi.view.const.HEX_Y_PAD;
-
-    const hexagon_box = document.createElement("DIV");
-    hexagon_box.id = "pijersi-hexagon-" + hexagon.name + "-id";
+ 
+    // Convert geometry in "relative dimensions"
 
     hexagon_box.style.left = box_left/pijersi.view.const.BOARD_WIDTH*100 + "%";
     hexagon_box.style.top = box_top/pijersi.view.const.BOARD_HEIGHT*100 + "%";
 
     hexagon_box.style.width = box_width/pijersi.view.const.BOARD_WIDTH*100 + "%";
     hexagon_box.style.height = box_height/pijersi.view.const.BOARD_HEIGHT*100 + "%";
- 
-    hexagon_box.className = pijersi.view.const.HEXA_BOX_STYLE;
 
     pijersi.view.const.BOARD.appendChild(hexagon_box);
 
@@ -561,6 +567,8 @@ pijersi.view.make_label_boxes = function(hexagons){
                 label_box.className = pijersi.view.const.LABEL_BOX_STYLE;
                 label_box.appendChild(paragraph_node);
 
+                // Compute geometry in "reference dimensions"
+
                 const hexagon_center_x = pijersi.view.const.BOARD_ORIGIN.x + (hexagon.u + hexagon.v/2)*pijersi.view.const.HEXA_WIDTH;
                 const hexagon_center_y = pijersi.view.const.BOARD_ORIGIN.y - hexagon.v*Math.sqrt(3)/2*pijersi.view.const.HEXA_WIDTH;
 
@@ -577,6 +585,8 @@ pijersi.view.make_label_boxes = function(hexagons){
 
                 const box_width = pijersi.view.const.LABEL_BOX_WIDTH;
                 const box_height = pijersi.view.const.HEXA_SIDE;
+
+                // Convert geometry in "relative dimensions"
 
                 label_box.style.left = box_left/pijersi.view.const.BOARD_WIDTH*100 + "%";
                 label_box.style.top = box_top/pijersi.view.const.BOARD_HEIGHT*100 + "%";
@@ -926,6 +936,5 @@ pijersi.view.show_black_swap = function(condition){
         pijersi.debug.log_error("unexpected 'condition' = " + condition);
     }
 };
-
 
 ///////////////////////////////////////////////////////////////////////////////
