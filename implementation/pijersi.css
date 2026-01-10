@@ -28,6 +28,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     --pijersi-view-hexagon-selection-2-color: var(--pijersi-view-color-grey-2);
     --pijersi-view-hexagon-selection-2-opacity: 0.25;
 
+    --pijersi-view-hexagon-selection-3-color: var(--pijersi-view-color-blue);
+    --pijersi-view-hexagon-selection-3-opacity: 0.25;
+
     --pijersi-view-hexagon-marker-1-white-color: white;
     --pijersi-view-hexagon-marker-1-white-width: 1.5;
 

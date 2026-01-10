@@ -104,6 +104,7 @@ pijersi.view.__init = function(){
 
     pijersi.view.const.HEXA_SELECTION_1 = "selection-1";
     pijersi.view.const.HEXA_SELECTION_2 = "selection-2";
+    pijersi.view.const.HEXA_SELECTION_3 = "selection-3";
 
     pijersi.view.const.HEXA_MARKER_1 = "marker-1";
     pijersi.view.const.HEXA_MARKER_2 = "marker-2";

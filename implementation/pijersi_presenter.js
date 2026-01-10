@@ -44,6 +44,7 @@ pijersi.presenter.__init = function(){
 
     pijersi.view.make_hexagon_selections(pijersi.model.hexagons, pijersi.view.const.HEXA_SELECTION_1);
     pijersi.view.make_hexagon_selections(pijersi.model.hexagons, pijersi.view.const.HEXA_SELECTION_2);
+    pijersi.view.make_hexagon_selections(pijersi.model.hexagons, pijersi.view.const.HEXA_SELECTION_3);
 
     pijersi.view.make_hexagon_markers(pijersi.model.hexagons, pijersi.view.const.HEXA_MARKER_1, pijersi.model.const.PLAYER_WHITE);
     pijersi.view.make_hexagon_markers(pijersi.model.hexagons, pijersi.view.const.HEXA_MARKER_2, pijersi.model.const.PLAYER_WHITE);
@@ -92,6 +93,8 @@ pijersi.presenter.testit = function(){
     pijersi.view.show_selection(true, pijersi.view.const.HEXA_SELECTION_1, pijersi.model.get_hexagon_by_name("d1"));
 
     pijersi.view.show_selection(true, pijersi.view.const.HEXA_SELECTION_1, pijersi.model.get_hexagon_by_name("a1"));
+    pijersi.view.show_selection(true, pijersi.view.const.HEXA_SELECTION_3, pijersi.model.get_hexagon_by_name("d6"));
+    pijersi.view.show_selection(true, pijersi.view.const.HEXA_SELECTION_3, pijersi.model.get_hexagon_by_name("g2"));
 
     pijersi.view.show_marker(true, pijersi.view.const.HEXA_MARKER_1, pijersi.model.const.PLAYER_WHITE, pijersi.model.get_hexagon_by_name("a1"));
     pijersi.view.show_marker(true, pijersi.view.const.HEXA_MARKER_1, pijersi.model.const.PLAYER_BLACK, pijersi.model.get_hexagon_by_name("a2"));
