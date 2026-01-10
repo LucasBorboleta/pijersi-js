@@ -97,6 +97,11 @@ pijersi.presenter.testit = function(){
     pijersi.view.show_marker(true, pijersi.view.const.HEXA_MARKER_2, pijersi.model.const.PLAYER_WHITE, pijersi.model.get_hexagon_by_name("d4"));
     pijersi.view.show_marker(true, pijersi.view.const.HEXA_MARKER_2, pijersi.model.const.PLAYER_BLACK, pijersi.model.get_hexagon_by_name("d2"));
 
+    pijersi.view.show_marker(true, pijersi.view.const.HEXA_MARKER_2, pijersi.model.const.PLAYER_BLACK, pijersi.model.get_hexagon_by_name("a6"));
+    pijersi.view.show_marker(true, pijersi.view.const.HEXA_MARKER_2, pijersi.model.const.PLAYER_BLACK, pijersi.model.get_hexagon_by_name("f1"));
+    pijersi.view.show_marker(true, pijersi.view.const.HEXA_MARKER_1, pijersi.model.const.PLAYER_WHITE, pijersi.model.get_hexagon_by_name("g6"));
+    pijersi.view.show_marker(true, pijersi.view.const.HEXA_MARKER_1, pijersi.model.const.PLAYER_BLACK, pijersi.model.get_hexagon_by_name("f7"));
+
     console.log("testit: bye");
 };
 

@@ -261,7 +261,7 @@ pijersi.view.make_hexagon_marker = function(hexagon, marker_sort, player){
         let vertices = []
 
         const hexagon_center = new pijersi.math.TinyVector(box_width/2, box_height/2);
-        const hexagon_side = pijersi.view.const.HEXA_SIDE;
+        const hexagon_side = pijersi.view.const.HEXA_SIDE*0.90;
 
         const canvas_unit_y = new pijersi.math.TinyVector(0, 1);
         let hexgaon_radius_vector = canvas_unit_y.mul(hexagon_side);
