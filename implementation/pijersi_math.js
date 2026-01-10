@@ -78,7 +78,17 @@ pijersi.math.__init = function(){
 
            mul(that){ 
                 if ( typeof that === "number" ) {
-                    return new TinyVector(that*this.x , that*this.y ) ; 
+                    return new TinyVector(this.x*that , this.y*that) ; 
+
+                } else {
+                    pijersi.debug.log_error("unexpected 'that' = " + that);
+                }
+             };
+
+             
+           div(that){ 
+                if ( typeof that === "number" ) {
+                    return new TinyVector(this.x/that , this.y/that ) ; 
 
                 } else {
                     pijersi.debug.log_error("unexpected 'that' = " + that);

@@ -140,6 +140,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     justify-self: center;
 
     position: relative;
+
+    z-index: 0;
+    pointer-events: auto;
  }
   
 #pijersi-view-mouse-debug-id {
@@ -752,15 +755,26 @@ PIJERSI-JS-COPYRIGHT-MD-END */
  .pijersi-view-hexagon-marker-style {
     position: absolute;
     display: none;
+
+    z-index: 3;
+    pointer-events: none;
  }
 
  .pijersi-view-hexagon-selection-style {
     position: absolute;
     display: none;
+
+    z-index: 2;
+    pointer-events: none;
  }
 
 .pijersi-view-hexagon-box-style {
+    background-color: cadetblue;
+    opacity: 0.25;
     position: absolute;
+
+    z-index: 1;
+    pointer-events: auto;
 }
 
 .pijersi-view-label-box-style {

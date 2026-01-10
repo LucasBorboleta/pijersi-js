@@ -524,6 +524,51 @@ pijersi.view.make_hexagon_box = function(hexagon){
 
     pijersi.view.const.BOARD.appendChild(hexagon_box);
 
+    const mouse_listner = function(event){
+
+        // Memorize the name of this hexagon actual BOARD rectangle
+        const hexagon_name = hexagon.name;
+
+        // Memorize the dimensions in % of the BOARD rectangle
+        const hexagon_width = box_width/pijersi.view.const.BOARD_WIDTH*100;
+        const hexagon_center = new pijersi.math.TinyVector(hexagon_center_x/pijersi.view.const.BOARD_WIDTH*100, 
+                                                           hexagon_center_y/pijersi.view.const.BOARD_HEIGHT*100);
+
+        // Get the mouse position in % relatively to the BOARD rectangle
+        const mouse_position = pijersi.view.get_mouse_position(event);
+
+        let mouse_relative_position = new pijersi.math.TinyVector(mouse_position.x, mouse_position.y).sub(hexagon_center).div(hexagon_width/2);
+
+        let mouse_is_inside = mouse_relative_position.x > -1  && mouse_relative_position.x < 1;
+        console.log("test 1: hexagon_name = " + hexagon_name + " mouse_relative_position = " + mouse_relative_position.toString() + " mouse_is_inside = " + mouse_is_inside)
+
+        if ( mouse_is_inside ) {
+            mouse_relative_position = mouse_relative_position.rotate(pijersi.view.const.HEXA_SIDE_ANGLE);
+            mouse_is_inside = mouse_relative_position.x > -1  && mouse_relative_position.x < 1;
+        }
+        console.log("test 2: hexagon_name = " + hexagon_name + " mouse_relative_position = " + mouse_relative_position.toString() + " mouse_is_inside = " + mouse_is_inside)
+
+        if ( mouse_is_inside ) {
+            mouse_relative_position = mouse_relative_position.rotate(pijersi.view.const.HEXA_SIDE_ANGLE);
+            mouse_is_inside = mouse_relative_position.x > -1  && mouse_relative_position.x < 1;
+        }
+        console.log("test 3: hexagon_name = " + hexagon_name + " mouse_relative_position = " + mouse_relative_position.toString() + " mouse_is_inside = " + mouse_is_inside)
+
+        if ( mouse_is_inside ) {
+            if ( pijersi.debug.current_hexagon_name === undefined || pijersi.debug.current_hexagon_name !==  hexagon_name ) {
+                pijersi.debug.current_hexagon_name = hexagon_name;
+                pijersi.view.const.OTHER_DEBUG.innerHTML = "hexagon " +  pijersi.debug.current_hexagon_name ;
+            }
+         } else {
+            if ( pijersi.debug.current_hexagon_name !== undefined && pijersi.debug.current_hexagon_name ===  hexagon_name ) {
+                pijersi.debug.current_hexagon_name = undefined;
+                pijersi.view.const.OTHER_DEBUG.innerHTML = "hexagon " +  pijersi.debug.current_hexagon_name ;
+            }
+         }
+    }
+
+    hexagon_box.addEventListener( "mousemove" , mouse_listner);
+
     return hexagon_box;
 };
 
