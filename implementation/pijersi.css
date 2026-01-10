@@ -769,12 +769,10 @@ PIJERSI-JS-COPYRIGHT-MD-END */
  }
 
 .pijersi-view-hexagon-box-style {
-    background-color: cadetblue;
-    opacity: 0.25;
     position: absolute;
 
     z-index: 1;
-    pointer-events: auto;
+    pointer-events: none;
 }
 
 .pijersi-view-label-box-style {

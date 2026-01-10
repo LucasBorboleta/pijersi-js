@@ -180,6 +180,7 @@ pijersi.view.__init = function(){
     pijersi.view.debug_showed = false;
     pijersi.view.show_debug(pijersi.view.debug_showed);
 
+    pijersi.view.hexagon_infos = undefined;
     pijersi.view.hexagon_boxes = undefined;
     pijersi.view.label_boxes = undefined;
     pijersi.view.capture_boxes = undefined;
@@ -305,15 +306,15 @@ pijersi.view.make_hexagon_marker = function(hexagon, marker_sort, player){
 
 pijersi.view.make_hexagon_markers = function(hexagons, marker_sort, player){
 
-    if ( pijersi.view.hexagon_markers == undefined ) {
+    if ( pijersi.view.hexagon_markers === undefined ) {
         pijersi.view.hexagon_markers = {};
     }
  
-    if ( pijersi.view.hexagon_markers[marker_sort] == undefined ) {
+    if ( pijersi.view.hexagon_markers[marker_sort] === undefined ) {
         pijersi.view.hexagon_markers[marker_sort] = {};
     }
    
-    if ( pijersi.view.hexagon_markers[marker_sort][player] == undefined ) {
+    if ( pijersi.view.hexagon_markers[marker_sort][player] === undefined ) {
 
         let hexagon_markers = [];
 
@@ -429,11 +430,11 @@ pijersi.view.make_hexagon_selection = function(hexagon, selection_sort){
 
 pijersi.view.make_hexagon_selections = function(hexagons, selection_sort){
 
-    if ( pijersi.view.hexagon_selections == undefined ) {
+    if ( pijersi.view.hexagon_selections === undefined ) {
         pijersi.view.hexagon_selections = {};
     }
     
-    if ( pijersi.view.hexagon_selections[selection_sort] == undefined ) {
+    if ( pijersi.view.hexagon_selections[selection_sort] === undefined ) {
 
         let hexagon_selections = [];
 
@@ -524,58 +525,13 @@ pijersi.view.make_hexagon_box = function(hexagon){
 
     pijersi.view.const.BOARD.appendChild(hexagon_box);
 
-    const mouse_listner = function(event){
-
-        // Memorize the name of this hexagon actual BOARD rectangle
-        const hexagon_name = hexagon.name;
-
-        // Memorize the dimensions in % of the BOARD rectangle
-        const hexagon_width = box_width/pijersi.view.const.BOARD_WIDTH*100;
-        const hexagon_center = new pijersi.math.TinyVector(hexagon_center_x/pijersi.view.const.BOARD_WIDTH*100, 
-                                                           hexagon_center_y/pijersi.view.const.BOARD_HEIGHT*100);
-
-        // Get the mouse position in % relatively to the BOARD rectangle
-        const mouse_position = pijersi.view.get_mouse_position(event);
-
-        let mouse_relative_position = new pijersi.math.TinyVector(mouse_position.x, mouse_position.y).sub(hexagon_center).div(hexagon_width/2);
-
-        let mouse_is_inside = mouse_relative_position.x > -1  && mouse_relative_position.x < 1;
-        console.log("test 1: hexagon_name = " + hexagon_name + " mouse_relative_position = " + mouse_relative_position.toString() + " mouse_is_inside = " + mouse_is_inside)
-
-        if ( mouse_is_inside ) {
-            mouse_relative_position = mouse_relative_position.rotate(pijersi.view.const.HEXA_SIDE_ANGLE);
-            mouse_is_inside = mouse_relative_position.x > -1  && mouse_relative_position.x < 1;
-        }
-        console.log("test 2: hexagon_name = " + hexagon_name + " mouse_relative_position = " + mouse_relative_position.toString() + " mouse_is_inside = " + mouse_is_inside)
-
-        if ( mouse_is_inside ) {
-            mouse_relative_position = mouse_relative_position.rotate(pijersi.view.const.HEXA_SIDE_ANGLE);
-            mouse_is_inside = mouse_relative_position.x > -1  && mouse_relative_position.x < 1;
-        }
-        console.log("test 3: hexagon_name = " + hexagon_name + " mouse_relative_position = " + mouse_relative_position.toString() + " mouse_is_inside = " + mouse_is_inside)
-
-        if ( mouse_is_inside ) {
-            if ( pijersi.debug.current_hexagon_name === undefined || pijersi.debug.current_hexagon_name !==  hexagon_name ) {
-                pijersi.debug.current_hexagon_name = hexagon_name;
-                pijersi.view.const.OTHER_DEBUG.innerHTML = "hexagon " +  pijersi.debug.current_hexagon_name ;
-            }
-         } else {
-            if ( pijersi.debug.current_hexagon_name !== undefined && pijersi.debug.current_hexagon_name ===  hexagon_name ) {
-                pijersi.debug.current_hexagon_name = undefined;
-                pijersi.view.const.OTHER_DEBUG.innerHTML = "hexagon " +  pijersi.debug.current_hexagon_name ;
-            }
-         }
-    }
-
-    hexagon_box.addEventListener( "mousemove" , mouse_listner);
-
     return hexagon_box;
 };
 
 
 pijersi.view.make_hexagon_boxes = function(hexagons){
     
-    if ( pijersi.view.hexagon_boxes == undefined ) {
+    if ( pijersi.view.hexagon_boxes === undefined ) {
 
         let hexagon_boxes = [];
 
@@ -584,6 +540,44 @@ pijersi.view.make_hexagon_boxes = function(hexagons){
         }
        
         pijersi.view.hexagon_boxes = hexagon_boxes;
+    }
+};
+
+
+pijersi.view.make_hexagon_info = function(hexagon){
+
+    let hexagon_info = {}
+ 
+    // Compute geometry in "reference dimensions"
+
+    const hexagon_center_x = pijersi.view.const.BOARD_ORIGIN.x + (hexagon.u + hexagon.v/2)*pijersi.view.const.HEXA_WIDTH;
+    const hexagon_center_y = pijersi.view.const.BOARD_ORIGIN.y - hexagon.v*Math.sqrt(3)/2*pijersi.view.const.HEXA_WIDTH;
+
+    const box_width = pijersi.view.const.HEXA_WIDTH - 2*pijersi.view.const.HEX_X_PAD;
+
+    // Memorize the name and the index of this hexagon
+    hexagon_info.name = hexagon.name;
+    hexagon_info.index = hexagon.index;
+
+    // Memorize geometry information in % of the BOARD rectangle
+    hexagon_info.width = box_width/pijersi.view.const.BOARD_WIDTH*100;
+    hexagon_info.center = new pijersi.math.TinyVector(hexagon_center_x/pijersi.view.const.BOARD_WIDTH*100, 
+                                                      hexagon_center_y/pijersi.view.const.BOARD_HEIGHT*100);
+
+    return hexagon_info;
+};
+
+pijersi.view.make_hexagon_infos = function(hexagons){
+    
+    if ( pijersi.view.hexagon_infos === undefined ) {
+
+        let hexagon_infos = [];
+
+        for ( const hexagon of hexagons ) {
+            hexagon_infos.push(pijersi.view.make_hexagon_info(hexagon));
+        }
+       
+        pijersi.view.hexagon_infos = hexagon_infos;
     }
 };
 
@@ -651,8 +645,56 @@ pijersi.view.make_label_boxes = function(hexagons){
 
 
 pijersi.view.mouse_listner = function(event){
+
     const mouse_position = pijersi.view.get_mouse_position(event);
-    pijersi.view.write_mouse_position(Math.round(mouse_position.x), Math.round(mouse_position.y));
+    pijersi.view.write_mouse_position(mouse_position);
+
+    let hexagon_is_found = false;
+    const mouse_vector = new pijersi.math.TinyVector(mouse_position.x, mouse_position.y);
+
+    for ( const hexagon_info of pijersi.view.hexagon_infos ) {
+
+        const hexagon_name = hexagon_info.name;
+        const hexagon_width = hexagon_info.width
+        const hexagon_center = hexagon_info.center
+
+        const mouse_relative_position_1 = mouse_vector.sub(hexagon_center).div(hexagon_width/2);
+
+        let mouse_is_inside = mouse_relative_position_1.x > -1 && mouse_relative_position_1.x < 1;
+        if ( mouse_is_inside ) {
+            console.log("\nhexagon_name = " + hexagon_name + " mouse_relative_position_1 = " + mouse_relative_position_1.toString())
+        }
+
+        if ( mouse_is_inside ) {
+            const mouse_relative_position_2 = mouse_relative_position_1.rotate(pijersi.view.const.HEXA_SIDE_ANGLE);
+            mouse_is_inside = mouse_relative_position_2.x > -1 && mouse_relative_position_2.x < 1;
+            console.log("hexagon_name = " + hexagon_name + " mouse_relative_position_2 = " + mouse_relative_position_2.toString())
+        }
+
+        if ( mouse_is_inside ) {
+            const mouse_relative_position_3 = mouse_relative_position_1.rotate(2*pijersi.view.const.HEXA_SIDE_ANGLE);
+            mouse_is_inside = mouse_relative_position_3.x > -1 && mouse_relative_position_3.x < 1;
+            console.log("hexagon_name = " + hexagon_name + " mouse_relative_position_3 = " + mouse_relative_position_3.toString())
+       }
+
+        if ( mouse_is_inside ) {
+
+            if ( pijersi.debug.current_hexagon_name === undefined || pijersi.debug.current_hexagon_name !==  hexagon_name ) {
+                pijersi.debug.current_hexagon_name = hexagon_name;
+                pijersi.view.const.OTHER_DEBUG.innerHTML = "hexagon " +  pijersi.debug.current_hexagon_name ;
+            }
+
+            hexagon_is_found = true;
+            break;
+        }
+    }
+
+    if ( ! hexagon_is_found ) {
+        if ( pijersi.debug.current_hexagon_name !== undefined ) {
+            pijersi.debug.current_hexagon_name = undefined;
+            pijersi.view.const.OTHER_DEBUG.innerHTML = "hexagon " +  "??" ;
+        }
+    }
 };
 
 
@@ -667,9 +709,13 @@ pijersi.view.get_mouse_position = function(event){
 };
 
 
-pijersi.view.write_mouse_position = function(x, y){
-    const x_text = x.toString().padStart(3, "0");
-    const y_text = y.toString().padStart(3, "0");
+pijersi.view.write_mouse_position = function(mouse_position){
+
+   const x = mouse_position.x;
+   const y = mouse_position.y;
+ 
+    const x_text = x.toFixed(1).padStart(5, "0");
+    const y_text = y.toFixed(1).padStart(5, "0");
     
     pijersi.view.const.MOUSE_DEBUG.innerHTML = "(x,y) = (" + x_text + ", " + y_text + ")" ;
 };

@@ -37,6 +37,7 @@ pijersi.presenter.__init = function(){
     pijersi.model.make_all_hexagons_states(pijersi.model.hexagons);
     pijersi.model.make_all_captures();
 
+    pijersi.view.make_hexagon_infos(pijersi.model.hexagons);
     pijersi.view.make_hexagon_boxes(pijersi.model.hexagons);
     pijersi.view.make_label_boxes(pijersi.model.hexagons);
     pijersi.view.make_capture_boxes(pijersi.model.captures);
