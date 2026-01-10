@@ -650,13 +650,18 @@ pijersi.view.mouse_listner = function(event){
     pijersi.view.write_mouse_position(mouse_position);
 
     let hexagon_is_found = false;
-    const mouse_vector = new pijersi.math.TinyVector(mouse_position.x, mouse_position.y);
+
+    //>> To apply rotation heuristics the X and Y axes should be comparable.
+    //>> So a 'distortion_correction' is applied on the Y relative coordinate.
+    const distortion_correction = pijersi.view.const.BOARD_HEIGHT/pijersi.view.const.BOARD_WIDTH;
+
+    const mouse_vector = new pijersi.math.TinyVector(mouse_position.x, distortion_correction*mouse_position.y);
 
     for ( const hexagon_info of pijersi.view.hexagon_infos ) {
 
         const hexagon_name = hexagon_info.name;
         const hexagon_width = hexagon_info.width
-        const hexagon_center = hexagon_info.center
+        const hexagon_center = new pijersi.math.TinyVector(hexagon_info.center.x, distortion_correction*hexagon_info.center.y)
 
         const mouse_relative_position_1 = mouse_vector.sub(hexagon_center).div(hexagon_width/2);
 
