@@ -666,20 +666,15 @@ pijersi.view.mouse_listner = function(event){
         const mouse_relative_position_1 = mouse_vector.sub(hexagon_center).div(hexagon_width/2);
 
         let mouse_is_inside = mouse_relative_position_1.x > -1 && mouse_relative_position_1.x < 1;
-        if ( mouse_is_inside ) {
-            console.log("\nhexagon_name = " + hexagon_name + " mouse_relative_position_1 = " + mouse_relative_position_1.toString())
-        }
 
         if ( mouse_is_inside ) {
             const mouse_relative_position_2 = mouse_relative_position_1.rotate(pijersi.view.const.HEXA_SIDE_ANGLE);
             mouse_is_inside = mouse_relative_position_2.x > -1 && mouse_relative_position_2.x < 1;
-            console.log("hexagon_name = " + hexagon_name + " mouse_relative_position_2 = " + mouse_relative_position_2.toString())
         }
 
         if ( mouse_is_inside ) {
             const mouse_relative_position_3 = mouse_relative_position_1.rotate(2*pijersi.view.const.HEXA_SIDE_ANGLE);
             mouse_is_inside = mouse_relative_position_3.x > -1 && mouse_relative_position_3.x < 1;
-            console.log("hexagon_name = " + hexagon_name + " mouse_relative_position_3 = " + mouse_relative_position_3.toString())
        }
 
         if ( mouse_is_inside ) {
