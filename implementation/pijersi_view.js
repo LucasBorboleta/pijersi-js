@@ -677,7 +677,6 @@ pijersi.view.mouse_listner = function(event){
 
     for ( const hexagon_info of pijersi.view.hexagon_infos ) {
 
-        const hexagon_name = hexagon_info.name;
         const hexagon_width = hexagon_info.width
         const hexagon_center = new pijersi.math.TinyVector(hexagon_info.center.x, distortion_correction*hexagon_info.center.y)
 
@@ -697,9 +696,22 @@ pijersi.view.mouse_listner = function(event){
 
         if ( mouse_is_inside ) {
 
-            if ( pijersi.debug.current_hexagon_name === undefined || pijersi.debug.current_hexagon_name !==  hexagon_name ) {
-                pijersi.debug.current_hexagon_name = hexagon_name;
-                pijersi.view.const.OTHER_DEBUG.innerHTML = "hexagon " +  pijersi.debug.current_hexagon_name ;
+            if ( pijersi.debug.current_hexagon_info === undefined ) {
+
+                pijersi.debug.current_hexagon_info = hexagon_info;
+                pijersi.view.show_selection(true, pijersi.view.const.HEXA_SELECTION_1, pijersi.debug.current_hexagon_info);
+
+                pijersi.view.const.OTHER_DEBUG.innerHTML = "hexagon " +  pijersi.debug.current_hexagon_info.name ;
+
+            } else {
+
+                if ( pijersi.debug.current_hexagon_info.index !== hexagon_info.index ) {
+                    pijersi.view.show_selection(false, pijersi.view.const.HEXA_SELECTION_1, pijersi.debug.current_hexagon_info);
+
+                    pijersi.debug.current_hexagon_info = hexagon_info;
+                    pijersi.view.show_selection(true, pijersi.view.const.HEXA_SELECTION_1, pijersi.debug.current_hexagon_info);
+                    pijersi.view.const.OTHER_DEBUG.innerHTML = "hexagon " +  pijersi.debug.current_hexagon_info.name ;
+                }
             }
 
             hexagon_is_found = true;
@@ -708,8 +720,11 @@ pijersi.view.mouse_listner = function(event){
     }
 
     if ( ! hexagon_is_found ) {
-        if ( pijersi.debug.current_hexagon_name !== undefined ) {
-            pijersi.debug.current_hexagon_name = undefined;
+       
+        if ( pijersi.debug.current_hexagon_info !== undefined ) {
+
+            pijersi.view.show_selection(false, pijersi.view.const.HEXA_SELECTION_1, pijersi.debug.current_hexagon_info);
+            pijersi.debug.current_hexagon_info = undefined;
             pijersi.view.const.OTHER_DEBUG.innerHTML = "hexagon " +  "??" ;
         }
     }
