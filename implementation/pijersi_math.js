@@ -29,6 +29,12 @@ pijersi.math.__init = function(){
     // Init the sub-module constants
     pijersi.math.const = {};
 
+    pijersi.math.const.COS_3TH = Math.cos(2*Math.PI/3);
+    pijersi.math.const.SIN_3TH = Math.sin(2*Math.PI/3);
+
+    pijersi.math.const.COS_6TH = Math.cos(2*Math.PI/6);
+    pijersi.math.const.SIN_6TH = Math.sin(2*Math.PI/6);
+
     // Freeze the sub-module constants
     Object.freeze(pijersi.math.const);
 
@@ -118,6 +124,23 @@ pijersi.math.__init = function(){
 
                 return new TinyVector(new_x, new_y);
             };
+
+
+            rotate_3th(){
+                const new_x = pijersi.math.const.COS_3TH*this.x - pijersi.math.const.SIN_3TH*this.y;
+                const new_y = pijersi.math.const.SIN_3TH*this.x + pijersi.math.const.COS_3TH*this.y;
+
+                return new TinyVector(new_x, new_y);
+            };
+
+
+            rotate_6th(){
+                const new_x = pijersi.math.const.COS_6TH*this.x - pijersi.math.const.SIN_6TH*this.y;
+                const new_y = pijersi.math.const.SIN_6TH*this.x + pijersi.math.const.COS_6TH*this.y;
+
+                return new TinyVector(new_x, new_y);
+            };
+
 
         } ;
 

@@ -271,7 +271,7 @@ pijersi.view.make_hexagon_marker = function(hexagon, marker_sort, player){
         for ( let vertex_index = 0 ; vertex_index < pijersi.view.const.HEXA_VERTEX_COUNT ; vertex_index++  ) {
             const hexagon_vertex = hexagon_center.add(hexgaon_radius_vector);
             vertices.push(hexagon_vertex);
-            hexgaon_radius_vector = hexgaon_radius_vector.rotate(pijersi.view.const.HEXA_SIDE_ANGLE);
+            hexgaon_radius_vector = hexgaon_radius_vector.rotate_6th();
         }
 
         // Draw the hexagon from its vertices
@@ -397,7 +397,7 @@ pijersi.view.make_hexagon_selection = function(hexagon, selection_sort){
         for ( let vertex_index = 0 ; vertex_index < pijersi.view.const.HEXA_VERTEX_COUNT ; vertex_index++  ) {
             const hexagon_vertex = hexagon_center.add(hexgaon_radius_vector);
             vertices.push(hexagon_vertex);
-            hexgaon_radius_vector = hexgaon_radius_vector.rotate(pijersi.view.const.HEXA_SIDE_ANGLE);
+            hexgaon_radius_vector = hexgaon_radius_vector.rotate_6th();
         }
 
         // Draw the hexagon from its vertices
@@ -669,12 +669,12 @@ pijersi.view.mouse_listner = function(event){
         let mouse_is_inside = mouse_relative_position_1.x > -1 && mouse_relative_position_1.x < 1;
 
         if ( mouse_is_inside ) {
-            const mouse_relative_position_2 = mouse_relative_position_1.rotate(pijersi.view.const.HEXA_SIDE_ANGLE);
+            const mouse_relative_position_2 = mouse_relative_position_1.rotate_6th();
             mouse_is_inside = mouse_relative_position_2.x > -1 && mouse_relative_position_2.x < 1;
         }
 
         if ( mouse_is_inside ) {
-            const mouse_relative_position_3 = mouse_relative_position_1.rotate(2*pijersi.view.const.HEXA_SIDE_ANGLE);
+            const mouse_relative_position_3 = mouse_relative_position_1.rotate_3th();
             mouse_is_inside = mouse_relative_position_3.x > -1 && mouse_relative_position_3.x < 1;
        }
 
