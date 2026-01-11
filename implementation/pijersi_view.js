@@ -198,6 +198,8 @@ pijersi.view.__init = function(){
 
 pijersi.view.compute_hexagon_center_xy = function(hexagon){
 
+    // Compute xy coordinates of an hexagon from its uv reduced coordinates
+
     const hexagon_center_uv = pijersi.view.const.BOARD_UNIT_U.mul(hexagon.u)
                          .add(pijersi.view.const.BOARD_UNIT_V.mul(hexagon.v));
 
