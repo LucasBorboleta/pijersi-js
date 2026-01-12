@@ -702,8 +702,8 @@ pijersi.view.mouse_listner = function(event){
 
                 pijersi.view.current_hexagon_info = hexagon_info;
                 pijersi.view.show_selection(true, pijersi.view.const.HEXA_SELECTION_1, pijersi.view.current_hexagon_info);
+                pijersi.view.set_other_debug("hexagon " +  pijersi.view.current_hexagon_info.name);
 
-                pijersi.view.const.OTHER_DEBUG.innerHTML = "hexagon " +  pijersi.view.current_hexagon_info.name ;
 
             } else {
 
@@ -712,7 +712,7 @@ pijersi.view.mouse_listner = function(event){
 
                     pijersi.view.current_hexagon_info = hexagon_info;
                     pijersi.view.show_selection(true, pijersi.view.const.HEXA_SELECTION_1, pijersi.view.current_hexagon_info);
-                    pijersi.view.const.OTHER_DEBUG.innerHTML = "hexagon " +  pijersi.view.current_hexagon_info.name ;
+                    pijersi.view.set_other_debug("hexagon " +  pijersi.view.current_hexagon_info.name);
                 }
             }
 
@@ -727,7 +727,8 @@ pijersi.view.mouse_listner = function(event){
 
             pijersi.view.show_selection(false, pijersi.view.const.HEXA_SELECTION_1, pijersi.view.current_hexagon_info);
             pijersi.view.current_hexagon_info = undefined;
-            pijersi.view.const.OTHER_DEBUG.innerHTML = "hexagon " +  "??" ;
+            pijersi.view.set_other_debug("hexagon " +  "??");
+
         }
     }
 };
@@ -894,6 +895,11 @@ pijersi.view.enable_capture_groups = function(condition){
     } else {
         pijersi.debug.log_error("unexpected 'condition' = " + condition);
     }
+};
+
+
+pijersi.view.set_other_debug = function(debug_info){
+    pijersi.view.const.OTHER_DEBUG.innerHTML = debug_info ;
 };
 
 
