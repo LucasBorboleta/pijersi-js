@@ -34,7 +34,6 @@ pijersi.debug.__init = function(){
 
     // Init the sub-module variables
     pijersi.debug.error_count = 0;
-    pijersi.debug.current_hexagon_info = undefined;
 
     // Seal the sub-module
     Object.seal(pijersi.debug);

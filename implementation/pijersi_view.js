@@ -180,6 +180,8 @@ pijersi.view.__init = function(){
     pijersi.view.debug_showed = false;
     pijersi.view.show_debug(pijersi.view.debug_showed);
 
+    pijersi.view.current_hexagon_info = undefined;
+
     pijersi.view.hexagon_infos = undefined;
     pijersi.view.hexagon_boxes = undefined;
     pijersi.view.label_boxes = undefined;
@@ -696,21 +698,21 @@ pijersi.view.mouse_listner = function(event){
 
         if ( mouse_is_inside ) {
 
-            if ( pijersi.debug.current_hexagon_info === undefined ) {
+            if ( pijersi.view.current_hexagon_info === undefined ) {
 
-                pijersi.debug.current_hexagon_info = hexagon_info;
-                pijersi.view.show_selection(true, pijersi.view.const.HEXA_SELECTION_1, pijersi.debug.current_hexagon_info);
+                pijersi.view.current_hexagon_info = hexagon_info;
+                pijersi.view.show_selection(true, pijersi.view.const.HEXA_SELECTION_1, pijersi.view.current_hexagon_info);
 
-                pijersi.view.const.OTHER_DEBUG.innerHTML = "hexagon " +  pijersi.debug.current_hexagon_info.name ;
+                pijersi.view.const.OTHER_DEBUG.innerHTML = "hexagon " +  pijersi.view.current_hexagon_info.name ;
 
             } else {
 
-                if ( pijersi.debug.current_hexagon_info.index !== hexagon_info.index ) {
-                    pijersi.view.show_selection(false, pijersi.view.const.HEXA_SELECTION_1, pijersi.debug.current_hexagon_info);
+                if ( pijersi.view.current_hexagon_info.index !== hexagon_info.index ) {
+                    pijersi.view.show_selection(false, pijersi.view.const.HEXA_SELECTION_1, pijersi.view.current_hexagon_info);
 
-                    pijersi.debug.current_hexagon_info = hexagon_info;
-                    pijersi.view.show_selection(true, pijersi.view.const.HEXA_SELECTION_1, pijersi.debug.current_hexagon_info);
-                    pijersi.view.const.OTHER_DEBUG.innerHTML = "hexagon " +  pijersi.debug.current_hexagon_info.name ;
+                    pijersi.view.current_hexagon_info = hexagon_info;
+                    pijersi.view.show_selection(true, pijersi.view.const.HEXA_SELECTION_1, pijersi.view.current_hexagon_info);
+                    pijersi.view.const.OTHER_DEBUG.innerHTML = "hexagon " +  pijersi.view.current_hexagon_info.name ;
                 }
             }
 
@@ -721,10 +723,10 @@ pijersi.view.mouse_listner = function(event){
 
     if ( ! hexagon_is_found ) {
        
-        if ( pijersi.debug.current_hexagon_info !== undefined ) {
+        if ( pijersi.view.current_hexagon_info !== undefined ) {
 
-            pijersi.view.show_selection(false, pijersi.view.const.HEXA_SELECTION_1, pijersi.debug.current_hexagon_info);
-            pijersi.debug.current_hexagon_info = undefined;
+            pijersi.view.show_selection(false, pijersi.view.const.HEXA_SELECTION_1, pijersi.view.current_hexagon_info);
+            pijersi.view.current_hexagon_info = undefined;
             pijersi.view.const.OTHER_DEBUG.innerHTML = "hexagon " +  "??" ;
         }
     }
