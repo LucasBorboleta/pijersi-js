@@ -567,11 +567,7 @@ pijersi.view.make_hexagon_info = function(hexagon){
     let hexagon_info = {}
  
     // Compute geometry in "reference dimensions"
-
     const hexagon_center = pijersi.view.compute_hexagon_center_xy(hexagon);
-    const hexagon_center_x = hexagon_center.x;
-    const hexagon_center_y = hexagon_center.y;
-
     const box_width = pijersi.view.const.HEXA_WIDTH - 2*pijersi.view.const.HEX_X_PAD;
 
     // Memorize the name and the index of this hexagon
@@ -580,8 +576,8 @@ pijersi.view.make_hexagon_info = function(hexagon){
 
     // Memorize geometry information in % of the BOARD rectangle
     hexagon_info.width = box_width/pijersi.view.const.BOARD_WIDTH*100;
-    hexagon_info.center = new pijersi.math.TinyVector(hexagon_center_x/pijersi.view.const.BOARD_WIDTH*100, 
-                                                      hexagon_center_y/pijersi.view.const.BOARD_HEIGHT*100);
+    hexagon_info.center = new pijersi.math.TinyVector(hexagon_center.x/pijersi.view.const.BOARD_WIDTH*100, 
+                                                      hexagon_center.y/pijersi.view.const.BOARD_HEIGHT*100);
 
     return hexagon_info;
 };
