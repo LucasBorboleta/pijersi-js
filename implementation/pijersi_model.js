@@ -375,7 +375,15 @@ pijersi.model.edit_player_turn = function(){
     pijersi.model.turns = []
     pijersi.model.turns.push(turn);
 };
+
+
 ///////////////////////////////////////////////////////////////////////////////
+
+
+pijersi.model.get_hexagon_by_name = function(name){
+    const maybe_hexagon = pijersi.model.hexagons.find(hexagon => hexagon.name === name);
+    return maybe_hexagon;
+};
 
 
 pijersi.model.make_hexagon = function(hexagon_index, hexagon_name, position_uv){
@@ -512,8 +520,4 @@ pijersi.model.make_all_captures = function(){
     }
 };
 
-
-pijersi.model.get_hexagon_by_name = function(name){
-    const maybe_hexagon = pijersi.model.hexagons.find(hexagon => hexagon.name === name);
-    return maybe_hexagon;
-};
+///////////////////////////////////////////////////////////////////////////////

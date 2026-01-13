@@ -134,6 +134,14 @@ pijersi.math.__init = function(){
             };
 
 
+            rotate_4th(){
+                const new_x = -this.y;
+                const new_y = this.x ;
+
+                return new TinyVector(new_x, new_y);
+            };
+
+
             rotate_6th(){
                 const new_x = pijersi.math.const.COS_6TH*this.x - pijersi.math.const.SIN_6TH*this.y;
                 const new_y = pijersi.math.const.SIN_6TH*this.x + pijersi.math.const.COS_6TH*this.y;
