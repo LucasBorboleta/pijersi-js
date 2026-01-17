@@ -809,21 +809,28 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 /* --- PIJERSI-BEGIN: cube states  --- */
 
 .pijersi-view-cube-style {
-    padding:0px;
-    margin:0px;
+    padding :0;
+    margin: 0;
 
-    outline-style:none;
-    outline-width:0px;
+    outline-style: none;
+    outline-width: 0;
 
-    background-origin:content-box;
-    background-position:center;
-    background-repeat:no-repeat;
-    background-size:cover;
+    background-origin: content-box;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 
-    position:absolute;
+    position: absolute;
 
-    transition-property:all;
+    transition-property: all;
     transition-duration: 300ms;
+
+    /* just for debug */
+    background-image:url(img/wise-white.svg);
+    box-shadow: 4px 4px 4px black;
+
+    z-index: 1 !important;
+
 }
 
 .pijersi-view-cube-selected-style {

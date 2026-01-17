@@ -51,6 +51,11 @@ pijersi.presenter.__init = function(){
 
     pijersi.view.make_hexagon_markers(pijersi.model.hexagons, pijersi.view.const.HEXA_MARKER_1, pijersi.model.const.PLAYER_BLACK);
     pijersi.view.make_hexagon_markers(pijersi.model.hexagons, pijersi.view.const.HEXA_MARKER_2, pijersi.model.const.PLAYER_BLACK);
+
+    pijersi.view.make_top_cubes(pijersi.model.hexagons);
+    //pijersi.view.make_middle_cubes(pijersi.model.hexagons);
+    pijersi.view.make_bottom_cubes(pijersi.model.hexagons);
+
   
     if ( ! pijersi.view.labels_showed ) {
         // >> the 'labels' must be showed, but also the associated checkbox must be 'checked' !

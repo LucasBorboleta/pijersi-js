@@ -149,7 +149,6 @@ pijersi.math.__init = function(){
                 return new TinyVector(new_x, new_y);
             };
 
-
         } ;
 
         return TinyVector;
