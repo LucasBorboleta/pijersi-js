@@ -52,9 +52,7 @@ pijersi.presenter.__init = function(){
     pijersi.view.make_hexagon_markers(pijersi.model.hexagons, pijersi.view.const.HEXA_MARKER_1, pijersi.model.const.PLAYER_BLACK);
     pijersi.view.make_hexagon_markers(pijersi.model.hexagons, pijersi.view.const.HEXA_MARKER_2, pijersi.model.const.PLAYER_BLACK);
 
-    pijersi.view.make_top_cubes(pijersi.model.hexagons);
-    //pijersi.view.make_middle_cubes(pijersi.model.hexagons);
-    pijersi.view.make_bottom_cubes(pijersi.model.hexagons);
+    pijersi.view.make_cubes(pijersi.model.hexagons);
 
   
     if ( ! pijersi.view.labels_showed ) {
@@ -112,6 +110,58 @@ pijersi.presenter.testit = function(){
     pijersi.view.show_marker(true, pijersi.view.const.HEXA_MARKER_2, pijersi.model.const.PLAYER_BLACK, pijersi.model.get_hexagon_by_name("f1"));
     pijersi.view.show_marker(true, pijersi.view.const.HEXA_MARKER_1, pijersi.model.const.PLAYER_WHITE, pijersi.model.get_hexagon_by_name("g6"));
     pijersi.view.show_marker(true, pijersi.view.const.HEXA_MARKER_1, pijersi.model.const.PLAYER_BLACK, pijersi.model.get_hexagon_by_name("f7"));
+
+    pijersi.view.show_cube("white-wise", pijersi.view.const.CUBE_POSITION_BOTTOM, pijersi.model.get_hexagon_by_name("b4"));
+    pijersi.view.show_cube("white-wise", pijersi.view.const.CUBE_POSITION_TOP, pijersi.model.get_hexagon_by_name("b4"));
+
+    pijersi.view.show_cube("white-rock", pijersi.view.const.CUBE_POSITION_MIDDLE, pijersi.model.get_hexagon_by_name("a1"));
+    pijersi.view.show_cube("white-paper", pijersi.view.const.CUBE_POSITION_MIDDLE, pijersi.model.get_hexagon_by_name("a2"));
+    pijersi.view.show_cube("white-scissors", pijersi.view.const.CUBE_POSITION_MIDDLE, pijersi.model.get_hexagon_by_name("a3"));
+
+    pijersi.view.show_cube("white-rock", pijersi.view.const.CUBE_POSITION_MIDDLE, pijersi.model.get_hexagon_by_name("a4"));
+    pijersi.view.show_cube("white-paper", pijersi.view.const.CUBE_POSITION_MIDDLE, pijersi.model.get_hexagon_by_name("a5"));
+    pijersi.view.show_cube("white-scissors", pijersi.view.const.CUBE_POSITION_MIDDLE, pijersi.model.get_hexagon_by_name("a6"));
+
+    pijersi.view.show_cube("white-paper", pijersi.view.const.CUBE_POSITION_MIDDLE, pijersi.model.get_hexagon_by_name("b1"));
+    pijersi.view.show_cube("white-scissors", pijersi.view.const.CUBE_POSITION_MIDDLE, pijersi.model.get_hexagon_by_name("b2"));
+    pijersi.view.show_cube("white-rock", pijersi.view.const.CUBE_POSITION_MIDDLE, pijersi.model.get_hexagon_by_name("b3"));
+
+    pijersi.view.show_cube("white-scissors", pijersi.view.const.CUBE_POSITION_MIDDLE, pijersi.model.get_hexagon_by_name("b5"));
+    pijersi.view.show_cube("white-rock", pijersi.view.const.CUBE_POSITION_MIDDLE, pijersi.model.get_hexagon_by_name("b6"));
+    pijersi.view.show_cube("white-paper", pijersi.view.const.CUBE_POSITION_MIDDLE, pijersi.model.get_hexagon_by_name("b7"));
+
+    pijersi.view.show_cube("black-wise", pijersi.view.const.CUBE_POSITION_BOTTOM, pijersi.model.get_hexagon_by_name("f4"));
+    pijersi.view.show_cube("black-wise", pijersi.view.const.CUBE_POSITION_TOP, pijersi.model.get_hexagon_by_name("f4"));
+ 
+    pijersi.view.show_cube("black-rock", pijersi.view.const.CUBE_POSITION_MIDDLE, pijersi.model.get_hexagon_by_name("g6"));
+    pijersi.view.show_cube("black-paper", pijersi.view.const.CUBE_POSITION_MIDDLE, pijersi.model.get_hexagon_by_name("g5"));
+    pijersi.view.show_cube("black-scissors", pijersi.view.const.CUBE_POSITION_MIDDLE, pijersi.model.get_hexagon_by_name("g4"));
+ 
+    pijersi.view.show_cube("black-rock", pijersi.view.const.CUBE_POSITION_MIDDLE, pijersi.model.get_hexagon_by_name("g3"));
+    pijersi.view.show_cube("black-paper", pijersi.view.const.CUBE_POSITION_MIDDLE, pijersi.model.get_hexagon_by_name("g2"));
+    pijersi.view.show_cube("black-scissors", pijersi.view.const.CUBE_POSITION_MIDDLE, pijersi.model.get_hexagon_by_name("g1"));
+
+    pijersi.view.show_cube("black-scissors", pijersi.view.const.CUBE_POSITION_MIDDLE, pijersi.model.get_hexagon_by_name("f3"));
+    pijersi.view.show_cube("black-rock", pijersi.view.const.CUBE_POSITION_MIDDLE, pijersi.model.get_hexagon_by_name("f2"));
+    pijersi.view.show_cube("black-paper", pijersi.view.const.CUBE_POSITION_MIDDLE, pijersi.model.get_hexagon_by_name("f1"));
+
+    pijersi.view.show_cube("black-rock", pijersi.view.const.CUBE_POSITION_MIDDLE, pijersi.model.get_hexagon_by_name("f5"));
+    pijersi.view.show_cube("black-scissors", pijersi.view.const.CUBE_POSITION_MIDDLE, pijersi.model.get_hexagon_by_name("f6"));
+    pijersi.view.show_cube("black-paper", pijersi.view.const.CUBE_POSITION_MIDDLE, pijersi.model.get_hexagon_by_name("f7"));
+ 
+    pijersi.view.hide_cube(pijersi.view.const.CUBE_POSITION_MIDDLE, pijersi.model.get_hexagon_by_name("f7"));
+    pijersi.view.show_cube("black-paper", pijersi.view.const.CUBE_POSITION_MIDDLE, pijersi.model.get_hexagon_by_name("f7"));
+
+    pijersi.view.select_cube(true, pijersi.view.const.CUBE_POSITION_MIDDLE, pijersi.model.get_hexagon_by_name("f1"));
+
+    pijersi.view.select_cube(true, pijersi.view.const.CUBE_POSITION_MIDDLE, pijersi.model.get_hexagon_by_name("a6"));
+    pijersi.view.select_cube(false, pijersi.view.const.CUBE_POSITION_MIDDLE, pijersi.model.get_hexagon_by_name("a6"));
+    pijersi.view.select_cube(true, pijersi.view.const.CUBE_POSITION_MIDDLE, pijersi.model.get_hexagon_by_name("a6"));
+
+    pijersi.view.select_cube(true, pijersi.view.const.CUBE_POSITION_BOTTOM, pijersi.model.get_hexagon_by_name("f4"));
+    pijersi.view.select_cube(true, pijersi.view.const.CUBE_POSITION_TOP, pijersi.model.get_hexagon_by_name("f4"));
+
+    pijersi.view.select_cube(true, pijersi.view.const.CUBE_POSITION_TOP, pijersi.model.get_hexagon_by_name("b4"));
 
     console.log("testit: bye");
 };

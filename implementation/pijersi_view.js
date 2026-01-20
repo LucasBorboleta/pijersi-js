@@ -109,8 +109,31 @@ pijersi.view.__init = function(){
     pijersi.view.const.HEXA_MARKER_1 = "marker-1";
     pijersi.view.const.HEXA_MARKER_2 = "marker-2";
 
-    pijersi.view.const.CUBE_STYLE = "pijersi-view-cube-style";
+    pijersi.view.const.CUBE_SORTS = [ "black-rock", "black-paper", "black-scissors", "black-wise",
+                                      "white-rock", "white-paper", "white-scissors", "white-wise" ]
+    
+    pijersi.view.const.CUBE_EMPTY_STYLE = "pijersi-view-cube-empty-style";
+    pijersi.view.const.CUBE_SELECTED_STYLE = "pijersi-view-cube-selected-style";
 
+    pijersi.view.const.CUBE_STYLES = {};
+
+    pijersi.view.const.CUBE_STYLES[ "black-rock"     ] = "pijersi-view-cube-black-rock-style";
+    pijersi.view.const.CUBE_STYLES[ "black-paper"    ] = "pijersi-view-cube-black-paper-style";
+    pijersi.view.const.CUBE_STYLES[ "black-scissors" ] = "pijersi-view-cube-black-scissors-style";
+    pijersi.view.const.CUBE_STYLES[ "black-wise"     ] = "pijersi-view-cube-black-wise-style";
+     
+    pijersi.view.const.CUBE_STYLES[ "white-rock"     ] = "pijersi-view-cube-white-rock-style";
+    pijersi.view.const.CUBE_STYLES[ "white-paper"    ] = "pijersi-view-cube-white-paper-style";
+    pijersi.view.const.CUBE_STYLES[ "white-scissors" ] = "pijersi-view-cube-white-scissors-style";
+    pijersi.view.const.CUBE_STYLES[ "white-wise"     ] = "pijersi-view-cube-white-wise-style";
+
+    pijersi.view.const.CUBE_POSITION_TOP = "top";
+    pijersi.view.const.CUBE_POSITION_MIDDLE = "middle";
+    pijersi.view.const.CUBE_POSITION_BOTTOM = "bottom";
+
+    pijersi.view.const.CUBE_POSITIONS = [ pijersi.view.const.CUBE_POSITION_BOTTOM, 
+                                          pijersi.view.const.CUBE_POSITION_MIDDLE, 
+                                          pijersi.view.const.CUBE_POSITION_TOP ];
 
     // >> All dimensions of board, hexagons and cubes are expressed in pixels
     // >> As resize of window could change such dimensions, 
@@ -196,6 +219,7 @@ pijersi.view.__init = function(){
     pijersi.view.top_cubes = undefined;
     pijersi.view.middle_cubes = undefined;
     pijersi.view.bottom_cubes = undefined;
+    pijersi.view.cubes = undefined;
 
     // Seal the sub-module
     Object.seal(pijersi.view);
@@ -206,18 +230,122 @@ pijersi.view.__init = function(){
 };
 
 
-pijersi.view.make_top_cube = function(hexagon){
+pijersi.view.select_cube = function(condition, position, hexagon){
+
+    if ( ! ( condition === true || condition === false ) ){
+        pijersi.debug.log_error("unexpected 'condition' = " + condition);
+        return;
+    }
+
+    if ( ! pijersi.view.const.CUBE_POSITIONS.includes(position ) ) {
+        pijersi.debug.log_error("unexpected 'position' = " + position);
+        return;
+    }
+
+    const cube_element = pijersi.view.cubes[position][hexagon.index];
+
+    if ( cube_element === undefined ) {
+        pijersi.debug.log_error("unexpected 'cube_element' = " + cube_element + " or 'hexagon' = " + JSON.stringify(hexagon));
+        return;
+    }
+
+    if ( condition ) {
+        cube_element.classList.add(pijersi.view.const.CUBE_SELECTED_STYLE);
+
+    } else {
+        cube_element.classList.remove(pijersi.view.const.CUBE_SELECTED_STYLE);
+    }
+};
+
+
+pijersi.view.hide_cube = function(position, hexagon){
+
+    if ( ! pijersi.view.const.CUBE_POSITIONS.includes(position ) ) {
+        pijersi.debug.log_error("unexpected 'position' = " + position);
+        return;
+    }
+
+    const cube_element = pijersi.view.cubes[position][hexagon.index];
+
+    if ( cube_element === undefined ) {
+        pijersi.debug.log_error("unexpected 'cube_element' = " + cube_element + " or 'hexagon' = " + JSON.stringify(hexagon));
+        return;
+    }
+
+    cube_element.className = pijersi.view.const.CUBE_EMPTY_STYLE;
+};
+
+
+pijersi.view.show_cube = function(cube_sort, position, hexagon){
+
+    if ( ! pijersi.view.const.CUBE_SORTS.includes(cube_sort ) ) {
+        pijersi.debug.log_error("unexpected 'cube_sort' = " + cube_sort);
+        return;
+    }
+
+    if ( ! pijersi.view.const.CUBE_POSITIONS.includes(position ) ) {
+        pijersi.debug.log_error("unexpected 'position' = " + position);
+        return;
+    }
+
+    const cube_element = pijersi.view.cubes[position][hexagon.index];
+
+    if ( cube_element === undefined ) {
+        pijersi.debug.log_error("unexpected 'cube_element' = " + cube_element + " or 'hexagon' = " + JSON.stringify(hexagon));
+        return;
+    }
+
+    cube_element.className = pijersi.view.const.CUBE_EMPTY_STYLE;
+    cube_element.classList.add(pijersi.view.const.CUBE_STYLES[cube_sort]);
+};
+
+
+pijersi.view.make_cubes = function(hexagons){
+
+    if ( pijersi.view.cubes === undefined ) {
+
+        pijersi.view.cubes = {};
+
+        for ( const position of pijersi.view.const.CUBE_POSITIONS ) {
+            let cubes = [];
+
+            for ( const hexagon of hexagons ) {
+                cubes.push(pijersi.view.make_cube(hexagon, position));
+            }
+
+            pijersi.view.cubes[position] = cubes;          
+        }
+    }
+}
+
+pijersi.view.make_cube = function(hexagon, position){
+
+    if ( ! pijersi.view.const.CUBE_POSITIONS.includes(position ) ) {
+        pijersi.debug.log_error("unexpected 'position' = " + position);
+        return;
+    }
 
     const cube = document.createElement("DIV");
-    cube.id = "pijersi-top-cube-" + hexagon.name + "-id";
-    cube.className = pijersi.view.const.CUBE_STYLE;
+    cube.id = "pijersi-" + position + "-cube-" + hexagon.name + "-id";
+    cube.className = pijersi.view.const.CUBE_EMPTY_STYLE;
  
     // Compute geometry in "reference dimensions"
 
     const hexagon_center = pijersi.view.compute_hexagon_center_xy(hexagon);
 
     const cube_left = hexagon_center.x - pijersi.view.const.CUBE_SIDE/2; 
-    const cube_top = hexagon_center.y - pijersi.view.const.CUBE_SIDE - pijersi.view.const.CUBE_Y_PAD/2; 
+
+    let cube_top = undefined;
+    
+    if ( position == pijersi.view.const.CUBE_POSITION_TOP ) {
+        cube_top = hexagon_center.y - pijersi.view.const.CUBE_SIDE - pijersi.view.const.CUBE_Y_PAD/2; 
+
+    } else if ( position == pijersi.view.const.CUBE_POSITION_MIDDLE ) {
+        cube_top = hexagon_center.y - pijersi.view.const.CUBE_SIDE/2; 
+
+    } else if ( position == pijersi.view.const.CUBE_POSITION_BOTTOM ) {
+        cube_top = hexagon_center.y + pijersi.view.const.CUBE_Y_PAD/2 ;
+    }
 
     const cube_width = pijersi.view.const.CUBE_SIDE ;
     const cube_height = pijersi.view.const.CUBE_SIDE ;
@@ -233,111 +361,6 @@ pijersi.view.make_top_cube = function(hexagon){
     pijersi.view.const.BOARD.appendChild(cube);
 
     return cube;
-};
-
-
-pijersi.view.make_middle_cube = function(hexagon){
-
-    const cube = document.createElement("DIV");
-    cube.id = "pijersi-middle-cube-" + hexagon.name + "-id";
-    cube.className = pijersi.view.const.CUBE_STYLE;
- 
-    // Compute geometry in "reference dimensions"
-
-    const hexagon_center = pijersi.view.compute_hexagon_center_xy(hexagon);
-
-    const cube_left = hexagon_center.x - pijersi.view.const.CUBE_SIDE/2; 
-    const cube_top = hexagon_center.y - pijersi.view.const.CUBE_SIDE/2; 
-
-    const cube_width = pijersi.view.const.CUBE_SIDE ;
-    const cube_height = pijersi.view.const.CUBE_SIDE ;
- 
-    // Convert geometry in "relative dimensions"
-
-    cube.style.left = cube_left/pijersi.view.const.BOARD_WIDTH*100 + "%";
-    cube.style.top = cube_top/pijersi.view.const.BOARD_HEIGHT*100 + "%";
-
-    cube.style.width = cube_width/pijersi.view.const.BOARD_WIDTH*100 + "%";
-    cube.style.height = cube_height/pijersi.view.const.BOARD_HEIGHT*100 + "%";
-
-    pijersi.view.const.BOARD.appendChild(cube);
-
-    return cube;
-};
-
-
-pijersi.view.make_bottom_cube = function(hexagon){
-
-    const cube = document.createElement("DIV");
-    cube.id = "pijersi-bottom-cube-" + hexagon.name + "-id";
-    cube.className = pijersi.view.const.CUBE_STYLE;
- 
-    // Compute geometry in "reference dimensions"
-
-    const hexagon_center = pijersi.view.compute_hexagon_center_xy(hexagon);
-
-    const cube_left = hexagon_center.x - pijersi.view.const.CUBE_SIDE/2; 
-    const cube_top = hexagon_center.y + pijersi.view.const.CUBE_Y_PAD/2 ; 
-
-    const cube_width = pijersi.view.const.CUBE_SIDE ;
-    const cube_height = pijersi.view.const.CUBE_SIDE ;
- 
-    // Convert geometry in "relative dimensions"
-
-    cube.style.left = cube_left/pijersi.view.const.BOARD_WIDTH*100 + "%";
-    cube.style.top = cube_top/pijersi.view.const.BOARD_HEIGHT*100 + "%";
-
-    cube.style.width = cube_width/pijersi.view.const.BOARD_WIDTH*100 + "%";
-    cube.style.height = cube_height/pijersi.view.const.BOARD_HEIGHT*100 + "%";
-
-    pijersi.view.const.BOARD.appendChild(cube);
-
-    return cube;
-};
-
-
-pijersi.view.make_top_cubes = function(hexagons){
-    
-    if ( pijersi.view.top_cubes === undefined ) {
-
-        let cubes = [];
-
-        for ( const hexagon of hexagons ) {
-            cubes.push(pijersi.view.make_top_cube(hexagon));
-        }
-       
-        pijersi.view.top_cubes = cubes;
-    }
-};
-
-
-pijersi.view.make_middle_cubes = function(hexagons){
-    
-    if ( pijersi.view.middle_cubes === undefined ) {
-
-        let cubes = [];
-
-        for ( const hexagon of hexagons ) {
-            cubes.push(pijersi.view.make_middle_cube(hexagon));
-        }
-       
-        pijersi.view.middle_cubes = cubes;
-    }
-};
-
-
-pijersi.view.make_bottom_cubes = function(hexagons){
-    
-    if ( pijersi.view.bottom_cubes === undefined ) {
-
-        let cubes = [];
-
-        for ( const hexagon of hexagons ) {
-            cubes.push(pijersi.view.make_bottom_cube(hexagon));
-        }
-       
-        pijersi.view.bottom_cubes = cubes;
-    }
 };
 
 

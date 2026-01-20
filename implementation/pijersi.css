@@ -21,6 +21,7 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     --pijersi-view-color-blue: #156082;
     --pijersi-view-color-grey-1: lightgray;
     --pijersi-view-color-grey-2: grey;
+    --pijersi-view-color-cube-selected: lightgray;
 
     --pijersi-view-hexagon-selection-1-color: var(--pijersi-view-color-grey-1);
     --pijersi-view-hexagon-selection-1-opacity: 0.25;
@@ -794,22 +795,13 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     text-align: center;
 }
 
-.pijersi-view-hexagon-selected-style {
-/*  outline-style:outset !important;
-    outline-color:white !important;
-    outline-width:2px !important; */
-}
-
-.pijersi-view-hexagon-unselected-style {
-}
-
 /* --- PIJERSI-END: hexagon states  --- */
 
 
 /* --- PIJERSI-BEGIN: cube states  --- */
 
-.pijersi-view-cube-style {
-    padding :0;
+.pijersi-view-cube-empty-style {
+    padding: 0;
     margin: 0;
 
     outline-style: none;
@@ -819,34 +811,23 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+ 
+    z-index: 10 !important;
 
     position: absolute;
 
+    pointer-events: none;
+
     transition-property: all;
     transition-duration: 300ms;
-
-    /* just for debug */
-    background-image:url(img/wise-white.svg);
-    box-shadow: 4px 4px 4px black;
-
-    z-index: 1 !important;
-
 }
 
 .pijersi-view-cube-selected-style {
-    box-shadow: 8px 8px 8px black !important;
+    box-shadow: 0.4rem 0.4rem 0.4rem black !important;
     transform: scale(1.25) !important;
     outline-style:outset !important;
-    outline-color:white !important;
-    outline-width:2px !important;
-    z-index: 1 !important;
-}
-
-.pijersi-view-cube-unselected-style {
-}
-
-.pijersi-view-cube-void-style{
-    background-image:none;
+    outline-color:var(--pijersi-view-color-cube-selected) !important;
+    outline-width: 0.1rem !important;
 }
 
 /* --- PIJERSI-END: cube states  --- */
@@ -854,44 +835,44 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 /* --- PIJERSI-BEGIN: cube sorts  --- */
 
-.pijersi-view-cube-wise-black-style {
-    background-image:url(img/wise-black.svg);
-    box-shadow: 4px 4px 4px black;
+.pijersi-view-cube-black-rock-style {
+    background-image: url(img/rock-black.svg);
+    box-shadow: 0.4rem 0.4rem 0.4rem black;
 }
 
-.pijersi-view-cube-wise-white-style {
-    background-image:url(img/wise-white.svg);
-    box-shadow: 4px 4px 4px black;
+.pijersi-view-cube-black-paper-style {
+    background-image: url(img/paper-black.svg);
+    box-shadow: 0.4rem 0.4rem 0.4rem black;
 }
 
-.pijersi-view-cube-rock-black-style {
-    background-image:url(img/rock-black.svg);
-    box-shadow: 4px 4px 4px black;
+.pijersi-view-cube-black-scissors-style {
+    background-image: url(img/scissors-black.svg);
+    box-shadow: 0.4rem 0.4rem 0.4rem black;
 }
 
-.pijersi-view-cube-rock-white-style {
-    background-image:url(img/rock-white.svg);
-    box-shadow: 4px 4px 4px black;
+.pijersi-view-cube-black-wise-style {
+    background-image: url(img/wise-black.svg);
+    box-shadow: 0.4rem 0.4rem 0.4rem black;
 }
 
-.pijersi-view-cube-paper-black-style {
-    background-image:url(img/paper-black.svg);
-    box-shadow: 4px 4px 4px black;
+.pijersi-view-cube-white-rock-style {
+    background-image: url(img/rock-white.svg);
+    box-shadow: 0.4rem 0.4rem 0.4rem black;
 }
 
-.pijersi-view-cube-paper-white-style {
-    background-image:url(img/paper-white.svg);
-    box-shadow: 4px 4px 4px black;
+.pijersi-view-cube-white-paper-style {
+    background-image: url(img/paper-white.svg);
+    box-shadow: 0.4rem 0.4rem 0.4rem black;
 }
 
-.pijersi-view-cube-scissors-black-style {
-    background-image:url(img/scissors-black.svg);
-    box-shadow: 4px 4px 4px black;
+.pijersi-view-cube-white-scissors-style {
+    background-image: url(img/scissors-white.svg);
+    box-shadow: 0.4rem 0.4rem 0.4rem black;
 }
 
-.pijersi-view-cube-scissors-white-style {
-    background-image:url(img/scissors-white.svg);
-    box-shadow: 4px 4px 4px black;
+.pijersi-view-cube-white-wise-style {
+    background-image: url(img/wise-white.svg);
+    box-shadow: 0.4rem 0.4rem 0.4rem black;
 }
 
 /* --- PIJERSI-END: cube sorts  --- */
