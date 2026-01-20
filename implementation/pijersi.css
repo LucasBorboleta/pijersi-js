@@ -828,6 +828,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     outline-style:outset !important;
     outline-color:var(--pijersi-view-color-cube-selected) !important;
     outline-width: 0.1rem !important;
+
+    z-index: 20 !important;
+
 }
 
 /* --- PIJERSI-END: cube states  --- */
