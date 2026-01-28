@@ -23,6 +23,10 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     --pijersi-view-color-grey-2: grey;
     --pijersi-view-color-cube-selected: lightgray;
 
+    --pijersi-view-cube-shadow-color: black;
+    --pijersi-view-cube-shadow-offset: 0.4rem;
+    --pijersi-view-cube-shadow-blur: 0.4rem;
+
     --pijersi-view-hexagon-selection-1-color: var(--pijersi-view-color-grey-1);
     --pijersi-view-hexagon-selection-1-opacity: 0.25;
 
@@ -823,10 +827,16 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 }
 
 .pijersi-view-cube-selected-style {
-    box-shadow: 0.4rem 0.4rem 0.4rem black !important;
+    box-shadow: 
+        var(--pijersi-view-cube-shadow-offset) 
+        var(--pijersi-view-cube-shadow-offset)
+        var(--pijersi-view-cube-shadow-blur) 
+        var(--pijersi-view-cube-shadow-color) 
+        !important;
+
     transform: scale(1.25) !important;
     outline-style:outset !important;
-    outline-color:var(--pijersi-view-color-cube-selected) !important;
+    outline-color: var(--pijersi-view-color-cube-selected) !important;
     outline-width: 0.1rem !important;
 
     z-index: 20 !important;
@@ -840,42 +850,90 @@ PIJERSI-JS-COPYRIGHT-MD-END */
 
 .pijersi-view-cube-black-rock-style {
     background-image: url(img/rock-black.svg);
-    box-shadow: 0.4rem 0.4rem 0.4rem black;
+
+    box-shadow: 
+        var(--pijersi-view-cube-shadow-offset) 
+        var(--pijersi-view-cube-shadow-offset)
+        var(--pijersi-view-cube-shadow-blur) 
+        var(--pijersi-view-cube-shadow-color) 
+        !important;
 }
 
 .pijersi-view-cube-black-paper-style {
     background-image: url(img/paper-black.svg);
-    box-shadow: 0.4rem 0.4rem 0.4rem black;
+    
+    box-shadow: 
+        var(--pijersi-view-cube-shadow-offset) 
+        var(--pijersi-view-cube-shadow-offset)
+        var(--pijersi-view-cube-shadow-blur) 
+        var(--pijersi-view-cube-shadow-color) 
+        !important;
 }
 
 .pijersi-view-cube-black-scissors-style {
     background-image: url(img/scissors-black.svg);
-    box-shadow: 0.4rem 0.4rem 0.4rem black;
+    
+    box-shadow: 
+        var(--pijersi-view-cube-shadow-offset) 
+        var(--pijersi-view-cube-shadow-offset)
+        var(--pijersi-view-cube-shadow-blur) 
+        var(--pijersi-view-cube-shadow-color) 
+        !important;
 }
 
 .pijersi-view-cube-black-wise-style {
     background-image: url(img/wise-black.svg);
-    box-shadow: 0.4rem 0.4rem 0.4rem black;
+    
+    box-shadow: 
+        var(--pijersi-view-cube-shadow-offset) 
+        var(--pijersi-view-cube-shadow-offset)
+        var(--pijersi-view-cube-shadow-blur) 
+        var(--pijersi-view-cube-shadow-color) 
+        !important;
 }
 
 .pijersi-view-cube-white-rock-style {
     background-image: url(img/rock-white.svg);
-    box-shadow: 0.4rem 0.4rem 0.4rem black;
+    
+    box-shadow: 
+        var(--pijersi-view-cube-shadow-offset) 
+        var(--pijersi-view-cube-shadow-offset)
+        var(--pijersi-view-cube-shadow-blur) 
+        var(--pijersi-view-cube-shadow-color) 
+        !important;
 }
 
 .pijersi-view-cube-white-paper-style {
     background-image: url(img/paper-white.svg);
-    box-shadow: 0.4rem 0.4rem 0.4rem black;
+    
+    box-shadow: 
+        var(--pijersi-view-cube-shadow-offset) 
+        var(--pijersi-view-cube-shadow-offset)
+        var(--pijersi-view-cube-shadow-blur) 
+        var(--pijersi-view-cube-shadow-color) 
+        !important;
 }
 
 .pijersi-view-cube-white-scissors-style {
     background-image: url(img/scissors-white.svg);
-    box-shadow: 0.4rem 0.4rem 0.4rem black;
+    
+    box-shadow: 
+        var(--pijersi-view-cube-shadow-offset) 
+        var(--pijersi-view-cube-shadow-offset)
+        var(--pijersi-view-cube-shadow-blur) 
+        var(--pijersi-view-cube-shadow-color) 
+        !important;
 }
 
 .pijersi-view-cube-white-wise-style {
     background-image: url(img/wise-white.svg);
-    box-shadow: 0.4rem 0.4rem 0.4rem black;
+    
+    box-shadow: 
+        var(--pijersi-view-cube-shadow-offset) 
+        var(--pijersi-view-cube-shadow-offset)
+        var(--pijersi-view-cube-shadow-blur) 
+        var(--pijersi-view-cube-shadow-color) 
+        !important;
 }
 
 /* --- PIJERSI-END: cube sorts  --- */
