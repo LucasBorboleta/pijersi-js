@@ -55,7 +55,9 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     --pijersi-view-body-background-color: var(--pijersi-view-color-brown);
 
     --pijersi-view-board-height: 75vh;
-    --pijersi-view-board-width: calc(var(--pijersi-view-board-height) * 1.10221);
+
+    --pijersi-view-board-width-height-ratio: 1.10221;
+    --pijersi-view-board-width: calc(var(--pijersi-view-board-height) * var(--pijersi-view-board-width-height-ratio));
  
     --pijersi-view-button-size: 3rem;
     --pijersi-view-button-hover-background-color: var(--pijersi-view-color-blue);
@@ -87,6 +89,14 @@ PIJERSI-JS-COPYRIGHT-MD-END */
     --pijersi-view-captures-by-type-gap: 0.2rem;
     --pijersi-view-captures-by-type-margin: 0.2rem;
     --pijersi-view-captures-cube-size: 1.25em;
+}
+
+@media only screen and (max-width: 600px) {
+    /* Extra small devices (phones, 600px and down) */
+    :root {
+        --pijersi-view-board-width: 80vw;
+        --pijersi-view-board-height: calc(var(--pijersi-view-board-width) / var(--pijersi-view-board-width-height-ratio));
+    }
 }
 
 * {
